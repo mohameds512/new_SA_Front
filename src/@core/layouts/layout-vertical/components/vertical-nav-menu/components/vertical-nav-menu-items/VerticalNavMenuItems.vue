@@ -5,8 +5,8 @@
                 v-for="(item , i) in items"
                 :key="i"
                 :item="item"
-                v-if="hasPermission(item.permission)"
         />
+<!--        v-if="hasPermission(item.permission)"&ndash;&gt;-->
     </ul>
 </template>
 

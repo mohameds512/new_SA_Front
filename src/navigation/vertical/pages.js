@@ -30,7 +30,7 @@ export default [{
     {
         title: 'الادوار',
         icon: 'KeyIcon',
-        permission: 'public',
+        // permission: 'public',
         route: 'roles',
     }
 ];

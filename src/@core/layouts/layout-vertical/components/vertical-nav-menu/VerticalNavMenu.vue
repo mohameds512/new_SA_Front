@@ -8,19 +8,19 @@
           <li class="nav-item mr-auto">
             <b-link class="navbar-brand" to="/">
               <span class="brand-logo">
-          
+
                 <b-img :src="appLogoImage" alt="logo" />
               </span>
-           
+
               <h2 class="brand-text">
-               
+
                 {{ appName }}
               </h2>
             </b-link>
           </li>
 
           <!-- Toggler Button -->
-          
+
           <li class="nav-item nav-toggle">
             <b-link class="nav-link modern-nav-toggle">
               <feather-icon icon="XIcon" size="20" class="d-block d-xl-none" @click="toggleVerticalMenuActive" />
@@ -46,7 +46,7 @@
         }
       "
     >
-      <vertical-nav-menu-items v-if="authUser().type && authUser().type.type" :items="authUser().type && authUser().type.type == 3 ? studentMenu : navMenuItems" class="navigation navigation-main" />
+      <vertical-nav-menu-items class="navigation navigation-main" :items="navMenuItems" />
     </vue-perfect-scrollbar>
     <!-- /main menu content-->
   </div>

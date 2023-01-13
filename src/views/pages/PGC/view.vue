@@ -626,7 +626,7 @@
                                     <b-card-text>
                                         <div class="add_project_details_wrapper">
                                         <validation-observer ref="addProjectRules">
-                                            <b-form v-if="this.hide == true">
+                                            <b-form >
                                                 <b-row class="bg-white pt-2 pb-2">
 
                                                     <b-col class="d-flex justify-content-center" md="8">
@@ -636,14 +636,14 @@
                                                 <!-- <b-form-group class="text-right" v-if="includesFormLength() == 0">
                                                     <b-button @click="addIncludes"> اضف</b-button>
                                                 </b-form-group> -->
-                                                <b-row v-for="(item ,index) in form.submission[0].includes" :key="index">
+                                                <b-row v-for="(item ,index) in form.submission[0].includes_data" :key="index">
                                                         <b-col md="4">
                                                             <b-form-group class="text-right" label=" نوع المشتمل ">
                                                                 <validation-provider #default="{ errors }" name=" نوع المشتمل"
                                                                     rules="required">
-                                                                    <b-form-input v-model="item.build_id"
+                                                                    <b-form-input v-model="item.type"
                                                                     :state="errors.length > 0 ? false : null"
-                                                                    placeholder="المساحات المنزوعة غير المبنية" type="number" disabled />
+                                                                    placeholder="المساحات المنزوعة غير المبنية"  disabled />
                                                                     <!-- <v-select
                                                                         placeholder="نوع المشتمل"
                                                                         :options="Array.from(contentType , (el) => el)"
@@ -652,8 +652,7 @@
                                                                         :reduce="(val) => val" disabled
                                                                     >
                                                                     </v-select> -->
-                                                                    <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                        مطلوب</small>
+
                                                                 </validation-provider>
                                                             </b-form-group>
                                                         </b-col>
@@ -661,9 +660,9 @@
                                                             <b-form-group class="text-right" label=" الوصف  ">
                                                                 <validation-provider #default="{ errors }" name=" الوصف "
                                                                     rules="required">
-                                                                    <b-form-input v-model="item.build_desc_id"
+                                                                    <b-form-input v-model="item.content"
                                                                     :state="errors.length > 0 ? false : null"
-                                                                    placeholder="الوصف" type="number" disabled />
+                                                                    placeholder="الوصف"  disabled />
                                                                     <!-- <v-select
                                                                         placeholder="الوصف "
                                                                         :options="Array.from(contentDesc , (el) => el)"
