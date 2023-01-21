@@ -1,7 +1,7 @@
 <template>
     <div class="container bg-white pt-2 pb-2" dir="rtl">
         <div style="text-align: right;">
-            <router-link :to="`/addRealty`"  > 
+            <router-link :to="`/addRealty`"  >
                 <b-button variant="primary"> اضافة عقار </b-button>
             </router-link>
         </div>
@@ -19,13 +19,13 @@
                             { key: 'zone', label: '  المنطقة ' },
                             { key: 'created_at', label: '  التاريخ ' },
                         ]"
-        
+
         >
         <template #cell(building_number)="data">
             <router-link :to="`/viewRealty/${data.item.id}`">
                 {{ data.item.building_number }}
             </router-link>
-        </template> 
+        </template>
 
         <template #cell(status)="data">
             {{getStatus(data.item.status) }}
@@ -122,9 +122,9 @@
     }
 </script>
 
-<style>
+<style scoped>
     th {
     background-color: #535ae7 !important;
     color: white;
-} 
+}
 </style>
