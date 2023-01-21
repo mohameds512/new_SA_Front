@@ -16,10 +16,36 @@ class PGC extends Resource {
     });
   }
 
-  save_submission(payload){
+  save_includes(payload){
     console.log(payload)
     return request({
-      url:`/store/save_submission`,
+      url:`/store/save_includes`,
+      method: "post",
+      data: payload
+    })
+  }
+  
+  save_submission(id,payload){
+    if (id==null) {
+      return request({
+        url:`/store/save_submission`,
+        method: "post",
+        data: payload
+      })
+    }else{
+      return request({
+        url:`/store/save_submission/${id}`,
+        method: "post",
+        data: payload
+      })
+    }
+    
+  }
+
+  submitFloor(payload){
+    console.log(payload)
+    return request({
+      url:`/store/submitFloor`,
       method: "post",
       data: payload
     })

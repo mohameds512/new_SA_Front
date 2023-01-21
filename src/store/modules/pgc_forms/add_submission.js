@@ -56,6 +56,26 @@ const locationModule = {
       })
     },
   
+    save_floor({commit}, payload ) {
+
+      return new Promise((resolve, reject) => {
+        console.log('payload')
+        console.log(payload)
+        pgc_forms
+          .show_sub( payload.query)
+          .then(response => {
+            // commit('SET_CONTRACTORS', response)
+            // commit('SET_ID', response.project.id);
+            console.log(response)
+            // console.log(response.project.id)
+            resolve();
+        
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     save_subs({commit}, payload ) {
 
       return new Promise((resolve, reject) => {
@@ -76,6 +96,27 @@ const locationModule = {
           })
       })
     },
+    save_inc({commit}, payload ) {
+
+      return new Promise((resolve, reject) => {
+        console.log('payload')
+        console.log(payload)
+        pgc_forms
+          .save_includes( payload.query)
+          .then(response => {
+            // commit('SET_CONTRACTORS', response)
+            // commit('SET_ID', response.project.id);
+            console.log(response)
+            // console.log(response.project.id)
+            resolve();
+        
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+
     }
 }
 export default locationModule;

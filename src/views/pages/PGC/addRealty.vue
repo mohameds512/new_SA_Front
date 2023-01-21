@@ -424,8 +424,11 @@
                                                     <b-col cols="8 text-right pt-2">
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="info" @click="show_model(5)" >
+                                                        <!-- <b-button variant="info" @click="show_model(5)" >
                                                             التالي
+                                                        </b-button> -->
+                                                        <b-button variant="info" @click="checkSubmit(5)" >
+                                                            تسجيل المرحلة الاولي
                                                         </b-button>
                                                     </b-col>
                                                     </b-row>
@@ -453,7 +456,7 @@
                                                             <validation-provider #default="{ errors }" name="رقم العقار"
                                                                 rules="required">
                                                                 <b-form-input v-model="form.submission.building_number"
-                                                                    :state="errors.length > 0 ? false : null"
+                                                                    :state="errors.length > 0 ? false : null" disabled
                                                                     placeholder="رقم العقار" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
@@ -550,7 +553,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(4)" >
+                                                        <b-button variant="primary" disabled @click="show_model(4)" >
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -582,7 +585,8 @@
 
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-row>
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="أتجاه الشمال">
                                                             <validation-provider #default="{ errors }" name="أتجاه الشمال"
                                                                 rules="required">
@@ -594,7 +598,7 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="طول الشمال ">
                                                             <validation-provider #default="{ errors }" name="طول الشمال"
                                                                 rules="required">
@@ -606,7 +610,33 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشمال ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشمال"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.north_coor_north"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشمال" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشرق ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشرق"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.north_coor_east"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشرق" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    </b-row>
+                                                    <b-row>
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="أتجاه الجنوب">
                                                             <validation-provider #default="{ errors }" name="أتجاه الجنوب"
                                                                 rules="required">
@@ -618,7 +648,7 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="طول الجنوب ">
                                                             <validation-provider #default="{ errors }" name="طول الجنوب"
                                                                 rules="required">
@@ -630,7 +660,33 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشمال ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشمال"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.south_coor_north"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشمال" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشرق ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشرق"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.south_coor_east"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشرق" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    </b-row>
+                                                    <b-row>
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="أتجاه الشرق">
                                                             <validation-provider #default="{ errors }" name="أتجاه الشرق"
                                                                 rules="required">
@@ -642,7 +698,7 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="طول الشرق ">
                                                             <validation-provider #default="{ errors }" name="طول الشرق"
                                                                 rules="required">
@@ -654,7 +710,33 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشمال ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشمال"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.east_coor_north"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشمال" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشرق ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشرق"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.east_coor_east"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشرق" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    </b-row>
+                                                    <b-row>
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="أتجاه الغرب">
                                                             <validation-provider #default="{ errors }" name="أتجاه الغرب"
                                                                 rules="required">
@@ -666,7 +748,7 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="طول الغرب ">
                                                             <validation-provider #default="{ errors }" name="طول الغرب"
                                                                 rules="required">
@@ -678,6 +760,32 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشمال ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشمال"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.west_coor_north"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشمال" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label=" احداثيات الشرق ">
+                                                            <validation-provider #default="{ errors }" name=" احداثيات الشرق"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.coordinates.west_coor_east"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder=" احداثيات الشرق" type="number" />
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    </b-row>
+
                                                 </b-row>
                                                 <b-row>
                                                         <b-col cols="2 text-right pt-2">
@@ -689,6 +797,7 @@
                                                     <b-col cols="8 text-right pt-2">
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
+                                                        
                                                         <b-button variant="info" @click="show_model(7)" >
                                                             التالي
                                                         </b-button>
@@ -748,8 +857,11 @@
                                                     <b-col cols="8 text-right pt-2">
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="info" @click="show_model(8)" >
+                                                        <!-- <b-button variant="info" @click="show_model(8)" >
                                                             التالي
+                                                        </b-button> -->
+                                                        <b-button variant="info" @click="checkSubmit(8)" >
+                                                            انهاء المرحلة الثانية
                                                         </b-button>
                                                     </b-col>
                                                     </b-row>
@@ -773,12 +885,13 @@
                                                         </b-col>
                                                         
                                                     </b-row>
-                                                    <b-form-group class="text-right" v-if="includesFormLength() == 0">
+                                                    <!-- <b-form-group class="text-right" v-if="includesFormLength() == 0">
                                                         <b-button @click="addIncludes"> اضف</b-button>
-                                                    </b-form-group>
-                                                    <div v-for="(item ,index) in form.includesForm" :key="index">
+                                                    </b-form-group> -->
+                                                    <!-- <div v-for="(item ,index) in includesForm" :key="index"> -->
                                                         <b-row>
                                                                 <b-col md="3">
+                                                                    
                                                                     <b-form-group class="text-right" label=" نوع المشتمل ">
                                                                         <validation-provider #default="{ errors }" name=" نوع المشتمل"
                                                                             rules="required">
@@ -787,7 +900,7 @@
                                                                                 :options="$store.getters['dashboard/getLookups'].includes_type "
                                                                                 label = 'name'
                                                                                 :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                                v-model="form.includesForm[index].build_id"
+                                                                                v-model="includesForm.build_id"
                                                                                 :reduce="(val) => val.id"
                                                                             >
                                                                             </v-select>
@@ -801,15 +914,15 @@
                                                                         
                                                                         <validation-provider #default="{ errors }" name=" الوصف "
                                                                             rules="required">
-                                                                            <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == form.includesForm[index].type)[0].build_desc }} -->
+                                                                            <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
                                                                             <v-select
                                                                                 placeholder="الوصف "
                                                                                 :options="$store.getters['dashboard/getLookups'].includes_type.filter((el)=>
-                                                                                    el.id == form.includesForm[index].build_id)[0].build_desc"
+                                                                                    el.id == includesForm.build_id)[0].build_desc"
                                                                                 label='name'
-                                                                                :disabled="form.includesForm[index].build_id ? false : true"
+                                                                                :disabled="includesForm.build_id ? false : true"
                                                                                 :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                                v-model="form.includesForm[index].build_desc_id"
+                                                                                v-model="includesForm.build_desc_id"
                                                                                 :reduce="(val) => val.id"
                                                                             >
                                                                             </v-select>
@@ -822,7 +935,7 @@
                                                                     <b-form-group class="text-right" label=" الوحدة">
                                                                         <validation-provider #default="{ errors }" name="الوحدة "
                                                                             rules="required">
-                                                                            <b-form-input v-model="form.includesForm[index].qty"
+                                                                            <b-form-input v-model="includesForm.qty"
                                                                                 :state="errors.length > 0 ? false : null"
                                                                                 placeholder=" " type="number" />
                                                                             <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -831,10 +944,10 @@
                                                                     </b-form-group>
                                                                 </b-col>
                                                                 <b-col md="2">
-                                                                    <b-form-group class="text-right" label=" الوحدة">
-                                                                        <validation-provider #default="{ errors }" name="الوحدة "
+                                                                    <b-form-group class="text-right" label=" مرفق">
+                                                                        <validation-provider #default="{ errors }" name="مرفق "
                                                                             rules="required">
-                                                                            <input type="file" name="image"
+                                                                            <input type="file" name="image" 
                                                                                 @change="changeImg"
                                                                                 accept="image/apng, image/jpeg, image/png, image/webp"
                                                                                 />
@@ -850,16 +963,16 @@
                                                                                 <b-button @click="addIncludes"> اضف</b-button>
                                                                             </b-form-group>
                                                                         </b-col>
-                                                                        <b-col cols="4">
+                                                                        <!-- <b-col cols="4">
                                                                             <b-form-group class="text-right" label=" . ">
-                                                                                <b-button @click="form.includesForm.pop()">حذف</b-button>
+                                                                                <b-button @click="includesForm.pop()">حذف</b-button>
                                                                             </b-form-group>
-                                                                        </b-col>
+                                                                        </b-col> -->
                                                                     </b-row>
                                                                 </b-col>
                                                         </b-row>
                                                         
-                                                    </div>
+                                                    <!-- </div> -->
                                                     
                                                     <b-row>
                                                         <b-col cols="2 text-right pt-2">
@@ -874,9 +987,9 @@
                                                             <!-- <b-button variant="info" @click="show_model(9)" >
                                                                 التالي
                                                             </b-button> -->
-                                                            <b-button variant="danger" @click="checkSubmit()" >
+                                                            <!-- <b-button variant="danger" @click="checkSubmit()" >
                                                                 حفظ
-                                                            </b-button>
+                                                            </b-button> -->
                                                         </b-col>
                                                         
                                                     </b-row>
@@ -1023,13 +1136,14 @@ import router from '@/router'
         },
         data() {
             return {
-                form: {
-                    includesForm: [{
+                includesForm: {
                         build_id:null,
                         build_desc_id: null,
                         qty: null,
-                        // image: null,
-                    }],
+                        submission_id: null,
+                        image: null,
+                    },
+                form: {
                     owners: [{
                         name: null,
                         phone: null,
@@ -1062,6 +1176,17 @@ import router from '@/router'
                             south_length: null,
                             east_length: null,
                             west_length: null,
+                        },
+                        coordinates:{
+                            north_coor_north: null,
+                            north_coor_east: null,
+                            south_coor_north: null,
+                            south_coor_east: null,
+                            east_coor_north: null,
+                            east_coor_east: null,
+                            west_coor_north: null,
+                            west_coor_east: null,
+                            
                         },
                         building_details:[ {
                             roof:null,
@@ -1184,16 +1309,16 @@ import router from '@/router'
         methods: {  
             changeImg(e){
                 console.log(e.target.files[0]);
-                // this.form.includesForm.image = e.target.files[0];
+                this.includesForm.image = e.target.files[0];
             },
             show_model(num){
                 this.show_model_inputs = num;
             },
-            addIncludes(){
-                this.form.includesForm.push({build_id:null,build_desc_id:null,qty:null});
-            },
+            // addIncludes(){
+            //     this.includesForm.push({build_id:null,build_desc_id:null,qty:null});
+            // },
             includesFormLength(){
-                var x = this.form.includesForm;
+                var x = this.includesForm;
                 return x.length; 
             },
             addOwner(){
@@ -1213,7 +1338,40 @@ import router from '@/router'
                 var x = this.form.attachs;
                 return x.length;
             },
-            checkSubmit() {
+            addIncludes(){
+                this.includesForm.submission_id = 42;
+                console.log(this.includesForm)
+                // delete this.form.submission.restrict_border
+                // delete this.form.submission.contract_border_
+                this.$store
+                    .dispatch('pgc_forms/save_inc', {
+                        query: this.includesForm,
+                    })
+                    .then((response) => {
+                        // console.log(response)
+                        // router.push({name:'Realtys'})
+                        this.includesForm.build_id = null,
+                        this.includesForm.build_desc_id = null,
+                        this.includesForm.qty = null,
+                        this.includesForm.image = null,
+                        
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم حفظ المشتمل ',
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
+
+                        // this.submission = response.submission;
+                            console.log(response);
+
+                    })
+                    .catch((error) => {
+                        // this.errorsdata = this.handleBackendError(error.response.data.errors)
+                        console.log(error);
+                    })
+            },
+            checkSubmit($state) {
                 console.log(this.form)
                 // delete this.form.submission.restrict_border
                 // delete this.form.submission.contract_border_
@@ -1223,13 +1381,19 @@ import router from '@/router'
                     })
                     .then((response) => {
                         // console.log(response)
-                        router.push({name:'Realtys'})
+                        // router.push({name:'Realtys'})
+                        if ($state) {
+                            this.show_model_inputs = $state ;    
+                        }
+                        
                         this.$swal({
                             icon: 'success',
                             title: 'تم الحفظ',
                             showConfirmButton: false,
                             timer: 1500,
                         })
+                        // this.submission = response.submission;
+                            console.log(response);
 
                     })
                     .catch((error) => {
