@@ -6,7 +6,29 @@
             <b-col>
                 <div dir="rtl">
                     <b-row class="bg-white pt-2 pb-2">
-                        <b-col cols="12">
+                        <b-col cols="3">
+                            <b-card no-body>
+                                <app-timeline>
+                                    <app-timeline-item
+                                            title="Goal Achieved"
+                                            subtitle="All milestones are completed"
+                                            icon="AwardIcon"
+                                            time="few minutes ago"
+                                            variant="success"
+                                    />
+
+                                    <app-timeline-item
+                                            title="Last milestone remain"
+                                            subtitle="You are just one step away from your goal"
+                                            icon="InfoIcon"
+                                            time="3 minutes ago"
+                                            variant="info"
+                                    />
+
+                                </app-timeline>
+                            </b-card>
+                        </b-col>
+                        <b-col cols="9">
                             <b-card no-body>
                                 <b-tabs pills card>
                                     <b-tab title="بيانات المشروع" active>
@@ -944,9 +966,7 @@
                                         </b-card-text>
                                     </b-tab> -->
                                 </b-tabs>
-
                             </b-card>
-
                         </b-col>
                     </b-row>
                 </div>
@@ -962,6 +982,8 @@
     import { required, min_value } from '@validations'
     import vSelect from 'vue-select'
     import DataTable from '@/views/components/table/DataTable'
+    import AppTimeline from '@core/components/app-timeline/AppTimeline.vue'
+    import AppTimelineItem from '@core/components/app-timeline/AppTimelineItem.vue'
     import {
         // BOverlay,
         // https://ecb.dev.vero-cloud.com/api/
@@ -1049,6 +1071,8 @@
             }
         },
         components: {
+            AppTimelineItem,
+            AppTimeline,
             WorkProgress,
             ManPower,
             Exports,
