@@ -6,6 +6,20 @@
             </router-link>
         </div>
         <br>
+        <div>
+            <b-row>
+                <b-col md="4">
+                    <b-form-group class="text-right" label="بحث">
+                        <validation-provider #default="{ errors }" name="بحث"
+                                             rules="required">
+                            <b-form-input v-model="search_Sub"
+                                          :state="errors.length > 0 ? false : null"
+                                          placeholder="بحث" />
+                        </validation-provider>
+                    </b-form-group>
+                </b-col>
+            </b-row>
+        </div>
         <!-- {{ $store.getters['dashboard/allSubmission'] }} -->
         <!-- {{  $store.getters['dashboard/getSubs'].submissions  }}   -->
         <b-table
@@ -21,15 +35,15 @@
                         ]"
 
         >
-        <template #cell(building_number)="data">
-            <router-link :to="`/viewRealty/${data.item.id}`">
-                {{ data.item.building_number }}
-            </router-link>
-        </template>
+            <template #cell(building_number)="data">
+                <router-link :to="`/viewRealty/${data.item.id}`">
+                    {{ data.item.building_number }}
+                </router-link>
+            </template>
 
-        <template #cell(status)="data">
-            {{getStatus(data.item.status) }}
-        </template>
+            <template #cell(status)="data">
+                {{getStatus(data.item.status) }}
+            </template>
             <template #cell(created_at)="data">
                 {{toLocalDatetime(data.item.created_at) }}
             </template>
@@ -93,20 +107,28 @@
         data() {
             return {
                 realty_list: [],
+                realty_list2: [],
+                search_sub: null,
             };
         },
         mounted() {
             // this.includes_type  = $store.getters['dashboard/getLookups'].includes_type
             this.$store.dispatch('dashboard/allSubmission')
                 .then((res) => {
-                    // this.realty_list = res.
+                    this.realty_list = res.submissions
                     // this.build_type = res.includes_type;
-                    // console.log('res')
-                    // console.log(res)
+                    console.log('res')
+                    // console.log(this.realty_list)
                 })
 
         },
         methods:{
+            searchSub(){
+
+                if (this.search_Sub) {
+                    this.realty_list = this.realty_list.filter((el)=> el.building_number == this.search_sub );
+                }
+            },
             getStatus(x){
                 if (x==0) {
                     return 'تحت المراجعة'
@@ -122,9 +144,9 @@
     }
 </script>
 
-<style scoped>
+<style>
     th {
-    background-color: #535ae7 !important;
-    color: white;
-}
+        background-color: #535ae7 !important;
+        color: white;
+    }
 </style>
