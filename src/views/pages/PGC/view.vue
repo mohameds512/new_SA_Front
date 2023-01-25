@@ -7,26 +7,23 @@
                 <div dir="rtl">
                     <b-row class="bg-white pt-2 pb-2">
                         <b-col cols="3">
-                            <b-card no-body>
-                                <app-timeline>
-                                    <app-timeline-item
-                                            title="Goal Achieved"
-                                            subtitle="All milestones are completed"
-                                            icon="AwardIcon"
-                                            time="few minutes ago"
-                                            variant="success"
-                                    />
+                            <app-timeline>
+                                <app-timeline-item
+                                        title="Goal Achieved"
+                                        subtitle="All milestones are completed"
+                                        icon="AwardIcon"
+                                        time="few minutes ago"
+                                        variant="success"
+                                />
+                                <app-timeline-item
+                                        title="Goal Achieved"
+                                        subtitle="All milestones are completed"
+                                        icon="AwardIcon"
+                                        time="few minutes ago"
+                                        variant="success"
+                                />
 
-                                    <app-timeline-item
-                                            title="Last milestone remain"
-                                            subtitle="You are just one step away from your goal"
-                                            icon="InfoIcon"
-                                            time="3 minutes ago"
-                                            variant="info"
-                                    />
-
-                                </app-timeline>
-                            </b-card>
+                            </app-timeline>
                         </b-col>
                         <b-col cols="9">
                             <b-card no-body>
@@ -36,6 +33,47 @@
                                             <div class="add_project_details_wrapper">
                                                 <validation-observer ref="addProjectRules">
                                                     <b-form v-if="this.hide == true">
+
+                                                        <b-button @click="model_notes = true" style="margin-left: 20px;"> أضافة ملاحظة </b-button>
+                                                        <b-button @click="model_approve = true" variant="info" v-if="this.form.submission[0].status != 2" >  أعتماد الطلب </b-button>
+
+                                                        <b-modal hide-header-close v-model="model_notes" hide-footer title="أضافة ملاحظة " >
+                                                            <div class="demo-vertical-spacing">
+                                                                <b-form-group class="text-right" label=" ملاحظة">
+                                                                    <validation-provider #default="{ errors }" name=" ملاحظة"
+                                                                                         rules="required">
+                                                                        <b-form-input v-model="notes.note"
+                                                                                      :state="errors.length > 0 ? false : null"
+                                                                                      placeholder=" ملاحظة"  />
+                                                                        <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                            مطلوب</small>
+                                                                    </validation-provider>
+                                                                </b-form-group>
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <b-col cols="12">
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <b-button @click="addNote()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
+                                                                        <b-button @click="model_notes = false"  variant="outline-primary">الغاء</b-button>
+                                                                    </div>
+                                                                </b-col>
+                                                            </div>
+
+                                                        </b-modal>
+                                                        <b-modal hide-header-close v-model="model_approve" hide-footer title=" أعتماد الطلب " >
+                                                            <div class="demo-vertical-spacing">
+                                                                <h4 class="text-center"> هل انت متأكد من اعتماد الطلب ؟ </h4>
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <b-col cols="12">
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <b-button @click="approve()" variant="primary"  style="margin-right: 10px;">تأكيد</b-button>
+                                                                        <b-button @click="model_approve = false"  variant="outline-primary">الغاء</b-button>
+                                                                    </div>
+                                                                </b-col>
+                                                            </div>
+
+                                                        </b-modal>
                                                         <b-row class="bg-white pt-2 pb-2">
                                                             <!-- <b-col md="12" class="back_ground">
                                                                 <p class="text-center"> بيانات المشروع </p>
@@ -713,6 +751,7 @@
                                                 <validation-observer ref="addProjectRules">
                                                     <b-form v-if="this.hide == true">
                                                         <b-row class="bg-white pt-2 pb-2">
+                                                            <b-button variant="primary" @click="edit_forced_area()" >تعديل المساحات المنزوعه</b-button>
 
                                                             <b-col class="d-flex justify-content-center" md="8">
                                                             </b-col>
@@ -720,7 +759,7 @@
                                                                 <b-form-group class="text-right" label="المساحة المنزوعة المبنية">
                                                                     <validation-provider #default="{ errors }" name="المساحة المنزوعة المبنية"
                                                                                          rules="required">
-                                                                        <b-form-input v-model="form.submission[0].build_area"
+                                                                        <b-form-input v-model="form.submission[0].removed_from_unbuilding"
                                                                                       :state="errors.length > 0 ? false : null"
                                                                                       placeholder="المساحة المنزوعة المبنية" type="number" disabled/>
                                                                         <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -732,7 +771,7 @@
                                                                 <b-form-group class="text-right" label="المساحات المنزوعة غير المبنية">
                                                                     <validation-provider #default="{ errors }" name="المساحات المنزوعة غير المبنية"
                                                                                          rules="required">
-                                                                        <b-form-input v-model="form.submission[0].unbuild_area"
+                                                                        <b-form-input v-model="form.submission[0].removed_from_unbuilding"
                                                                                       :state="errors.length > 0 ? false : null"
                                                                                       placeholder="المساحات المنزوعة غير المبنية" type="number" disabled />
                                                                         <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -744,6 +783,53 @@
 
                                                     </b-form>
                                                 </validation-observer>
+                                            </div>
+                                            <div>
+                                                <b-modal hide-header-close v-model="model_forced_area" hide-footer title=" المساحات المنزوعة " size="lg" >
+                                                    <validation-observer ref="addProjectRules">
+                                                        <b-form v-if="this.hide == true">
+                                                            <b-row class="bg-white pt-2 pb-2">
+
+                                                                <b-col class="d-flex justify-content-center" md="8">
+                                                                </b-col>
+                                                                <b-col md="6">
+                                                                    <b-form-group class="text-right" label="المساحة المنزوعة المبنية">
+                                                                        <validation-provider #default="{ errors }" name="المساحة المنزوعة المبنية"
+                                                                                             rules="required">
+                                                                            <b-form-input v-model="form.submission[0].removed_from_building"
+                                                                                          :state="errors.length > 0 ? false : null"
+                                                                                          placeholder="المساحة المنزوعة المبنية" type="number" />
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
+                                                                </b-col>
+                                                                <b-col md="6">
+                                                                    <b-form-group class="text-right" label="المساحات المنزوعة غير المبنية">
+                                                                        <validation-provider #default="{ errors }" name="المساحات المنزوعة غير المبنية"
+                                                                                             rules="required">
+                                                                            <b-form-input v-model="form.submission[0].removed_from_unbuilding"
+                                                                                          :state="errors.length > 0 ? false : null"
+                                                                                          placeholder="المساحات المنزوعة غير المبنية" type="number"  />
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
+                                                                </b-col>
+                                                            </b-row>
+
+                                                        </b-form>
+                                                    </validation-observer>
+                                                    <div class="mt-2">
+                                                        <b-col cols="12">
+                                                            <div class="d-flex justify-content-end">
+                                                                <b-button @click="edit_forced()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
+                                                                <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
+                                                            </div>
+                                                        </b-col>
+                                                    </div>
+
+                                                </b-modal>
                                             </div>
                                         </b-card-text>
                                     </b-tab>
@@ -921,6 +1007,15 @@
                                             </div>
                                         </b-card-text>
                                     </b-tab>
+                                    <b-tab title="الملاحظات">
+                                        <b-card-text>
+                                            <div class="add_project_details_wrapper">
+                                                <h2 class="text-center danger">
+                                                    {{ form.submission[0].notes }}
+                                                </h2>
+                                            </div>
+                                        </b-card-text>
+                                    </b-tab>
                                     <!-- <b-tab title="المرفقات">
                                         <b-card-text>
                                             <div class="add_project_details_wrapper">
@@ -967,6 +1062,7 @@
                                     </b-tab> -->
                                 </b-tabs>
                             </b-card>
+
                         </b-col>
                     </b-row>
                 </div>
@@ -1019,6 +1115,11 @@
         },
         data() {
             return {
+                approve_sub:{id:null},
+                notes:{note: null , id: null},
+                model_notes:false,
+                model_forced_area:false,
+                model_approve:false,
                 model_floor:false,
                 modal_img:false,
                 floorsNum:[
@@ -1068,14 +1169,19 @@
                     { title: 'نوفمبر' },
                     { title: 'ديسمبر' },
                 ],
+                forced_area_data:{
+                    sub_id:null,
+                    removed_from_unbuilding:null,
+                    removed_from_building:null,
+                }
             }
         },
         components: {
-            AppTimelineItem,
-            AppTimeline,
             WorkProgress,
             ManPower,
             Exports,
+            AppTimeline,
+            AppTimelineItem,
             EquipmentProductivity,
             ValidationProvider,
             ValidationObserver,
@@ -1110,6 +1216,81 @@
 
         },
         methods: {
+            edit_forced_area(){
+                this.model_forced_area = true;
+            },
+            edit_forced(){
+                this.forced_area_data.sub_id =this.form.submission[0].id,
+                    this.forced_area_data.removed_from_unbuilding = this.form.submission[0].removed_from_unbuilding,
+                    this.forced_area_data.removed_from_building = this.form.submission[0].removed_from_building
+                this.$store
+                    .dispatch('pgc_forms/forced_area',{
+                        query: this.forced_area_data
+                    })
+                    .then((resp) => {
+                        this.model_forced_area = false;
+
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم التحديث  ',
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
+                        console.log(response);
+                    })
+            },
+            approve(){
+                this.approve_sub.id = this.form.submission[0].id
+                this.$store
+                    .dispatch('pgc_forms/approve', {
+                        query: this.approve_sub,
+                    })
+                    .then((response) => {
+
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم الاعتماد  ',
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
+                        this.form.submission[0].status = 2;
+                        console.log(response);
+
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+                this.model_approve = false;
+            },
+            addNote(){
+                this.notes.id = this.form.submission[0].id
+                this.$store
+                    .dispatch('pgc_forms/add_notes', {
+                        query: this.notes,
+                    })
+                    .then((response) => {
+                        // console.log(response)
+                        // router.push({name:'Realtys'})
+
+
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم الاضافة  ',
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
+                        this.form.submission[0].notes = this.notes.note
+                        this.notes.note = null
+                        // this.submission = response.submission;
+                        console.log(response);
+
+                    })
+                    .catch((error) => {
+                        // this.errorsdata = this.handleBackendError(error.response.data.errors)
+                        console.log(error);
+                    })
+                this.model_notes = false;
+            },
             submitFloor(){
                 console.log(this.floors)
 

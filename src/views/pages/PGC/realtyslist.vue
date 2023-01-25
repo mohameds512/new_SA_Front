@@ -1,9 +1,9 @@
 <template>
     <div class="container bg-white pt-2 pb-2" dir="rtl">
         <div style="text-align: right;">
-            <router-link :to="`/addRealty`"  >
-                <b-button variant="primary"> اضافة عقار </b-button>
-            </router-link>
+<!--            <router-link :to="`/addRealty`"  >-->
+                <b-button variant="primary"  @click="openDialog()" > اضافة عقار </b-button>
+<!--            </router-link>-->
         </div>
         <br>
         <div>
@@ -48,6 +48,22 @@
                 {{toLocalDatetime(data.item.created_at) }}
             </template>
         </b-table>
+
+        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار" cancel-title="الغاء" ok-title="اضافة" cancel-variant="outline-secondary" @show="resetModal" @hidden="resetModal" @ok="handleOk">
+            <validation-observer ref="simpleRules">
+                <form  ref="form" @submit.stop.prevent="handleSubmit">
+                    <b-col md="12">
+                        <b-form-group label="رقم العقار " label-for="name-input" invalid-feedback="Name is required">
+<!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
+                                <b-form-input id="name-input" v-model="form.building_number"/>
+<!--                                <ValidationErrors :frontend-errors="errors" :backend-errors="getBackendFieldError(errorsdata, 'new_role')" />-->
+<!--                            </validation-provider>-->
+                        </b-form-group>
+                    </b-col>
+                </form>
+            </validation-observer>
+        </b-modal>
+
     </div>
 </template>
 
@@ -108,7 +124,9 @@
             return {
                 realty_list: [],
                 realty_list2: [],
+                building_dialog:false,
                 search_sub: null,
+                form:{}
             };
         },
         mounted() {
@@ -129,15 +147,21 @@
                     this.realty_list = this.realty_list.filter((el)=> el.building_number == this.search_sub );
                 }
             },
+            openDialog(){
+                this.building_dialog = true;
+            },
+            resetModal(){
+                this.building_dialog = false;
+            },
             getStatus(x){
                 if (x==0) {
                     return 'تحت المراجعة'
                 }
                 if (x==1) {
-                    return 'يراجع مرة أخري'
+                    return ' يراجع مرة أخري'
                 }
                 if(x==2){
-                    return 'تمت المراجعه'
+                    return 'تم اعتماده'
                 }
             }
         }
