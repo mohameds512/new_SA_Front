@@ -11,7 +11,7 @@
               {{ $t(`Global.${option.label}`) }}
             </span>
           </template>
-           <template v-slot:option="option">
+          <template v-slot:option="option">
                             {{ $t(`Global.${option.label}`) }}
                         </template>
         </v-select>
@@ -25,7 +25,7 @@
               <b-avatar size="32" :text="avatarText(data.item.name)" :src="user_photo(data.item.id)" />
             </template>
             <b-link v-if="$i18n.locale == 'en'" v-b-tooltip.hover="data.item.name" :to="{ name: 'user-show', params: { id: data.item.id } }" class="font-weight-bold d-block text-nowrap text-truncate">
-              {{ data.item ? data.item.name : '_' }}
+              {{ data.item ? data.item.name_local : '_' }}
             </b-link>
             <b-link v-if="$i18n.locale == 'ar'" v-b-tooltip.hover="data.item.name_local" :to="{ name: 'user-show', params: { id: data.item.id } }">
               {{ data.item ? shortMyText(data.item.name_local) : '_' }}

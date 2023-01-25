@@ -6,15 +6,18 @@ const locationModule = {
   namespaced: true,
   state: {
     projectList: null,
-    listcontractors:null,
+    // listcontractors:null,
     showSub: null,
-
+    incs : null,
   },
   getters: {
   
     showSub(state) {
       return state.showSub
     },
+    // get_incs(state) {
+    //   return state.incs
+    // },
     
   },
   mutations: {
@@ -22,9 +25,26 @@ const locationModule = {
     SET_SHOW_SUB(state, sub) {
       state.showSub = sub
     },
+    // SET_GET_INCS(state, data) {
+    //   state.incs = data
+    // },
   },
   actions: {
 
+    // get_incs({ commit },id) {
+    //   return new Promise((resolve, reject) => {
+    //     pgc_forms
+    //       .incs(id)
+    //       .then(response => {
+    //         commit('SET_GET_INC', response)
+    //         console.log(response)
+    //         resolve(response)
+    //       })
+    //       .catch(error => {
+    //         reject(error)
+    //       })
+    //   })
+    // },
     show_sub({ commit },id) {
       return new Promise((resolve, reject) => {
         pgc_forms
@@ -76,6 +96,7 @@ const locationModule = {
           })
       })
     },
+
     save_subs({commit}, payload ) {
 
       return new Promise((resolve, reject) => {
@@ -96,6 +117,7 @@ const locationModule = {
           })
       })
     },
+    
     save_inc({commit}, payload ) {
 
       return new Promise((resolve, reject) => {
@@ -103,6 +125,66 @@ const locationModule = {
         console.log(payload)
         pgc_forms
           .save_includes( payload.query)
+          .then(response => {
+            // commit('SET_CONTRACTORS', response)
+            // commit('SET_ID', response.project.id);
+            console.log(response)
+            // console.log(response.project.id)
+            resolve();
+        
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    add_notes({commit}, payload ) {
+
+      return new Promise((resolve, reject) => {
+        console.log('payload')
+        console.log(payload)
+        pgc_forms
+          .save_notes( payload.query)
+          .then(response => {
+            // commit('SET_CONTRACTORS', response)
+            // commit('SET_ID', response.project.id);
+            console.log(response)
+            // console.log(response.project.id)
+            resolve();
+        
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    approve({commit}, payload ) {
+
+      return new Promise((resolve, reject) => {
+        // console.log('payload')
+        // console.log(payload)
+        pgc_forms
+          .approve( payload.query)
+          .then(response => {
+            // commit('SET_CONTRACTORS', response)
+            // commit('SET_ID', response.project.id);
+            console.log(response)
+            // console.log(response.project.id)
+            resolve();
+        
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+    forced_area({commit}, payload ) {
+
+      return new Promise((resolve, reject) => {
+        // console.log('payload')
+        // console.log(payload)
+        pgc_forms
+          .edit_forced_area( payload.query)
           .then(response => {
             // commit('SET_CONTRACTORS', response)
             // commit('SET_ID', response.project.id);

@@ -12,6 +12,7 @@ const locationModule = {
     // projectDetails: [],
     lookups: null,
     submissions:null,
+    incs : null,
   },
   getters: {
     
@@ -20,6 +21,9 @@ const locationModule = {
     },
     getSubs(state){
       return state.submissions
+    },
+    get_incs(state) {
+      return state.incs
     }
 
   },
@@ -29,10 +33,26 @@ const locationModule = {
     },
     SET_SUBMISSIONS(state,subs){
       state.submissions = subs
-    }
+    },
+    SET_GET_INCS(state, data) {
+      state.incs = data
+    },
   },
   actions: {
-
+    get_incs({ commit },id) {
+      return new Promise((resolve, reject) => {
+        dashboard
+          .incs(id)
+          .then(response => {
+            commit('SET_GET_INC', response)
+            console.log(response)
+            resolve(response)
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     getLookups({ commit }) {
       return new Promise((resolve, reject) => {
         dashboard.lookups()

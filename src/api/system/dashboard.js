@@ -6,6 +6,12 @@ class Dashboard extends Resource {
     super('dashboard');
   }
 
+  incs(id){
+    return request({
+      url: `/getInc/${id}`,
+      method: 'post'
+    });
+  }
   lookups(){
     return request({
       url: '/dataLookups',

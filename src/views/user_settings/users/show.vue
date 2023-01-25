@@ -7,7 +7,7 @@
                     <span>{{$t('Global.personal_info')}}</span>
                 </template>
                 <list :data="user" :loading="load"
-                      :only="['name', 'code','name_local','email', 'birth_date', 'gender', 'national_id']"></list>
+                    :only="['name', 'code','name_local','email', 'birth_date', 'gender', 'national_id']"></list>
             </b-tab>
             <b-tab>
                 <template #title>

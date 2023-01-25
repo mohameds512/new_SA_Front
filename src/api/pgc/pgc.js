@@ -15,7 +15,12 @@ class PGC extends Resource {
       data:payload,
     });
   }
-
+  incs(id){
+    return request({
+      url: `/getInc/${id}`,
+      method: 'post'
+    });
+  }
   save_includes(payload){
     console.log(payload)
     return request({
@@ -24,21 +29,42 @@ class PGC extends Resource {
       data: payload
     })
   }
+
+  save_notes(payload){
+    console.log(payload)
+    return request({
+      url:`/store/add_notes`,
+      method: "post",
+      data: payload
+    })
+  }
+  approve(payload){
+    console.log(payload)
+    return request({
+      url:`/store/approve`,
+      method: "post",
+      data: payload
+    })
+  }
+
+  edit_forced_area(payload){
+    console.log(payload)
+    return request({
+      url:`/store/forced_area`,
+      method: "post",
+      data: payload
+    })
+  }
   
-  save_submission(id,payload){
-    if (id==null) {
+  save_submission(payload){
+    
+
       return request({
         url:`/store/save_submission`,
         method: "post",
         data: payload
       })
-    }else{
-      return request({
-        url:`/store/save_submission/${id}`,
-        method: "post",
-        data: payload
-      })
-    }
+    
     
   }
 
