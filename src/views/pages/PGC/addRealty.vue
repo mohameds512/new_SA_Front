@@ -1022,7 +1022,7 @@
 
                                                             </feather-icon>
                                                         </template>
-                                                    </b-table>
+                                                        </b-table>
                                                         <b-button @click="edit_inc_form()"> fffff</b-button>
                                                     </div>
                                                     <div>

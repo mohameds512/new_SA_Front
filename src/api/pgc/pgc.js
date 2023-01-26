@@ -47,6 +47,15 @@ class PGC extends Resource {
     })
   }
 
+  editTypes(payload){
+    console.log(payload)
+    return request({
+      url:`/store/edit_desc`,
+      method: "post",
+      data: payload
+    })
+  }
+
   edit_forced_area(payload){
     console.log(payload)
     return request({

@@ -24,6 +24,12 @@ class Dashboard extends Resource {
       method: 'post'
     });
   }
+  allBuildType(){
+    return request({
+      url: '/build_desc',
+      method: 'post'
+    });
+  }
 
   counts(){
     return request({
