@@ -49,9 +49,9 @@
             </template>
         </b-table>
 
-        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار" cancel-title="الغاء" ok-title="اضافة" cancel-variant="outline-secondary" @show="resetModal" @hidden="resetModal" @ok="handleOk">
+        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار" cancel-title="الغاء" ok-title="اضافة" cancel-variant="outline-secondary" @show="resetModal" @hidden="resetModal" @ok="save">
             <validation-observer ref="simpleRules">
-                <form  ref="form" @submit.stop.prevent="handleSubmit">
+                <form  ref="form" @submit.stop.prevent="save">
                     <b-col md="12">
                         <b-form-group label="رقم العقار " label-for="name-input" invalid-feedback="Name is required">
 <!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
@@ -163,7 +163,29 @@
                 if(x==2){
                     return 'تم اعتماده'
                 }
-            }
+            },
+            save($state) {
+                this.$store
+                    .dispatch('pgc_forms/add_subs', {
+                        query: this.form,
+                    })
+                    .then((response) => {
+                        if ($state) {
+                            this.building_dialog = false ;
+                        }
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم الحفظ',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        })
+
+                        this.$router.push(`/viewRealty/${response.submission.id}`)
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            },
         }
     }
 </script>

@@ -68,6 +68,30 @@ class PGC extends Resource {
 
   }
 
+  add_submission(payload){
+
+
+    return request({
+      url:`/store/add/submission`,
+      method: "put",
+      data: payload
+    })
+
+
+  }
+
+  change_status(payload){
+
+
+    return request({
+      url:`/store/change/status/${payload.id}`,
+      method: "post",
+      data: payload.query
+    })
+
+
+  }
+
   submitFloor(payload){
     console.log(payload)
     return request({
