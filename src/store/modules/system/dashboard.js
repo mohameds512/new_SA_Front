@@ -40,8 +40,8 @@ const locationModule = {
     SET_SUBMISSIONS(state,subs){
       state.submissions = subs
     },
-    SET_GET_INCS(state, data) {
-      state.incs = data
+    SET_GET_INCS(state, includes) {
+      state.incs = includes
     },
   },
   actions: {
@@ -64,8 +64,8 @@ const locationModule = {
         dashboard
           .incs(id)
           .then(response => {
-            commit('SET_GET_INC', response)
-            console.log(response)
+            commit('SET_GET_INC', response.includes)
+            console.log(response.includes)
             resolve(response)
           })
           .catch(error => {

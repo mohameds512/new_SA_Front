@@ -988,6 +988,16 @@
                                 </div>
                                     </b-card-text>
                                 </b-tab>
+                                <b-tab title="التقارير">
+                                    <b-card-text>
+                                        <div class="add_project_details_warpper" >
+                                            <b-button> المخطط التفصيلي </b-button>
+                                        </div>
+                                        <div>
+                                            <details-rep></details-rep>
+                                        </div>
+                                    </b-card-text>
+                                </b-tab>
                                 <b-tab title="الملاحظات">
                                     <b-card-text>
                                         <div class="add_project_details_wrapper">
@@ -1086,7 +1096,8 @@
     import Exports from "@/views/dashboard/component/exports";
     import ManPower from "@/views/dashboard/component/manPower";
     import WorkProgress from "@/views/dashboard/component/workProgress";
-
+    import detailsRep from "@/views/dashboard/component/detailsRep.vue";
+    // import planedDetailsRep from './planedDetailsRep.vue'
     export default {
         name: 'view',
         props: {
@@ -1157,6 +1168,7 @@
             }
         },
         components: {
+            detailsRep,
             WorkProgress,
             ManPower,
             Exports,

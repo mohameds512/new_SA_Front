@@ -15,12 +15,12 @@ class PGC extends Resource {
       data:payload,
     });
   }
-  incs(id){
-    return request({
-      url: `/getInc/${id}`,
-      method: 'post'
-    });
-  }
+  // incs(id){
+  //   return request({
+  //     url: `/dashboard/getInc/${id}`,
+  //     method: 'post'
+  //   });
+  // }
   save_includes(payload){
     console.log(payload)
     return request({
