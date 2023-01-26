@@ -18,6 +18,7 @@
                                                     <b-col md="12" class="back_ground">
                                                         <p class="text-center"> بيانات المشروع </p>
                                                     </b-col>
+                                                    
 
                                                     <b-col md="1"></b-col>
 
