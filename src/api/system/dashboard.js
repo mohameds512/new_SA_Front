@@ -8,7 +8,7 @@ class Dashboard extends Resource {
 
   incs(id){
     return request({
-      url: `/getInc/${id}`,
+      url: `dashboard/getInc/${id}`,
       method: 'post'
     });
   }

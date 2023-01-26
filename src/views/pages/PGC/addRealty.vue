@@ -6,6 +6,7 @@
                 <div align="right">
                     <b-row class="bg-white pt-2 pb-2">
                         <div class="container">
+                            <h3 class="text-danger text-center"> رقم العقار : {{ form.submission.building_number }}</h3>
                             <b-col  cols="12">
                                 
                                 <!-- بيانات المشروع  -->
@@ -14,12 +15,11 @@
                                 <div class="add_project_details_wrapper">
                                         <validation-observer ref="addProjectRules">
                                             <b-form v-if="this.hide == true">
+                                                <b-row></b-row>
                                                 <b-row class="bg-white pt-2 pb-2">
                                                     <b-col md="12" class="back_ground">
                                                         <p class="text-center"> بيانات المشروع </p>
                                                     </b-col>
-                                                    
-
                                                     <b-col md="1"></b-col>
 
                                                     <b-col class="d-flex justify-content-center" md="8">
@@ -453,7 +453,22 @@
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
                                                     <b-col md="4">
-                                                        <b-form-group class="text-right" label="رقم العقار">
+                                                        <b-form-group class="text-right" label="نوع المعاملة ">
+                                                            <validation-provider #default="{ errors }" name="نوع المعاملة"
+                                                                rules="required">
+                                                                <v-select
+                                                                    placeholder="نوع المعاملة"
+                                                                    :options="Array.from(all_operation_type , (el) => el)"
+                                                                    :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                                    v-model="form.submission.operation_type"
+                                                                    :reduce="(val) => val"
+                                                                >
+                                                                </v-select>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                        <!-- <b-form-group class="text-right" label="رقم العقار">
                                                             <validation-provider #default="{ errors }" name="رقم العقار"
                                                                 rules="required">
                                                                 <b-form-input v-model="form.submission.building_number"
@@ -462,7 +477,7 @@
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
-                                                        </b-form-group>
+                                                        </b-form-group> -->
                                                     </b-col>
                                                     <b-col md="4">
                                                         <b-form-group class="text-right" label="رقم المخطط">
@@ -746,7 +761,7 @@
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="3">
-                                                        <b-form-group class="text-right" label=" احداثيات الشرق ">
+                                                        <b-form-group class="text-right" :label="' احداثيات الشرق'+ (i+1) ">
                                                             <validation-provider #default="{ errors }" name=" احداثيات الشرق"
                                                                 rules="required">
                                                                 <b-form-input v-model="coor.coor_east"
@@ -791,7 +806,7 @@
                                         </validation-observer>
                                     </div>
                                 </b-overlay>
-                                <!-- المساحات المنزوعة   -->
+                                <!-- المساحات بموجب الحصر الميداني   -->
                                 <b-overlay v-if="(show_model_inputs == 8)" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
                                 rounded="sm">
                                 <div class="add_project_details_wrapper">
@@ -799,7 +814,7 @@
                                             <b-form v-if="this.hide == true">
                                                 <b-row class="bg-white pt-2 pb-2">
                                                     <b-col md="12" class="back_ground">
-                                                        <p class="text-center">  المساحات المنزوعة  </p>
+                                                        <p class="text-center">  المساحات بموجب الحصر الميداني  </p>
                                                     </b-col>
 
                                                     <b-col md="1"></b-col>
@@ -861,7 +876,7 @@
                                                 <b-form v-if="this.hide == true">
                                                     <b-row class="bg-white pt-2 pb-2">
                                                         <b-col md="12" class="back_ground">
-                                                            <p class="text-center">المشتمالات</p>
+                                                            <p class="text-center">المشتملات</p>
                                                             <!-- {{  $store.getters['dashboard/getLookups'].includes_type  }} -->
                                                         </b-col>
                                                         <b-col md="1"></b-col>
@@ -955,7 +970,7 @@
                                                                     </b-row>
                                                                 </b-col>
                                                         </b-row>
-                                                        <!-- <div v-if="includesForm.build_id == 1">
+                                                        <div v-if="includesForm.build_id == 1">
                                                             <b-row v-for="(details , index) in form.submission.building_details" :key="index" >
                                                                 <b-col md="4">
                                                                     <b-form-group class="text-right" label=" الدور ">
@@ -1001,16 +1016,16 @@
                                                                     </b-row>
                                                                 </b-col>
                                                             </b-row>
-                                                        </div> -->
+                                                        </div>
                                                         
 
                                                     <div style="margin-top: 50px;">
-                                                        {{ $store.getters[`dashboard/get_incs/${69}`] }}
+                                                        
                                                         <b-table
                                                             class="text-center"
                                                             striped
                                                             hover
-                                                            :items="$store.getters['dashboard/get_incs/69']"
+                                                            :items="getAllIncs"
                                                             :fields="[
                                                                     { key: 'type', label: 'نوع المشتمل ' },
                                                                     { key: 'content', label: 'الوصف' },
@@ -1024,17 +1039,84 @@
                                                             </feather-icon>
                                                         </template>
                                                         </b-table>
-                                                        <b-button @click="edit_inc_form()"> fffff</b-button>
                                                     </div>
                                                     <div>
-                                                        <b-modal hide-header-close v-model="model_inc_edit" hide-footer title="أضافة ملاحظة " size="lg" >
+                                                        <b-modal hide-header-close v-model="model_inc_edit"
+                                                            hide-footer title=" تحديث مشتمل " size="lg" >
                                                             <div class="demo-vertical-spacing">
-                                                                <h3>ddddddddd</h3>
+                                                                <b-row>
+                                                                    <b-col md="2">
+                                                                        <b-form-group class="text-right" label=" مرفق">
+                                                                            <validation-provider #default="{ errors }" name="مرفق "
+                                                                                rules="required">
+                                                                                <input type="file" name="image" 
+                                                                                    @change="changeImg"
+                                                                                    accept="image/apng, image/jpeg, image/png, image/webp"
+                                                                                    />
+                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                    مطلوب</small>
+                                                                            </validation-provider>
+                                                                        </b-form-group>
+                                                                    </b-col>
+                                                                    <b-col md="2">
+                                                                        <b-form-group class="text-right" label=" الوحدة">
+                                                                            <validation-provider #default="{ errors }" name="الوحدة "
+                                                                                rules="required">
+                                                                                <b-form-input v-model="editInc.qty"
+                                                                                    :state="errors.length > 0 ? false : null"
+                                                                                    placeholder=" " type="number" />
+                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                    مطلوب</small>
+                                                                            </validation-provider>
+                                                                        </b-form-group>
+                                                                    </b-col>
+                                                                    <b-col md="3">
+                                                                        <b-form-group class="text-right" label=" الوصف  ">
+                                                                            
+                                                                            <validation-provider #default="{ errors }" name=" الوصف "
+                                                                                rules="required">
+                                                                                <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
+                                                                                <v-select
+                                                                                    placeholder="الوصف "
+                                                                                    :options="$store.getters['dashboard/getLookups'].includes_type.filter((el)=>
+                                                                                        el.id == editInc.build_id)[0].build_desc"
+                                                                                    label='name'
+                                                                                    :disabled="editInc.build_id ? false : true"
+                                                                                    :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                                                    v-model="editInc.build_desc_id"
+                                                                                    :reduce="(val) => val.id"
+                                                                                >
+                                                                                </v-select>
+                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                    مطلوب</small>
+                                                                            </validation-provider>
+                                                                        </b-form-group>
+                                                                    </b-col>
+                                                                    <b-col md="3">
+                                                                        <b-form-group class="text-right" label=" نوع المشتمل ">
+                                                                            <validation-provider #default="{ errors }" name=" نوع المشتمل"
+                                                                                rules="required">
+                                                                                <v-select
+                                                                                    placeholder="نوع المشتمل"
+                                                                                    :options="$store.getters['dashboard/getLookups'].includes_type "
+                                                                                    label = 'name'
+                                                                                    
+                                                                                    :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                                                    v-model="editInc.build_id"
+                                                                                    :reduce="(val) => val.id"
+                                                                                >
+                                                                                </v-select>
+                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                    مطلوب</small>
+                                                                            </validation-provider>
+                                                                        </b-form-group>
+                                                                    </b-col>
+                                                                </b-row>
                                                             </div>
                                                             <div class="mt-2">
                                                                 <b-col cols="12">
                                                                     <div class="d-flex justify-content-end">
-                                                                        <b-button @click="edit_inc()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
+                                                                        <b-button @click="editIncludes()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
                                                                         <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
                                                                     </div>
                                                                 </b-col>
@@ -1284,6 +1366,7 @@ import router from '@/router'
                         created_by: null,
                         submission_using:null,
                         submission_area:null,
+                        operation_type:null,
                         // search_text: null,
                     },
                 },
@@ -1291,6 +1374,9 @@ import router from '@/router'
                 hide: true,
                 roofs:[
                     ' تحت الارضي',' الارضي',' الاول',' الثاني',' الثالث',' الرابع',' الخامس','أخري',
+                ],
+                all_operation_type:[
+                    'فرز','دمج','عادية','اخري'
                 ],
                 personality: [
                     'تابعية','هوية'
@@ -1330,6 +1416,14 @@ import router from '@/router'
                     { title: 'نوفمبر' },
                     { title: 'ديسمبر' },
                 ],
+                getAllIncs:[],
+                editInc:{
+                    build_id:null,
+                    build_desc_id:null,
+                    qty:null,
+                    submission_id:null,
+                },
+                editInc_id:null,
             }
         },
         components: {
@@ -1368,34 +1462,58 @@ import router from '@/router'
                     // this.build_type = res.includes_type;
                     
                 })
-                this.$store.getters['dashboard/get_incs/69']
-            // this.$store.dispatch(`dashboard/get_incs/${69}`)
-            // .then((res) => {
-            //     console.log(res);
-            //     // this.build_type = res.includes_type;
-                
-            // })
-
+                // this.$store.dispatch('dashboard/get_incs/69')
+            this.initGetIncs();
+            
         },
         computed:{
             getIncludes(){
-                this.$store.getters[`dashboard/get_incs/${69}`]
+                this.$store.getters['dashboard/get_incs']
             }
         },
         methods: {  
-            edit_inc(){
-
+            initGetIncs(){
+                this.$store.dispatch('dashboard/get_incs',67)
+                    .then((res) => {
+                        this.getAllIncs = res.includes;
+                    })
             },
             edit_inc_form(item){
-                this.includesForm.build_id = 1,
-                // this.includesForm.build_id = item.build_id,
-                this.includesForm.build_desc_id = 1,
-                // this.includesForm.build_desc_id = item.build_desc_id,
-                this.includesForm.qty = 1,
-                // this.includesForm.qty = item.qty,
+                this.editInc_id = item.id,
+                this.editInc.build_id = item.build_id,
+                this.editInc.build_desc_id = item.build_desc_id,
+                this.editInc.qty = item.qty,
+                this.editInc.submission_id = 67;
                 this.model_inc_edit = true;
 
                 console.log(item);
+            },
+            editIncludes(){
+                this.$store
+                    .dispatch('pgc_forms/save_inc', {
+                        id:this.editInc_id,
+                        query: this.editInc,
+                    })
+                    .then((response) => {
+                        this.editInc.build_id = null,
+                        this.editInc.build_desc_id = null,
+                        this.editInc.qty = null,
+                        this.editInc.image = null,
+                        this.editInc.submission_id = null;
+
+                        this.initGetIncs(),
+                        this.model_inc_edit= false,
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم تحديث المشتمل ',
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
+                            console.log(response);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
             },
             changeImg(e){
                 console.log(e.target.files[0]);
@@ -1435,24 +1553,19 @@ import router from '@/router'
                 var x = this.form.attachs;
                 return x.length;
             },
+            
             addIncludes(){
-                this.includesForm.submission_id = 67;
-                // this.includesForm.submission_id = this.form.submission.id;
-                console.log(this.includesForm)
-                // delete this.form.submission.restrict_border
-                // delete this.form.submission.contract_border_
+                this.includesForm.submission_id = 97;
                 this.$store
                     .dispatch('pgc_forms/save_inc', {
                         query: this.includesForm,
                     })
                     .then((response) => {
-                        // console.log(response)
-                        // router.push({name:'Realtys'})
                         this.includesForm.build_id = null,
                         this.includesForm.build_desc_id = null,
                         this.includesForm.qty = null,
                         this.includesForm.image = null,
-                        
+                        this.initGetIncs(),
                         this.$swal({
                             icon: 'success',
                             title: 'تم حفظ المشتمل ',
