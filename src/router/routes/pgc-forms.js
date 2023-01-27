@@ -32,4 +32,10 @@ export default [
     component: () => import("@/views/pages/PGC/view"),
     // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
   },  
+  {
+    path: "/building_desc",
+    name: "building_desc",
+    component: () => import("@/views/pages/PGC/building_desc"),
+    // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
+  },  
 ]

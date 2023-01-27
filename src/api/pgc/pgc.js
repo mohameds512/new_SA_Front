@@ -15,12 +15,12 @@ class PGC extends Resource {
       data:payload,
     });
   }
-  incs(id){
-    return request({
-      url: `/getInc/${id}`,
-      method: 'post'
-    });
-  }
+  // incs(id){
+  //   return request({
+  //     url: `/dashboard/getInc/${id}`,
+  //     method: 'post'
+  //   });
+  // }
   save_includes(payload){
     console.log(payload)
     return request({
@@ -42,6 +42,15 @@ class PGC extends Resource {
     console.log(payload)
     return request({
       url:`/store/approve`,
+      method: "post",
+      data: payload
+    })
+  }
+
+  editTypes(payload){
+    console.log(payload)
+    return request({
+      url:`/store/edit_desc`,
       method: "post",
       data: payload
     })

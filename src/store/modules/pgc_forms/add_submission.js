@@ -222,7 +222,25 @@ const locationModule = {
                     })
             })
         },
+    },
+    edit_desc({commit}, payload ) {
 
-    }
+      return new Promise((resolve, reject) => {
+        // console.log('payload')
+        // console.log(payload)
+        pgc_forms
+          .editTypes( payload.query)
+          .then(response => {
+            console.log(response)
+            // console.log(response.project.id)
+            resolve();
+
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
+
 }
 export default locationModule;

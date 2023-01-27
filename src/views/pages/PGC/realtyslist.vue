@@ -4,6 +4,13 @@
 <!--            <router-link :to="`/addRealty`"  >-->
                 <b-button variant="primary"  @click="openDialog()" > اضافة عقار </b-button>
 <!--            </router-link>-->
+            <router-link :to="`/addRealty`"  >
+                <b-button variant="primary"> اضافة عقار </b-button>
+            </router-link>
+
+            <router-link :to="`/building_desc`" style="margin-right: 15px;" >
+                <b-button variant="primary"> انواع المشتمالات و الوصف</b-button>
+            </router-link>
         </div>
         <br>
         <div>

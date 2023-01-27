@@ -28,8 +28,13 @@
                                                             <validation-provider #default="{ errors }" name="اسم المشروع"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.pro_name"
+<<<<<<< HEAD
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="اسم المشروع"  />
+=======
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder="اسم المشروع"  disabled />
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -806,24 +811,42 @@
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
                                                     <b-col md="6">
+<<<<<<< HEAD
                                                         <b-form-group class="text-right" label="المساحة المنزوعة المبنية">
                                                             <validation-provider #default="{ errors }" name="المساحة المنزوعة المبنية"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.build_area"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="المساحة المنزوعة المبنية" type="number"/>
+=======
+                                                        <b-form-group class="text-right" label="المساحة المبنية">
+                                                            <validation-provider #default="{ errors }" name="المساحة المبنية"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.build_area"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder="المساحة المبنية" type="number"/>
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
+<<<<<<< HEAD
                                                         <b-form-group class="text-right" label="المساحات المنزوعة غير المبنية">
                                                             <validation-provider #default="{ errors }" name="المساحات المنزوعة غير المبنية"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.unbuild_area"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="المساحات المنزوعة غير المبنية" type="number" />
+=======
+                                                        <b-form-group class="text-right" label="المساحات غير المبنية">
+                                                            <validation-provider #default="{ errors }" name="المساحات غير المبنية"
+                                                                rules="required">
+                                                                <b-form-input v-model="form.submission.unbuild_area"
+                                                                    :state="errors.length > 0 ? false : null"
+                                                                    placeholder="المساحات غير المبنية" type="number" />
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -853,8 +876,13 @@
                                     </div>
                                 </b-overlay>
                                 <!--  المشتمالات -->
+<<<<<<< HEAD
                                 <b-overlay v-if="(show_model_inputs == 1 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
                                            rounded="sm">
+=======
+                                <b-overlay v-if="(show_model_inputs == 9 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
+                                    rounded="sm">
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                                     <div class="add_project_details_wrapper">
                                         <validation-observer ref="addProjectRules">
                                             <b-form v-if="this.hide == true">
@@ -1009,19 +1037,29 @@
                                                             class="text-center"
                                                             striped
                                                             hover
-                                                            :items="$store.getters[`dashboard/get_incs/${69}`]"
+                                                            :items="$store.getters['dashboard/get_incs/69']"
                                                             :fields="[
+<<<<<<< HEAD
                                                                         { key: 'type', label: 'نوع المشتمل ' },
                                                                         { key: 'content', label: 'الوصف' },
                                                                         { key: 'qty', label: '  الوحدة ' },
                                                                         { key: 'action', label: '  تعديل ' },
                                                                     ]"
                                                     >
+=======
+                                                                    { key: 'type', label: 'نوع المشتمل ' },
+                                                                    { key: 'content', label: 'الوصف' },
+                                                                    { key: 'qty', label: '  الوحدة ' },
+                                                                    { key: 'action', label: '  تعديل ' },
+                                                                ]"
+                                                        >
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                                                         <template #cell(action)="data">
                                                             <feather-icon @click="edit_inc_form(data.item)" icon="EditIcon">
 
                                                             </feather-icon>
                                                         </template>
+<<<<<<< HEAD
                                                     </b-table>
                                                     <b-button @click="edit_inc_form()"> fffff</b-button>
                                                 </div>
@@ -1038,6 +1076,24 @@
                                                                 </div>
                                                             </b-col>
                                                         </div>
+=======
+                                                        </b-table>
+                                                        <b-button @click="edit_inc_form()"> fffff</b-button>
+                                                    </div>
+                                                    <div>
+                                                        <b-modal hide-header-close v-model="model_inc_edit" hide-footer title="أضافة ملاحظة " size="lg" >
+                                                            <div class="demo-vertical-spacing">
+                                                                <h3>ddddddddd</h3>
+                                                            </div>
+                                                            <div class="mt-2">
+                                                                <b-col cols="12">
+                                                                    <div class="d-flex justify-content-end">
+                                                                        <b-button @click="edit_inc()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
+                                                                        <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
+                                                                    </div>
+                                                                </b-col>
+                                                            </div>
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
 
                                                     </b-modal>
                                                 </div>
@@ -1367,6 +1423,7 @@
                     // this.build_type = res.includes_type;
 
                 })
+                this.$store.getters['dashboard/get_incs/69']
             // this.$store.dispatch(`dashboard/get_incs/${69}`)
             // .then((res) => {
             //     console.log(res);
@@ -1375,7 +1432,16 @@
             // })
 
         },
+<<<<<<< HEAD
         methods: {
+=======
+        computed:{
+            getIncludes(){
+                this.$store.getters[`dashboard/get_incs/${69}`]
+            }
+        },
+        methods: {  
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
             edit_inc(){
 
             },

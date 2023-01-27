@@ -1291,10 +1291,81 @@
 
                                             </b-form>
                                         </validation-observer>
+<<<<<<< HEAD
                                     </div>
                                         </b-card-text>
                                     </b-tab> -->
                                 </b-tabs>
+=======
+                                </div>
+                                    </b-card-text>
+                                </b-tab>
+                                <b-tab title="التقارير">
+                                    <b-card-text>
+                                        <div class="add_project_details_warpper" >
+                                            <b-button> المخطط التفصيلي </b-button>
+                                        </div>
+                                        <div>
+                                            <details-rep></details-rep>
+                                        </div>
+                                    </b-card-text>
+                                </b-tab>
+                                <b-tab title="الملاحظات">
+                                    <b-card-text>
+                                        <div class="add_project_details_wrapper">
+                                            <h2 class="text-center danger">
+                                                {{ form.submission[0].notes }}
+                                            </h2>
+                                        </div>
+                                    </b-card-text>
+                                </b-tab>
+                                <!-- <b-tab title="المرفقات">
+                                    <b-card-text>
+                                        <div class="add_project_details_wrapper">
+                                    <validation-observer ref="addProjectRules">
+                                        <b-form v-if="this.hide == true">
+                                            <b-row class="bg-white pt-2 pb-2">
+
+
+                                                <b-col class="d-flex justify-content-center" md="8">
+                                                </b-col>
+
+                                            </b-row>
+
+                                            <b-row v-for="(attach , i ) in form.attachs" :key="i">
+                                                <b-col md="4">
+                                                    <b-form-group class="text-right"
+                                                        label=" المرفق ">
+                                                        <input type="file" name="image"
+                                                            accept="image/apng, image/jpeg, image/png, image/webp"
+                                                            />
+                                                    </b-form-group>
+                                                </b-col>
+                                                <b-col md="4">
+                                                    <b-form-group class="text-right" label="ملاحظات">
+                                                        <validation-provider #default="{ errors }" name="ملاحظات"
+                                                            rules="required">
+                                                            <b-form-input v-model="attach.note"
+                                                                :state="errors.length > 0 ? false : null"
+                                                                placeholder="ملاحظات" type="number" />
+                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                مطلوب</small>
+                                                        </validation-provider>
+                                                    </b-form-group>
+                                                </b-col>
+                                                <b-col md="3">
+
+                                                </b-col>
+                                            </b-row>
+
+                                        </b-form>
+                                    </validation-observer>
+                                </div>
+                                    </b-card-text>
+                                </b-tab> -->
+                            </b-tabs>
+
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                             </b-card>
 
                         </b-col>
@@ -1340,8 +1411,13 @@
     import Exports from "@/views/dashboard/component/exports";
     import ManPower from "@/views/dashboard/component/manPower";
     import WorkProgress from "@/views/dashboard/component/workProgress";
+<<<<<<< HEAD
     import Report from "@/views/pages/PGC/report";
 
+=======
+    import detailsRep from "@/views/dashboard/component/detailsRep.vue";
+    // import planedDetailsRep from './planedDetailsRep.vue'
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
     export default {
         name: 'view',
         props: {
@@ -1412,7 +1488,11 @@
             }
         },
         components: {
+<<<<<<< HEAD
             Report,
+=======
+            detailsRep,
+>>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
             WorkProgress,
             ManPower,
             Exports,
