@@ -12,7 +12,7 @@ const locationModule = {
     // projectDetails: [],
     lookups: null,
     submissions:null,
-    incs : null,
+    incs : [],
     build_desc:null,
   },
   getters: {
@@ -64,7 +64,7 @@ const locationModule = {
         dashboard
           .incs(id)
           .then(response => {
-            commit('SET_GET_INC', response.includes)
+            commit('SET_GET_INCS', response.includes)
             console.log(response.includes)
             resolve(response)
           })
