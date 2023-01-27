@@ -30,21 +30,6 @@ const locationModule = {
         // },
     },
     actions: {
-
-        // get_incs({ commit },id) {
-        //   return new Promise((resolve, reject) => {
-        //     pgc_forms
-        //       .incs(id)
-        //       .then(response => {
-        //         commit('SET_GET_INC', response)
-        //         console.log(response)
-        //         resolve(response)
-        //       })
-        //       .catch(error => {
-        //         reject(error)
-        //       })
-        //   })
-        // },
         show_sub({commit}, id) {
             return new Promise((resolve, reject) => {
                 pgc_forms
@@ -59,8 +44,6 @@ const locationModule = {
                     })
             })
         },
-
-
         img({commit}, id) {
             return new Promise((resolve, reject) => {
                 pgc_forms
@@ -75,19 +58,14 @@ const locationModule = {
                     })
             })
         },
-
-        save_floor({commit}, payload) {
-
+        submitMab({commit}, payload) {
             return new Promise((resolve, reject) => {
-                console.log('payload')
+
                 console.log(payload)
                 pgc_forms
-                    .show_sub(payload.query)
+                    .submitMab(payload.query)
                     .then(response => {
-                        // commit('SET_CONTRACTORS', response)
-                        // commit('SET_ID', response.project.id);
                         console.log(response)
-                        // console.log(response.project.id)
                         resolve();
 
                     })
@@ -96,7 +74,6 @@ const locationModule = {
                     })
             })
         },
-
         save_subs({commit}, payload) {
 
             return new Promise((resolve, reject) => {
@@ -117,7 +94,6 @@ const locationModule = {
                     })
             })
         },
-
         add_subs({commit}, payload) {
             return new Promise((resolve, reject) => {
                 pgc_forms.add_submission(payload.query)
@@ -129,7 +105,17 @@ const locationModule = {
                     })
             })
         },
-
+        save_signature({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.save_signature(payload)
+                    .then(response => {
+                        resolve(response);
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
         change_status({commit}, payload) {
             return new Promise((resolve, reject) => {
                 pgc_forms.change_status(payload)
@@ -222,25 +208,25 @@ const locationModule = {
                     })
             })
         },
-    },
-    edit_desc({commit}, payload ) {
+        edit_desc({commit}, payload) {
 
-      return new Promise((resolve, reject) => {
-        // console.log('payload')
-        // console.log(payload)
-        pgc_forms
-          .editTypes( payload.query)
-          .then(response => {
-            console.log(response)
-            // console.log(response.project.id)
-            resolve();
+            return new Promise((resolve, reject) => {
+                // console.log('payload')
+                // console.log(payload)
+                pgc_forms
+                    .editTypes(payload.query)
+                    .then(response => {
+                        console.log(response)
+                        // console.log(response.project.id)
+                        resolve();
 
-          })
-          .catch(error => {
-            reject(error)
-          })
-      })
-    },
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
+    }
 
 }
 export default locationModule;

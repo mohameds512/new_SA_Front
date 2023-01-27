@@ -6,7 +6,28 @@
                 <div align="right">
                     <b-row class="bg-white pt-2 pb-2">
                         <div class="container">
-                            <h3 class="text-danger text-center"> رقم العقار : {{ form.submission.building_number }}</h3>
+                            <b-row>
+                                <b-col cols="6" style="text-align: left; margin-top: 20px;">
+                                    <h3 class="text-danger text-center"> رقم العقار : {{ form.submission.building_number }}</h3>
+                                </b-col>
+                                <b-col cols="4"  >
+                                    <b-form-group class="text-right" label="نوع المعاملة ">
+                                        <validation-provider #default="{ errors }" name="نوع المعاملة"
+                                                             rules="required">
+                                            <v-select
+                                                    placeholder="نوع المعاملة"
+                                                    :options="Array.from(all_operation_type , (el) => el)"
+                                                    :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                    v-model="form.submission.operation_type"
+                                                    :reduce="(val) => val"
+                                            >
+                                            </v-select>
+                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                مطلوب</small>
+                                        </validation-provider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
                             <b-col  cols="12">
 
                                 <!-- بيانات المشروع  -->
@@ -29,13 +50,8 @@
                                                             <validation-provider #default="{ errors }" name="اسم المشروع"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.pro_name"
-<<<<<<< HEAD
                                                                               :state="errors.length > 0 ? false : null"
-                                                                              placeholder="اسم المشروع"  />
-=======
-                                                                    :state="errors.length > 0 ? false : null"
-                                                                    placeholder="اسم المشروع"  disabled />
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
+                                                                              placeholder="اسم المشروع"  disabled />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -458,27 +474,13 @@
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
                                                     <b-col md="4">
-                                                        <b-form-group class="text-right" label="نوع المعاملة ">
-                                                            <validation-provider #default="{ errors }" name="نوع المعاملة"
-                                                                rules="required">
-                                                                <v-select
-                                                                    placeholder="نوع المعاملة"
-                                                                    :options="Array.from(all_operation_type , (el) => el)"
-                                                                    :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                    v-model="form.submission.operation_type"
-                                                                    :reduce="(val) => val"
-                                                                >
-                                                                </v-select>
-                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                    مطلوب</small>
-                                                            </validation-provider>
-                                                        </b-form-group>
+
                                                         <!-- <b-form-group class="text-right" label="رقم العقار">
                                                             <validation-provider #default="{ errors }" name="رقم العقار"
-                                                                                 rules="required">
+                                                                rules="required">
                                                                 <b-form-input v-model="form.submission.building_number"
-                                                                              :state="errors.length > 0 ? false : null" disabled
-                                                                              placeholder="رقم العقار" type="text"/>
+                                                                    :state="errors.length > 0 ? false : null" disabled
+                                                                    placeholder="رقم العقار" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -827,42 +829,24 @@
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
                                                     <b-col md="6">
-<<<<<<< HEAD
-                                                        <b-form-group class="text-right" label="المساحة المنزوعة المبنية">
-                                                            <validation-provider #default="{ errors }" name="المساحة المنزوعة المبنية"
+                                                        <b-form-group class="text-right" label="المساحة المبنية">
+                                                            <validation-provider #default="{ errors }" name="المساحة المبنية"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.build_area"
                                                                               :state="errors.length > 0 ? false : null"
-                                                                              placeholder="المساحة المنزوعة المبنية" type="number"/>
-=======
-                                                        <b-form-group class="text-right" label="المساحة المبنية">
-                                                            <validation-provider #default="{ errors }" name="المساحة المبنية"
-                                                                rules="required">
-                                                                <b-form-input v-model="form.submission.build_area"
-                                                                    :state="errors.length > 0 ? false : null"
-                                                                    placeholder="المساحة المبنية" type="number"/>
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
+                                                                              placeholder="المساحة المبنية" type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
-<<<<<<< HEAD
-                                                        <b-form-group class="text-right" label="المساحات المنزوعة غير المبنية">
-                                                            <validation-provider #default="{ errors }" name="المساحات المنزوعة غير المبنية"
+                                                        <b-form-group class="text-right" label="المساحات غير المبنية">
+                                                            <validation-provider #default="{ errors }" name="المساحات غير المبنية"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.unbuild_area"
                                                                               :state="errors.length > 0 ? false : null"
-                                                                              placeholder="المساحات المنزوعة غير المبنية" type="number" />
-=======
-                                                        <b-form-group class="text-right" label="المساحات غير المبنية">
-                                                            <validation-provider #default="{ errors }" name="المساحات غير المبنية"
-                                                                rules="required">
-                                                                <b-form-input v-model="form.submission.unbuild_area"
-                                                                    :state="errors.length > 0 ? false : null"
-                                                                    placeholder="المساحات غير المبنية" type="number" />
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
+                                                                              placeholder="المساحات غير المبنية" type="number" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -892,20 +876,14 @@
                                     </div>
                                 </b-overlay>
                                 <!--  المشتمالات -->
-<<<<<<< HEAD
                                 <b-overlay v-if="(show_model_inputs == 1 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
                                            rounded="sm">
-=======
-                                <b-overlay v-if="(show_model_inputs == 9 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
-                                    rounded="sm">
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
                                     <div class="add_project_details_wrapper">
-<<<<<<< HEAD
                                         <validation-observer ref="addProjectRules">
                                             <b-form v-if="this.hide == true">
                                                 <b-row class="bg-white pt-2 pb-2">
                                                     <b-col md="12" class="back_ground">
-                                                        <p class="text-center">المشتمالات</p>
+                                                        <p class="text-center">المشتملات</p>
                                                         <!-- {{  $store.getters['dashboard/getLookups'].includes_type  }} -->
                                                     </b-col>
                                                     <b-col md="1"></b-col>
@@ -939,65 +917,19 @@
                                                     </b-col>
                                                     <b-col md="3">
                                                         <b-form-group class="text-right" label=" الوصف  ">
-
+                                                            {{ passUnite()  }}
                                                             <validation-provider #default="{ errors }" name=" الوصف "
                                                                                  rules="required">
                                                                 <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
                                                                 <v-select
                                                                         placeholder="الوصف "
                                                                         :options="$store.getters['dashboard/getLookups'].includes_type.filter((el)=>
-=======
-                                            <validation-observer ref="addProjectRules">
-                                                <b-form v-if="this.hide == true">
-                                                    <b-row class="bg-white pt-2 pb-2">
-                                                        <b-col md="12" class="back_ground">
-                                                            <p class="text-center">المشتملات</p>
-                                                            <!-- {{  $store.getters['dashboard/getLookups'].includes_type  }} -->
-                                                        </b-col>
-                                                        <b-col md="1"></b-col>
-                                                        <b-col class="d-flex justify-content-center" md="8">
-                                                        </b-col>
-                                                        
-                                                    </b-row>
-                                                    <!-- <b-form-group class="text-right" v-if="includesFormLength() == 0">
-                                                        <b-button @click="addIncludes"> اضف</b-button>
-                                                    </b-form-group> -->
-                                                    <!-- <div v-for="(item ,index) in includesForm" :key="index"> -->
-                                                        <b-row>
-                                                                <b-col md="3">
-                                                                    
-                                                                    <b-form-group class="text-right" label=" نوع المشتمل ">
-                                                                        <validation-provider #default="{ errors }" name=" نوع المشتمل"
-                                                                            rules="required">
-                                                                            <v-select
-                                                                                placeholder="نوع المشتمل"
-                                                                                :options="$store.getters['dashboard/getLookups'].includes_type "
-                                                                                label = 'name'
-                                                                                :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                                v-model="includesForm.build_id"
-                                                                                :reduce="(val) => val.id"
-                                                                            >
-                                                                            </v-select>
-                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                                مطلوب</small>
-                                                                        </validation-provider>
-                                                                    </b-form-group>
-                                                                </b-col>
-                                                                <b-col md="3">
-                                                                    <b-form-group class="text-right" label=" الوصف  ">
-                                                                        
-                                                                        <validation-provider #default="{ errors }" name=" الوصف "
-                                                                            rules="required">
-                                                                            <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
-                                                                            <v-select
-                                                                                placeholder="الوصف "
-                                                                                :options="$store.getters['dashboard/getLookups'].includes_type.filter((el)=>
->>>>>>> b774eddb6e7ac4166b0b83098397c3b679b79558
                                                                                     el.id == includesForm.build_id)[0].build_desc"
                                                                         label='name'
                                                                         :disabled="includesForm.build_id ? false : true"
                                                                         :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
                                                                         v-model="includesForm.build_desc_id"
+                                                                        @change="passUnite(includesForm.build_desc_id)"
                                                                         :reduce="(val) => val.id"
                                                                 >
                                                                 </v-select>
@@ -1044,21 +976,20 @@
                                                                 </b-form-group>
                                                             </b-col> -->
                                                         </b-row>
-<<<<<<< HEAD
                                                     </b-col>
                                                 </b-row>
-                                                <!-- <div v-if="includesForm.build_id == 1">
+                                                <div v-if="includesForm.build_id == 1">
                                                     <b-row v-for="(details , index) in form.submission.building_details" :key="index" >
                                                         <b-col md="4">
                                                             <b-form-group class="text-right" label=" الدور ">
                                                                 <validation-provider #default="{ errors }" name=" الدور"
-                                                                    rules="required">
+                                                                                     rules="required">
                                                                     <v-select
-                                                                        placeholder="الدور"
-                                                                        :options="Array.from(roofs , (el) => el)"
-                                                                        :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                        v-model="form.submission.building_details[index].roof"
-                                                                        :reduce="(val) => val"
+                                                                            placeholder="الدور"
+                                                                            :options="Array.from(roofs , (el) => el)"
+                                                                            :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                                            v-model="form.submission.building_details[index].roof"
+                                                                            :reduce="(val) => val"
                                                                     >
                                                                     </v-select>
                                                                     <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -1069,10 +1000,10 @@
                                                         <b-col md="4" >
                                                             <b-form-group class="text-right" label="المساحة ">
                                                                 <validation-provider #default="{ errors }" name="المساحة "
-                                                                    rules="required">
+                                                                                     rules="required">
                                                                     <b-form-input v-model="form.submission.building_details[index].area"
-                                                                        :state="errors.length > 0 ? false : null"
-                                                                        placeholder="المساحة " type="number" />
+                                                                                  :state="errors.length > 0 ? false : null"
+                                                                                  placeholder="المساحة " type="number" />
                                                                     <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                         مطلوب</small>
                                                                 </validation-provider>
@@ -1083,25 +1014,6 @@
                                                                 <b-col cols="4">
                                                                     <b-form-group class="text-right" label=".  ">
                                                                         <b-button @click="addroof"> اضف</b-button>
-=======
-                                                        <div v-if="includesForm.build_id == 1">
-                                                            <b-row v-for="(details , index) in form.submission.building_details" :key="index" >
-                                                                <b-col md="4">
-                                                                    <b-form-group class="text-right" label=" الدور ">
-                                                                        <validation-provider #default="{ errors }" name=" الدور"
-                                                                            rules="required">
-                                                                            <v-select
-                                                                                placeholder="الدور"
-                                                                                :options="Array.from(roofs , (el) => el)"
-                                                                                :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                                v-model="form.submission.building_details[index].roof"
-                                                                                :reduce="(val) => val"
-                                                                            >
-                                                                            </v-select>
-                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                                مطلوب</small>
-                                                                        </validation-provider>
->>>>>>> b774eddb6e7ac4166b0b83098397c3b679b79558
                                                                     </b-form-group>
                                                                 </b-col>
                                                                 <b-col cols="4">
@@ -1110,105 +1022,69 @@
                                                                     </b-form-group>
                                                                 </b-col>
                                                             </b-row>
-<<<<<<< HEAD
                                                         </b-col>
                                                     </b-row>
-                                                </div> -->
+                                                </div>
 
 
                                                 <div style="margin-top: 50px;">
-                                                    {{ $store.getters[`dashboard/get_incs/${69}`] }}
-                                                    <b-table
-=======
-                                                        </div>
-                                                        
 
-                                                    <div style="margin-top: 50px;">
-                                                        
-                                                        <b-table
->>>>>>> b774eddb6e7ac4166b0b83098397c3b679b79558
+                                                    <b-table
                                                             class="text-center"
                                                             striped
                                                             hover
                                                             :items="getAllIncs"
                                                             :fields="[
-<<<<<<< HEAD
-                                                                        { key: 'type', label: 'نوع المشتمل ' },
-                                                                        { key: 'content', label: 'الوصف' },
-                                                                        { key: 'qty', label: '  الوحدة ' },
-                                                                        { key: 'action', label: '  تعديل ' },
-                                                                    ]"
-                                                    >
-=======
                                                                     { key: 'type', label: 'نوع المشتمل ' },
                                                                     { key: 'content', label: 'الوصف' },
                                                                     { key: 'qty', label: '  الوحدة ' },
                                                                     { key: 'action', label: '  تعديل ' },
                                                                 ]"
-                                                        >
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
+                                                    >
                                                         <template #cell(action)="data">
                                                             <feather-icon @click="edit_inc_form(data.item)" icon="EditIcon">
 
                                                             </feather-icon>
                                                         </template>
-<<<<<<< HEAD
                                                     </b-table>
-                                                    <b-button @click="edit_inc_form()"> fffff</b-button>
                                                 </div>
                                                 <div>
-                                                    <b-modal hide-header-close v-model="model_inc_edit" hide-footer title="أضافة ملاحظة " size="lg" >
+                                                    <b-modal hide-header-close v-model="model_inc_edit"
+                                                             hide-footer title=" تحديث مشتمل " size="lg" >
                                                         <div class="demo-vertical-spacing">
-                                                            <h3>ddddddddd</h3>
-                                                        </div>
-                                                        <div class="mt-2">
-                                                            <b-col cols="12">
-                                                                <div class="d-flex justify-content-end">
-                                                                    <b-button @click="edit_inc()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
-                                                                    <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
-                                                                </div>
-                                                            </b-col>
-                                                        </div>
-=======
-                                                        </b-table>
-                                                    </div>
-                                                    <div>
-                                                        <b-modal hide-header-close v-model="model_inc_edit"
-                                                            hide-footer title=" تحديث مشتمل " size="lg" >
-                                                            <div class="demo-vertical-spacing">
-                                                                <b-row>
-                                                                    <b-col md="2">
-                                                                        <b-form-group class="text-right" label=" مرفق">
-                                                                            <validation-provider #default="{ errors }" name="مرفق "
-                                                                                rules="required">
-                                                                                <input type="file" name="image" 
-                                                                                    @change="changeImg"
-                                                                                    accept="image/apng, image/jpeg, image/png, image/webp"
-                                                                                    />
-                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                                    مطلوب</small>
-                                                                            </validation-provider>
-                                                                        </b-form-group>
-                                                                    </b-col>
-                                                                    <b-col md="2">
-                                                                        <b-form-group class="text-right" label=" الوحدة">
-                                                                            <validation-provider #default="{ errors }" name="الوحدة "
-                                                                                rules="required">
-                                                                                <b-form-input v-model="editInc.qty"
-                                                                                    :state="errors.length > 0 ? false : null"
-                                                                                    placeholder=" " type="number" />
-                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                                    مطلوب</small>
-                                                                            </validation-provider>
-                                                                        </b-form-group>
-                                                                    </b-col>
-                                                                    <b-col md="3">
-                                                                        <b-form-group class="text-right" label=" الوصف  ">
-                                                                            
-                                                                            <validation-provider #default="{ errors }" name=" الوصف "
-                                                                                rules="required">
-                                                                                <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
-                                                                                <v-select
+                                                            <b-row>
+                                                                <b-col md="2">
+                                                                    <b-form-group class="text-right" label=" مرفق">
+                                                                        <validation-provider #default="{ errors }" name="مرفق "
+                                                                                             rules="required">
+                                                                            <input type="file" name="image"
+                                                                                   @change="changeImg"
+                                                                                   accept="image/apng, image/jpeg, image/png, image/webp"
+                                                                            />
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
+                                                                </b-col>
+                                                                <b-col md="2">
+                                                                    <b-form-group class="text-right" label=" الوحدة">
+                                                                        <validation-provider #default="{ errors }" name="الوحدة "
+                                                                                             rules="required">
+                                                                            <b-form-input v-model="editInc.qty"
+                                                                                          :state="errors.length > 0 ? false : null"
+                                                                                          placeholder=" " type="number" />
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
+                                                                </b-col>
+                                                                <b-col md="3">
+                                                                    <b-form-group class="text-right" label=" الوصف  ">
+
+                                                                        <validation-provider #default="{ errors }" name=" الوصف "
+                                                                                             rules="required">
+                                                                            <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
+                                                                            <v-select
                                                                                     placeholder="الوصف "
                                                                                     :options="$store.getters['dashboard/getLookups'].includes_type.filter((el)=>
                                                                                         el.id == editInc.build_id)[0].build_desc"
@@ -1217,43 +1093,42 @@
                                                                                     :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
                                                                                     v-model="editInc.build_desc_id"
                                                                                     :reduce="(val) => val.id"
-                                                                                >
-                                                                                </v-select>
-                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                                    مطلوب</small>
-                                                                            </validation-provider>
-                                                                        </b-form-group>
-                                                                    </b-col>
-                                                                    <b-col md="3">
-                                                                        <b-form-group class="text-right" label=" نوع المشتمل ">
-                                                                            <validation-provider #default="{ errors }" name=" نوع المشتمل"
-                                                                                rules="required">
-                                                                                <v-select
+                                                                            >
+                                                                            </v-select>
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
+                                                                </b-col>
+                                                                <b-col md="3">
+                                                                    <b-form-group class="text-right" label=" نوع المشتمل ">
+                                                                        <validation-provider #default="{ errors }" name=" نوع المشتمل"
+                                                                                             rules="required">
+                                                                            <v-select
                                                                                     placeholder="نوع المشتمل"
                                                                                     :options="$store.getters['dashboard/getLookups'].includes_type "
                                                                                     label = 'name'
-                                                                                    
+
                                                                                     :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
                                                                                     v-model="editInc.build_id"
                                                                                     :reduce="(val) => val.id"
-                                                                                >
-                                                                                </v-select>
-                                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                                    مطلوب</small>
-                                                                            </validation-provider>
-                                                                        </b-form-group>
-                                                                    </b-col>
-                                                                </b-row>
-                                                            </div>
-                                                            <div class="mt-2">
-                                                                <b-col cols="12">
-                                                                    <div class="d-flex justify-content-end">
-                                                                        <b-button @click="editIncludes()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
-                                                                        <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
-                                                                    </div>
+                                                                            >
+                                                                            </v-select>
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
                                                                 </b-col>
-                                                            </div>
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
+                                                            </b-row>
+                                                        </div>
+                                                        <div class="mt-2">
+                                                            <b-col cols="12">
+                                                                <div class="d-flex justify-content-end">
+                                                                    <b-button @click="editIncludes()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
+                                                                    <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
+                                                                </div>
+                                                            </b-col>
+                                                        </div>
 
                                                     </b-modal>
                                                 </div>
@@ -1557,6 +1432,7 @@
                     submission_id:null,
                 },
                 editInc_id:null,
+                allLookUps:[],
             }
         },
         components: {
@@ -1591,48 +1467,28 @@
             // this.includes_type  = $store.getters['dashboard/getLookups'].includes_type
             this.$store.dispatch('dashboard/getLookups')
                 .then((res) => {
-
+                    console.log('res')
                     // this.build_type = res.includes_type;
 
                 })
-<<<<<<< HEAD
-                this.$store.getters['dashboard/get_incs/69']
-            // this.$store.dispatch(`dashboard/get_incs/${69}`)
-            // .then((res) => {
-            //     console.log(res);
-            //     // this.build_type = res.includes_type;
-
-            // })
-
-=======
-                // this.$store.dispatch('dashboard/get_incs/69')
+            // this.$store.dispatch('dashboard/get_incs/69')
             this.initGetIncs();
-            
->>>>>>> b774eddb6e7ac4166b0b83098397c3b679b79558
+
         },
-<<<<<<< HEAD
-        methods: {
-=======
         computed:{
             getIncludes(){
                 this.$store.getters['dashboard/get_incs']
-            }
-        },
-        methods: {  
-<<<<<<< HEAD
->>>>>>> 9529120f9a823f00bd6c472063c127ecc19ea208
-            edit_inc(){
-
             },
-            edit_inc_form(item){
-                this.includesForm.build_id = 1,
-                    // this.includesForm.build_id = item.build_id,
-                    this.includesForm.build_desc_id = 1,
-                    // this.includesForm.build_desc_id = item.build_desc_id,
-                    this.includesForm.qty = 1,
-                    // this.includesForm.qty = item.qty,
-                    this.model_inc_edit = true;
-=======
+            // getAllLook(){
+            //     this.$store.getters['dashboard/getLookups']
+            // }
+        },
+        methods: {
+            passUnite(){
+                console.log(this.getAllLook)
+                // $unit = $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm.build_id)[0].build_desc ;
+                // return $unit;
+            },
             initGetIncs(){
                 this.$store.dispatch('dashboard/get_incs',67)
                     .then((res) => {
@@ -1641,12 +1497,11 @@
             },
             edit_inc_form(item){
                 this.editInc_id = item.id,
-                this.editInc.build_id = item.build_id,
-                this.editInc.build_desc_id = item.build_desc_id,
-                this.editInc.qty = item.qty,
-                this.editInc.submission_id = 67;
+                    this.editInc.build_id = item.build_id,
+                    this.editInc.build_desc_id = item.build_desc_id,
+                    this.editInc.qty = item.qty,
+                    this.editInc.submission_id = 67;
                 this.model_inc_edit = true;
->>>>>>> b774eddb6e7ac4166b0b83098397c3b679b79558
 
                 console.log(item);
             },
@@ -1658,20 +1513,20 @@
                     })
                     .then((response) => {
                         this.editInc.build_id = null,
-                        this.editInc.build_desc_id = null,
-                        this.editInc.qty = null,
-                        this.editInc.image = null,
-                        this.editInc.submission_id = null;
+                            this.editInc.build_desc_id = null,
+                            this.editInc.qty = null,
+                            this.editInc.image = null,
+                            this.editInc.submission_id = null;
 
                         this.initGetIncs(),
-                        this.model_inc_edit= false,
-                        this.$swal({
-                            icon: 'success',
-                            title: 'تم تحديث المشتمل ',
-                            showConfirmButton: false,
-                            timer: 1000,
-                        })
-                            console.log(response);
+                            this.model_inc_edit= false,
+                            this.$swal({
+                                icon: 'success',
+                                title: 'تم تحديث المشتمل ',
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
+                        console.log(response);
                     })
                     .catch((error) => {
                         console.log(error);
@@ -1684,9 +1539,6 @@
             show_model(num){
                 this.show_model_inputs = num;
             },
-            // addIncludes(){
-            //     this.includesForm.push({build_id:null,build_desc_id:null,qty:null});
-            // },
             includesFormLength(){
                 var x = this.includesForm;
                 return x.length;
@@ -1715,38 +1567,32 @@
                 var x = this.form.attachs;
                 return x.length;
             },
-            
+
             addIncludes(){
                 this.includesForm.submission_id = 97;
+
+                const dataInclude = new FormData();
+                dataInclude.append('image', this.includesForm.image);
+                dataInclude.append('build_id', this.includesForm.build_id);
+                dataInclude.append('build_desc_id', this.includesForm.build_desc_id);
+                dataInclude.append('qty', this.includesForm.qty);
+
                 this.$store
                     .dispatch('pgc_forms/save_inc', {
-                        query: this.includesForm,
+                        query: dataInclude,
                     })
                     .then((response) => {
                         this.includesForm.build_id = null,
-<<<<<<< HEAD
                             this.includesForm.build_desc_id = null,
                             this.includesForm.qty = null,
                             this.includesForm.image = null,
-
+                            this.initGetIncs(),
                             this.$swal({
                                 icon: 'success',
                                 title: 'تم حفظ المشتمل ',
                                 showConfirmButton: false,
                                 timer: 1000,
                             })
-=======
-                        this.includesForm.build_desc_id = null,
-                        this.includesForm.qty = null,
-                        this.includesForm.image = null,
-                        this.initGetIncs(),
-                        this.$swal({
-                            icon: 'success',
-                            title: 'تم حفظ المشتمل ',
-                            showConfirmButton: false,
-                            timer: 1000,
-                        })
->>>>>>> b774eddb6e7ac4166b0b83098397c3b679b79558
 
                         // this.submission = response.submission;
                         console.log(response);

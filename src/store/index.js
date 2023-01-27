@@ -51,22 +51,7 @@ export default new Vuex.Store({
         log: logModule,
         settings: settingModule,
         dashboard: dashboardModule,
-        aircraft: AirCraftModule,
-        lookups: lookupsModule,
-        airport: AirPortModule,
-        engine_type:EngineTypeModule,
 
-        flights:FlightsModule,
-        engine_physical_class:EnginePhysicalClassModule,
-        aircraft_status:AircraftStatusModule,
-        manufacturer_types:ManufacturerTypesModule,
-
-        operators: OperatorsModule,
-        delay_codes : Delay_CodesModule,
-        fleet_type: FleetTypeModule,
-        manufacturers: ManufacturersModule,
-        countries: CountriesModule,
-        flights: FlightsModule
 
 
     },

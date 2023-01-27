@@ -6,6 +6,10 @@ import i18n from '@/libs/i18n'
 import router from './router'
 import store from './store'
 import App from './App.vue'
+// import VueSignaturePad from 'vue-signature-pad';
+//
+// Vue.use(VueSignaturePad);
+
 export const EventBus = new Vue();
 import VueCookie from 'vue-js-cookie'
 Vue.use(VueCookie)

@@ -4,9 +4,9 @@
 <!--            <router-link :to="`/addRealty`"  >-->
                 <b-button variant="primary"  @click="openDialog()" > اضافة عقار </b-button>
 <!--            </router-link>-->
-            <router-link :to="`/addRealty`"  >
-                <b-button variant="primary"> اضافة عقار </b-button>
-            </router-link>
+<!--            <router-link :to="`/addRealty`"  >-->
+<!--                <b-button variant="primary"> اضافة عقار </b-button>-->
+<!--            </router-link>-->
 
             <router-link :to="`/building_desc`" style="margin-right: 15px;" >
                 <b-button variant="primary"> انواع المشتمالات و الوصف</b-button>
@@ -171,15 +171,14 @@
                     return 'تم اعتماده'
                 }
             },
-            save($state) {
-                this.$store
-                    .dispatch('pgc_forms/add_subs', {
+            save() {
+                this.$store.dispatch('pgc_forms/add_subs', {
                         query: this.form,
                     })
                     .then((response) => {
-                        if ($state) {
+                        // if ($state) {
                             this.building_dialog = false ;
-                        }
+                        // }
                         this.$swal({
                             icon: 'success',
                             title: 'تم الحفظ',
