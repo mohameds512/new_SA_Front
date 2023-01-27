@@ -6,7 +6,28 @@
                 <div align="right">
                     <b-row class="bg-white pt-2 pb-2">
                         <div class="container">
-                            <h3 class="text-danger text-center"> رقم العقار : {{ form.submission.building_number }}</h3>
+                            <b-row>
+                                <b-col cols="6" style="text-align: left; margin-top: 20px;">
+                                    <h3 class="text-danger text-center"> رقم العقار : {{ form.submission.building_number }}</h3>
+                                </b-col>
+                                <b-col cols="4"  >
+                                    <b-form-group class="text-right" label="نوع المعاملة ">
+                                        <validation-provider #default="{ errors }" name="نوع المعاملة"
+                                            rules="required">
+                                            <v-select
+                                                placeholder="نوع المعاملة"
+                                                :options="Array.from(all_operation_type , (el) => el)"
+                                                :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                v-model="form.submission.operation_type"
+                                                :reduce="(val) => val"
+                                            >
+                                            </v-select>
+                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                مطلوب</small>
+                                        </validation-provider>
+                                    </b-form-group>
+                                </b-col>
+                            </b-row>
                             <b-col  cols="12">
                                 
                                 <!-- بيانات المشروع  -->
@@ -453,21 +474,7 @@
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
                                                     <b-col md="4">
-                                                        <b-form-group class="text-right" label="نوع المعاملة ">
-                                                            <validation-provider #default="{ errors }" name="نوع المعاملة"
-                                                                rules="required">
-                                                                <v-select
-                                                                    placeholder="نوع المعاملة"
-                                                                    :options="Array.from(all_operation_type , (el) => el)"
-                                                                    :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                    v-model="form.submission.operation_type"
-                                                                    :reduce="(val) => val"
-                                                                >
-                                                                </v-select>
-                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                    مطلوب</small>
-                                                            </validation-provider>
-                                                        </b-form-group>
+                                                        
                                                         <!-- <b-form-group class="text-right" label="رقم العقار">
                                                             <validation-provider #default="{ errors }" name="رقم العقار"
                                                                 rules="required">
@@ -869,7 +876,7 @@
                                     </div>
                                 </b-overlay>
                                 <!--  المشتمالات -->
-                                <b-overlay v-if="(show_model_inputs == 9 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
+                                <b-overlay v-if="(show_model_inputs == 1 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
                                     rounded="sm">
                                     <div class="add_project_details_wrapper">
                                             <validation-observer ref="addProjectRules">
@@ -910,7 +917,7 @@
                                                                 </b-col>
                                                                 <b-col md="3">
                                                                     <b-form-group class="text-right" label=" الوصف  ">
-                                                                        
+                                                                        {{ passUnite()  }} 
                                                                         <validation-provider #default="{ errors }" name=" الوصف "
                                                                             rules="required">
                                                                             <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
@@ -922,6 +929,7 @@
                                                                                 :disabled="includesForm.build_id ? false : true"
                                                                                 :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
                                                                                 v-model="includesForm.build_desc_id"
+                                                                                @change="passUnite(includesForm.build_desc_id)"
                                                                                 :reduce="(val) => val.id"
                                                                             >
                                                                             </v-select>
@@ -1424,6 +1432,7 @@ import router from '@/router'
                     submission_id:null,
                 },
                 editInc_id:null,
+                allLookUps:[],
             }
         },
         components: {
@@ -1458,20 +1467,28 @@ import router from '@/router'
             // this.includes_type  = $store.getters['dashboard/getLookups'].includes_type
             this.$store.dispatch('dashboard/getLookups')
                 .then((res) => {
-                    
+                    console.log('res')
                     // this.build_type = res.includes_type;
                     
                 })
                 // this.$store.dispatch('dashboard/get_incs/69')
             this.initGetIncs();
-            
+
         },
         computed:{
             getIncludes(){
                 this.$store.getters['dashboard/get_incs']
-            }
+            },
+            // getAllLook(){
+            //     this.$store.getters['dashboard/getLookups']
+            // }
         },
         methods: {  
+            passUnite(){
+                console.log(this.getAllLook)
+                // $unit = $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm.build_id)[0].build_desc ;
+                // return $unit;
+            },  
             initGetIncs(){
                 this.$store.dispatch('dashboard/get_incs',67)
                     .then((res) => {
@@ -1522,9 +1539,6 @@ import router from '@/router'
             show_model(num){
                 this.show_model_inputs = num;
             },
-            // addIncludes(){
-            //     this.includesForm.push({build_id:null,build_desc_id:null,qty:null});
-            // },
             includesFormLength(){
                 var x = this.includesForm;
                 return x.length; 
@@ -1556,9 +1570,16 @@ import router from '@/router'
             
             addIncludes(){
                 this.includesForm.submission_id = 97;
+
+                const dataInclude = new FormData();
+                dataInclude.append('image', this.includesForm.image);
+                dataInclude.append('build_id', this.includesForm.build_id);
+                dataInclude.append('build_desc_id', this.includesForm.build_desc_id);
+                dataInclude.append('qty', this.includesForm.qty);
+
                 this.$store
                     .dispatch('pgc_forms/save_inc', {
-                        query: this.includesForm,
+                        query: dataInclude,
                     })
                     .then((response) => {
                         this.includesForm.build_id = null,

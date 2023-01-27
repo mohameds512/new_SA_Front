@@ -117,7 +117,22 @@ const locationModule = {
           })
       })
     },
-    
+    submitMab({commit} , payload){
+      return new Promise((resolve, reject) => {
+        
+        console.log(payload)
+        pgc_forms
+          .submitMab( payload.query)
+          .then(response => {
+            console.log(response)
+            resolve();
+        
+          })
+          .catch(error => {
+            reject(error)
+          })
+      })
+    },
     save_inc({commit}, payload ) {
 
       return new Promise((resolve, reject) => {

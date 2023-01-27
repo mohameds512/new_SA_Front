@@ -26,7 +26,17 @@ class PGC extends Resource {
     return request({
       url:`/store/save_includes`,
       method: "post",
-      data: payload
+      data: payload,
+      headers: {'Content-Type': 'multipart/form-data'},
+    })
+  }
+
+  submitMab(payload){
+    return request({
+      url:`/store/map`,
+      method:"post",
+      data:payload,
+      headers: {'Content-Type': 'multipart/form-data'},
     })
   }
 

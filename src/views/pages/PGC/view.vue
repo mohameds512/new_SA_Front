@@ -738,20 +738,20 @@
                                                         </b-row>
                                                         
                                                         </b-col>
-                                                        <b-modal hide-header-close v-model="modal_img" title="أضفة صورة" id="img">
+                                                        <!-- <b-modal hide-header-close v-model="modal_img" title="أضفة صورة" id="img">
                                                             <b-form-group class="text-right" >
                                                                 <input type="hidden" v-model="item.inc_id" >
                                                                 <validation-provider #default="{ errors }" name="صورة "
                                                                     rules="required">
                                                                     <input type="file" name="image" 
-                                                                        @change="changeIncImg" ref="incFiles"
+                                                                        @change="changeIncImg()" ref="subMap"
                                                                         accept="image/apng, image/jpeg, image/png, image/webp"
                                                                         />
                                                                     <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                         مطلوب</small>
                                                                 </validation-provider>
                                                             </b-form-group>
-                                                        </b-modal>
+                                                        </b-modal> -->
                                                         <!-- floors  -->
                                                         <b-modal hide-header-close v-model="model_floor" title="الادوار" hide-footer size="lg" dir="rtl">
                                                             <div >
@@ -934,7 +934,100 @@
                                         </div>
                                     </b-card-text>
                                 </b-tab>
-                                
+                                <b-tab title="الخريطة">
+                                    <b-card-text>
+                                        <div class="add_project_details_wrapper">
+                                        <validation-observer ref="addProjectRules">
+                                            <b-form >
+                                                <b-row class="bg-white pt-2 pb-2">
+
+                                                    <b-col class="d-flex justify-content-center" md="8">
+                                                    </b-col>
+
+                                                </b-row>
+                                                <!-- <b-form-group class="text-right" v-if="includesFormLength() == 0">
+                                                    <b-button @click="addIncludes"> اضف</b-button>
+                                                </b-form-group> -->
+                                                <b-row >
+                                                        <b-col md="6">
+                                                            <div>
+                                                                <img src="http://127.0.0.1:8000/api/" alt="">
+                                                            </div>
+                                                        </b-col>
+                                                        
+                                                        <b-col md="3">
+                                                            <b-row>
+                                                            <b-col cols="6">
+                                                                <b-form-group class="text-right btncls" >
+                                                                    <b-button @click="editMap" variant="primary" > تحديث الخريطة  </b-button>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                        </b-row>
+                                                        <div>
+                                                            <b-modal hide-header-close v-model="modal_map" hide-footer title="أضفة خريطة" id="img">
+                                                                <div  class="demo-vertical-spacing" >
+                                                                    
+                                                                    <b-form-group class="text-right" >
+                                                                        <input type="hidden" v-model="sub_map" >
+                                                                        <validation-provider #default="{ errors }" name="خريطة "
+                                                                            rules="required">
+                                                                            <input type="file" name="image"
+                                                                                @change="changeSubMap" ref="subMap"
+                                                                                accept="image/apng, image/jpeg, image/png, image/webp"
+                                                                                />
+                                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                                مطلوب</small>
+                                                                        </validation-provider>
+                                                                    </b-form-group>
+                                                                </div>
+                                                                <div class="mt-2">
+                                                                    <b-col cols="12">
+                                                                        <div class="d-flex justify-content-end">
+                                                                            <b-button @click="submitMap()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
+                                                                            <b-button @click="modal_map = false"  variant="outline-primary">الغاء</b-button>
+                                                                        </div>
+                                                                    </b-col>
+                                                                </div>
+                                                        </b-modal>
+                                                        </div>
+                                                        </b-col>
+                                                        <!-- <b-modal hide-header-close v-model="modal_img" title="أضفة صورة" id="img">
+                                                            <b-form-group class="text-right" >
+                                                                <input type="hidden" v-model="item.inc_id" >
+                                                                <validation-provider #default="{ errors }" name="صورة "
+                                                                    rules="required">
+                                                                    <input type="file" name="image" 
+                                                                        @change="changeIncImg" ref="incFiles"
+                                                                        accept="image/apng, image/jpeg, image/png, image/webp"
+                                                                        />
+                                                                    <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                        مطلوب</small>
+                                                                </validation-provider>
+                                                            </b-form-group>
+                                                        </b-modal> -->
+                                                        <br>
+                                                        <b-row>
+                                                            <b-col cols="6"></b-col>
+                                                            <b-col cols="6">
+                                                                <div style="max-height: 550px; max-width: 500px;">
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img1.png'" alt="img"> <br> <br> -->
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img2.png'" alt="img"><br><br> -->
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img3.png'" alt="img"><br><br> -->
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img4.png'" alt="img"><br><br> -->
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img5.png'" alt="img"><br><br> -->
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img6.png'" alt="img"><br><br> -->
+                                                    <!-- <img  style="max-height: 550px; max-width: 500px;" :src="'/includes/img7.png'" alt="img"><br><br> -->
+                                                                    </div>
+                                                                </b-col>
+                                                    </b-row>
+                                                </b-row><br>
+                                                
+                                                
+                                            </b-form>
+                                        </validation-observer>
+                                </div>
+                                    </b-card-text>
+                                </b-tab>
                                 <b-tab title="التقارير">
                                     <b-card-text>
                                         <div class="add_project_details_warpper" >
@@ -1044,6 +1137,7 @@
     import ManPower from "@/views/dashboard/component/manPower";
     import WorkProgress from "@/views/dashboard/component/workProgress";
     import detailsRep from "@/views/dashboard/component/detailsRep.vue";
+import { formatDate } from '@/@core/utils/filter'
     // import planedDetailsRep from './planedDetailsRep.vue'
     export default {
         name: 'view',
@@ -1053,6 +1147,7 @@
         },
         data() {
             return {
+                sub_map:null,
                 approve_sub:{id:null},
                 notes:{note: null , id: null},
                 model_notes:false,
@@ -1060,6 +1155,7 @@
                 model_approve:false,
                 model_floor:false,
                 modal_img:false,
+                modal_map:false,
                 floorsNum:[
                     'الاول','الثاني','الثالث','الرابع','الخامس','اخري'
                 ],
@@ -1111,7 +1207,8 @@
                     sub_id:null,
                     removed_from_unbuilding:null,
                     removed_from_building:null,
-                }
+                },
+                submision_map:null,
             }
         },
         components: {
@@ -1153,6 +1250,26 @@
 
         },
         methods: {
+            submitMap(){
+                const map = new FormData()
+                map.append('submission_map',this.submision_map)
+                map.append('submission_id',this.form.submission[0].id)
+                this.$store
+                    .dispatch('pgc_forms/submitMab',{
+                        query: map,
+                    })
+                    .then((response)=>{
+                        this.modal_map = false,
+                        this.$swal({
+                            icon: 'success',
+                            title: 'تم التحديث  ',
+                            showConfirmButton: false,
+                            timer: 1000,
+                        })
+                        
+                    });
+                // this.store.d
+            },
             edit_forced_area(){
                 this.model_forced_area = true;
             },
@@ -1253,12 +1370,20 @@
             editImg(){
                 this.modal_img = true;
             },
+            editMap(){
+                this.modal_map = true;
+            },
             addfloors(){
                 this.floors.push({num:null , area:null})
             },
             changeIncImg(){
                 console.log(this.$refs.incFiles.files[0])
-            }
+            },
+            changeSubMap(){
+                // console.log(this.$refs.subMap.files[0])
+                this.submision_map = this.$refs.subMap.files[0];
+                console.log(this.submision_map);
+            },
             // retDirs(x , y){
             //     var d=[];
             //     d=x;
