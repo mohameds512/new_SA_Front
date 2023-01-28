@@ -15,7 +15,7 @@ export default [
   },
 
   {
-    path: "/addRealty",
+    path: "/addRealty/:id",
     name: "addRealty",
     component: () => import("@/views/pages/PGC/addRealty"),
     // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
@@ -31,11 +31,11 @@ export default [
     name: "view",
     component: () => import("@/views/pages/PGC/view"),
     // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
-  },  
+  },
   {
     path: "/building_desc",
     name: "building_desc",
     component: () => import("@/views/pages/PGC/building_desc"),
     // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
-  },  
+  },
 ]

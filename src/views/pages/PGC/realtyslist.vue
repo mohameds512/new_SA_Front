@@ -186,7 +186,7 @@
                             timer: 1500,
                         })
 
-                        this.$router.push(`/viewRealty/${response.submission.id}`)
+                        this.$router.push(`/addRealty/${response.submission.id}`)
                     })
                     .catch((error) => {
                         console.log(error);
