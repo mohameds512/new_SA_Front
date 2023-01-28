@@ -1034,7 +1034,10 @@
                                             <b-tabs pills card>
                                                 <b-tab title=" المخطط التفصيلي " >
                                                     <b-card-text>
-                                                        <details-rep ></details-rep>
+                                                        <details-rep 
+                                                            :submissionDtat="form.submission[0]"
+                                                            :ownersDtat="form.owners[0]"
+                                                        ></details-rep>
                                                     </b-card-text>
                                                 </b-tab>
                                                 <b-tab title=" حصر العقار ">
@@ -1055,8 +1058,7 @@
                                                 </b-tab>
                                             </b-tabs>
                                         </div>
-                                        <div>
-                                        </div>
+                                        
                                     </b-card-text>
                                 </b-tab>
                                 <b-tab title="الملاحظات">

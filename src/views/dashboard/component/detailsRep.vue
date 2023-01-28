@@ -1,5 +1,14 @@
 <template>
   <div class="main_pdf_details_wrapper">
+    <b-button
+        variant="success"
+        class="mb-75 invoice-actions"
+        block
+        @click="printInvoice"
+  >
+    طباعة
+</b-button>
+<br><br>
     <!-- Start Section Part One  -->
     <section class="section_part_one">
       <div class="num_one">
@@ -17,19 +26,19 @@
       <div class="num_three">
         <div class="one">
           <span class="name bg_main_color">إسم المالك</span>
-          <span></span>
+          <span> {{ ownersDtat.name }} </span>
         </div>
         <div class="two one">
           <span class="name bg_main_color">رقم الهوية الوطنية</span>
-          <span></span>
+          <span> {{ ownersDtat.national_id }} </span>
         </div>
         <div class="three one">
           <span class="name bg_main_color">اسم المشروع</span>
-          <span></span>
+          <span> {{ submissionDtat.pro_name }} </span>
         </div>
         <div class="four one">
           <span class="name bg_main_color">استعمال العقار</span>
-          <span></span>
+          <span> {{ submissionDtat.submission_using }} </span>
         </div>
         <div class="five one">
           <span class="name bg_main_color">تصنيف العقار</span>
@@ -596,6 +605,7 @@
 
 <script>
 export default {
+  props: ["submissionDtat", "ownersDtat"],
   data() {
     return {
       allDetails: {},
@@ -607,6 +617,11 @@ export default {
     //   this.allDetails = res.data;
     // });
   },
+  methods:{
+    printInvoice() {
+        window.print()
+    }
+  }
 };
 </script>
 
