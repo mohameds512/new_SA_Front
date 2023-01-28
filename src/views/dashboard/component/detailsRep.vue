@@ -640,7 +640,7 @@ $min-name-width: 120px;
 }
 .main_pdf_details_wrapper {
   background-color: #fff;
-  width: 1600px;
+  width: 1300px;
   border: 1px solid $border-color;
   // Start Section Part One
   .section_part_one {
