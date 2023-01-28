@@ -14,7 +14,7 @@
             ref="html2Pdf"
         >
             <section slot="pdf-content">
-                <div  class="invoice-preview-wrapper ">
+                <div style="text-align: right; "  class="invoice-preview-wrapper ">
                     <br><br>
                     <b-button
                             variant="success"
@@ -215,12 +215,71 @@
                                         <b-th class="content-item">مالك</b-th>
                                         <b-th class="content-item">وكيل</b-th>
                                     </b-tr>
+                                    <!-- <b-tr>
+                                        <p  style="padding-right: 10px;" >
+                                            أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة وبذلك أوقع                  التاريخ: 
+                                        </p>
+                                    </b-tr> -->
+                                    
+                                </b-tbody>
+                            </b-table-simple  >
+                            <div>
+                                <p  style="padding-right: 10px;" >
+                                    أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة وبذلك أوقع                  التاريخ: 
+                                </p>
+                            </div>
+                            
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col>
+                            <b-table-simple bordered >
+                                <b-tbody>
+                                    <b-tr>
+                                        <b-th>:الاسم</b-th>
+                                        <b-th>التوقيع:</b-th>
+                                        <b-th>رقم الجوال:</b-th>
+                                    </b-tr>
                                 </b-tbody>
                             </b-table-simple>
                         </b-col>
                     </b-row>
                     <br><br>
                     <b-row>
+                        <b-col>
+                            <h3 style="color:  rgb(11, 55, 2); text-align: right;"> أعضاء لجنة حصر العقارات</h3>
+                            <b-table-simple bordered>
+                                <b-tbody>
+                                    <b-tr>
+                                        <b-th class="green-header" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
+                                        <b-th class="green-header">الإمارة</b-th>
+                                        <b-th class="green-header">وزارة البيئة والمياه والزراعة</b-th>
+                                        <b-th class="green-header">الجهة المستفيدة</b-th>
+                                    </b-tr>
+                                    <b-tr>
+                                        <b-th class="content-item">الاسم</b-th>
+                                        <b-th class="content-item">الاسم</b-th>
+                                        <b-th class="content-item">الاسم</b-th>
+                                        <b-th class="content-item">الاسم</b-th>
+                                    </b-tr>
+                                    <b-tr>
+                                        <b-th class="content-item">التاريخ</b-th>
+                                        <b-th class="content-item">التاريخ</b-th>
+                                        <b-th class="content-item">التاريخ</b-th>
+                                        <b-th class="content-item">التاريخ</b-th>
+                                    </b-tr>
+                                    <b-tr>
+                                        <b-th class="content-item">التوقيع</b-th>
+                                        <b-th class="content-item">التوقيع</b-th>
+                                        <b-th class="content-item">التوقيع</b-th>
+                                        <b-th class="content-item">التوقيع</b-th>
+                                    </b-tr>
+                                    
+                                </b-tbody>
+                            </b-table-simple>
+                        </b-col>
+                    </b-row>
+                    <!-- <b-row>
                         <b-col>
                             <h3 style="color:  rgb(11, 55, 2); text-align: right;"> ثالثاً: مشتملات العقار </h3>
                             <b-table-simple bordered>
@@ -249,10 +308,11 @@
                                         <b-th class="content-item">التوقيع</b-th>
                                         <b-th class="content-item">التوقيع</b-th>
                                     </b-tr>
+                                    
                                 </b-tbody>
                             </b-table-simple>
                         </b-col>
-                    </b-row>
+                    </b-row> -->
                 </div>
             </section>
         </vue-html2pdf>

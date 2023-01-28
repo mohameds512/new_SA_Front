@@ -1142,9 +1142,8 @@
     import WorkProgress from "@/views/dashboard/component/workProgress";
     import detailsRep from "@/views/dashboard/component/detailsRep.vue";
     import collectIncludes from "@/views/dashboard/component/collectIncludes.vue";
-
-    import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
     
+    import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
 import { formatDate } from '@/@core/utils/filter'
     // import planedDetailsRep from './planedDetailsRep.vue'
     export default {

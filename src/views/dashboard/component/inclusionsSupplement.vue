@@ -1,4 +1,5 @@
 <template>
+    
     <div>
         <vue-html2pdf
             :show-layout="true"
@@ -24,6 +25,7 @@
                     >
                         Print
                     </b-button>
+                    <div class="fgh"> محمد السعيد</div>
                     <br><br>
                     <b-row    class="invoice-preview">
                         <b-col md="4">
@@ -178,99 +180,6 @@
                     <b-row>
                         <b-col>
                             <h3 style="color:  rgb(11, 55, 2); text-align: right;">  ثانياً: مساحة الأرض</h3>
-                            <b-table-simple
-                                    bordered
-                            > 
-                            <b-tbody>
-                                    <b-tr>
-                                        <b-th class="green-header" variant="secondary"> المساحة حسب الصك</b-th>
-                                        <b-th class="content-item"  colspan="3">56</b-th>
-                                        <b-th class="green-header" variant="secondary">المساحة حسب الطبيعة </b-th>
-                                        <b-th class="content-item" colspan="3">56</b-th>
-
-                                    </b-tr>
-                                </b-tbody>
-                            </b-table-simple>
-                        </b-col>
-                    </b-row>
-                    <br><br>
-                    <b-row>
-                        <b-col>
-                            <h3 style="color:  rgb(11, 55, 2); text-align: right;"> ثالثاً: مشتملات العقار </h3>
-                            <b-table-simple
-                                    bordered
-                            > 
-                                <b-tbody>
-                                    <b-tr>
-                                        <b-th class="green-header" variant="secondary"> م</b-th>
-                                        <b-th class="green-header" variant="secondary"> النوع</b-th>
-                                        <b-th class="green-header" variant="secondary"> الوصف</b-th>
-                                        <b-th class="green-header" variant="secondary"> الوحدة</b-th>
-                                        <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
-                                        <b-th class="green-header" variant="secondary">الملاحظات</b-th>
-                                        
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">1</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">2</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">3</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">4</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">5</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">6</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">7</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr style="text-align: right;">
-                                        <h3>ملاحظات</h3>
-                                    </b-tr>
-                                </b-tbody>
-                            </b-table-simple>
                             
                             <b-table-simple bordered>
                                 <b-tbody>
@@ -279,6 +188,30 @@
                                         <b-th class="content-item">مالك</b-th>
                                         <b-th class="content-item">وكيل</b-th>
                                     </b-tr>
+                                    <!-- <b-tr>
+                                        <p  style="padding-right: 10px;" >
+                                            أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة وبذلك أوقع                  التاريخ: 
+                                        </p>
+                                    </b-tr> -->
+                                    
+                                </b-tbody>
+                            </b-table-simple>
+                            <div style="text-align: right;">
+                                <p  style="padding-right: 10px;" >
+                                    أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة وبذلك أوقع                  التاريخ: 
+                                </p>
+                            </div>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col>
+                            <b-table-simple bordered >
+                                <b-tbody style="text-align: right;">
+                                    <b-tr>
+                                        <b-th class="content-item" >:الاسم</b-th>
+                                        <b-th class="content-item" >التوقيع:</b-th>
+                                        <b-th class="content-item" >رقم الجوال:</b-th>
+                                    </b-tr>
                                 </b-tbody>
                             </b-table-simple>
                         </b-col>
@@ -286,14 +219,25 @@
                     <br><br>
                     <b-row>
                         <b-col>
-                            <h3 style="color:  rgb(11, 55, 2); text-align: right;"> ثالثاً: مشتملات العقار </h3>
+                            <b-table-simple bordered >
+                                <b-tbody style="text-align: right;">
+                                    <b-tr >
+                                        <b-th  class=" center-green text-center">اعضاء لجنة حصر العقارات</b-th>
+                                    </b-tr>
+                                </b-tbody>
+                            </b-table-simple>
+                        </b-col>
+                    </b-row>
+                    
+                    <b-row>
+                        <b-col>
                             <b-table-simple bordered>
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th class="green-header" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                                        <b-th class="green-header">الإمارة</b-th>
-                                        <b-th class="green-header">وزارة البيئة والمياه والزراعة</b-th>
-                                        <b-th class="green-header">الجهة المستفيدة</b-th>
+                                        <b-th class="content-item" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
+                                        <b-th class="content-item">الإمارة</b-th>
+                                        <b-th class="content-item">وزارة البيئة والمياه والزراعة</b-th>
+                                        <b-th class="content-item">الجهة المستفيدة</b-th>
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="content-item">الاسم</b-th>
@@ -372,7 +316,23 @@
     @import "~@core/scss/base/pages/app-invoice.scss";
 </style>
 
-<style lang="scss">
+<style lang="scss" >
+    // .fgh{
+        
+    // }
+    @media print {
+  .fgh {
+    background-color: red;
+    direction: rtl;
+
+  }
+}
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; //
+  }
+}
     th {
         background-color: #ffffff !important;
         color: rgb(11, 55, 2);
@@ -382,6 +342,10 @@
         background-color: #05481e !important;
         color: #ffffff !important;
         // text-align: left !important;
+    }
+    .center-green{
+        background-color: #05481e !important;
+        color: #ffffff !important;
     }
     .content-item{
         text-align: left !important;
