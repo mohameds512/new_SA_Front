@@ -9,11 +9,15 @@ const locationModule = {
         // listcontractors:null,
         showSub: null,
         incs: null,
+        dashboard: null,
     },
     getters: {
 
         showSub(state) {
             return state.showSub
+        },
+        dashboard(state) {
+            return state.dashboard
         },
         // get_incs(state) {
         //   return state.incs
@@ -24,6 +28,9 @@ const locationModule = {
 
         SET_SHOW_SUB(state, sub) {
             state.showSub = sub
+        },
+        SET_DASHBOARD(state, dashboard) {
+            state.dashboard = dashboard
         },
         // SET_GET_INCS(state, data) {
         //   state.incs = data
@@ -72,12 +79,8 @@ const locationModule = {
         },
         submitMab({commit}, payload) {
             return new Promise((resolve, reject) => {
-
-                console.log(payload)
-                pgc_forms
-                    .submitMab(payload.query)
+                pgc_forms.submitMab(payload)
                     .then(response => {
-                        console.log(response)
                         resolve();
 
                     })
@@ -86,6 +89,22 @@ const locationModule = {
                     })
             })
         },
+
+        dashboard({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.dashboard()
+                    .then(response => {
+
+                        commit('SET_DASHBOARD', response.data)
+                        resolve();
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
+
+
         save_subs({commit}, payload) {
 
             return new Promise((resolve, reject) => {

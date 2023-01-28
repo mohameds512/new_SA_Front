@@ -3,7 +3,7 @@
     <div style="zoom: 90%" dir="rtl">
         <b-row>
             <b-col cols="12">
-                <Statistics v-if="counts" :items="counts" :only="[ 'areas','projects','buildings', 'users' ]"
+                <Statistics v-if="counts" :items="counts" :only="[ 'total', 'in_review','feedback','approved' ]"
                             icon="TrendingUpIcon"></Statistics>
             </b-col>
         </b-row>
@@ -57,16 +57,16 @@
 
         </b-row>
         <b-row>
-                        <b-col cols="12">
-                            <b-card>
-                                <div class="d-flex">
-                                    <feather-icon size="21" class="mr-2" icon="CommandIcon"/>
-                                    <!--            <feather-icon size="21"  icon="DollarSignIcon"/>-->
-                                    <h4>نسب الانجاز التراكمية خلال الشهور </h4>
-                                </div>
-                                          <chartjs-component-bar-chart :options="options" :height="400" :data="mixedChart"  />
-                            </b-card>
-                        </b-col>
+            <b-col cols="12">
+                <b-card>
+                    <div class="d-flex">
+                        <feather-icon size="21" class="mr-2" icon="CommandIcon"/>
+                        <!--            <feather-icon size="21"  icon="DollarSignIcon"/>-->
+                        <h4>نسب الانجاز التراكمية خلال الشهور </h4>
+                    </div>
+                    <chartjs-component-bar-chart :options="options" :height="400" :data="mixedChart"/>
+                </b-card>
+            </b-col>
             <!--            <b-col cols="12">-->
             <!--                <b-card>-->
             <!--                    <div class="d-flex">-->
@@ -209,41 +209,67 @@
         },
         computed: {
             counts() {
-                return {
-                    areas: 50,
-                    projects: 100,
-                    buildings: 1000,
-                    users: 300
+
+                var counts = {
+                    total: 0,
+                    in_review: 0,
+                    feedback: 0,
+                    approved: 0,
                 }
+
+                let statistics = this.$store.getters['pgc_forms/dashboard'];
+
+                if (statistics) {
+
+                    statistics.forEach(el => {
+                        if (el.status == 0) {
+                            counts.in_review = el.count;
+                        }
+                        if (el.status == 1) {
+                            counts.feedback = el.count;
+                        }
+                        if (el.status == 2) {
+                            counts.approved = el.count;
+                        }
+                        if (el.status == 3) {
+                            counts.final_approved = el.count;
+                        }
+
+                        counts.total += el.count;
+
+                    })
+                }
+
+                return counts;
             },
             mixedChart() {
                 return {
-                    labels: ["يناير","فبراير"," سبتمبر", " اكتوبر", " نوفمبر", " ديسمبر"],
+                    labels: ["يناير", "فبراير", " سبتمبر", " اكتوبر", " نوفمبر", " ديسمبر"],
                     datasets: [
                         {
                             type: "line",
                             label: "الفعلى التراكمى ",
-                            data: [10, 12, 20, 30,45,50],
+                            data: [10, 12, 20, 30, 45, 50],
                             fill: false,
                             borderColor: "pink",
                         },
                         {
                             type: "line",
                             label: "المخطط التراكمى ",
-                            data: [20, 23, 30, 40,60,80],
+                            data: [20, 23, 30, 40, 60, 80],
                             fill: false,
                             borderColor: "#836AF9",
                         },
                         {
                             type: "bar",
                             label: "الفعلى ",
-                            data: [40, 50, 60, 70,80,90],
+                            data: [40, 50, 60, 70, 80, 90],
                             backgroundColor: chartColors.second_color,
                         },
                         {
                             type: "bar",
                             label: "المخطط ",
-                            data: [50, 55, 60, 75, 85,98],
+                            data: [50, 55, 60, 75, 85, 98],
                             backgroundColor: "#054978",
                         },
                     ],
@@ -268,13 +294,13 @@
                     datasets: [
                         {
                             label: "فعلى",
-                            data: [40, 59, 30,20,34],
+                            data: [40, 59, 30, 20, 34],
                             backgroundColor: chartColors.second_color,
                             borderColor: "transparent",
                         },
                         {
                             label: "مخطط ",
-                            data: [80, 70, 30,14,78],
+                            data: [80, 70, 30, 14, 78],
                             backgroundColor: "#eee",
                             borderColor: "transparent",
                         },
@@ -285,7 +311,7 @@
         },
         methods: {},
         mounted() {
-
+            this.$store.dispatch('pgc_forms/dashboard');
         },
     };
 </script>

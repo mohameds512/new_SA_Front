@@ -44,12 +44,12 @@ Vue.mixin({
     hasPermission(permission, checkFromUserAccess = false) {
       if (permission === 'public') return true
 
-      const userAccessPermissions = store.getters['roles/userAccessPermissions']
-      if (checkFromUserAccess) {
-        return permissions.includes(permission)
-      }
+      // const userAccessPermissions = store.getters['roles/userAccessPermissions']
+      // if (checkFromUserAccess) {
+      //   return permissions.includes(permission)
+      // }
 
-      return store.getters['roles/authUserRolesPermissionsName'].includes(permission) || store.getters['roles/authUserPermissionsName'].includes(permission) || (userAccessPermissions && userAccessPermissions.includes(permission))
+      return store.getters['roles/authUserRolesPermissionsName'].includes(permission) || store.getters['roles/authUserPermissionsName'].includes(permission)
     },
     hasNoPermission(permission) {
       return store.getters['roles/authUserRolesPermissionsName'].includes(permission)

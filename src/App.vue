@@ -56,9 +56,9 @@ export default {
   },
   watch: {
     $route(from, to) {
-      // if (this.authUser().id) {
-      //   this.$store.dispatch('roles/getAuthUserRolesPermissions', this.authUser().id);
-      // }
+      if (this.authUser().id) {
+        this.$store.dispatch('roles/getAuthUserRolesPermissions', this.authUser().id);
+      }
       // this.$store.commit('app/UPDATE_PAGE_DETAILS',null)
     },
   },

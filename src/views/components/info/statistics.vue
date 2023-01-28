@@ -12,9 +12,11 @@
         <b-row v-else>
             <b-col v-for="(item, i) in mapOrder(transform(items, only, except),only,'key')" :key="i"
                    class="m-0 w-100 pl-1 pr-0">
+                <router-link :to="`/Realty`" style="margin-right: 15px;">
                 <statistic-card-horizontal class="w-100" :icon="icon ? icon : 'TrendingUpIcon'" :color="colors[i]"
                                            :statistic="item.value ? item.value : 0"
                                            :statistic-title="$t(`Global.${item.key}`)"/>
+                </router-link>
             </b-col>
         </b-row>
 

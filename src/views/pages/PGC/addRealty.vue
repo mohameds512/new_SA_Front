@@ -1096,9 +1096,18 @@
                                                                     { key: 'action', label: '  تعديل ' },
                                                                 ]"
                                                     >
+                                                        <template #cell(type)="data">
+                                                            <a :href="data.item.image" target="_blank">
+                                                                {{data.item.type}}
+                                                            </a>
+                                                        </template>
                                                         <template #cell(action)="data">
+
+                                                            <a :href="data.item.image" target="_blank">
+                                                               <feather-icon icon="EyeIcon" class="text-primary mx-1"></feather-icon>
+                                                            </a>
                                                             <feather-icon @click="edit_inc_form(data.item)"
-                                                                          icon="EditIcon">
+                                                                          icon="EditIcon" class="text-success">
 
                                                             </feather-icon>
                                                         </template>

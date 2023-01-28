@@ -1,14 +1,15 @@
 <template>
     <div class="container bg-white pt-2 pb-2" dir="rtl">
         <div style="text-align: right;">
-<!--            <router-link :to="`/addRealty`"  >-->
-                <b-button variant="primary"  @click="openDialog()" > اضافة عقار </b-button>
-<!--            </router-link>-->
-<!--            <router-link :to="`/addRealty`"  >-->
-<!--                <b-button variant="primary"> اضافة عقار </b-button>-->
-<!--            </router-link>-->
+            <!--            <router-link :to="`/addRealty`"  >-->
+            <b-button variant="primary" v-if="hasPermission('edit_submissions')" @click="openDialog()"> اضافة عقار
+            </b-button>
+            <!--            </router-link>-->
+            <!--            <router-link :to="`/addRealty`"  >-->
+            <!--                <b-button variant="primary"> اضافة عقار </b-button>-->
+            <!--            </router-link>-->
 
-            <router-link :to="`/building_desc`" style="margin-right: 15px;" >
+            <router-link :to="`/building_desc`" style="margin-right: 15px;">
                 <b-button variant="primary"> انواع المشتمالات و الوصف</b-button>
             </router-link>
         </div>
@@ -21,7 +22,7 @@
                                              rules="required">
                             <b-form-input v-model="search_Sub"
                                           :state="errors.length > 0 ? false : null"
-                                          placeholder="بحث" />
+                                          placeholder="بحث"/>
                         </validation-provider>
                     </b-form-group>
                 </b-col>
@@ -29,19 +30,20 @@
         </div>
         <!-- {{ $store.getters['dashboard/allSubmission'] }} -->
         <!-- {{  $store.getters['dashboard/getSubs'].submissions  }}   -->
+
         <b-table
                 class="text-center"
                 striped
                 hover
-                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"
+                :items="$store.getters['dashboard/getSubs'].submissions"
                 :fields="[
-                            { key: 'building_number', label: 'رقم العقار ' },
-                            { key: 'status', label: 'الحالة' },
-                            { key: 'zone', label: '  المنطقة ' },
-                            { key: 'created_at', label: '  التاريخ ' },
-                            { key: 'action', label: '  تعديل ' },
-                        ]"
-
+                        { key: 'building_number', label: 'رقم العقار ' },
+                        { key: 'status', label: 'الحالة' },
+                        { key: 'operation_type', label: 'نوع المعاملة' },
+                        { key: 'zone', label: '  المنطقة ' },
+                        { key: 'created_at', label: '  التاريخ ' },
+                           { key: 'action', label: '  تعديل ' },
+                    ]"
         >
             <template #cell(building_number)="data">
                 <router-link :to="`/viewRealty/${data.item.id}`">
@@ -55,20 +57,54 @@
             <template #cell(created_at)="data">
                 {{toLocalDatetime(data.item.created_at) }}
             </template>
-
             <template #cell(action)="data">
-                <router-link :to="`/addRealty/${data.item.id}`">
+                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">
                     <feather-icon icon="EditIcon"></feather-icon>
                 </router-link>
             </template>
         </b-table>
+<!--        <b-table-->
+<!--                class="text-center"-->
+<!--                striped-->
+<!--                hover-->
+<!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
+<!--                :fields="[-->
+<!--                            { key: 'building_number', label: 'رقم العقار ' },-->
+<!--                            { key: 'status', label: 'الحالة' },-->
+<!--                            { key: 'zone', label: '  المنطقة ' },-->
+<!--                            { key: 'created_at', label: '  التاريخ ' },-->
+<!--                            { key: 'action', label: '  تعديل ' },-->
+<!--                        ]"-->
 
-        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار" cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary" @show="resetModal" @hidden="resetModal" @ok="save">
+<!--        >-->
+<!--            <template #cell(building_number)="data">-->
+<!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
+<!--                    {{ data.item.building_number }}-->
+<!--                </router-link>-->
+<!--            </template>-->
+
+<!--            <template #cell(status)="data">-->
+<!--                {{getStatus(data.item.status) }}-->
+<!--            </template>-->
+<!--            <template #cell(created_at)="data">-->
+<!--                {{toLocalDatetime(data.item.created_at) }}-->
+<!--            </template>-->
+
+<!--            <template #cell(action)="data">-->
+<!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
+<!--                    <feather-icon icon="EditIcon"></feather-icon>-->
+<!--                </router-link>-->
+<!--            </template>-->
+<!--        </b-table>-->
+
+        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار"
+                 cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary" @show="resetModal"
+                 @hidden="resetModal" @ok="save">
             <validation-observer ref="simpleRules">
-                <form  ref="form" @submit.stop.prevent="save">
+                <form ref="form" @submit.stop.prevent="save">
                     <b-col md="12" dir="rtl" class="text-left">
-                        <b-form-group label="رقم العقار "  label-for="name-input" invalid-feedback="Name is required">
-<!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
+                        <b-form-group label="رقم العقار " label-for="name-input" invalid-feedback="Name is required">
+                            <!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
 
                             <v-select
                                     dir="rtl"
@@ -79,9 +115,9 @@
                                     label="building_number"
                             >
                             </v-select>
-<!--                                <b-form-input id="name-input" v-model="form.building_number"/>-->
-<!--                                <ValidationErrors :frontend-errors="errors" :backend-errors="getBackendFieldError(errorsdata, 'new_role')" />-->
-<!--                            </validation-provider>-->
+                            <!--                                <b-form-input id="name-input" v-model="form.building_number"/>-->
+                            <!--                                <ValidationErrors :frontend-errors="errors" :backend-errors="getBackendFieldError(errorsdata, 'new_role')" />-->
+                            <!--                            </validation-provider>-->
                         </b-form-group>
                     </b-col>
                 </form>
@@ -92,7 +128,7 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import {mapGetters} from 'vuex'
     import vSelect from 'vue-select'
     import {
         // BOverlay,
@@ -148,9 +184,9 @@
             return {
                 realty_list: [],
                 realty_list2: [],
-                building_dialog:false,
+                building_dialog: false,
                 search_sub: null,
-                form:{}
+                form: {}
             };
         },
         mounted() {
@@ -164,37 +200,37 @@
                 })
 
         },
-        methods:{
-            searchSub(){
+        methods: {
+            searchSub() {
 
                 if (this.search_Sub) {
-                    this.realty_list = this.realty_list.filter((el)=> el.building_number == this.search_sub );
+                    this.realty_list = this.realty_list.filter((el) => el.building_number == this.search_sub);
                 }
             },
-            openDialog(){
+            openDialog() {
                 this.building_dialog = true;
             },
-            resetModal(){
+            resetModal() {
                 this.building_dialog = false;
             },
-            getStatus(x){
-                if (x==0) {
+            getStatus(x) {
+                if (x == 0) {
                     return 'تحت المراجعة'
                 }
-                if (x==1) {
+                if (x == 1) {
                     return ' يراجع مرة أخري'
                 }
-                if(x==2){
+                if (x == 2) {
                     return 'تم اعتماده'
                 }
             },
             save() {
                 this.$store.dispatch('pgc_forms/add_subs', {
-                        query: this.form,
-                    })
+                    query: this.form,
+                })
                     .then((response) => {
                         // if ($state) {
-                            this.building_dialog = false ;
+                        this.building_dialog = false;
                         // }
                         this.$swal({
                             icon: 'success',

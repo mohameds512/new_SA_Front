@@ -35,12 +35,20 @@ class PGC extends Resource {
 
     submitMab(payload) {
         return request({
-            url: `/store/map`,
+            url: `/store/map/${payload.id}`,
             method: "post",
-            data: payload,
+            data: payload.query,
             headers: {'Content-Type': 'multipart/form-data'},
         })
     }
+
+    dashboard() {
+        return request({
+            url: `/dashboard/submissions`,
+            method: "post",
+        })
+    }
+
 
     save_notes(payload) {
         console.log(payload)
