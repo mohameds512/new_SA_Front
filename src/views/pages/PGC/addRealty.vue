@@ -876,7 +876,7 @@
                                     </div>
                                 </b-overlay>
                                 <!--  المشتمالات -->
-                                <b-overlay v-if="(show_model_inputs == 1 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
+                                <b-overlay v-if="(show_model_inputs == 9 )" variant="white"  spinner-variant="primary" blur="0" opacity=".75"
                                     rounded="sm">
                                     <div class="add_project_details_wrapper">
                                             <validation-observer ref="addProjectRules">
@@ -917,7 +917,7 @@
                                                                 </b-col>
                                                                 <b-col md="3">
                                                                     <b-form-group class="text-right" label=" الوصف  ">
-                                                                        {{ passUnite()  }} 
+                                                                        
                                                                         <validation-provider #default="{ errors }" name=" الوصف "
                                                                             rules="required">
                                                                             <!-- {{ $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm[index].type)[0].build_desc }} -->
@@ -929,7 +929,7 @@
                                                                                 :disabled="includesForm.build_id ? false : true"
                                                                                 :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
                                                                                 v-model="includesForm.build_desc_id"
-                                                                                @change="passUnite(includesForm.build_desc_id)"
+                                                                                
                                                                                 :reduce="(val) => val.id"
                                                                             >
                                                                             </v-select>
@@ -939,7 +939,7 @@
                                                                     </b-form-group>
                                                                 </b-col>
                                                                 <b-col md="2">
-                                                                    <b-form-group class="text-right" label=" الوحدة">
+                                                                    <b-form-group class="text-right" :label=" ' القياس/الوحدة'+' ( '+passUnite()+' )'">
                                                                         <validation-provider #default="{ errors }" name="الوحدة "
                                                                             rules="required">
                                                                             <b-form-input v-model="includesForm.qty"
@@ -1485,8 +1485,13 @@ import router from '@/router'
         },
         methods: {  
             passUnite(){
-                console.log(this.getAllLook)
-                // $unit = $store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == includesForm.build_id)[0].build_desc ;
+                if(this.includesForm.build_id && this.includesForm.build_desc_id){
+                    let build_desc = this.$store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == this.includesForm.build_id)[0].build_desc ;
+                    let selected = build_desc.filter((element)=> element.id == this.includesForm.build_desc_id);
+                    return selected[0].unit;
+
+                }
+                // $unit = this.$store.getters['dashboard/getLookups'].includes_type.filter((el)=>el.id == this.includesForm.build_id)[0] ;
                 // return $unit;
             },  
             initGetIncs(){

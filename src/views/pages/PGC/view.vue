@@ -1032,9 +1032,12 @@
                                     <b-card-text>
                                         <div class="add_project_details_warpper" >
                                             <b-button> المخطط التفصيلي </b-button>
+                                            <b-button>  حصر عقار </b-button>
                                         </div>
                                         <div>
-                                            <details-rep></details-rep>
+                                            <!-- <details-rep></details-rep> -->
+                                            <!-- <collect-includes></collect-includes> -->
+                                            <inclusions-supplement></inclusions-supplement>
                                         </div>
                                     </b-card-text>
                                 </b-tab>
@@ -1132,11 +1135,16 @@
         BTable,
 
     } from 'bootstrap-vue'
+    
     import EquipmentProductivity from "@/views/dashboard/component/equipmentProductivity";
     import Exports from "@/views/dashboard/component/exports";
     import ManPower from "@/views/dashboard/component/manPower";
     import WorkProgress from "@/views/dashboard/component/workProgress";
     import detailsRep from "@/views/dashboard/component/detailsRep.vue";
+    import collectIncludes from "@/views/dashboard/component/collectIncludes.vue";
+
+    import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
+    
 import { formatDate } from '@/@core/utils/filter'
     // import planedDetailsRep from './planedDetailsRep.vue'
     export default {
@@ -1212,6 +1220,8 @@ import { formatDate } from '@/@core/utils/filter'
             }
         },
         components: {
+            inclusionsSupplement,
+            collectIncludes,
             detailsRep,
             WorkProgress,
             ManPower,

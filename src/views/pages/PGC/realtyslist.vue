@@ -32,12 +32,12 @@
                 hover
                 :items="$store.getters['dashboard/getSubs'].submissions"
                 :fields="[
-                            { key: 'building_number', label: 'رقم العقار ' },
-                            { key: 'status', label: 'الحالة' },
-                            { key: 'zone', label: '  المنطقة ' },
-                            { key: 'created_at', label: '  التاريخ ' },
-                        ]"
-        
+                        { key: 'building_number', label: 'رقم العقار ' },
+                        { key: 'status', label: 'الحالة' },
+                        { key: 'operation_type', label: 'نوع المعاملة' },
+                        { key: 'zone', label: '  المنطقة ' },
+                        { key: 'created_at', label: '  التاريخ ' },
+                    ]"
         >
         <template #cell(building_number)="data">
             <router-link :to="`/viewRealty/${data.item.id}`">
