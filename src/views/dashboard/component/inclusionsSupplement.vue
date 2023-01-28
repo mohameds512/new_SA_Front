@@ -10,31 +10,32 @@
             :pdf-quality="2"
             :manual-pagination="true"
             pdf-format="a4"
-            pdf-orientation="landscape"
             
             ref="html2Pdf"
         >
-            <section slot="pdf-content">
+            <section slot="pdf-content" style="font-family: dejavusans; text-align: right; align-self: center;">
+                
                 <div  class="invoice-preview-wrapper ">
                     <br><br>
                     <b-button
                             variant="success"
                             class="mb-75 invoice-actions"
                             block
-                            @click="generateReport"
+                            @click="printInvoice"
                     >
-                        Print
+                        طباعة
                     </b-button>
                     <div class="fgh"> محمد السعيد</div>
                     <br><br>
                     <b-row    class="invoice-preview">
                         <b-col md="4">
-                            <h4 class="text-left text-bold text-dark"> logo </h4>
+                            <div >
+                                <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
+                            </div>
                         </b-col>
                         <b-col md="8">
                             <b-table
                                     bordered
-                                    style="text-align: right;"
                                     hover
                                     :items="[{pro_num:2 , area_num: 2 , num:2 , building_num:2}]"
                                     :fields="[
@@ -44,7 +45,7 @@
                                         { key: 'building_num' , label: '  رقم العقار'   },
                                     ]"
                             ></b-table>
-                            <div style="width: 100%; text-align: right; padding-right: 10px; border: 0.1rem;">رقم فريق الحصر (                            )</div>
+                            <div style="width: 100%;  padding-right: 10px; ">رقم فريق الحصر (                            )</div>
                         </b-col>
                     </b-row>
                     <br/>
@@ -60,11 +61,7 @@
                                     bordered
                             > 
                                 <b-thead head-variant="light">
-                                    <!-- <b-tr>
-                                        <b-th colspan="8" class="text-center text-dark text-bold">
-                                            أولاً: بيانات العقار
-                                        </b-th>
-                                    </b-tr> -->
+                                    
                                 </b-thead>
                                 <b-tbody>
                                     <b-tr>
@@ -188,11 +185,6 @@
                                         <b-th class="content-item">مالك</b-th>
                                         <b-th class="content-item">وكيل</b-th>
                                     </b-tr>
-                                    <!-- <b-tr>
-                                        <p  style="padding-right: 10px;" >
-                                            أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة وبذلك أوقع                  التاريخ: 
-                                        </p>
-                                    </b-tr> -->
                                     
                                 </b-tbody>
                             </b-table-simple>
@@ -262,6 +254,7 @@
                         </b-col>
                     </b-row>
                 </div>
+            
             </section>
         </vue-html2pdf>
     </div>
@@ -321,11 +314,27 @@
         
     // }
     @media print {
-  .fgh {
-    background-color: red;
-    direction: rtl;
-
-  }
+    .fgh {
+        background-color: red;
+        direction: rtl;
+    }
+    // .th {
+    //     background-color: #ffffff !important;
+    //     color: rgb(11, 55, 2);
+    //     font-size: 15px;
+    // } 
+    .green-header{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+        // text-align: left !important;
+    }
+    .center-green{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+    }
+    .content-item{
+        text-align: left !important;
+    }
 }
 @media print {
   * {
@@ -333,11 +342,6 @@
     color-adjust: exact !important; //
   }
 }
-    th {
-        background-color: #ffffff !important;
-        color: rgb(11, 55, 2);
-        font-size: 15px;
-    } 
     .green-header{
         background-color: #05481e !important;
         color: #ffffff !important;

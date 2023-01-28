@@ -4,7 +4,7 @@
         <b-row>
 
             <b-col>
-                <div dir="rtl">
+                <div>
                     <b-row class="bg-white pt-2 pb-2">
                         <b-col cols="12">
                             <b-card no-body>
@@ -1031,13 +1031,31 @@
                                 <b-tab title="التقارير">
                                     <b-card-text>
                                         <div class="add_project_details_warpper" >
-                                            <b-button> المخطط التفصيلي </b-button>
-                                            <b-button>  حصر عقار </b-button>
+                                            <b-tabs pills card>
+                                                <b-tab title=" المخطط التفصيلي " >
+                                                    <b-card-text>
+                                                        <details-rep ></details-rep>
+                                                    </b-card-text>
+                                                </b-tab>
+                                                <b-tab title=" حصر العقار ">
+                                                    <b-card-text>
+                                                        <collect-includes></collect-includes>
+                                                    </b-card-text>
+                                                </b-tab>
+                                                <b-tab title=" ملحق المشتملات " >
+                                                    <b-card-text>
+                                                        <inclusions-supplement></inclusions-supplement>
+                                                    </b-card-text>
+                                                </b-tab>
+                                                <b-tab title=" محضر تقدير " >
+                                                    <b-card-text>
+                                                        <appreciation-miunte></appreciation-miunte>
+                                                        <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
+                                                    </b-card-text>
+                                                </b-tab>
+                                            </b-tabs>
                                         </div>
                                         <div>
-                                            <!-- <details-rep></details-rep> -->
-                                            <!-- <collect-includes></collect-includes> -->
-                                            <inclusions-supplement></inclusions-supplement>
                                         </div>
                                     </b-card-text>
                                 </b-tab>
@@ -1142,6 +1160,7 @@
     import WorkProgress from "@/views/dashboard/component/workProgress";
     import detailsRep from "@/views/dashboard/component/detailsRep.vue";
     import collectIncludes from "@/views/dashboard/component/collectIncludes.vue";
+    import appreciationMiunte from "@/views/dashboard/component/appreciationMiunte.vue";
     
     import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
 import { formatDate } from '@/@core/utils/filter'
@@ -1219,6 +1238,7 @@ import { formatDate } from '@/@core/utils/filter'
             }
         },
         components: {
+            appreciationMiunte,
             inclusionsSupplement,
             collectIncludes,
             detailsRep,

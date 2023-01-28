@@ -27,7 +27,10 @@
                     <br><br>
                     <b-row    class="invoice-preview">
                         <b-col md="4">
-                            <h4 class="text-left text-bold text-dark"> logo </h4>
+                            <div >
+                                <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
+                            </div>
+                            
                         </b-col>
                         <b-col md="8">
                             <b-table
