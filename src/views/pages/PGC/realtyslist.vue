@@ -33,12 +33,13 @@
                 class="text-center"
                 striped
                 hover
-                :items="$store.getters['dashboard/getSubs'].submissions"
+                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"
                 :fields="[
                             { key: 'building_number', label: 'رقم العقار ' },
                             { key: 'status', label: 'الحالة' },
                             { key: 'zone', label: '  المنطقة ' },
                             { key: 'created_at', label: '  التاريخ ' },
+                            { key: 'action', label: '  تعديل ' },
                         ]"
 
         >
@@ -54,15 +55,31 @@
             <template #cell(created_at)="data">
                 {{toLocalDatetime(data.item.created_at) }}
             </template>
+
+            <template #cell(action)="data">
+                <router-link :to="`/addRealty/${data.item.id}`">
+                    <feather-icon icon="EditIcon"></feather-icon>
+                </router-link>
+            </template>
         </b-table>
 
-        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار" cancel-title="الغاء" ok-title="اضافة" cancel-variant="outline-secondary" @show="resetModal" @hidden="resetModal" @ok="save">
+        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار" cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary" @show="resetModal" @hidden="resetModal" @ok="save">
             <validation-observer ref="simpleRules">
                 <form  ref="form" @submit.stop.prevent="save">
-                    <b-col md="12">
-                        <b-form-group label="رقم العقار " label-for="name-input" invalid-feedback="Name is required">
+                    <b-col md="12" dir="rtl" class="text-left">
+                        <b-form-group label="رقم العقار "  label-for="name-input" invalid-feedback="Name is required">
 <!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
-                                <b-form-input id="name-input" v-model="form.building_number"/>
+
+                            <v-select
+                                    dir="rtl"
+                                    placeholder="رقم العقار"
+                                    :options="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status == 4)"
+                                    v-model="form.submission_id"
+                                    :reduce="(val) => val.id"
+                                    label="building_number"
+                            >
+                            </v-select>
+<!--                                <b-form-input id="name-input" v-model="form.building_number"/>-->
 <!--                                <ValidationErrors :frontend-errors="errors" :backend-errors="getBackendFieldError(errorsdata, 'new_role')" />-->
 <!--                            </validation-provider>-->
                         </b-form-group>

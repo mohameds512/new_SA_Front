@@ -213,7 +213,7 @@
                                                         </b-row>
 
                                                         <b-row v-for="(owner , i) in form.owners" :key="i">
-                                                            <b-col md="3">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-right" label="اسم المالك">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name="اسم المالك"
@@ -228,7 +228,7 @@
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-                                                            <b-col md="3">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-right" label="رقم الجوال ">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name=" رقم الجوال"
@@ -243,7 +243,7 @@
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-                                                            <b-col md="3">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-right" label=" نوع الهوية ">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name=" نوع الهوية"
@@ -854,7 +854,7 @@
                                                         </b-form-group> -->
                                                         <b-row v-for="(item ,index) in form.submission[0].includes_data"
                                                                :key="index">
-                                                            <b-col md="3">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-right" label=" نوع المشتمل ">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name=" نوع المشتمل"
@@ -867,7 +867,7 @@
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-                                                            <b-col md="3">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-right" label=" الوصف  ">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name=" الوصف "
@@ -882,12 +882,13 @@
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-                                                            <b-col md="2">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-right" label="المساحة  ">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name="المساحة "
                                                                                          rules="required">
                                                                         <b-form-input v-model="item.qty"
+                                                                                      disabled
                                                                                       :state="errors.length > 0 ? false : null"
                                                                                       placeholder="المساحة "
                                                                                       type="number"/>
@@ -896,23 +897,6 @@
                                                                             مطلوب</small>
                                                                     </validation-provider>
                                                                 </b-form-group>
-                                                            </b-col>
-                                                            <b-col md="3">
-                                                                <b-row>
-                                                                    <b-col cols="6">
-                                                                        <b-form-group class="text-right btncls">
-                                                                            <b-button @click="editImg"
-                                                                                      variant="primary"> تحديث الصورة
-                                                                            </b-button>
-                                                                        </b-form-group>
-                                                                    </b-col>
-                                                                    <!-- <b-col cols="6" v-if="item.type== 'المباني'" >
-                                                                        <b-form-group class="text-right btncls" >
-                                                                            <b-button @click="model_floor = true" variant="info">أضافة دور</b-button>
-                                                                        </b-form-group>
-                                                                    </b-col> -->
-                                                                </b-row>
-
                                                             </b-col>
                                                             <!-- <b-modal hide-header-close v-model="modal_img" title="أضفة صورة" id="img">
                                                                 <b-form-group class="text-right" >

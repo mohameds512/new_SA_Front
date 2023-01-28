@@ -44,6 +44,18 @@ const locationModule = {
                     })
             })
         },
+
+        show_submission({commit}, id) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.show_submission(id)
+                    .then(response => {
+                        commit('SET_SHOW_SUB', response.data)
+                        resolve(response)
+                    }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
         img({commit}, id) {
             return new Promise((resolve, reject) => {
                 pgc_forms
@@ -77,21 +89,14 @@ const locationModule = {
         save_subs({commit}, payload) {
 
             return new Promise((resolve, reject) => {
-                console.log('payload')
-                console.log(payload)
                 pgc_forms
-                    .save_submission(payload.query)
+                    .save_submission(payload)
                     .then(response => {
-                        // commit('SET_CONTRACTORS', response)
-                        // commit('SET_ID', response.project.id);
-                        console.log(response)
-                        // console.log(response.project.id)
                         resolve();
 
-                    })
-                    .catch(error => {
-                        reject(error)
-                    })
+                    }).catch(error => {
+                    reject(error)
+                })
             })
         },
         add_subs({commit}, payload) {
@@ -131,10 +136,9 @@ const locationModule = {
         save_inc({commit}, payload) {
 
             return new Promise((resolve, reject) => {
-                console.log('payload')
-                console.log(payload)
+
                 pgc_forms
-                    .save_includes(payload.query)
+                    .save_includes(payload)
                     .then(response => {
                         // commit('SET_CONTRACTORS', response)
                         // commit('SET_ID', response.project.id);
