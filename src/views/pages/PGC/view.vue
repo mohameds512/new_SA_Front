@@ -30,9 +30,21 @@
                                                         <b-button @click="model_notes = true"
                                                                   style="margin-left: 20px;"> أضافة ملاحظة
                                                         </b-button>
-                                                        <b-button @click="model_approve = true" variant="info"
+                                                        <b-button @click="change_status(2)" variant="info"
                                                                   v-if="this.form.submission[0].status != 2"> أعتماد
                                                             الطلب
+                                                        </b-button>
+
+                                                        <b-button @click="openSignature(1)" variant="primary" class="mx-1">
+                                                            توقيع المساح
+                                                        </b-button>
+
+                                                        <b-button @click="openSignature(2)" variant="warning" class="mx-1">
+                                                            توقيع المالك
+                                                        </b-button>
+
+                                                        <b-button @click="openSignature(3)" variant="success">
+                                                            توقيع رئيس اللجنة
                                                         </b-button>
 
                                                         <b-modal hide-header-close v-model="model_notes" hide-footer
@@ -54,7 +66,7 @@
                                                             <div class="mt-2">
                                                                 <b-col cols="12">
                                                                     <div class="d-flex justify-content-end">
-                                                                        <b-button @click="addNote()" variant="primary"
+                                                                        <b-button @click="change_status(1)" variant="primary"
                                                                                   style="margin-right: 10px;">تأكيد
                                                                         </b-button>
                                                                         <b-button @click="model_notes = false"
@@ -1320,23 +1332,38 @@
                                     </b-tab> -->
                                 </b-tabs>
 
+                                <div class="d-flex justify-content-between text-center">
+                                    <div>
+                                        <h4>توقيع المساح</h4>
+                                        <img :src="form.submission[0].signature_eng" width="200" height="70">
+                                    </div>
+                                    <div>
+                                        <h4>توقيع المالك</h4>
+                                        <img :src="form.submission[0].signature_owner" width="200" height="70">
+                                    </div>
+                                    <div>
+                                        <h4>توقيع رئيس اللجنة</h4>
+                                        <img :src="form.submission[0].signature_poss" width="200" height="70">
+                                    </div>
+                                </div>
+
                             </b-card>
 
                         </b-col>
                     </b-row>
-                    <b-modal hide-header-close v-model="model_signature" hide-footer title="أضافة ملاحظة ">
-                        <div class="demo-vertical-spacing">
-                            <b-form-group class="text-right" label=" التوقيع">
+                    <b-modal hide-header-close v-model="model_signature" hide-footer title="التوقيع " dir="rtl">
+                        <div class="demo-vertical-spacing" dir="rtl">
+<!--                            <b-form-group class="text-right" label=" التوقيع">-->
                                 <vueSignature ref="signature" :sigOption="option" :w="'440px'" :h="'200px'" ></vueSignature>
-                            </b-form-group>
+<!--                            </b-form-group>-->
                         </div>
                         <div class="mt-2">
                             <b-col cols="12">
-                                <div class="d-flex justify-content-end">
+                                <div >
                                     <b-button @click="saveSignature()" variant="primary"
-                                              style="margin-right: 10px;">تأكيد
+                                              style="margin-right: 10px;" class="mx-1">تأكيد
                                     </b-button>
-                                    <b-button @click="$refs.signature.clear()"
+                                    <b-button @click="$refs.signature.clear(); model_signature=false"
                                               variant="outline-primary">الغاء
                                     </b-button>
                                 </div>
@@ -1404,7 +1431,8 @@
                     backgroundColor:"rgb(255,255,255)"
                 },
                 disabled:false,
-                model_signature:true,
+                model_signature:false,
+                signature_type:null,
                 sub_map: null,
                 approve_sub: {id: null},
                 notes: {note: null, id: null},
@@ -1517,14 +1545,24 @@
                 this.model_forced_area = true;
             },
 
+            openSignature(type){
+                this.signature_type = type;
+                this.model_signature = true;
+            },
+
             saveSignature() {
                 var png = this.$refs.signature.save()
 
                 this.approve_sub.id = this.form.submission[0].id
 
-                let payload = {id: this.form.submission[0].id, query: {status: 1, signature: png}};
+                let payload = {id: this.form.submission[0].id, query: {type: this.signature_type, signature: png}};
                 this.$store.dispatch('pgc_forms/save_signature', payload)
                     .then((response) => {
+                        this.$store.dispatch('pgc_forms/show_sub', this.$route.params.id)
+                            .then((res) => {
+                                this.form = res.data
+                            })
+                        this.model_signature = false;
                     });
 
                 console.log(png);
