@@ -6,7 +6,7 @@
             <b-col>
                 <div dir="rtl">
                     <b-row class="bg-white pt-2 pb-2">
-                        <b-col cols="3">
+                        <b-col cols="3" class="hidden_print">
                             <app-timeline>
                                 <app-timeline-item
                                         v-for="(log , i) in form.submission[0].logs_data"
@@ -1157,23 +1157,37 @@
                                     </b-tab>
                                     <b-tab title="التقارير">
                                         <b-card-text>
-                                            <div class="add_project_details_warpper">
-                                                <b-button> المخطط التفصيلي</b-button>
+                                            <div class="add_project_details_warpper" >
+                                                <b-tabs pills card>
+                                                    <b-tab title=" المخطط التفصيلي " >
+                                                        <b-card-text>
+                                                            <details-rep
+                                                                    :submissionDtat="form.submission[0]"
+                                                                    :ownersDtat="form.owners[0]"
+                                                            ></details-rep>
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                    <b-tab title=" حصر العقار ">
+                                                        <b-card-text>
+                                                            <collect-includes></collect-includes>
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                    <b-tab title=" ملحق المشتملات " >
+                                                        <b-card-text>
+                                                            <inclusions-supplement></inclusions-supplement>
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                    <b-tab title=" محضر تقدير " >
+                                                        <b-card-text>
+                                                            <appreciation-miunte></appreciation-miunte>
+                                                            <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                </b-tabs>
                                             </div>
-                                            <div>
-                                                <details-rep></details-rep>
-                                            </div>
+
                                         </b-card-text>
                                     </b-tab>
-                                    <!--                                    <b-tab title="الملاحظات">-->
-                                    <!--                                        <b-card-text>-->
-                                    <!--                                            <div class="add_project_details_wrapper">-->
-                                    <!--                                                <h2 class="text-center danger">-->
-                                    <!--                                                    {{ form.submission[0].notes }}-->
-                                    <!--                                                </h2>-->
-                                    <!--                                            </div>-->
-                                    <!--                                        </b-card-text>-->
-                                    <!--                                    </b-tab>-->
                                 </b-tabs>
 
                                 <div class="d-flex justify-content-between text-center">
@@ -1233,6 +1247,7 @@
     import DataTable from '@/views/components/table/DataTable'
     import AppTimeline from '@core/components/app-timeline/AppTimeline.vue'
     import AppTimelineItem from '@core/components/app-timeline/AppTimelineItem.vue'
+
     import {
         // BOverlay,
         // https://ecb.dev.vero-cloud.com/api/
@@ -1255,12 +1270,12 @@
         BTable,
 
     } from 'bootstrap-vue'
-    import EquipmentProductivity from "@/views/dashboard/component/equipmentProductivity";
-    import Exports from "@/views/dashboard/component/exports";
-    import ManPower from "@/views/dashboard/component/manPower";
-    import WorkProgress from "@/views/dashboard/component/workProgress";
     import Report from "@/views/pages/PGC/report";
     import detailsRep from "@/views/dashboard/component/detailsRep.vue";
+    import collectIncludes from "@/views/dashboard/component/collectIncludes.vue";
+    import appreciationMiunte from "@/views/dashboard/component/appreciationMiunte.vue";
+    import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
+
     import vueSignature from "vue-signature"
 
     import {formatDate} from '@/@core/utils/filter'
@@ -1346,14 +1361,13 @@
         },
         components: {
             Report,
+            collectIncludes,
+            appreciationMiunte,
+            inclusionsSupplement,
             detailsRep,
-            WorkProgress,
-            ManPower,
             vueSignature,
-            Exports,
             AppTimeline,
             AppTimelineItem,
-            EquipmentProductivity,
             ValidationProvider,
             ValidationObserver,
             // BOverlay,

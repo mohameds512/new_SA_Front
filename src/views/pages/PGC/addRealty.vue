@@ -1104,7 +1104,7 @@
                                                         <template #cell(action)="data">
 
                                                             <a :href="data.item.image" target="_blank">
-                                                               <feather-icon icon="EyeIcon" class="text-primary mx-1"></feather-icon>
+                                                                <feather-icon icon="EyeIcon" class="text-primary mx-1"></feather-icon>
                                                             </a>
                                                             <feather-icon @click="edit_inc_form(data.item)"
                                                                           icon="EditIcon" class="text-success">
@@ -1224,7 +1224,7 @@
                                                         <!-- <b-button variant="info" @click="show_model(9)" >
                                                             التالي
                                                         </b-button> -->
-                                                         <b-button variant="danger" @click="checkSubmit()" >
+                                                        <b-button variant="danger" @click="checkSubmit()" >
                                                             انهاء وعرض الطلب
                                                         </b-button>
                                                     </b-col>
@@ -1235,91 +1235,91 @@
                                     </div>
                                 </b-overlay>
                                 <!-- المرفقات   -->
-<!--                                <b-overlay v-if="(show_model_inputs == 10)" variant="white" spinner-variant="primary"-->
-<!--                                           blur="0" opacity=".75"-->
-<!--                                           rounded="sm">-->
-<!--                                    <div class="add_project_details_wrapper">-->
-<!--                                        <validation-observer ref="addProjectRules">-->
-<!--                                            <b-form v-if="this.hide == true">-->
-<!--                                                <b-row class="bg-white pt-2 pb-2">-->
-<!--                                                    <b-col md="12" class="back_ground">-->
-<!--                                                        <p class="text-center"> المرفقات </p>-->
-<!--                                                    </b-col>-->
+                                <!--                                <b-overlay v-if="(show_model_inputs == 10)" variant="white" spinner-variant="primary"-->
+                                <!--                                           blur="0" opacity=".75"-->
+                                <!--                                           rounded="sm">-->
+                                <!--                                    <div class="add_project_details_wrapper">-->
+                                <!--                                        <validation-observer ref="addProjectRules">-->
+                                <!--                                            <b-form v-if="this.hide == true">-->
+                                <!--                                                <b-row class="bg-white pt-2 pb-2">-->
+                                <!--                                                    <b-col md="12" class="back_ground">-->
+                                <!--                                                        <p class="text-center"> المرفقات </p>-->
+                                <!--                                                    </b-col>-->
 
-<!--                                                    <b-col md="1"></b-col>-->
+                                <!--                                                    <b-col md="1"></b-col>-->
 
-<!--                                                    <b-col class="d-flex justify-content-center" md="8">-->
-<!--                                                    </b-col>-->
+                                <!--                                                    <b-col class="d-flex justify-content-center" md="8">-->
+                                <!--                                                    </b-col>-->
 
-<!--                                                </b-row>-->
-<!--                                                <b-form-group class="text-right" v-if="attachLength() == 0">-->
-<!--                                                    <b-button @click="addAttachs"> اضف</b-button>-->
-<!--                                                </b-form-group>-->
-<!--                                                <b-row v-for="(attach , i ) in form.attachs" :key="i">-->
-<!--                                                    <b-col md="4">-->
-<!--                                                        <b-form-group class="text-right"-->
-<!--                                                                      label=" المرفق ">-->
-<!--                                                            <input type="file" name="image"-->
-<!--                                                                   accept="image/apng, image/jpeg, image/png, image/webp"-->
-<!--                                                            />-->
-<!--                                                        </b-form-group>-->
-<!--                                                        <b-form-group class="text-right" label="المرفق">-->
-<!--                                                            <validation-provider #default="{ errors }" name="المرفق"-->
-<!--                                                                                 rules="required">-->
-<!--                                                                <b-form-input v-model="attach.file"-->
-<!--                                                                              :state="errors.length > 0 ? false : null"-->
-<!--                                                                              placeholder="المرفق" type="file"/>-->
-<!--                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل-->
-<!--                                                                    مطلوب</small>-->
-<!--                                                            </validation-provider>-->
-<!--                                                        </b-form-group>-->
-<!--                                                    </b-col>-->
-<!--                                                    <b-col md="4">-->
-<!--                                                        <b-form-group class="text-right" label="ملاحظات">-->
-<!--                                                            <validation-provider #default="{ errors }" name="ملاحظات"-->
-<!--                                                                                 rules="required">-->
-<!--                                                                <b-form-input v-model="attach.note"-->
-<!--                                                                              :state="errors.length > 0 ? false : null"-->
-<!--                                                                              placeholder="ملاحظات" type="text"/>-->
-<!--                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل-->
-<!--                                                                    مطلوب</small>-->
-<!--                                                            </validation-provider>-->
-<!--                                                        </b-form-group>-->
-<!--                                                    </b-col>-->
-<!--                                                    <b-col md="3">-->
-<!--                                                        <b-row>-->
-<!--                                                            <b-col cols="4">-->
-<!--                                                                <b-form-group class="text-right" label=".  ">-->
-<!--                                                                    <b-button @click="addAttachs"> اضف</b-button>-->
-<!--                                                                </b-form-group>-->
-<!--                                                            </b-col>-->
-<!--                                                            <b-col cols="4">-->
-<!--                                                                <b-form-group class="text-right" label=" . ">-->
-<!--                                                                    <b-button @click="form.attachs.pop()">حذف</b-button>-->
-<!--                                                                </b-form-group>-->
-<!--                                                            </b-col>-->
-<!--                                                        </b-row>-->
-<!--                                                    </b-col>-->
-<!--                                                </b-row>-->
-<!--                                                <b-row>-->
-<!--                                                    <b-col cols="2 text-right pt-2">-->
-<!--                                                        <b-button variant="primary" @click="show_model(7)">-->
-<!--                                                            السابق-->
-<!--                                                        </b-button>-->
-<!--                                                    </b-col>-->
+                                <!--                                                </b-row>-->
+                                <!--                                                <b-form-group class="text-right" v-if="attachLength() == 0">-->
+                                <!--                                                    <b-button @click="addAttachs"> اضف</b-button>-->
+                                <!--                                                </b-form-group>-->
+                                <!--                                                <b-row v-for="(attach , i ) in form.attachs" :key="i">-->
+                                <!--                                                    <b-col md="4">-->
+                                <!--                                                        <b-form-group class="text-right"-->
+                                <!--                                                                      label=" المرفق ">-->
+                                <!--                                                            <input type="file" name="image"-->
+                                <!--                                                                   accept="image/apng, image/jpeg, image/png, image/webp"-->
+                                <!--                                                            />-->
+                                <!--                                                        </b-form-group>-->
+                                <!--                                                        <b-form-group class="text-right" label="المرفق">-->
+                                <!--                                                            <validation-provider #default="{ errors }" name="المرفق"-->
+                                <!--                                                                                 rules="required">-->
+                                <!--                                                                <b-form-input v-model="attach.file"-->
+                                <!--                                                                              :state="errors.length > 0 ? false : null"-->
+                                <!--                                                                              placeholder="المرفق" type="file"/>-->
+                                <!--                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل-->
+                                <!--                                                                    مطلوب</small>-->
+                                <!--                                                            </validation-provider>-->
+                                <!--                                                        </b-form-group>-->
+                                <!--                                                    </b-col>-->
+                                <!--                                                    <b-col md="4">-->
+                                <!--                                                        <b-form-group class="text-right" label="ملاحظات">-->
+                                <!--                                                            <validation-provider #default="{ errors }" name="ملاحظات"-->
+                                <!--                                                                                 rules="required">-->
+                                <!--                                                                <b-form-input v-model="attach.note"-->
+                                <!--                                                                              :state="errors.length > 0 ? false : null"-->
+                                <!--                                                                              placeholder="ملاحظات" type="text"/>-->
+                                <!--                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل-->
+                                <!--                                                                    مطلوب</small>-->
+                                <!--                                                            </validation-provider>-->
+                                <!--                                                        </b-form-group>-->
+                                <!--                                                    </b-col>-->
+                                <!--                                                    <b-col md="3">-->
+                                <!--                                                        <b-row>-->
+                                <!--                                                            <b-col cols="4">-->
+                                <!--                                                                <b-form-group class="text-right" label=".  ">-->
+                                <!--                                                                    <b-button @click="addAttachs"> اضف</b-button>-->
+                                <!--                                                                </b-form-group>-->
+                                <!--                                                            </b-col>-->
+                                <!--                                                            <b-col cols="4">-->
+                                <!--                                                                <b-form-group class="text-right" label=" . ">-->
+                                <!--                                                                    <b-button @click="form.attachs.pop()">حذف</b-button>-->
+                                <!--                                                                </b-form-group>-->
+                                <!--                                                            </b-col>-->
+                                <!--                                                        </b-row>-->
+                                <!--                                                    </b-col>-->
+                                <!--                                                </b-row>-->
+                                <!--                                                <b-row>-->
+                                <!--                                                    <b-col cols="2 text-right pt-2">-->
+                                <!--                                                        <b-button variant="primary" @click="show_model(7)">-->
+                                <!--                                                            السابق-->
+                                <!--                                                        </b-button>-->
+                                <!--                                                    </b-col>-->
 
-<!--                                                    <b-col cols="8 text-right pt-2">-->
-<!--                                                    </b-col>-->
-<!--                                                    <b-col cols="2 text-right pt-2">-->
-<!--                                                        <b-button variant="danger" @click="checkSubmit()">-->
-<!--                                                            حفظ-->
-<!--                                                        </b-button>-->
-<!--                                                    </b-col>-->
-<!--                                                </b-row>-->
-<!--                                            </b-form>-->
-<!--                                        </validation-observer>-->
-<!--                                    </div>-->
-<!--                                </b-overlay>-->
+                                <!--                                                    <b-col cols="8 text-right pt-2">-->
+                                <!--                                                    </b-col>-->
+                                <!--                                                    <b-col cols="2 text-right pt-2">-->
+                                <!--                                                        <b-button variant="danger" @click="checkSubmit()">-->
+                                <!--                                                            حفظ-->
+                                <!--                                                        </b-button>-->
+                                <!--                                                    </b-col>-->
+                                <!--                                                </b-row>-->
+                                <!--                                            </b-form>-->
+                                <!--                                        </validation-observer>-->
+                                <!--                                    </div>-->
+                                <!--                                </b-overlay>-->
 
                             </b-col>
                         </div>
@@ -1586,7 +1586,7 @@
                     this.editInc.build_id = item.build_id,
                     this.editInc.build_desc_id = item.build_desc_id,
                     this.editInc.qty = item.qty,
-                this.model_inc_edit = true;
+                    this.model_inc_edit = true;
             },
             editIncludes() {
                 const dataInclude = new FormData();

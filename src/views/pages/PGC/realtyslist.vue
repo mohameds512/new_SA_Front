@@ -63,39 +63,39 @@
                 </router-link>
             </template>
         </b-table>
-<!--        <b-table-->
-<!--                class="text-center"-->
-<!--                striped-->
-<!--                hover-->
-<!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
-<!--                :fields="[-->
-<!--                            { key: 'building_number', label: 'رقم العقار ' },-->
-<!--                            { key: 'status', label: 'الحالة' },-->
-<!--                            { key: 'zone', label: '  المنطقة ' },-->
-<!--                            { key: 'created_at', label: '  التاريخ ' },-->
-<!--                            { key: 'action', label: '  تعديل ' },-->
-<!--                        ]"-->
+        <!--        <b-table-->
+        <!--                class="text-center"-->
+        <!--                striped-->
+        <!--                hover-->
+        <!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
+        <!--                :fields="[-->
+        <!--                            { key: 'building_number', label: 'رقم العقار ' },-->
+        <!--                            { key: 'status', label: 'الحالة' },-->
+        <!--                            { key: 'zone', label: '  المنطقة ' },-->
+        <!--                            { key: 'created_at', label: '  التاريخ ' },-->
+        <!--                            { key: 'action', label: '  تعديل ' },-->
+        <!--                        ]"-->
 
-<!--        >-->
-<!--            <template #cell(building_number)="data">-->
-<!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
-<!--                    {{ data.item.building_number }}-->
-<!--                </router-link>-->
-<!--            </template>-->
+        <!--        >-->
+        <!--            <template #cell(building_number)="data">-->
+        <!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
+        <!--                    {{ data.item.building_number }}-->
+        <!--                </router-link>-->
+        <!--            </template>-->
 
-<!--            <template #cell(status)="data">-->
-<!--                {{getStatus(data.item.status) }}-->
-<!--            </template>-->
-<!--            <template #cell(created_at)="data">-->
-<!--                {{toLocalDatetime(data.item.created_at) }}-->
-<!--            </template>-->
+        <!--            <template #cell(status)="data">-->
+        <!--                {{getStatus(data.item.status) }}-->
+        <!--            </template>-->
+        <!--            <template #cell(created_at)="data">-->
+        <!--                {{toLocalDatetime(data.item.created_at) }}-->
+        <!--            </template>-->
 
-<!--            <template #cell(action)="data">-->
-<!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
-<!--                    <feather-icon icon="EditIcon"></feather-icon>-->
-<!--                </router-link>-->
-<!--            </template>-->
-<!--        </b-table>-->
+        <!--            <template #cell(action)="data">-->
+        <!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
+        <!--                    <feather-icon icon="EditIcon"></feather-icon>-->
+        <!--                </router-link>-->
+        <!--            </template>-->
+        <!--        </b-table>-->
 
         <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار"
                  cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary" @show="resetModal"
