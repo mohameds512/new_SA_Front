@@ -1050,7 +1050,7 @@
                                                                             placeholder="الدور"
                                                                             :options="Array.from(floors , (el) => el)"
                                                                             :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
-                                                                            v-model="item.roof"
+                                                                            v-model="sub_floors[index].roof"
                                                                             :reduce="(val) => val"
                                                                     >
                                                                     </v-select>
@@ -1066,7 +1066,7 @@
                                                                                      name="المساحة "
                                                                                      rules="required">
                                                                     <b-form-input
-                                                                            v-model="item.area"
+                                                                            v-model="sub_floors[index].area"
                                                                             :state="errors.length > 0 ? false : null"
                                                                             placeholder="المساحة " type="number"/>
                                                                     <small class="text-danger" v-if="errors[0]">هذا
@@ -1692,20 +1692,28 @@
 
             addIncludes() {
                 // this.includesForm.submission_id = this.$route.params.id;
-
+                // console.log(this.sub_floors);
+                
+                let the_names = [];
+                let the_area = [];
+                this.sub_floors.forEach(element => {
+                    the_names.push(element.roof);
+                    the_area.push(element.area);
+                });
                 const dataInclude = new FormData();
                 dataInclude.append('image', this.includesForm.image);
                 dataInclude.append('build_id', this.includesForm.build_id);
                 dataInclude.append('build_desc_id', this.includesForm.build_desc_id);
                 dataInclude.append('qty', this.includesForm.qty);
                 dataInclude.append('submission_id', this.$route.params.id);
-                dataInclude.append('floors', this.sub_floors);
                 
-                console.log('this.sub_floors');
-                console.log(this.sub_floors);
+                dataInclude.append('floors_name', the_names );
+                dataInclude.append('floors_area', the_area);
+                
+                
                 this.$store.dispatch('pgc_forms/save_inc', {
                     id:null,
-                    query: dataInclude,
+                    query: dataInclude ,
                 }).then((response) => {
                     this.includesForm.build_id = null,
                         this.includesForm.build_desc_id = null,
