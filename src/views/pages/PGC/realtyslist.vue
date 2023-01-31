@@ -16,13 +16,20 @@
         <br>
         <div>
             <b-row>
-                <b-col md="4">
-                    <b-form-group class="text-right" label="بحث">
-                        <validation-provider #default="{ errors }" name="بحث"
-                                             rules="required">
-                            <b-form-input v-model="search_Sub"
-                                          :state="errors.length > 0 ? false : null"
-                                          placeholder="بحث"/>
+                <b-col md="4" >
+                    <b-form-group class="text-right" label="نوع المعاملة ">
+                        <validation-provider #default="{ errors }" name="نوع المعاملة"
+                                                rules="required">
+                            <v-select
+                                    :disabled="show_model_inputs > 8"
+                                    placeholder="نوع المعاملة"
+                                    :options="Array.from(all_operation_type , (el) => el)"
+                                    v-model="search_operation_type"
+                                    :reduce="(val) => val"
+                            >
+                            </v-select>
+                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                مطلوب</small>
                         </validation-provider>
                     </b-form-group>
                 </b-col>
@@ -35,7 +42,7 @@
                 class="text-center"
                 striped
                 hover
-                :items="$store.getters['dashboard/getSubs'].submissions"
+                :items="$store.getters['dashboard/getSubs'].submissions.filter((el)=> el.operation_type == search_operation_type || search_operation_type == null )"
                 :fields="[
                         { key: 'building_number', label: 'رقم العقار ' },
                         { key: 'status', label: 'الحالة' },
@@ -63,39 +70,39 @@
                 </router-link>
             </template>
         </b-table>
-        <!--        <b-table-->
-        <!--                class="text-center"-->
-        <!--                striped-->
-        <!--                hover-->
-        <!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
-        <!--                :fields="[-->
-        <!--                            { key: 'building_number', label: 'رقم العقار ' },-->
-        <!--                            { key: 'status', label: 'الحالة' },-->
-        <!--                            { key: 'zone', label: '  المنطقة ' },-->
-        <!--                            { key: 'created_at', label: '  التاريخ ' },-->
-        <!--                            { key: 'action', label: '  تعديل ' },-->
-        <!--                        ]"-->
+<!--        <b-table-->
+<!--                class="text-center"-->
+<!--                striped-->
+<!--                hover-->
+<!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
+<!--                :fields="[-->
+<!--                            { key: 'building_number', label: 'رقم العقار ' },-->
+<!--                            { key: 'status', label: 'الحالة' },-->
+<!--                            { key: 'zone', label: '  المنطقة ' },-->
+<!--                            { key: 'created_at', label: '  التاريخ ' },-->
+<!--                            { key: 'action', label: '  تعديل ' },-->
+<!--                        ]"-->
 
-        <!--        >-->
-        <!--            <template #cell(building_number)="data">-->
-        <!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
-        <!--                    {{ data.item.building_number }}-->
-        <!--                </router-link>-->
-        <!--            </template>-->
+<!--        >-->
+<!--            <template #cell(building_number)="data">-->
+<!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
+<!--                    {{ data.item.building_number }}-->
+<!--                </router-link>-->
+<!--            </template>-->
 
-        <!--            <template #cell(status)="data">-->
-        <!--                {{getStatus(data.item.status) }}-->
-        <!--            </template>-->
-        <!--            <template #cell(created_at)="data">-->
-        <!--                {{toLocalDatetime(data.item.created_at) }}-->
-        <!--            </template>-->
+<!--            <template #cell(status)="data">-->
+<!--                {{getStatus(data.item.status) }}-->
+<!--            </template>-->
+<!--            <template #cell(created_at)="data">-->
+<!--                {{toLocalDatetime(data.item.created_at) }}-->
+<!--            </template>-->
 
-        <!--            <template #cell(action)="data">-->
-        <!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
-        <!--                    <feather-icon icon="EditIcon"></feather-icon>-->
-        <!--                </router-link>-->
-        <!--            </template>-->
-        <!--        </b-table>-->
+<!--            <template #cell(action)="data">-->
+<!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
+<!--                    <feather-icon icon="EditIcon"></feather-icon>-->
+<!--                </router-link>-->
+<!--            </template>-->
+<!--        </b-table>-->
 
         <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار"
                  cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary" @show="resetModal"
@@ -128,6 +135,8 @@
 </template>
 
 <script>
+    import {ValidationProvider, ValidationObserver} from 'vee-validate'
+
     import {mapGetters} from 'vuex'
     import vSelect from 'vue-select'
     import {
@@ -157,6 +166,8 @@
     export default {
         name: "workProgress",
         components: {
+            ValidationObserver,
+            ValidationProvider,
             // BOverlay,
             BCardText,
             BCard,
@@ -182,6 +193,10 @@
 
         data() {
             return {
+                search_operation_type:null,
+                all_operation_type: [
+                    'فرز', 'دمج', 'عادية', 'اخري'
+                ],
                 realty_list: [],
                 realty_list2: [],
                 building_dialog: false,

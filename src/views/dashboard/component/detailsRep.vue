@@ -1,5 +1,5 @@
 <template>
-  <div class="main_pdf_details_wrapper" style="zoom: 70% !important;">
+  <div class="main_pdf_details_wrapper">
     <b-button
         variant="success"
         class="mb-75 invoice-actions"
@@ -10,7 +10,7 @@
 </b-button>
 <br><br>
     <!-- Start Section Part One  -->
-    <section class="section_part_one" >
+    <section class="section_part_one">
       <div class="num_one">
         <img src="@/assets/images/Picture1.png" alt="" />
       </div>
@@ -630,19 +630,6 @@ export default {
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
     color-adjust: exact !important; /*Firefox*/
-    font-size: 12px;
-    font-weight: bolder;
-  }
-  /**{*/
-  /*  overflow: hidden;*/
-  /*}*/
-
-  .main_pdf_details_wrapper{
-    margin: 0!important;
-    padding: 0!important;
-  }
-  .hidden_print{
-    display: none;
   }
 }
 $border-color: #ccc;

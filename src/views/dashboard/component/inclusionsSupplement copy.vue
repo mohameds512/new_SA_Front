@@ -1,7 +1,23 @@
 <template>
     
-    <div  class="invoice-preview-wrapper " style="text-align: right;">
-        <b-button
+    <!-- <div>
+        <vue-html2pdf
+            :show-layout="true"
+            :float-layout="false"
+            :enable-download="true"
+            :preview-modal="true"
+            
+            :pdf-quality="2"
+            :manual-pagination="true"
+            pdf-format="a4"
+            
+            ref="html2Pdf"
+        >
+            <section slot="pdf-content" style="font-family: dejavusans; text-align: right; align-self: center;"> -->
+                
+                <div  class="invoice-preview-wrapper " style=" text-align: right; ">
+                    <br><br>
+                    <b-button
                             variant="success"
                             class="mb-75 invoice-actions"
                             block
@@ -236,178 +252,182 @@
                             </b-table-simple>
                         </b-col>
                     </b-row>
-    </div>
-
+                </div>
+            
+            <!-- </section>
+        </vue-html2pdf>
+    </div> -->
+    
 </template>
 
 <script>
-import {
-    BCol,
-    BOverlay,
-    BRow,
-    BTab,
-    BTable,
-    BTabs,
-    BTableSimple,
-    BTr,
-    BTh,
-    BButton,
-    BTfoot,
-    BTbody,
-    BTd,
-    BThead
-} from "bootstrap-vue";
-
-// import VueHtml2pdf from 'vue-html2pdf'
-export default {
-    name: "report",
-    components: {
-        // VueHtml2pdf,
-        BRow,
+    import {
         BCol,
-        BTab,
-        BButton,
-        BTabs,
         BOverlay,
+        BRow,
+        BTab,
         BTable,
+        BTabs,
         BTableSimple,
-        BTr, BTh, BTfoot, BTbody, BTd, BThead
-    },
-    methods: {
-        // generateReport () {
-        //     this.$refs.html2Pdf.generatePdf()
-        // },
-        printInvoice() {
-            window.print()
+        BTr,
+        BTh,
+        BButton,
+        BTfoot,
+        BTbody,
+        BTd,
+        BThead
+    } from "bootstrap-vue";
+
+    // import VueHtml2pdf from 'vue-html2pdf'
+    export default {
+        name: "report",
+        components: {
+            // VueHtml2pdf,
+            BRow,
+            BCol,
+            BTab,
+            BButton,
+            BTabs,
+            BOverlay,
+            BTable,
+            BTableSimple,
+            BTr, BTh, BTfoot, BTbody, BTd, BThead
+        },
+        methods: {
+            // generateReport () {
+            //     this.$refs.html2Pdf.generatePdf()
+            // },
+            printInvoice() {
+                window.print()
+            }
         }
     }
-}
 </script>
 
 <style lang="scss" scoped>
-@import "~@core/scss/base/pages/app-invoice.scss";
+    @import "~@core/scss/base/pages/app-invoice.scss";
 </style>
 
 <style lang="scss" >
-// .fgh{
+    // .fgh{
+        
+    // }
+    @media print {
+    .fgh {
+        background-color: red;
+        direction: rtl;
+    }
+    // .th {
+    //     background-color: #ffffff !important;
+    //     color: rgb(11, 55, 2);
+    //     font-size: 15px;
+    // } 
+    .green-header{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+        // text-align: left !important;
+    }
+    .center-green{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+    }
+    .content-item{
+        text-align: left !important;
+    }
+}
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; //
+  }
+}
+    .green-header{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+        // text-align: left !important;
+    }
+    .center-green{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+    }
+    .content-item{
+        text-align: left !important;
+    }
     
-// }
-@media print {
-.fgh {
-    background-color: red;
-    direction: rtl;
-}
-// .th {
-//     background-color: #ffffff !important;
-//     color: rgb(11, 55, 2);
-//     font-size: 15px;
-// } 
-.green-header{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-    // text-align: left !important;
-}
-.center-green{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-}
-.content-item{
-    text-align: left !important;
-}
-}
-@media print {
-* {
--webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
-color-adjust: exact !important; //
-}
-}
-.green-header{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-    // text-align: left !important;
-}
-.center-green{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-}
-.content-item{
-    text-align: left !important;
-}
+    @media print {
 
-@media print {
+        // Global Styles
+        body {
+            background-color: transparent !important;
+        }
+        nav.header-navbar {
+            display: none;
+        }
+        .main-menu {
+            display: none;
+        }
+        .header-navbar-shadow {
+            display: none !important;
+        }
+        .content.app-content {
+            margin-left: 0;
+            padding-top: 2rem !important;
+        }
+        footer.footer {
+            display: none;
+        }
+        .card {
+            background-color: transparent;
+            box-shadow: none;
+        }
+        .customizer-toggle {
+            display: none !important;
+        }
 
-    // Global Styles
-    body {
-        background-color: transparent !important;
-    }
-    nav.header-navbar {
-        display: none;
-    }
-    .main-menu {
-        display: none;
-    }
-    .header-navbar-shadow {
-        display: none !important;
-    }
-    .content.app-content {
-        margin-left: 0;
-        padding-top: 2rem !important;
-    }
-    footer.footer {
-        display: none;
-    }
-    .card {
-        background-color: transparent;
-        box-shadow: none;
-    }
-    .customizer-toggle {
-        display: none !important;
-    }
+        // Invoice Specific Styles
+        .invoice-preview-wrapper {
+            .row.invoice-preview {
+                .col-md-8 {
+                    max-width: 100%;
+                    flex-grow: 1;
+                }
 
-    // Invoice Specific Styles
-    .invoice-preview-wrapper {
-        .row.invoice-preview {
-            .col-md-8 {
-                max-width: 100%;
-                flex-grow: 1;
-            }
+                .invoice-preview-card {
+                    .card-body:nth-of-type(2) {
+                        .row {
+                            > .col-12 {
+                                max-width: 50% !important;
+                            }
 
-            .invoice-preview-card {
-                .card-body:nth-of-type(2) {
-                    .row {
-                        > .col-12 {
-                            max-width: 50% !important;
-                        }
-
-                        .col-12:nth-child(2) {
-                            display: flex;
-                            align-items: flex-start;
-                            justify-content: flex-end;
-                            margin-top: 0 !important;
+                            .col-12:nth-child(2) {
+                                display: flex;
+                                align-items: flex-start;
+                                justify-content: flex-end;
+                                margin-top: 0 !important;
+                            }
                         }
                     }
                 }
             }
-        }
 
-        // Action Right Col
+            // Action Right Col
+            .invoice-actions {
+                display: none;
+            }
+        }
+        body{
+            overflow: hidden;
+            overflow-scrolling: unset;
+        }
+        th {
+            background-color: #787676 !important;
+            color: white;
+        }
+        .card-header-pills{
+            display: none;
+        }
         .invoice-actions {
             display: none;
         }
     }
-    body{
-        overflow: hidden;
-        overflow-scrolling: unset;
-    }
-    th {
-        background-color: #787676 !important;
-        color: white;
-    }
-    .card-header-pills{
-        display: none;
-    }
-    .invoice-actions {
-        display: none;
-    }
-}
 </style>

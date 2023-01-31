@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <vue-html2pdf
+    <!-- <div> -->
+        <!-- <vue-html2pdf
             :show-layout="true"
             :float-layout="false"
             :enable-download="true"
@@ -13,7 +13,7 @@
             
             ref="html2Pdf"
         >
-            <section slot="pdf-content">
+            <section slot="pdf-content"> -->
                 <div style="text-align: right; "  class="invoice-preview-wrapper ">
                     <br><br>
                     <b-button
@@ -317,9 +317,9 @@
                         </b-col>
                     </b-row> -->
                 </div>
-            </section>
+            <!-- </section>
         </vue-html2pdf>
-    </div>
+    </div> -->
     
 </template>
 
@@ -341,11 +341,11 @@
         BThead
     } from "bootstrap-vue";
 
-    import VueHtml2pdf from 'vue-html2pdf'
+    // import VueHtml2pdf from 'vue-html2pdf'
     export default {
         name: "report",
         components: {
-            VueHtml2pdf,
+            // VueHtml2pdf,
             BRow,
             BCol,
             BTab,
@@ -357,9 +357,9 @@
             BTr, BTh, BTfoot, BTbody, BTd, BThead
         },
         methods: {
-            generateReport () {
-                this.$refs.html2Pdf.generatePdf()
-            },
+            // generateReport () {
+            //     this.$refs.html2Pdf.generatePdf()
+            // },
             printInvoice() {
                 window.print()
             }
