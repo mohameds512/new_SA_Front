@@ -1169,17 +1169,26 @@
                                                     </b-tab>
                                                     <b-tab title=" حصر العقار ">
                                                         <b-card-text>
-                                                            <collect-includes></collect-includes>
+                                                            <collect-includes
+                                                                :submissionData="form.submission[0]"
+                                                                :ownersData="form.owners[0]"
+                                                            ></collect-includes>
                                                         </b-card-text>
                                                     </b-tab>
                                                     <b-tab title=" ملحق المشتملات " >
                                                         <b-card-text>
-                                                            <inclusions-supplement></inclusions-supplement>
+                                                            <inclusions-supplement
+                                                                :submissionData="form.submission[0]"
+                                                                :ownersData="form.owners[0]"
+                                                            ></inclusions-supplement>
                                                         </b-card-text>
                                                     </b-tab>
                                                     <b-tab title=" محضر تقدير " >
                                                         <b-card-text>
-                                                            <appreciation-miunte></appreciation-miunte>
+                                                            <appreciation-miunte
+                                                                :submissionData="form.submission[0]"
+                                                                :ownersData="form.owners[0]"
+                                                            ></appreciation-miunte>
                                                             <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
                                                         </b-card-text>
                                                     </b-tab>
@@ -1198,7 +1207,10 @@
                                     <!--                                    </b-tab>-->
                                 </b-tabs>
 
-                                <div class="d-flex justify-content-between text-center">
+                                
+
+                            </b-card>
+                            <div class="d-flex justify-content-between text-center">
                                     <div>
                                         <h4>توقيع المساح</h4>
                                         <img v-if="form.submission[0].signature_eng"
@@ -1215,9 +1227,6 @@
                                              :src="form.submission[0].signature_poss" width="200" height="70">
                                     </div>
                                 </div>
-
-                            </b-card>
-
                         </b-col>
                     </b-row>
                     <b-modal hide-header-close v-model="model_signature" hide-footer title="التوقيع " dir="rtl">

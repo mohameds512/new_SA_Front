@@ -17,7 +17,7 @@
         <div>
             <b-row>
                 <b-col md="4" >
-                    <b-form-group class="text-right" label="نوع المعاملة ">
+                    <b-form-group class="text-right" label=" بحث بنوع المعاملة ">
                         <validation-provider #default="{ errors }" name="نوع المعاملة"
                                                 rules="required">
                             <v-select
@@ -33,6 +33,48 @@
                         </validation-provider>
                     </b-form-group>
                 </b-col>
+                <!-- <b-col md="4">
+                    <b-form-group class="text-right" label="  بحث برقم العقار  ">
+                        <validation-provider #default="{ errors }"
+                                            name="رقم العقار  "
+                                            rules="required">
+                            <b-form-input v-model="search_buildingNumber"
+                                        :state="errors.length > 0 ? false : null"
+                                        placeholder="رقم العقار  " />
+                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                مطلوب</small>
+                        </validation-provider>
+                    </b-form-group>
+                </b-col> -->
+                <!-- <b-col md="4">
+                    <b-form-group class="text-right" label="  بحث برقم العقار  ">
+                        <validation-provider #default="{ errors }"
+                                            name="رقم العقار  "
+                                            rules="required">
+                            <b-form-input v-model="search_createdBy"
+                                        @change="console.log(search_createdBy)"
+                                        placeholder="رقم العقار  " />
+                        </validation-provider>
+                    </b-form-group>
+                </b-col> -->
+                <!-- <b-col md="4" >
+                    <b-form-group class="text-right" label="بحث بالاسم">
+                        <validation-provider #default="{ errors }" name="بحث بالاسم"
+                                                rules="required">
+                            <v-select
+                                    :disabled="show_model_inputs > 8"
+                                    placeholder="بحث بالاسم"
+                                    :options="Array.from($store.getters['dashboard/getSubs'].submissions , (el) => el.created_by)"
+                                    
+                                    v-model="sub_created_by"
+                                    :reduce="(val) => val"
+                            >
+                            </v-select>
+                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                مطلوب</small>
+                        </validation-provider>
+                    </b-form-group>
+                </b-col> -->
             </b-row>
         </div>
         <!-- {{ $store.getters['dashboard/allSubmission'] }} -->
@@ -42,12 +84,17 @@
                 class="text-center"
                 striped
                 hover
-                :items="$store.getters['dashboard/getSubs'].submissions.filter((el)=> el.operation_type == search_operation_type || search_operation_type == null )"
+                :items="$store.getters['dashboard/getSubs'].submissions.filter((el)=> 
+                    (el.operation_type == search_operation_type || search_operation_type == null) &&
+                    (el.building_number == search_buildingNumber || search_buildingNumber == null) &&
+                    (el.created_by == search_createdBy || search_createdBy == null) 
+                    )"
                 :fields="[
                         { key: 'building_number', label: 'رقم العقار ' },
                         { key: 'status', label: 'الحالة' },
                         { key: 'operation_type', label: 'نوع المعاملة' },
                         { key: 'zone', label: '  المنطقة ' },
+                        { key: 'created_by', label: '  المساح ' },
                         { key: 'created_at', label: '  التاريخ ' },
                            { key: 'action', label: '  تعديل ' },
                     ]"
@@ -194,6 +241,9 @@
         data() {
             return {
                 search_operation_type:null,
+                search_buildingNumber:null,
+                search_createdBy:null,
+                sub_created_by:null,
                 all_operation_type: [
                     'فرز', 'دمج', 'عادية', 'اخري'
                 ],

@@ -30,22 +30,50 @@
                             <div >
                                 <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
                             </div>
-                            
+                            {{ submissionData.building_number }}
                         </b-col>
                         <b-col md="8">
-                            <b-table
+                            <b-table-simple>
+                                <b-thead head-variant="light">
+                                    <b-tr>
+                                        <b-th > رقم المشروع</b-th>
+                                        <b-th >رقم المنطقة</b-th>
+                                        <b-th >رقم اللوحة</b-th>
+                                        <b-th >رقم العقار</b-th>
+                                    </b-tr>
+                                    
+                                </b-thead>
+                                <b-tbody>
+                                    <b-tr>
+                                        <b-th>{{ submissionData.pro_num }}</b-th>
+                                        <b-th >{{submissionData.zone}}</b-th>
+                                        <b-th> {{ submissionData.plad_num }}</b-th>
+                                        <b-th>{{submissionData.building_number}}</b-th>
+
+                                    </b-tr>
+
+                                </b-tbody>
+
+                            </b-table-simple>
+                            <!-- <b-table
                                     bordered
                                     style="text-align: right;"
                                     hover
-                                    :items="[{pro_num:2 , area_num: 2 , num:2 , building_num:2}]"
+                                    :items="submissionData"
                                     :fields="[
                                         { key: 'pro_num', label: 'رقم المشروع ' },
                                         { key: 'area_num' , label: ' رقم المنطقة'   },
                                         { key: 'num' , label: '  رقم اللوحة'   },
-                                        { key: 'building_num' , label: '  رقم العقار'   },
+                                        { key: 'building_number' , label: '  رقم العقار'   },
                                     ]"
-                            ></b-table>
-                            <div style="width: 100%; text-align: right; padding-right: 10px; border: 0.1rem;">رقم فريق الحصر (                            )</div>
+                            >
+                                <tbody>
+                                    <tr>
+                                        <td>{{ submissionData.building_number }}</td>
+                                    </tr>
+                                </tbody>
+                            </b-table> -->
+                            <div style="width: 100%; text-align: right; padding-right: 10px; border: 0.1rem;">رقم فريق الحصر ( {{ submissionData.building_number }}                           )</div>
                         </b-col>
                     </b-row>
                     <br/>
@@ -70,41 +98,41 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">اسم المالك</b-th>
-                                        <b-th class="content-item"  colspan="3">56</b-th>
+                                        <b-th class="content-item"  colspan="3">{{ ownersData.name }}</b-th>
                                         <b-th class="green-header" variant="secondary">رقم الهوية</b-th>
-                                        <b-th class="content-item" colspan="3">56</b-th>
+                                        <b-th class="content-item" colspan="3">{{ ownersData.national_id }}</b-th>
 
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">رقم القطعة</b-th>
-                                        <b-th class="content-item">56</b-th>
+                                        <b-th class="content-item">{{ submissionData.slice_number }}</b-th>
                                         <b-th class="green-header" variant="secondary">رقم المخطط</b-th>
-                                        <b-th class="content-item">56</b-th>
+                                        <b-th class="content-item">{{ submissionData.planned_num}}</b-th>
                                         <b-th class="green-header" variant="secondary">الموقع</b-th>
                                         <b-th class="content-item" colspan="3">56</b-th>
 
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">رقم الصك</b-th>
-                                        <b-th class="content-item">56</b-th>
+                                        <b-th class="content-item">{{ submissionData.contract_number}}</b-th>
                                         <b-th class="green-header" variant="secondary">تاريخه</b-th>
-                                        <b-th class="content-item">56</b-th>
+                                        <b-th class="content-item">{{ toLocalDatetime(submissionData.contract_date)}}</b-th>
                                         <b-th class="green-header" variant="secondary">مصدره </b-th>
-                                        <b-th class="content-item" colspan="3">56</b-th>
+                                        <b-th class="content-item" colspan="3">{{submissionData.contract_source}}</b-th>
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">نوع العقار</b-th>
-                                        <b-th class="content-item" > 56</b-th>
+                                        <b-th class="content-item" > {{submissionData.building_type}}</b-th>
                                         <b-th class="green-header" variant="secondary">المساحة حسب الصك م2</b-th>
-                                        <b-th class="content-item">56</b-th>
+                                        <b-th class="content-item">{{ submissionData.contract_area }}</b-th>
                                         <b-th class="green-header" variant="secondary">الاستخدام </b-th>
-                                        <b-th class="content-item" colspan="3">56</b-th>
+                                        <b-th class="content-item" colspan="3">{{submissionData.submission_using}}</b-th>
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">نوع الملكية</b-th>
-                                        <b-td class="content-item" >56</b-td>
+                                        <b-td class="content-item" >{{ submissionData.contract_type }}</b-td>
                                         <b-th class="green-header" variant="secondary">وصف العقار</b-th>
-                                        <b-th class="content-item" colspan="5">56</b-th>
+                                        <b-th class="content-item" colspan="5">{{submissionData.submission_desc }}</b-th>
 
                                     </b-tr>
 
@@ -122,10 +150,10 @@
                             > 
                             <b-tbody>
                                     <b-tr>
-                                        <b-th class="green-header" variant="secondary"> المساحة حسب الصك</b-th>
-                                        <b-th class="content-item"  colspan="3">56</b-th>
-                                        <b-th class="green-header" variant="secondary">المساحة حسب الطبيعة </b-th>
-                                        <b-th class="content-item" colspan="3">56</b-th>
+                                        <b-th class="green-header" variant="secondary">  المساحة حسب الصك م2</b-th>
+                                        <b-th class="content-item"  colspan="3">{{ submissionData.contract_area }}</b-th>
+                                        <b-th class="green-header" variant="secondary">المساحة حسب الطبيعة م2</b-th>
+                                        <b-th class="content-item" colspan="3">{{ submissionData.submission_area}}</b-th>
 
                                     </b-tr>
                                 </b-tbody>
@@ -142,69 +170,20 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary"> م</b-th>
-                                        <b-th class="green-header" variant="secondary"> النوع</b-th>
                                         <b-th class="green-header" variant="secondary"> الوصف</b-th>
                                         <b-th class="green-header" variant="secondary"> الوحدة</b-th>
                                         <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
                                         <b-th class="green-header" variant="secondary">الملاحظات</b-th>
                                         
                                     </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">1</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
+                                    <b-tr  v-for="(item,index) in submissionData.includes_data" :key="index">
+                                        <b-th class="content-item">{{ index + 1}}</b-th>
+                                        <b-th class="content-item"> {{ item.content }} </b-th>
+                                        <b-th class="content-item">{{ item.unit }}</b-th>
+                                        <b-th class="content-item">{{ item.qty }}</b-th>
+                                        <b-th class="content-item">{{ item.notes }}</b-th>
                                     </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">2</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">3</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">4</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">5</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">6</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-th class="content-item">7</b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                        <b-th class="content-item"></b-th>
-                                    </b-tr>
+                                    
                                     <b-tr style="text-align: right;">
                                         <h3>ملاحظات</h3>
                                     </b-tr>
@@ -215,8 +194,8 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="content-item" >التوقيع</b-th>
-                                        <b-th class="content-item">مالك</b-th>
-                                        <b-th class="content-item">وكيل</b-th>
+                                        <b-th class="content-item"><span> <input type="checkbox" :checked="submissionData.contract_type == 'مالك' ? true : false"   > </span> <span>مالك</span>   </b-th>
+                                        <b-th class="content-item"> <span> <input type="checkbox"  :checked="submissionData.contract_type == 'وكيل' ? true : false"  > </span> <span>وكيل</span> </b-th>
                                     </b-tr>
                                     <!-- <b-tr>
                                         <p  style="padding-right: 10px;" >
@@ -239,9 +218,9 @@
                             <b-table-simple bordered >
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th>:الاسم</b-th>
+                                        <b-th>الاسم: {{ ownersData.name }} </b-th>
                                         <b-th>التوقيع:</b-th>
-                                        <b-th>رقم الجوال:</b-th>
+                                        <b-th>رقم الجوال: {{ ownersData.phone }} </b-th>
                                     </b-tr>
                                 </b-tbody>
                             </b-table-simple>
@@ -343,6 +322,7 @@
 
     // import VueHtml2pdf from 'vue-html2pdf'
     export default {
+        
         name: "report",
         components: {
             // VueHtml2pdf,
@@ -355,6 +335,10 @@
             BTable,
             BTableSimple,
             BTr, BTh, BTfoot, BTbody, BTd, BThead
+        },
+        props:{
+            submissionData:[],
+            ownersData:[],
         },
         methods: {
             // generateReport () {
@@ -452,10 +436,7 @@
             overflow: hidden;
             overflow-scrolling: unset;
         }
-        th {
-            background-color: #787676 !important;
-            color: white;
-        }
+        
         .card-header-pills{
             display: none;
         }

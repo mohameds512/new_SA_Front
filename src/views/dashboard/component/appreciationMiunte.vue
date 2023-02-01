@@ -18,17 +18,29 @@
                     </div>
                 </b-col>
                 <b-col md="8">
-                    <b-table
-                            bordered
-                            hover
-                            :items="[{pro_num:2 , area_num: 2 , num:2 , building_num:2}]"
-                            :fields="[
-                                { key: 'pro_num', label: 'رقم المشروع ' },
-                                { key: 'area_num' , label: ' رقم المنطقة'   },
-                                { key: 'num' , label: '  رقم اللوحة'   },
-                                { key: 'building_num' , label: '  رقم العقار'   },
-                            ]"
-                    ></b-table>
+                    
+                    <b-table-simple>
+                                <b-thead head-variant="light">
+                                    <b-tr>
+                                        <b-th > رقم المشروع</b-th>
+                                        <b-th >رقم المنطقة</b-th>
+                                        <b-th >رقم اللوحة</b-th>
+                                        <b-th >رقم العقار</b-th>
+                                    </b-tr>
+                                    
+                                </b-thead>
+                                <b-tbody>
+                                    <b-tr>
+                                        <b-th>{{ submissionData.pro_num }}</b-th>
+                                        <b-th >{{submissionData.zone}}</b-th>
+                                        <b-th> {{ submissionData.plad_num }}</b-th>
+                                        <b-th>{{submissionData.building_number}}</b-th>
+
+                                    </b-tr>
+
+                                </b-tbody>
+
+                            </b-table-simple>
                     <div style="width: 100%;  padding-right: 10px; ">رقم فريق الحصر (                            )</div>
                 </b-col>
             </b-row>
@@ -285,6 +297,10 @@
             BTable,
             BTableSimple,
             BTr, BTh, BTfoot, BTbody, BTd, BThead
+        },
+        props:{
+            submissionData:[],
+            ownersData:[],
         },
         methods: {
             // generateReport () {

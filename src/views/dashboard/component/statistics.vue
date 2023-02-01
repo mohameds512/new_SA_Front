@@ -56,6 +56,14 @@
             </b-col>
 
         </b-row>
+        <!-- <b-row>
+            <b-col cols>
+                <div > 
+                    <button> تحديث الخريطة </button>
+                </div>
+                <div ></div>
+            </b-col>
+        </b-row> -->
         <b-row>
             <b-col cols="12">
                 <b-card>

@@ -17,7 +17,7 @@
                             </div>
                         </b-col>
                         <b-col md="8">
-                            <b-table
+                            <!-- <b-table
                                     bordered
                                     hover
                                     :items="[{pro_num:2 , area_num: 2 , num:2 , building_num:2}]"
@@ -27,8 +27,31 @@
                                         { key: 'num' , label: '  رقم اللوحة'   },
                                         { key: 'building_num' , label: '  رقم العقار'   },
                                     ]"
-                            ></b-table>
-                            <div style="width: 100%;  padding-right: 10px; ">رقم فريق الحصر (                            )</div>
+                            ></b-table> -->
+                            
+                            <b-table-simple>
+                                <b-thead head-variant="light">
+                                    <b-tr>
+                                        <b-th > رقم المشروع</b-th>
+                                        <b-th >رقم المنطقة</b-th>
+                                        <b-th >رقم اللوحة</b-th>
+                                        <b-th >رقم العقار</b-th>
+                                    </b-tr>
+                                    
+                                </b-thead>
+                                <b-tbody>
+                                    <b-tr>
+                                        <b-th>{{ submissionData.pro_num }}</b-th>
+                                        <b-th >{{submissionData.zone}}</b-th>
+                                        <b-th> {{ submissionData.plad_num }}</b-th>
+                                        <b-th>{{submissionData.building_number}}</b-th>
+
+                                    </b-tr>
+
+                                </b-tbody>
+
+                            </b-table-simple>
+                            <div style="width: 100%;  padding-right: 10px; ">رقم فريق الحصر (        {{ submissionData.building_number }}                    )</div>
                         </b-col>
                     </b-row>
                     <br/>
@@ -40,7 +63,10 @@
 
                     <b-row>
                         <b-col>
-                            <b-table-simple
+                            <div  >
+                                <b-row>
+                                    <b-col>
+                                        <b-table-simple
                                     bordered
                             > 
                                 <b-thead head-variant="light">
@@ -49,10 +75,10 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary"> م</b-th>
-                                        <b-th class="green-header" variant="secondary"> النوع</b-th>
+                                        <b-th class="green-header" variant="secondary"> الوصف</b-th>
                                         <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
                                         <b-th class="green-header" variant="secondary"> م</b-th>
-                                        <b-th class="green-header" variant="secondary"> النوع</b-th>
+                                        <b-th class="green-header" variant="secondary"> الوصف</b-th>
                                         <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
                                     </b-tr>
                                     <b-tr>
@@ -154,6 +180,9 @@
                                 </b-tbody>
 
                             </b-table-simple>
+                                    </b-col>
+                                </b-row>
+                            </div>
                         </b-col>
                     </b-row>
                     <br><br>
@@ -165,8 +194,9 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="content-item" >التوقيع</b-th>
-                                        <b-th class="content-item">مالك</b-th>
-                                        <b-th class="content-item">وكيل</b-th>
+                                        <b-th class="content-item"><span> <input type="checkbox" :checked="submissionData.contract_type == 'مالك' ? true : false"   > </span> <span>مالك</span>   </b-th>
+                                        <b-th class="content-item"> <span> <input type="checkbox"  :checked="submissionData.contract_type == 'وكيل' ? true : false"  > </span> <span>وكيل</span> </b-th>
+                                    
                                     </b-tr>
                                     
                                 </b-tbody>
@@ -183,9 +213,9 @@
                             <b-table-simple bordered >
                                 <b-tbody style="text-align: right;">
                                     <b-tr>
-                                        <b-th class="content-item" >:الاسم</b-th>
+                                        <b-th class="content-item" > الاسم: {{ ownersData.name }}</b-th>
                                         <b-th class="content-item" >التوقيع:</b-th>
-                                        <b-th class="content-item" >رقم الجوال:</b-th>
+                                        <b-th class="content-item" >رقم الجوال:{{ ownersData.phone }}</b-th>
                                     </b-tr>
                                 </b-tbody>
                             </b-table-simple>
@@ -273,6 +303,10 @@ export default {
         BTableSimple,
         BTr, BTh, BTfoot, BTbody, BTd, BThead
     },
+    props:{
+            submissionData:[],
+            ownersData:[],
+        },
     methods: {
         // generateReport () {
         //     this.$refs.html2Pdf.generatePdf()
