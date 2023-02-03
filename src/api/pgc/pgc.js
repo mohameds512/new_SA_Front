@@ -110,8 +110,9 @@ class PGC extends Resource {
     add_submission(payload) {
         return request({
             url: `/store/add/submission`,
-            method: "put",
-            data: payload
+            method: "post",
+            data: payload,
+            headers: {'Content-Type': 'multipart/form-data'},
         })
 
 

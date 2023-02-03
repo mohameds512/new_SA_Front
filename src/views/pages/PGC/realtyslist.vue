@@ -1,5 +1,5 @@
 <template>
-    <div class="container bg-white pt-2 pb-2" dir="rtl">
+    <div class="container bg-white pt-2 pb-2" dir="rtl" v-if="$store.getters['dashboard/getSubs']">
         <div style="text-align: right;">
             <!--            <router-link :to="`/addRealty`"  >-->
             <b-button variant="primary" v-if="hasPermission('edit_submissions')" @click="openDialog()"> اضافة عقار
@@ -16,12 +16,11 @@
         <br>
         <div>
             <b-row>
-                <b-col md="4" >
+                <b-col md="4">
                     <b-form-group class="text-right" label=" بحث بنوع المعاملة ">
                         <validation-provider #default="{ errors }" name="نوع المعاملة"
-                                                rules="required">
+                                             rules="required">
                             <v-select
-                                    :disabled="show_model_inputs > 8"
                                     placeholder="نوع المعاملة"
                                     :options="Array.from(all_operation_type , (el) => el)"
                                     v-model="search_operation_type"
@@ -65,7 +64,7 @@
                                     :disabled="show_model_inputs > 8"
                                     placeholder="بحث بالاسم"
                                     :options="Array.from($store.getters['dashboard/getSubs'].submissions , (el) => el.created_by)"
-                                    
+
                                     v-model="sub_created_by"
                                     :reduce="(val) => val"
                             >
@@ -84,10 +83,10 @@
                 class="text-center"
                 striped
                 hover
-                :items="$store.getters['dashboard/getSubs'].submissions.filter((el)=> 
+                :items="$store.getters['dashboard/getSubs'].submissions.filter((el)=>
                     (el.operation_type == search_operation_type || search_operation_type == null) &&
                     (el.building_number == search_buildingNumber || search_buildingNumber == null) &&
-                    (el.created_by == search_createdBy || search_createdBy == null) 
+                    (el.created_by == search_createdBy || search_createdBy == null)
                     )"
                 :fields="[
                         { key: 'building_number', label: 'رقم العقار ' },
@@ -117,62 +116,180 @@
                 </router-link>
             </template>
         </b-table>
-<!--        <b-table-->
-<!--                class="text-center"-->
-<!--                striped-->
-<!--                hover-->
-<!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
-<!--                :fields="[-->
-<!--                            { key: 'building_number', label: 'رقم العقار ' },-->
-<!--                            { key: 'status', label: 'الحالة' },-->
-<!--                            { key: 'zone', label: '  المنطقة ' },-->
-<!--                            { key: 'created_at', label: '  التاريخ ' },-->
-<!--                            { key: 'action', label: '  تعديل ' },-->
-<!--                        ]"-->
+        <!--        <b-table-->
+        <!--                class="text-center"-->
+        <!--                striped-->
+        <!--                hover-->
+        <!--                :items="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status != 4)"-->
+        <!--                :fields="[-->
+        <!--                            { key: 'building_number', label: 'رقم العقار ' },-->
+        <!--                            { key: 'status', label: 'الحالة' },-->
+        <!--                            { key: 'zone', label: '  المنطقة ' },-->
+        <!--                            { key: 'created_at', label: '  التاريخ ' },-->
+        <!--                            { key: 'action', label: '  تعديل ' },-->
+        <!--                        ]"-->
 
-<!--        >-->
-<!--            <template #cell(building_number)="data">-->
-<!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
-<!--                    {{ data.item.building_number }}-->
-<!--                </router-link>-->
-<!--            </template>-->
+        <!--        >-->
+        <!--            <template #cell(building_number)="data">-->
+        <!--                <router-link :to="`/viewRealty/${data.item.id}`">-->
+        <!--                    {{ data.item.building_number }}-->
+        <!--                </router-link>-->
+        <!--            </template>-->
 
-<!--            <template #cell(status)="data">-->
-<!--                {{getStatus(data.item.status) }}-->
-<!--            </template>-->
-<!--            <template #cell(created_at)="data">-->
-<!--                {{toLocalDatetime(data.item.created_at) }}-->
-<!--            </template>-->
+        <!--            <template #cell(status)="data">-->
+        <!--                {{getStatus(data.item.status) }}-->
+        <!--            </template>-->
+        <!--            <template #cell(created_at)="data">-->
+        <!--                {{toLocalDatetime(data.item.created_at) }}-->
+        <!--            </template>-->
 
-<!--            <template #cell(action)="data">-->
-<!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
-<!--                    <feather-icon icon="EditIcon"></feather-icon>-->
-<!--                </router-link>-->
-<!--            </template>-->
-<!--        </b-table>-->
+        <!--            <template #cell(action)="data">-->
+        <!--                <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">-->
+        <!--                    <feather-icon icon="EditIcon"></feather-icon>-->
+        <!--                </router-link>-->
+        <!--            </template>-->
+        <!--        </b-table>-->
 
-        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" ref="my-modal" title="اضافة عقار"
-                 cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary" @show="resetModal"
+        <b-modal v-model="building_dialog" centered id="modal-prevent-closing" no-close-on-backdrop ref="my-modal"
+                 size="lg" title="اضافة عقار"
+                 cancel-title="الغاء" ok-title="اضافة" dir="rtl" cancel-variant="outline-secondary"
                  @hidden="resetModal" @ok="save">
             <validation-observer ref="simpleRules">
                 <form ref="form" @submit.stop.prevent="save">
                     <b-col md="12" dir="rtl" class="text-left">
-                        <b-form-group label="رقم العقار " label-for="name-input" invalid-feedback="Name is required">
-                            <!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
+                        <!--                            <validation-provider #default="{ errors }" name="name" rules="english|required">-->
 
+                        <b-form-group label="نوع المعاملة " label-for="name-input" invalid-feedback="Name is required">
                             <v-select
                                     dir="rtl"
-                                    placeholder="رقم العقار"
-                                    :options="$store.getters['dashboard/getSubs'].submissions.filter(el => el.status == 4)"
-                                    v-model="form.submission_id"
-                                    :reduce="(val) => val.id"
-                                    label="building_number"
+                                    class="mb-2"
+                                    placeholder="نوع المعاملة"
+                                    :options="all_operation_type"
+                                    v-model="form.operation_type"
+                                    :reduce="(val) => val"
                             >
                             </v-select>
-                            <!--                                <b-form-input id="name-input" v-model="form.building_number"/>-->
-                            <!--                                <ValidationErrors :frontend-errors="errors" :backend-errors="getBackendFieldError(errorsdata, 'new_role')" />-->
-                            <!--                            </validation-provider>-->
                         </b-form-group>
+
+                        <b-row v-if="form.operation_type == 'دمج'">
+                            <b-col md="12">
+                                <b-form-group label="عقارات الدمج" label-for="name-input">
+                                    <v-select
+                                            dir="rtl"
+                                            multiple
+                                            placeholder="العقارات الدمج"
+                                            :options="$store.getters['dashboard/getSubs'].submissions"
+                                            v-model="form.merged_submissions"
+                                            :reduce="(val) => val.building_number"
+                                            label="building_number"
+                                    >
+                                    </v-select>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="12">
+                                <b-form-group label="رقم العقار الجديد" label-for="name-input">
+                                    <v-select
+                                            dir="rtl"
+                                            placeholder=" رقم العقار الجديد"
+                                            :options="$store.getters['dashboard/getSubs'].submissions.filter(el =>  (form.merged_submissions && form.merged_submissions.includes(el.building_number)))"
+                                            v-model="form.submission_id"
+                                            :reduce="(val) => val.id"
+                                            label="building_number"
+                                    >
+                                    </v-select>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group label="الموقع قبل الدمج" label-for="name-input">
+                                    <b-form-file
+                                            v-model="form.before_file"
+                                            :state="Boolean(form.before_file)"
+                                            accept=".jpg, .png, .gif"
+                                            placeholder="الموقع قبل الدمج "
+                                    ></b-form-file>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group label="الموقع بعد الدمج" label-for="name-input">
+                                    <b-form-file
+                                            v-model="form.after_file"
+                                            :state="Boolean(form.after_file)"
+                                            accept=".jpg, .png, .gif"
+                                            placeholder="الموقع بعد الدمج "
+                                    ></b-form-file>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+                        <b-row v-else-if="form.operation_type == 'فرز'">
+                            <b-col md="12">
+                                <b-form-group label="رقم العقار" label-for="name-input">
+                                    <v-select
+                                            dir="rtl"
+                                            placeholder="رقم العقار"
+                                            :options="$store.getters['dashboard/getSubs'].submissions"
+                                            v-model="form.submission_id"
+                                            :reduce="(val) => val.id"
+                                            label="building_number"
+                                    >
+                                    </v-select>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="12" class="mb-1">
+                                <!--                                <b-form-group label="رقم العقار" label-for="name-input">-->
+                                <b-row>
+                                    <b-col md="4" v-for="(submission , i ) in form.isolate_submissions">
+                                        <b-form-group :label="` عقار فرز رقم ${ i + 1}` " label-for="name-input">
+                                            <b-form-input v-model="form.isolate_submissions[i]"
+                                                          :placeholder="` عقار فرز رقم ${ i + 1}` "/>
+                                        </b-form-group>
+                                    </b-col>
+                                    <b-col md="12" class="d-flex justify-content-center">
+                                        <b-button size="sm" class="mx-1" variant="success"
+                                                  @click="form.isolate_submissions.push(null)"> اضافة
+                                            عقار
+                                        </b-button>
+                                        <b-button size="sm" variant="danger" @click="form.isolate_submissions.pop()">
+                                            حذف عقار
+                                        </b-button>
+                                    </b-col>
+                                </b-row>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group label="الموقع قبل الفرز" label-for="name-input">
+                                    <b-form-file
+                                            v-model="form.before_file"
+                                            :state="Boolean(form.before_file)"
+                                            accept=".jpg, .png, .gif"
+                                            placeholder="الموقع قبل الدمج "
+                                    ></b-form-file>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group label="الموقع بعد الفرز" label-for="name-input">
+                                    <b-form-file
+                                            v-model="form.after_file"
+                                            :state="Boolean(form.after_file)"
+                                            accept=".jpg, .png, .gif"
+                                            placeholder="الموقع بعد الدمج "
+                                    ></b-form-file>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
+                        <b-row v-else>
+                            <b-col md="12">
+                                <b-form-group label="رقم العقار" label-for="name-input">
+                                    <v-select
+                                            dir="rtl"
+                                            placeholder="رقم العقار"
+                                            :options="$store.getters['dashboard/getSubs'].submissions"
+                                            v-model="form.submission_id"
+                                            :reduce="(val) => val.id"
+                                            label="building_number"
+                                    >
+                                    </v-select>
+                                </b-form-group>
+                            </b-col>
+                        </b-row>
                     </b-col>
                 </form>
             </validation-observer>
@@ -240,10 +357,10 @@
 
         data() {
             return {
-                search_operation_type:null,
-                search_buildingNumber:null,
-                search_createdBy:null,
-                sub_created_by:null,
+                search_operation_type: null,
+                search_buildingNumber: null,
+                search_createdBy: null,
+                sub_created_by: null,
                 all_operation_type: [
                     'فرز', 'دمج', 'عادية', 'اخري'
                 ],
@@ -251,7 +368,9 @@
                 realty_list2: [],
                 building_dialog: false,
                 search_sub: null,
-                form: {}
+                form: {
+                    isolate_submissions: [],
+                }
             };
         },
         mounted() {
@@ -290,8 +409,16 @@
                 }
             },
             save() {
+
+                const submission = new FormData();
+
+               Object.entries(this.form).map(([key, val] = entry) => {
+                    submission.append(key, val);
+                })
+
+
                 this.$store.dispatch('pgc_forms/add_subs', {
-                    query: this.form,
+                    query: submission,
                 })
                     .then((response) => {
                         // if ($state) {

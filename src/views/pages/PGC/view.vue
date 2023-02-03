@@ -1161,7 +1161,7 @@
                                                 <b-tabs pills card>
                                                     <b-tab title=" المخطط التفصيلي " >
                                                         <b-card-text>
-                                                            <details-rep 
+                                                            <details-rep
                                                                 :submissionDtat="form.submission[0]"
                                                                 :ownersDtat="form.owners[0]"
                                                             ></details-rep>
@@ -1196,6 +1196,12 @@
                                             </div>
                                         </b-card-text>
                                     </b-tab>
+                                    <b-tab v-if="form.submission[0].operation_type == 'دمج'" title="نموذج الدمج">
+                                        <marge_report :submission="form.submission[0]"></marge_report>
+                                    </b-tab>
+                                    <b-tab  v-if="form.submission[0].operation_type == 'فرز'" title="نموذج الفرز">
+                                        <marge_report :submission="form.submission[0]"></marge_report>
+                                    </b-tab>
                                     <!--                                    <b-tab title="الملاحظات">-->
                                     <!--                                        <b-card-text>-->
                                     <!--                                            <div class="add_project_details_wrapper">-->
@@ -1207,7 +1213,7 @@
                                     <!--                                    </b-tab>-->
                                 </b-tabs>
 
-                                
+
 
                             </b-card>
                             <div class="d-flex justify-content-between text-center">
@@ -1293,14 +1299,15 @@
     import Report from "@/views/pages/PGC/report";
     import detailsRep from "@/views/dashboard/component/detailsRep.vue";
     import vueSignature from "vue-signature";
-    
+
     // import detailsRep from "@/views/dashboard/component/detailsRep.vue";
     import collectIncludes from "@/views/dashboard/component/collectIncludes.vue";
     import appreciationMiunte from "@/views/dashboard/component/appreciationMiunte.vue";
-    
+
     import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
 
     import {formatDate} from '@/@core/utils/filter'
+    import Marge_report from "@/views/pages/PGC/marge_report";
     // import planedDetailsRep from './planedDetailsRep.vue'
     export default {
         name: 'view',
@@ -1382,6 +1389,7 @@
             }
         },
         components: {
+            Marge_report,
             inclusionsSupplement,
             appreciationMiunte,
             collectIncludes,
