@@ -17,7 +17,7 @@
                     <b-td v-if="i == 0" :rowspan="submission.isolate_submissions.length">
                         {{submission.building_number}}
                     </b-td>
-                    
+
                     <b-td>
                         {{item}}
                     </b-td>
