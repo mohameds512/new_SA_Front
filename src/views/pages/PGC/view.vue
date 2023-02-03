@@ -1200,7 +1200,7 @@
                                         <marge_report :submission="form.submission[0]"></marge_report>
                                     </b-tab>
                                     <b-tab  v-if="form.submission[0].operation_type == 'فرز'" title="نموذج الفرز">
-                                        <marge_report :submission="form.submission[0]"></marge_report>
+                                      <isolate_report :submission="form.submission[0]"></isolate_report>
                                     </b-tab>
                                     <!--                                    <b-tab title="الملاحظات">-->
                                     <!--                                        <b-card-text>-->
@@ -1308,6 +1308,7 @@
 
     import {formatDate} from '@/@core/utils/filter'
     import Marge_report from "@/views/pages/PGC/marge_report";
+    import Isolate_report from "@/views/pages/PGC/isolate_report";
     // import planedDetailsRep from './planedDetailsRep.vue'
     export default {
         name: 'view',
@@ -1389,6 +1390,7 @@
             }
         },
         components: {
+            Isolate_report,
             Marge_report,
             inclusionsSupplement,
             appreciationMiunte,

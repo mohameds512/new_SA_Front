@@ -4,21 +4,22 @@
             <b-tbody>
                 <tr>
                     <b-th variant="secondary" class="text-center text-dark text-bold">
-                        رقم العقار قبل الدمج
+                        رقم العقار قبل الفرز
                     </b-th>
                     <b-th variant="secondary" class="text-center text-dark text-bold">
-                        رقم العقار بعد بعد
+                        رقم العقار بعد الفرز
                     </b-th>
                 </tr>
             </b-tbody>
             <b-tbody>
-                <b-tr v-if="submission.merged_submissions" v-for="(item , i) in submission.merged_submissions">
+                <b-tr v-if="submission.isolate_submissions" v-for="(item , i) in submission.isolate_submissions">
+
+                    <b-td v-if="i == 0" :rowspan="submission.isolate_submissions.length">
+                        {{submission.building_number}}
+                    </b-td>
+                    
                     <b-td>
                         {{item}}
-                    </b-td>
-
-                    <b-td v-if="i == 0" :rowspan="submission.merged_submissions.length">
-                        {{submission.building_number}}
                     </b-td>
                 </b-tr>
 
@@ -54,7 +55,7 @@
     } from "bootstrap-vue";
 
     export default {
-        name: "marge_report",
+        name: "isolate_report",
         components: {
             BRow,
             BCol,
