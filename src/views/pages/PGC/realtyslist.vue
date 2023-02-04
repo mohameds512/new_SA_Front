@@ -441,9 +441,3 @@
     }
 </script>
 
-<style>
-    th {
-        background-color: #535ae7 !important;
-        color: white;
-    }
-</style>

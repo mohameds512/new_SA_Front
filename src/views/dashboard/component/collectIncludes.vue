@@ -14,13 +14,13 @@
             ref="html2Pdf"
         >
             <section slot="pdf-content"> -->
-                <div style="text-align: right; "  class="invoice-preview-wrapper ">
+                <div style="text-align: right; " id="collection_pdf"  class="invoice-preview-wrapper">
                     <br><br>
                     <b-button
                             variant="success"
                             class="mb-75 invoice-actions"
                             block
-                            @click="generateReport"
+                            @click="printInvoice"
                     >
                         Print
                     </b-button>
@@ -36,16 +36,16 @@
                             <b-table-simple>
                                 <b-thead head-variant="light">
                                     <b-tr>
-                                        <b-th > رقم المشروع</b-th>
-                                        <b-th >رقم المنطقة</b-th>
-                                        <b-th >رقم اللوحة</b-th>
-                                        <b-th >رقم العقار</b-th>
+                                        <b-th class="green-header"> رقم المشروع</b-th>
+                                        <b-th class="green-header">رقم المنطقة</b-th>
+                                        <b-th class="green-header">رقم اللوحة</b-th>
+                                        <b-th class="green-header">رقم العقار</b-th>
                                     </b-tr>
                                     
                                 </b-thead>
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th>{{ submissionData.pro_num }}</b-th>
+                                        <b-th class="default_th" >{{ submissionData.pro_num }}</b-th>
                                         <b-th >{{submissionData.zone}}</b-th>
                                         <b-th> {{ submissionData.plad_num }}</b-th>
                                         <b-th>{{submissionData.building_number}}</b-th>
@@ -123,7 +123,7 @@
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">نوع العقار</b-th>
                                         <b-th class="content-item" > {{submissionData.building_type}}</b-th>
-                                        <b-th class="green-header" variant="secondary">المساحة حسب الصك م2</b-th>
+                                        <b-th class="green-header" variant="secondary">المساحة حسب الصك ( <span>م&sup2</span>)</b-th>
                                         <b-th class="content-item">{{ submissionData.contract_area }}</b-th>
                                         <b-th class="green-header" variant="secondary">الاستخدام </b-th>
                                         <b-th class="content-item" colspan="3">{{submissionData.submission_using}}</b-th>
@@ -132,7 +132,7 @@
                                         <b-th class="green-header" variant="secondary">نوع الملكية</b-th>
                                         <b-td class="content-item" >{{ submissionData.contract_type }}</b-td>
                                         <b-th class="green-header" variant="secondary">وصف العقار</b-th>
-                                        <b-th class="content-item" colspan="5">{{submissionData.submission_desc }}</b-th>
+                                        <b-th class="content-item" colspan="5">{{submissionData.building_type }}</b-th>
 
                                     </b-tr>
 
@@ -150,9 +150,9 @@
                             > 
                             <b-tbody>
                                     <b-tr>
-                                        <b-th class="green-header" variant="secondary">  المساحة حسب الصك م2</b-th>
+                                        <b-th class="green-header" variant="secondary">  المساحة حسب الصك ( <span>م&sup2</span>)</b-th>
                                         <b-th class="content-item"  colspan="3">{{ submissionData.contract_area }}</b-th>
-                                        <b-th class="green-header" variant="secondary">المساحة حسب الطبيعة م2</b-th>
+                                        <b-th class="green-header" variant="secondary">المساحة حسب الطبيعة ( <span>م&sup2</span>)</b-th>
                                         <b-th class="content-item" colspan="3">{{ submissionData.submission_area}}</b-th>
 
                                     </b-tr>
@@ -355,22 +355,17 @@
     @import "~@core/scss/base/pages/app-invoice.scss";
 </style>
 
-<style lang="scss">
-    th {
-        background-color: #ffffff !important;
-        color: rgb(11, 55, 2);
-        font-size: 15px;
-    } 
+<style lang="scss" scoped >
     .green-header{
         background-color: #05481e !important;
         color: #ffffff !important;
         text-align: left !important;
     }
-    .content-item{
-        color: #1b0404 !important;
-        text-align: left !important;
-    }
     
+    .default_th{
+        background-color: #ffffff;  
+        color: #1b0404;
+    }
     @media print {
 
         // Global Styles
@@ -385,6 +380,9 @@
         }
         .header-navbar-shadow {
             display: none !important;
+        }
+        .collection_pdf{
+            position: fixed;
         }
         .content.app-content {
             margin-left: 0;
@@ -403,6 +401,24 @@
 
         // Invoice Specific Styles
         .invoice-preview-wrapper {
+
+            th {
+        background-color: #ffffff !important;
+        color: rgb(11, 55, 2);
+        font-size: 15px;
+    }
+    .invoice-preview-wrapper_container{
+
+    } 
+    .green-header{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+        text-align: left !important;
+    }
+    .content-item{
+        color: #1b0404 !important;
+        text-align: left !important;
+    }
             .row.invoice-preview {
                 .col-md-8 {
                     max-width: 100%;
@@ -445,3 +461,4 @@
         }
     }
 </style>
+

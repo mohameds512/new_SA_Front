@@ -41,6 +41,15 @@ class PGC extends Resource {
             headers: {'Content-Type': 'multipart/form-data'},
         })
     }
+    
+    updateDashMap(payload) {
+        return request({
+            url: `/store/updateDashMap`,
+            method: "post",
+            data: payload.query,
+            headers: {'Content-Type': 'multipart/form-data'},
+        })
+    }
 
     dashboard() {
         return request({

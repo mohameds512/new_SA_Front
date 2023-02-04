@@ -32,16 +32,16 @@
                             <b-table-simple>
                                 <b-thead head-variant="light">
                                     <b-tr>
-                                        <b-th > رقم المشروع</b-th>
-                                        <b-th >رقم المنطقة</b-th>
-                                        <b-th >رقم اللوحة</b-th>
-                                        <b-th >رقم العقار</b-th>
+                                        <b-th class="green-header"> رقم المشروع</b-th>
+                                        <b-th class="green-header">رقم المنطقة</b-th>
+                                        <b-th class="green-header">رقم اللوحة</b-th>
+                                        <b-th class="green-header">رقم العقار</b-th>
                                     </b-tr>
                                     
                                 </b-thead>
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th>{{ submissionData.pro_num }}</b-th>
+                                        <b-th class="default_th">{{ submissionData.pro_num }}</b-th>
                                         <b-th >{{submissionData.zone}}</b-th>
                                         <b-th> {{ submissionData.plad_num }}</b-th>
                                         <b-th>{{submissionData.building_number}}</b-th>
@@ -65,116 +65,42 @@
                         <b-col>
                             <div  >
                                 <b-row>
-                                    <b-col>
+                                    <b-col cols="6">
                                         <b-table-simple
                                     bordered
                             > 
                                 <b-thead head-variant="light">
-                                    
+                                    <b-tr>
+                                        <b-th class="green-header" variant="secondary"> م</b-th>
+                                        <b-th class="green-header" variant="secondary"> الوصف</b-th>
+                                        <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
+                                    </b-tr>
                                 </b-thead>
                                 <b-tbody>
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" >
+                                        <b-td class="content-item" >{{ index+1 }}</b-td>
+                                        <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
+                                        <b-th class="content-item" ></b-th>
+                                    </b-tr>
+                                </b-tbody>
+
+                            </b-table-simple>
+                                    </b-col>
+                                    <b-col cols="6">
+                                        <b-table-simple
+                                    bordered
+                            > 
+                                <b-thead head-variant="light">
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary"> م</b-th>
                                         <b-th class="green-header" variant="secondary"> الوصف</b-th>
                                         <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
-                                        <b-th class="green-header" variant="secondary"> م</b-th>
-                                        <b-th class="green-header" variant="secondary"> الوصف</b-th>
-                                        <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
                                     </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >1</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >13</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >2</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >14</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >3</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >15</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >4</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >16</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >5</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >17</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >6</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >18</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >7</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >19</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >8</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >20</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >9</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >21</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >10</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >22</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >11</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >23</b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                    </b-tr>
-                                    <b-tr>
-                                        <b-td class="content-item" >12</b-td>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" ></b-th>
-                                        <b-th class="content-item" >24</b-th>
-                                        <b-th class="content-item" ></b-th>
+                                </b-thead>
+                                <b-tbody>
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" >
+                                        <b-td class="content-item" >{{ index+1 }}</b-td>
+                                        <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
                                         <b-th class="content-item" ></b-th>
                                     </b-tr>
                                 </b-tbody>
@@ -188,7 +114,6 @@
                     <br><br>
                     <b-row>
                         <b-col>
-                            <h3 style="color:  rgb(11, 55, 2); text-align: right;">  ثانياً: مساحة الأرض</h3>
                             
                             <b-table-simple bordered>
                                 <b-tbody>
@@ -322,126 +247,110 @@ export default {
 @import "~@core/scss/base/pages/app-invoice.scss";
 </style>
 
-<style lang="scss" >
-// .fgh{
+<style lang="scss" scoped >
+    .green-header{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+        text-align: left !important;
+    }
     
-// }
-@media print {
-.fgh {
-    background-color: red;
-    direction: rtl;
-}
-// .th {
-//     background-color: #ffffff !important;
-//     color: rgb(11, 55, 2);
-//     font-size: 15px;
-// } 
-.green-header{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-    // text-align: left !important;
-}
-.center-green{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-}
-.content-item{
-    text-align: left !important;
-}
-}
-@media print {
-* {
--webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
-color-adjust: exact !important; //
-}
-}
-.green-header{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-    // text-align: left !important;
-}
-.center-green{
-    background-color: #05481e !important;
-    color: #ffffff !important;
-}
-.content-item{
-    text-align: left !important;
-}
+    .default_th{
+        background-color: #ffffff;  
+        color: #1b0404;
+    }
+    @media print {
 
-@media print {
+        // Global Styles
+        body {
+            background-color: transparent !important;
+        }
+        nav.header-navbar {
+            display: none;
+        }
+        .main-menu {
+            display: none;
+        }
+        .header-navbar-shadow {
+            display: none !important;
+        }
+        .collection_pdf{
+            position: fixed;
+        }
+        .content.app-content {
+            margin-left: 0;
+            padding-top: 2rem !important;
+        }
+        footer.footer {
+            display: none;
+        }
+        .card {
+            background-color: transparent;
+            box-shadow: none;
+        }
+        .customizer-toggle {
+            display: none !important;
+        }
 
-    // Global Styles
-    body {
-        background-color: transparent !important;
-    }
-    nav.header-navbar {
-        display: none;
-    }
-    .main-menu {
-        display: none;
-    }
-    .header-navbar-shadow {
-        display: none !important;
-    }
-    .content.app-content {
-        margin-left: 0;
-        padding-top: 2rem !important;
-    }
-    footer.footer {
-        display: none;
-    }
-    .card {
-        background-color: transparent;
-        box-shadow: none;
-    }
-    .customizer-toggle {
-        display: none !important;
-    }
+        // Invoice Specific Styles
+        .invoice-preview-wrapper {
 
-    // Invoice Specific Styles
-    .invoice-preview-wrapper {
-        .row.invoice-preview {
-            .col-md-8 {
-                max-width: 100%;
-                flex-grow: 1;
-            }
+            th {
+        background-color: #ffffff !important;
+        color: rgb(11, 55, 2);
+        font-size: 15px;
+    }
+    .invoice-preview-wrapper_container{
 
-            .invoice-preview-card {
-                .card-body:nth-of-type(2) {
-                    .row {
-                        > .col-12 {
-                            max-width: 50% !important;
-                        }
+    } 
+    .green-header{
+        background-color: #05481e !important;
+        color: #ffffff !important;
+        text-align: left !important;
+    }
+    .content-item{
+        color: #1b0404 !important;
+        text-align: left !important;
+    }
+            .row.invoice-preview {
+                .col-md-8 {
+                    max-width: 100%;
+                    flex-grow: 1;
+                }
 
-                        .col-12:nth-child(2) {
-                            display: flex;
-                            align-items: flex-start;
-                            justify-content: flex-end;
-                            margin-top: 0 !important;
+                .invoice-preview-card {
+                    .card-body:nth-of-type(2) {
+                        .row {
+                            > .col-12 {
+                                max-width: 50% !important;
+                            }
+
+                            .col-12:nth-child(2) {
+                                display: flex;
+                                align-items: flex-start;
+                                justify-content: flex-end;
+                                margin-top: 0 !important;
+                            }
                         }
                     }
                 }
             }
-        }
 
-        // Action Right Col
+            // Action Right Col
+            .invoice-actions {
+                display: none;
+            }
+        }
+        body{
+            overflow: hidden;
+            overflow-scrolling: unset;
+        }
+        
+        .card-header-pills{
+            display: none;
+        }
         .invoice-actions {
             display: none;
         }
     }
-    body{
-        overflow: hidden;
-        overflow-scrolling: unset;
-    }
-    th {
-        background-color: #787676 !important;
-        color: white;
-    }
-    .card-header-pills{
-        display: none;
-    }
-    .invoice-actions {
-        display: none;
-    }
-}
 </style>
+

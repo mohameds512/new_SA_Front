@@ -1082,6 +1082,53 @@
                                             </div>
                                         </b-card-text>
                                     </b-tab>
+                                </b-tab><b-tab title="التوقيعات">
+                                        <b-card-text>
+                                            <div class="add_project_details_wrapper">
+                                                <validation-observer ref="addProjectRules">
+                                                    <b-form>
+                                                        <b-row class="bg-white pt-2 pb-2">
+
+                                                            <b-col class="d-flex justify-content-center" md="8">
+                                                            </b-col>
+
+                                                        </b-row>
+                                                        <b-row>
+                                                            <b-col md="12" class="justify-content-center">
+                                                                <div class="d-flex justify-content-between text-center">
+                                    <div>
+                                        <h4>توقيع المساح</h4>
+                                        <img v-if="form.submission[0].signature_eng"
+                                             :src="form.submission[0].signature_eng" width="200" height="70">
+                                    </div>
+                                    <div>
+                                        <h4>توقيع المالك</h4>
+                                        <img v-if="form.submission[0].signature_owner"
+                                             :src="form.submission[0].signature_owner" width="200" height="70">
+                                    </div>
+                                    <div>
+                                        <h4>توقيع رئيس اللجنة</h4>
+                                        <img v-if="form.submission[0].signature_poss"
+                                             :src="form.submission[0].signature_poss" width="200" height="70">
+                                    </div>
+                                </div>
+                                                            </b-col>
+                                                            <b-col md="12">
+                                                                <!-- <div>
+                                                                    <img v-if="form.submission[0].map"
+                                                                         :src="form.submission[0].map" alt=""
+                                                                         style="max-width: 100% ; width: 92%; height: 500px">
+                                                                </div> -->
+                                                            </b-col>
+                                                        </b-row>
+                                                        <br>
+
+
+                                                    </b-form>
+                                                </validation-observer>
+                                            </div>
+                                        </b-card-text>
+                                    </b-tab>
                                     <b-tab title="الخريطة">
                                         <b-card-text>
                                             <div class="add_project_details_wrapper">
@@ -1216,7 +1263,7 @@
 
 
                             </b-card>
-                            <div class="d-flex justify-content-between text-center">
+                            <!-- <div class="d-flex justify-content-between text-center">
                                     <div>
                                         <h4>توقيع المساح</h4>
                                         <img v-if="form.submission[0].signature_eng"
@@ -1232,7 +1279,7 @@
                                         <img v-if="form.submission[0].signature_poss"
                                              :src="form.submission[0].signature_poss" width="200" height="70">
                                     </div>
-                                </div>
+                                </div> -->
                         </b-col>
                     </b-row>
                     <b-modal hide-header-close v-model="model_signature" hide-footer title="التوقيع " dir="rtl">

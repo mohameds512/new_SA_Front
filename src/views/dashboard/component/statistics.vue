@@ -8,6 +8,61 @@
             </b-col>
         </b-row>
         <b-row>
+            <b-col md="12" class="justify-content-center">
+                <b-button variant="primary" @click="editDashMap()"
+                            class="mb-2">
+                    تحديث الخريطة   
+                </b-button>
+                <div>
+                    <b-modal hide-header-close v-model="modal_map"
+                                hide-footer title="أضفة خريطة" id="img">
+                        <div class="demo-vertical-spacing">
+
+                            <b-form-group class="text-left">
+                                <input type="hidden" v-model="dash_map" >
+                                <validation-provider
+                                        #default="{ errors }"
+                                        name="خريطة "
+                                        rules="required">
+                                    <input type="file" name="image"
+                                            @change="changeDashMap"
+                                            ref="dashMap"
+                                            accept="image/apng, image/jpeg, image/png, image/webp"
+                                    />
+                                    <small class="text-danger"
+                                            v-if="errors[0]">هذا الحقل
+                                        مطلوب</small>
+                                </validation-provider>
+                            </b-form-group>
+                        </div>
+                        <div class="mt-2">
+                            <b-col cols="12">
+                                <div class="d-flex justify-content-end">
+                                    <b-button @click="submitDashMap()"
+                                                variant="primary"
+                                                style="margin-right: 10px;">
+                                        تأكيد
+                                    </b-button>
+                                    <b-button @click="modal_map = false"
+                                                variant="outline-primary">
+                                        الغاء
+                                    </b-button>
+                                </div>
+                            </b-col>
+                        </div>
+                    </b-modal>
+                </div>
+            </b-col>
+            <b-col md="12">
+                <!-- <div>
+                    <img v-if="form.submission[0].map"
+                            :src="form.submission[0].map" alt=""
+                            style="max-width: 100% ; width: 92%; height: 500px">
+                </div> -->
+            </b-col>
+        </b-row>
+        
+        <b-row>
 
             <b-col cols="6">
                 <b-card>
@@ -103,9 +158,10 @@
         BMedia,
         BMediaAside,
         BAvatar,
-        BMediaBody
+        BMediaBody,
+        BFormGroup,
     } from 'bootstrap-vue';
-
+    import {ValidationProvider, ValidationObserver} from 'vee-validate';
     import pieChartCategory from '@/views/dashboard/component/pieChart.vue';
     import ChartjsComponentBarChart from '@/views/components/charts-components/ChartjsComponentBarChart.vue';
     import ChartjsComponentLineChart from '@/views/components/charts-components/ChartjsComponentLineChart.vue';
@@ -136,6 +192,9 @@
 
     export default {
         components: {
+            ValidationProvider,
+            ValidationObserver,
+            BFormGroup,
             BCard,
             BCol,
             BImg,
@@ -156,6 +215,8 @@
         },
         data() {
             return {
+                dash_map:null,
+                modal_map:false,
                 data: null,
                 options: {
                     elements: {
@@ -286,10 +347,12 @@
             },
             programs() {
                 return {
-                    labels: ['المنطقة الاولى ', 'المنطقة الثانية ', 'المنطقة الثالثة ', 'المنطقة الرابعة ', 'المنطقة الخامسة '],
+                    labels: [' sub zone 1 ', 'sub zone 2  ', 'sub zone 3 ', 'sub zone 4 ', 'sub zone 5 '
+                                , 'sub zone 6 ', 'sub zone 7 ', 'sub zone 8 '
+                            ],
                     datasets: [
                         {
-                            data: [10, 20, 40, 20, 15],
+                            data: [10, 20, 40, 20, 15,20,35,31],
                             backgroundColor: chartColors.second_color,
                             borderColor: 'transparent',
                         },
@@ -298,17 +361,19 @@
             },
             courses() {
                 return {
-                    labels: ['المنطقة الاولى ', 'المنطقة الثانية ', 'المنطقة الثالثة ', 'المنطقة الرابعة ', 'المنطقة الخامسة '],
+                    labels: [' sub zone 1 ', 'sub zone 2  ', 'sub zone 3 ', 'sub zone 4 ', 'sub zone 5 '
+                                , 'sub zone 6 ', 'sub zone 7 ', 'sub zone 8 '
+                            ],
                     datasets: [
                         {
                             label: "فعلى",
-                            data: [40, 59, 30, 20, 34],
+                            data: [40, 59, 30, 20, 34,24,78,69],
                             backgroundColor: chartColors.second_color,
                             borderColor: "transparent",
                         },
                         {
                             label: "مخطط ",
-                            data: [80, 70, 30, 14, 78],
+                            data: [80, 70, 30, 14, 78,24,78,69],
                             backgroundColor: "#eee",
                             borderColor: "transparent",
                         },
@@ -317,7 +382,27 @@
             },
 
         },
-        methods: {},
+        methods: {
+            changeDashMap(){
+                this.dash_map = this.$refs.dashMap.files[0];
+                console.log(this.dash_map);
+            },
+            editDashMap(){
+                this.modal_map = true;
+            },
+            submitDashMap() {
+                const Map = new FormData()
+                Map.append('dash_map', this.dash_map)
+                this.$store
+                    .dispatch('pgc_forms/updateDashMap', {
+                        query: Map,
+                    }).then((response) => {
+                    this.modal_map = false;
+                    
+
+                });
+            }
+        },
         mounted() {
             this.$store.dispatch('pgc_forms/dashboard');
         },

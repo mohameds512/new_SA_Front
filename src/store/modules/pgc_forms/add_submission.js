@@ -89,6 +89,18 @@ const locationModule = {
                     })
             })
         },
+        updateDashMap({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.updateDashMap(payload)
+                    .then(response => {
+                        resolve();
+
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
 
         dashboard({commit}, payload) {
             return new Promise((resolve, reject) => {
