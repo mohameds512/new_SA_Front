@@ -44,14 +44,14 @@
                                         <b-th class="default_th">{{ submissionData.pro_num }}</b-th>
                                         <b-th >{{submissionData.zone}}</b-th>
                                         <b-th> {{ submissionData.plad_num }}</b-th>
-                                        <b-th>{{submissionData.building_number}}</b-th>
+                                        <b-th>{{ getLast5(submissionData.building_number) }}</b-th>
 
                                     </b-tr>
 
                                 </b-tbody>
 
                             </b-table-simple>
-                            <div style="width: 100%;  padding-right: 10px; ">رقم فريق الحصر (        {{ submissionData.building_number }}                    )</div>
+                            <div style="width: 100%;  padding-right: 10px; ">رقم  العقار (        {{ submissionData.building_number }}                    )</div>
                         </b-col>
                     </b-row>
                     <br/>
@@ -77,7 +77,7 @@
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" >
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0" >
                                         <b-td class="content-item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
                                         <b-th class="content-item" ></b-th>
@@ -98,7 +98,7 @@
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" >
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0" >
                                         <b-td class="content-item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
                                         <b-th class="content-item" ></b-th>
@@ -236,6 +236,9 @@ export default {
         // generateReport () {
         //     this.$refs.html2Pdf.generatePdf()
         // },
+        getLast5( subNum ){
+                return  subNum.slice(-5);
+            },
         printInvoice() {
             window.print()
         }
@@ -352,5 +355,27 @@ export default {
             display: none;
         }
     }
+    @media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; /*Firefox*/
+    
+  }
+  .invoice-preview-wrapper {
+    .btn_print{
+      display: none;
+    }
+    background-color: #ffffff;
+    overflow:hidden !important;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    inset: 0;
+
+    padding: 35px;
+    margin: 0;
+    z-index: 999999999999999999999999999999;
+  }
+}
 </style>
 

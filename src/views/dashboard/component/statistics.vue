@@ -8,11 +8,12 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col md="12" class="justify-content-center">
-                <b-button variant="primary" @click="editDashMap()"
+            <b-col md="12" class="justify-content-start d-flex">
+                <b-button  variant="primary" @click="editDashMap()"
                             class="mb-2">
                     تحديث الخريطة   
                 </b-button>
+                <!-- {{ dashboardMap.img }} -->
                 <div>
                     <b-modal hide-header-close v-model="modal_map"
                                 hide-footer title="أضفة خريطة" id="img">
@@ -54,11 +55,10 @@
                 </div>
             </b-col>
             <b-col md="12">
-                <!-- <div>
-                    <img v-if="form.submission[0].map"
-                            :src="form.submission[0].map" alt=""
-                            style="max-width: 100% ; width: 92%; height: 500px">
-                </div> -->
+                <b-card class="text-center" v-if="dashboardMap.img">
+                    <img 
+                            :src="dashboardMap.img" alt="map">
+                </b-card>
             </b-col>
         </b-row>
         
@@ -279,7 +279,7 @@
         computed: {
             counts() {
 
-                var counts = {
+                let counts = {
                     total: 0,
                     in_review: 0,
                     feedback: 0,
@@ -287,10 +287,10 @@
                 }
 
                 let statistics = this.$store.getters['pgc_forms/dashboard'];
-
+                
                 if (statistics) {
 
-                    statistics.forEach(el => {
+                    statistics.statistics.forEach(el => {
                         if (el.status == 0) {
                             counts.in_review = el.count;
                         }
@@ -310,6 +310,10 @@
                 }
 
                 return counts;
+            },
+            dashboardMap(){
+                return  this.$store.getters['pgc_forms/dashboard'];
+                
             },
             mixedChart() {
                 return {
@@ -398,8 +402,7 @@
                         query: Map,
                     }).then((response) => {
                     this.modal_map = false;
-                    
-
+                    this.$store.dispatch('pgc_forms/dashboard');
                 });
             }
         },

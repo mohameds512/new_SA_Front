@@ -30,7 +30,6 @@
                             <div >
                                 <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
                             </div>
-                            {{ submissionData.building_number }}
                         </b-col>
                         <b-col md="8">
                             <b-table-simple>
@@ -48,7 +47,7 @@
                                         <b-th class="default_th" >{{ submissionData.pro_num }}</b-th>
                                         <b-th >{{submissionData.zone}}</b-th>
                                         <b-th> {{ submissionData.plad_num }}</b-th>
-                                        <b-th>{{submissionData.building_number}}</b-th>
+                                        <b-th>{{getLast5(submissionData.building_number)}}</b-th>
 
                                     </b-tr>
 
@@ -73,7 +72,7 @@
                                     </tr>
                                 </tbody>
                             </b-table> -->
-                            <div style="width: 100%; text-align: right; padding-right: 10px; border: 0.1rem;">رقم فريق الحصر ( {{ submissionData.building_number }}                           )</div>
+                            <div style="width: 100%; text-align: right; padding-right: 10px; border: 0.1rem;">رقم العقار ( {{ submissionData.building_number }}                           )</div>
                         </b-col>
                     </b-row>
                     <br/>
@@ -344,6 +343,9 @@
             // generateReport () {
             //     this.$refs.html2Pdf.generatePdf()
             // },
+            getLast5( subNum ){
+                return  subNum.slice(-5);
+            },
             printInvoice() {
                 window.print()
             }
@@ -460,5 +462,28 @@
             display: none;
         }
     }
+    
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; /*Firefox*/
+    
+  }
+  .invoice-preview-wrapper {
+    .btn_print{
+      display: none;
+    }
+    background-color: #ffffff;
+    overflow:hidden !important;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    inset: 0;
+
+    padding: 35px;
+    margin: 0;
+    z-index: 999999999999999999999999999999;
+  }
+}
 </style>
 

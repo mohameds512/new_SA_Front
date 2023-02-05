@@ -436,4 +436,15 @@ html {
     overflow-x: hidden;
   }
 }
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; /*Firefox*/
+    
+  }
+  .main_app_container_for_elements {
+    
+    overflow: hidden !important;
+  }
+}
 </style>

@@ -67,6 +67,7 @@
                                                                                  name="رقم المشروع"
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.pro_num"
+                                                                                disabled
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="رقم المشروع"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -89,19 +90,25 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
-                                                        <!-- <b-form-group class="text-right" label="رقم المنطقة ">
-                                                            <validation-provider #default="{ errors }"
-                                                                                 name=" رقم المنطقة"
-                                                                                 rules="required">
-                                                                <b-form-input v-model="form.submission.zone"
-                                                                              :state="errors.length > 0 ? false : null"
-                                                                              placeholder=" رقم المنطقة"/>
+                                                    </b-col>
+                                                    <b-col md="6">
+                                                        <b-form-group class="text-right" label="رقم المنطقة ">
+                                                            <validation-provider #default="{ errors }" name="رقم المنطقة "
+                                                                                    rules="required">
+                                                                <v-select
+                                                                        placeholder="رقم المنطقة "
+                                                                        :options="Array.from(plad_num , (el) => el)"
+                                                                        v-model="form.submission.plad_num"
+                                                                        :reduce="(val) => val"
+                                                                >
+                                                                </v-select>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
-                                                        </b-form-group> -->
+                                                        </b-form-group>
+                                                        
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <!-- <b-col md="6">
                                                         <b-form-group class="text-right" label=" رقم اللوحة">
                                                             <validation-provider #default="{ errors }"
                                                                                  name=" رقم اللوحة"
@@ -113,7 +120,7 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
-                                                    </b-col>
+                                                    </b-col> -->
                                                     <!-- <b-col md="6">
                                                         <b-form-group class="text-right" label=" رقم العقار ">
                                                             <validation-provider #default="{ errors }" name=" رقم العقار"
@@ -175,9 +182,11 @@
                                                     <b-col md="3">
                                                         <b-form-group class="text-right" label="رقم الجوال ">
                                                             <validation-provider #default="{ errors }"
+                                                                                min="10" max="10"
                                                                                  name=" رقم الجوال"
                                                                                  rules="required">
                                                                 <b-form-input v-model="owner.phone"
+                                                                min="10" max="10"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الجوال" type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -188,9 +197,11 @@
                                                     <b-col md="3">
                                                         <b-form-group class="text-right" label="رقم الهوية ">
                                                             <validation-provider #default="{ errors }"
+                                                            min="10" max="10"
                                                                                  name=" رقم الهوية"
                                                                                  rules="required">
                                                                 <b-form-input v-model="owner.national_id"
+                                                                min="10" max="10"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الهوية" type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -804,7 +815,7 @@
                                                     </b-col>
 
                                                 </b-row>
-                                                <b-form-group class="text-right" v-if="coorsFormLenght() == 0">
+                                                <b-form-group class="text-right" v-if="coorsFormLenght() == 0 || !coorsFormLenght()">
                                                     <b-button @click="addCoor"> اضف</b-button>
                                                 </b-form-group>
                                                 <b-row v-for="(coor , i) in form.submission.coordinates" :key="i">
@@ -842,12 +853,12 @@
                                                         <b-row>
                                                             <b-col cols="4">
                                                                 <b-form-group class="text-right" label=".  ">
-                                                                    <b-button @click="addCoor"> اضف</b-button>
+                                                                    <b-button @click="addCoor" > اضف</b-button>
                                                                 </b-form-group>
                                                             </b-col>
                                                             <b-col cols="4">
                                                                 <b-form-group class="text-right" label=" . ">
-                                                                    <b-button
+                                                                    <b-button class="mr-2"
                                                                             @click="form.submission.coordinates.pop()">
                                                                         حذف
                                                                     </b-button>
@@ -943,7 +954,7 @@
                                     </div>
                                 </b-overlay>
                                 <!--  المشتمالات -->
-                                <b-overlay v-if="(show_model_inputs == 1 )" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 9 )" variant="white" spinner-variant="primary"
                                         blur="0" opacity=".75"
                                         rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -1513,10 +1524,13 @@
                     'فرز', 'دمج', 'عادية', 'اخري'
                 ],
                 personality: [
-                    'تابعية', 'هوية'
+                    'تابعية', 'هوية','حفيظة نفوس'
                 ],
                 zones: [
-                    'sub zone 1', 'sub zone 2', 'sub zone 3','sub zone 4','sub zone 5','sub zone 6','sub zone 7','sub zone 8'
+                    '01','02','03','04','05','06','07','08'
+                ],
+                plad_num: [
+                    '01','02','03','04','05','06','07','08'
                 ],
                 submissionTypes: [
                     'سكني',
@@ -1603,7 +1617,7 @@
                     this.form.submission = data;
                     this.form.submission.restrict_border = data.restrict_border ? data.restrict_border : {};
                     this.form.submission.contract_border_details = data.contract_border_details ? data.contract_border_details : {};
-                    this.form.submission.coordinates = data.coordinates ? data.coordinates : {};
+                    this.form.submission.coordinates = data.coordinates ? data.coordinates : [{coor_north:null,coor_east:null}];
                     this.form.submission.building_details = data.building_details ? data.contract_border_details : {};
                 })
 
@@ -1689,6 +1703,9 @@
                 this.form.owners.push({name: null, phone: null, id_type: null});
             },
             addCoor() {
+                if (!this.coorsFormLenght()) {
+                    
+                }
                 this.form.submission.coordinates.push({coor_north: null, coor_east: null});
             },
             addfloor() {

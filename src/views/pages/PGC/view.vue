@@ -7,16 +7,19 @@
                 <div dir="rtl">
                     <b-row class="bg-white pt-2 pb-2">
                         <b-col cols="3">
-                            <app-timeline>
-                                <app-timeline-item
-                                        v-for="(log , i) in form.submission[0].logs_data"
-                                        :title="log.status.name"
-                                        :subtitle="log.note"
-                                        icon="AwardIcon"
-                                        :time="log.user.name"
-                                        variant="success"
-                                />
-                            </app-timeline>
+                            <div class="hide_time_line">
+
+                                <app-timeline>
+                                    <app-timeline-item
+                                            v-for="(log , i) in form.submission[0].logs_data" :key="i"
+                                            :title="log.status.name"
+                                            :subtitle="log.note"
+                                            icon="AwardIcon"
+                                            :time="log.user.name"
+                                            variant="success"
+                                    />
+                                </app-timeline>
+                            </div>
                         </b-col>
                         <b-col cols="9">
                             <b-card no-body v-if=" form.submission && form.submission[0]">
@@ -1209,8 +1212,8 @@
                                                     <b-tab title=" المخطط التفصيلي " >
                                                         <b-card-text>
                                                             <details-rep
-                                                                :submissionDtat="form.submission[0]"
-                                                                :ownersDtat="form.owners[0]"
+                                                                :submissionData="form.submission[0]"
+                                                                :ownersData="form.owners[0]"
                                                             ></details-rep>
                                                         </b-card-text>
                                                     </b-tab>
@@ -1965,6 +1968,11 @@
 
         .btncls {
             padding-top: 25px;
+        }
+    }
+    @media print {
+        .hide_time_line{
+            display: none;
         }
     }
 </style>

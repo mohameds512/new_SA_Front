@@ -1,6 +1,6 @@
 <template>
     
-    <div  class="invoice-preview-wrapper " style="text-align: right;">
+    <div  class="invoice-preview-wrapper  " style="text-align: right;">
         <br><br>
         <b-button
                 variant="success"
@@ -11,13 +11,13 @@
             طباعة
         </b-button>
         <br><br>
-        <b-row    class="invoice-preview">
-            <b-col md="4">
+        <div   class="invoice-preview switch_printer">
+            <div style="min-width: 350px;" >
                 <div >
                     <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
                 </div>
-            </b-col>
-            <b-col md="8">
+            </div>
+            <div style="flex-grow: 1;" >
                 
                 <b-table-simple>
                             <b-thead head-variant="light">
@@ -34,25 +34,25 @@
                                     <b-th>{{ submissionData.pro_num }}</b-th>
                                     <b-th >{{submissionData.zone}}</b-th>
                                     <b-th> {{ submissionData.plad_num }}</b-th>
-                                    <b-th>{{submissionData.building_number}}</b-th>
+                                    <b-th>{{ getLast5(submissionData.building_number) }}</b-th>
 
                                 </b-tr>
 
                             </b-tbody>
 
                         </b-table-simple>
-                <div style="width: 100%;  padding-right: 10px; ">رقم فريق الحصر (    {{ submissionData.building_number }}                        )</div>
-            </b-col>
-        </b-row>
+                <div style="width: 100%;  padding-right: 10px; ">رقم العقار (    {{ submissionData.building_number }}                        )</div>
+            </div>
+        </div>
         
-        <b-row>
-            <h3 style="color:  rgb(11, 55, 2); margin-right: 20px;"> محضر تقدير </h3>
+        <div>
+            <h3 style="color:  rgb(11, 55, 2); margin-right: 20px; "> محضر تقدير </h3>
             <div style="padding-right: 15px;">
                 تاريخ نهاية إجراءات قرار لجنة التقدير     /      /          14هـ
 بناءً على الأمر السامي الكريم رقم (……………) الصادر بتاريخ  ..../…./………هــ القاضي بالموافقة على الآلية المقترحة لنزع الملكيات وإعادة توطين السكان بمشروع .............................، وعلى الأمر السامي الكريم رقم (..............) في ...../....../.............هـ القاضي بالموافقة على ...............................، تم شخوص اللجنة المشكلة بموجب المادة السابعة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المصادق عليه بالمرسوم الملكي رقم (م/15) بتاريخ (11/03/1424هـ) على العقار الموضح بياناته أدناه، واتضح أن المعلومات المبينة صحيحة وأن الأسعار التي حددت أخذت بعين الاعتبار موقع العقار بالنسبة للمنطقة والعقارات المجاورة وكذلك بحسب وصف العقار  في محضر الحصر المعتد من قبل لجنة الحصر المشكلة حسب نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المشار إليه ولائحته التنفيذية، كما أن اللجنة اتبعت في تقديراتها طريقة (...........) وفقاً للمعايير والضوابط التي تتبعها الهيئة السعودية للمقيمين المعتمدين وفقاً للتالي:
 
             </div>
-        </b-row>
+        </div>
         <br>
 
         <b-row>
@@ -60,13 +60,6 @@
                         <b-table-simple
                                 bordered
                         > 
-                            <b-thead head-variant="light">
-                                <!-- <b-tr>
-                                    <b-th colspan="8" class="text-center text-dark text-bold">
-                                        أولاً: بيانات العقار
-                                    </b-th>
-                                </b-tr> -->
-                            </b-thead>
                             <b-tbody>
                                 <b-tr>
                                     <b-th class="green-header" variant="secondary">اسم المالك</b-th>
@@ -258,6 +251,9 @@ export default {
         // generateReport () {
         //     this.$refs.html2Pdf.generatePdf()
         // },
+        getLast5( subNum ){
+            return  subNum.slice(-5);
+        },
         printInvoice() {
             window.print()
         },
@@ -373,11 +369,68 @@ export default {
     
     .card-header-pills{
         display: none;
-    }
+    }@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; /*Firefox*/
+    // direction: rtl;
+  }
+  .our_wrapper_for_container_details {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 18px;
+    z-index: 999999999999999999999999999999;
+  }
+}
     .invoice-actions {
         display: none;
     }
 }
+.switch_printer{
+    display: flex;
+    gap: 10px;
+}
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+    color-adjust: exact !important; /*Firefox*/
+    
+  }
+  .invoice-preview-wrapper {
+    .btn_print{
+      display: none;
+    }
+    .switch_printer{
+        flex-direction: row-reverse;
+    }
+    
+    background-color: #ffffff;
+    overflow:hidden !important;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    inset: 0;
+    padding: 35px;
+    margin: 0;
+    z-index: 999999999999999999999999999999;
+  }
+}
+
 </style>
 
+<style lang="scss">
+    .swith_test_print_table{
+        .card .table{
+            background-color: #1b0404 !important;
+            padding: 50px;
+        }
+    }
+</style>
 
