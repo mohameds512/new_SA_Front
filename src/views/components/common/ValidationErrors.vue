@@ -10,9 +10,9 @@
     <!-- <small class="text-danger">{{ validation(null, 0).message }}</small> -->
   </span>
   <span v-else-if=" backendErrors && backendErrors.length">
-     <small
-         class="text-danger"
-     >
+    <small
+      class="text-danger"
+    >
       {{ backendErrors }}
     </small>
   </span>
