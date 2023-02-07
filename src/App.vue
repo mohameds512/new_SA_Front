@@ -147,6 +147,19 @@ html[dir="rtl"]
   transform: rotate(180deg);
   display: inline-block;
 }
+
+   @font-face {
+     font-family: Sakkal Majalla;
+     src: url("assets/majalla.ttf");
+   }
+
+   *{
+     font-family: Sakkal Majalla !important;
+     font-weight: bold;
+     font-size: 20px;
+   }
+
+
 .no_hover {
   &.btn-flat-primary:hover:not(.disabled):not(:disabled) {
     background-color: transparent !important;
@@ -440,10 +453,10 @@ html {
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
     color-adjust: exact !important; /*Firefox*/
-    
+
   }
   .main_app_container_for_elements {
-    
+
     overflow: hidden !important;
   }
 }

@@ -106,7 +106,7 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
-                                                        
+
                                                     </b-col>
                                                     <!-- <b-col md="6">
                                                         <b-form-group class="text-right" label=" رقم اللوحة">
@@ -289,17 +289,26 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="3">
                                                         <b-form-group class="text-right" label="تاريخه">
                                                             <validation-provider #default="{ errors }" name="رقم الصك"
                                                                                  rules="required">
                                                                 <b-form-datepicker
+                                                                        locale="ar-u-ca-islamic"
+                                                                        :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric'}"
                                                                         v-model="form.submission.contract_date"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         label-no-date-selected="تاريخه "/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right mt-1" label="  تاريخه الهجرى" >
+                                                            <p class="font-weight-bolder">
+                                                                {{ new Date(form.submission.contract_date).toLocaleString('ar-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric'})}}
+                                                            </p>
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
@@ -591,7 +600,7 @@
                                                                 <b-form-input v-model="form.submission.submission_desc"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="وصف العقار"/>
-                                                            
+
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -604,7 +613,7 @@
                                                                 <b-form-input v-model="form.submission.slice_number"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="رقم القطعه"/>
-                                                            
+
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1111,7 +1120,7 @@
                                                         <b-col>
                                                             <b-row >
                                                                 <b-col cols="4">
-                                                                    
+
                                                                     <b-form-group class="text-right" label=".  ">
                                                                         <b-button @click="addfloor" :disabled="floorFormLenght() > 8 ? true : false"
                                                                         > اضف</b-button>
@@ -1704,7 +1713,7 @@
             },
             addCoor() {
                 if (!this.coorsFormLenght()) {
-                    
+
                 }
                 this.form.submission.coordinates.push({coor_north: null, coor_east: null});
             },
@@ -1734,7 +1743,7 @@
             addIncludes() {
                 // this.includesForm.submission_id = this.$route.params.id;
                 // console.log(this.sub_floors);
-                
+
                 let the_names = [];
                 let the_area = [];
                 this.sub_floors.forEach(element => {
@@ -1748,11 +1757,11 @@
                 dataInclude.append('qty', this.includesForm.qty);
                 dataInclude.append('notes', this.includesForm.notes);
                 dataInclude.append('submission_id', this.$route.params.id);
-                
+
                 dataInclude.append('floors_name', the_names );
                 dataInclude.append('floors_area', the_area);
-                
-                
+
+
                 this.$store.dispatch('pgc_forms/save_inc', {
                     id:null,
                     query: dataInclude ,
