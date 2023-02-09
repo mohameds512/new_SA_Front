@@ -16,42 +16,33 @@
                                 <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
                             </div>
                         </b-col>
-                        <b-col md="8">
-                            <!-- <b-table
-                                    bordered
-                                    hover
-                                    :items="[{pro_num:2 , area_num: 2 , num:2 , building_num:2}]"
-                                    :fields="[
-                                        { key: 'pro_num', label: 'رقم المشروع ' },
-                                        { key: 'area_num' , label: ' رقم المنطقة'   },
-                                        { key: 'num' , label: '  رقم اللوحة'   },
-                                        { key: 'building_num' , label: '  رقم العقار'   },
-                                    ]"
-                            ></b-table> -->
-                            
-                            <b-table-simple>
+                        <b-col cols="2" ></b-col>
+                        <b-col md="6" class="text-center">
+                            <b-table-simple small bordered>
                                 <b-thead head-variant="light">
                                     <b-tr>
-                                        <b-th class="green-header"> رقم المشروع</b-th>
-                                        <b-th class="green-header">رقم المنطقة</b-th>
-                                        <b-th class="green-header">رقم اللوحة</b-th>
-                                        <b-th class="green-header">رقم العقار</b-th>
+                                        <b-th class="green-item"> رقم المشروع</b-th>
+                                        <b-th class="green-item">رقم المنطقة</b-th>
+                                        <b-th class="green-item">رقم اللوحة</b-th>
+                                        <b-th class="green-item">رقم العقار</b-th>
                                     </b-tr>
                                     
                                 </b-thead>
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th class="default_th">{{ submissionData.pro_num }}</b-th>
+                                        <b-th  >{{ submissionData.pro_num }}</b-th>
                                         <b-th >{{submissionData.zone}}</b-th>
                                         <b-th> {{ submissionData.plad_num }}</b-th>
-                                        <b-th>{{ getLast5(submissionData.building_number) }}</b-th>
+                                        <b-th>{{getLast5(submissionData.building_number)}}</b-th>
 
                                     </b-tr>
-
+                                    <b-tr>
+                                        رقم العقار ( {{ submissionData.building_number }}                           )
+                                    </b-tr>
                                 </b-tbody>
 
                             </b-table-simple>
-                            <div style="width: 100%;  padding-right: 10px; ">رقم  العقار (        {{ submissionData.building_number }}                    )</div>
+                            
                         </b-col>
                     </b-row>
                     <br/>
@@ -59,49 +50,50 @@
                         <h3 style="color:  rgb(11, 55, 2); margin-right: 20px;">  ملحق حصر المشتملات</h3>
                         
                     </b-row>
-                    <br><br>
-
+                    <br>
+                    
                     <b-row>
+                        
                         <b-col>
                             <div  >
                                 <b-row>
                                     <b-col cols="6">
-                                        <b-table-simple
+                                        <b-table-simple small
                                     bordered
                             > 
                                 <b-thead head-variant="light">
                                     <b-tr>
-                                        <b-th class="green-header" variant="secondary"> م</b-th>
+                                        <b-th class="gray_item" style="width: 13%;" variant="secondary"> م</b-th>
                                         <b-th class="green-header" variant="secondary"> الوصف</b-th>
-                                        <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
+                                        <b-th class="green-header" style="width: 25%;" variant="secondary"> العدد/المساحة</b-th>
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0" >
-                                        <b-td class="content-item" >{{ index+1 }}</b-td>
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0 && index > 6" >
+                                        <b-td class="gray_item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
-                                        <b-th class="content-item" ></b-th>
+                                        <b-th class="content-item" >{{ submissionData.includes_data[index].qty }}</b-th>
                                     </b-tr>
                                 </b-tbody>
 
                             </b-table-simple>
                                     </b-col>
                                     <b-col cols="6">
-                                        <b-table-simple
+                                        <b-table-simple small
                                     bordered
                             > 
                                 <b-thead head-variant="light">
                                     <b-tr>
-                                        <b-th class="green-header" variant="secondary"> م</b-th>
+                                        <b-th class="gray_item" style="width: 13%;" variant="secondary"> م</b-th>
                                         <b-th class="green-header" variant="secondary"> الوصف</b-th>
-                                        <b-th class="green-header" variant="secondary"> العدد/المساحة</b-th>
+                                        <b-th class="green-header" style="width: 25%;" variant="secondary"> العدد/المساحة</b-th>
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0" >
-                                        <b-td class="content-item" >{{ index+1 }}</b-td>
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0 && index > 6" >
+                                        <b-td class="gray_item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
-                                        <b-th class="content-item" ></b-th>
+                                        <b-th class="content-item" >{{ submissionData.includes_data[index].qty }}</b-th>
                                     </b-tr>
                                 </b-tbody>
 
@@ -115,41 +107,41 @@
                     <b-row>
                         <b-col>
                             
-                            <b-table-simple bordered>
+                            <b-table-simple small bordered>
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th class="content-item" >التوقيع</b-th>
-                                        <b-th class="content-item"><span> <input type="checkbox" :checked="submissionData.contract_type == 'مالك' ? true : false"   > </span> <span>مالك</span>   </b-th>
-                                        <b-th class="content-item"> <span> <input type="checkbox"  :checked="submissionData.contract_type == 'وكيل' ? true : false"  > </span> <span>وكيل</span> </b-th>
+                                        <b-th style="width: 33%;" class="content-item" >التوقيع</b-th>
+                                        <b-th style="width: 33%;" class="content-item"><span> <input type="checkbox" :checked="submissionData.contract_type == 'مالك' ? true : false"   > </span> <span>مالك</span>   </b-th>
+                                        <b-th style="width: 33%;" class="content-item"> <span> <input type="checkbox"  :checked="submissionData.contract_type == 'وكيل' ? true : false"  > </span> <span>وكيل</span> </b-th>
                                     
                                     </b-tr>
                                     
                                 </b-tbody>
                             </b-table-simple>
                             <div style="text-align: right;">
-                                <p  style="padding-right: 10px;" >
+                                <p  style="padding-right: 10px; border: 0.1rem solid #d7d5d5;" >
                                     أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة وبذلك أوقع                  التاريخ: 
                                 </p>
                             </div>
                         </b-col>
                     </b-row>
-                    <b-row>
+                    <b-row style="padding-top: -5px !important;">
                         <b-col>
-                            <b-table-simple bordered >
+                            <b-table-simple small bordered >
                                 <b-tbody style="text-align: right;">
                                     <b-tr>
-                                        <b-th class="content-item" > الاسم: {{ ownersData.name }}</b-th>
-                                        <b-th class="content-item" >التوقيع:</b-th>
-                                        <b-th class="content-item" >رقم الجوال:{{ ownersData.phone }}</b-th>
+                                        <b-th style="width: 33%;" class="content-item" > الاسم: {{ ownersData.name }}</b-th>
+                                        <b-th style="width: 33%;" class="content-item" >التوقيع:</b-th>
+                                        <b-th  style="width: 33%;" class="content-item" >رقم الجوال:{{ ownersData.phone }}</b-th>
                                     </b-tr>
                                 </b-tbody>
                             </b-table-simple>
                         </b-col>
                     </b-row>
-                    <br><br>
+                    
                     <b-row>
                         <b-col>
-                            <b-table-simple bordered >
+                            <b-table-simple small bordered >
                                 <b-tbody style="text-align: right;">
                                     <b-tr >
                                         <b-th  class=" center-green text-center">اعضاء لجنة حصر العقارات</b-th>
@@ -161,13 +153,13 @@
                     
                     <b-row>
                         <b-col>
-                            <b-table-simple bordered>
+                            <b-table-simple small bordered>
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th class="content-item" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                                        <b-th class="content-item">الإمارة</b-th>
-                                        <b-th class="content-item">وزارة البيئة والمياه والزراعة</b-th>
-                                        <b-th class="content-item">الجهة المستفيدة</b-th>
+                                        <b-th style="width: 25%;" class="content-item" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
+                                        <b-th style="width: 25%;" class="content-item">الإمارة</b-th>
+                                        <b-th style="width: 25%;" class="content-item">وزارة البيئة والمياه والزراعة</b-th>
+                                        <b-th style="width: 25%;" class="content-item">الجهة المستفيدة</b-th>
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="content-item">الاسم</b-th>
@@ -190,6 +182,12 @@
                                 </b-tbody>
                             </b-table-simple>
                         </b-col>
+                    </b-row>
+                    <br>
+                    <b-row>
+                        <b-col cols="4" class="mr-2" style="font-size: 10px;"  >رمز الوثيقة:[TP_OPS_ATM_01]</b-col>
+                        <b-col cols="5" ></b-col>
+                        <b-col cols="2" style="font-size: 10px;" >الاصدار:01</b-col>
                     </b-row>
     </div>
 
@@ -236,6 +234,12 @@ export default {
         // generateReport () {
         //     this.$refs.html2Pdf.generatePdf()
         // },
+        getValidData(data){
+            if (data == null) {
+                return "بدون"
+            }
+            return data;
+        },
         getLast5( subNum ){
                 return  subNum.slice(-5);
             },
@@ -250,8 +254,24 @@ export default {
 @import "~@core/scss/base/pages/app-invoice.scss";
 </style>
 
+
+
 <style lang="scss" scoped >
-    .green-header{
+.gray_item{
+    color: #1b0404;
+    background-color: #dedddd !important;
+    text-align: left;
+}
+.center-green{
+    color: #ffffff !important;
+    background-color: #05481e !important;
+    text-align: center ;
+}
+.green-item{
+    color: #05481e !important;
+    background-color: #ffffff !important;
+}
+.green-header{
         background-color: #05481e !important;
         color: #ffffff !important;
         text-align: left !important;
@@ -266,6 +286,7 @@ export default {
         // Global Styles
         body {
             background-color: transparent !important;
+            margin-top: -30px;
         }
         nav.header-navbar {
             display: none;
@@ -296,15 +317,13 @@ export default {
 
         // Invoice Specific Styles
         .invoice-preview-wrapper {
-
+            
             th {
         background-color: #ffffff !important;
-        color: rgb(11, 55, 2);
-        font-size: 15px;
+        color:#000;
+        // font-size: 15px;
     }
-    .invoice-preview-wrapper_container{
-
-    } 
+    
     .green-header{
         background-color: #05481e !important;
         color: #ffffff !important;
@@ -355,7 +374,8 @@ export default {
             display: none;
         }
     }
-    @media print {
+    
+@media print {
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
     color-adjust: exact !important; /*Firefox*/

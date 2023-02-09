@@ -92,11 +92,11 @@
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="رقم المنطقة ">
-                                                            <validation-provider #default="{ errors }" name="رقم المنطقة "
+                                                        <b-form-group class="text-right" label="رقم اللوحة ">
+                                                            <validation-provider #default="{ errors }" name="رقم اللوحة "
                                                                                     rules="required">
                                                                 <v-select
-                                                                        placeholder="رقم المنطقة "
+                                                                        placeholder="رقم اللوحة "
                                                                         :options="Array.from(plad_num , (el) => el)"
                                                                         v-model="form.submission.plad_num"
                                                                         :reduce="(val) => val"
@@ -166,6 +166,26 @@
                                                 <b-form-group class="text-right" v-if="ownersFormLenght() == 0">
                                                     <b-button @click="addOwner"> اضف</b-button>
                                                 </b-form-group>
+                                                <b-row>
+                                                    <b-col md="4">
+                                                        <b-form-group class="text-right" label=" نوع الملكية ">
+                                                            <validation-provider #default="{ errors }"
+                                                                                 name=" نوع الملكية"
+                                                                                 rules="required">
+                                                                <v-select
+                                                                        placeholder="نوع الملكية"
+                                                                        :options="Array.from(preportyTypes , (el) => el)"
+                                                                        :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                                        v-model="form.submission.contract_type"
+                                                                        :reduce="(val) => val"
+                                                                >
+                                                                </v-select>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                </b-row>
                                                 <b-row v-for="(owner , i) in form.owners" :key="i">
                                                     <b-col md="3">
                                                         <b-form-group class="text-right" label="اسم المالك">
@@ -324,13 +344,13 @@
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="المساحة حسب السك ">
+                                                        <b-form-group class="text-right" label="المساحة حسب الصك ">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="المساحة حسب السك "
+                                                                                 name="المساحة حسب الصك "
                                                                                  rules="required">
                                                                 <b-form-input v-model="form.submission.contract_area"
                                                                               :state="errors.length > 0 ? false : null"
-                                                                              placeholder="المساحة حسب السك "
+                                                                              placeholder="المساحة حسب الصك "
                                                                               type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
@@ -521,9 +541,9 @@
 
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
-                                                    <b-col md="4">
+                                                    <!-- <b-col md="4">
 
-                                                        <!-- <b-form-group class="text-right" label="رقم العقار">
+                                                        <b-form-group class="text-right" label="رقم العقار">
                                                             <validation-provider #default="{ errors }" name="رقم العقار"
                                                                 rules="required">
                                                                 <b-form-input v-model="form.submission.building_number"
@@ -532,8 +552,8 @@
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
-                                                        </b-form-group> -->
-                                                    </b-col>
+                                                        </b-form-group>
+                                                    </b-col> -->
                                                     <b-col md="4">
                                                         <b-form-group class="text-right" label="رقم المخطط">
                                                             <validation-provider #default="{ errors }" name="رقم المخطط"
@@ -563,7 +583,7 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="4">
+                                                    <!-- <b-col md="4">
                                                         <b-form-group class="text-right" label=" نوع الملكية ">
                                                             <validation-provider #default="{ errors }"
                                                                                  name=" نوع الملكية"
@@ -580,7 +600,7 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
-                                                    </b-col>
+                                                    </b-col> -->
                                                     <b-col md="4">
                                                         <b-form-group class="text-right" label="الاستخدام">
                                                             <validation-provider #default="{ errors }" name="الاستخدام"
@@ -1536,22 +1556,22 @@
                     'تابعية', 'هوية','حفيظة نفوس'
                 ],
                 zones: [
-                    '01','02','03','04','05','06','07','08'
+                    '01','02','03'
                 ],
                 plad_num: [
                     '01','02','03','04','05','06','07','08'
                 ],
                 submissionTypes: [
+                    'سكني-تجاري',
                     'سكني',
                     'تجاري',
-                    'تعليمي',
-                    'فندقي',
-                    'أرض فضاء',
+                    'حكومي',
+                    'أحواش',
                 ],
                 preportyTypes: [
-                    'مالك',
+                    'نفسه (المالك) ',
                     'وكيل',
-                    'ممثل',
+                    'ناظر وقف',
                 ],
                 // submissionDesc: [
                 //     'تشطيب داخلي',

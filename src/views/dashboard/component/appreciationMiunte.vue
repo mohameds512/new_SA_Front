@@ -11,39 +11,59 @@
             طباعة
         </b-button>
         <br><br>
-        <div   class="invoice-preview switch_printer">
-            <div style="min-width: 350px;" >
-                <div >
-                    <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
-                </div>
-            </div>
-            <div style="flex-grow: 1;" >
-                
-                <b-table-simple>
-                            <b-thead head-variant="light">
-                                <b-tr>
-                                    <b-th class="green-header" > رقم المشروع</b-th>
-                                    <b-th class="green-header">رقم المنطقة</b-th>
-                                    <b-th class="green-header">رقم اللوحة</b-th>
-                                    <b-th class="green-header">رقم العقار</b-th>
-                                </b-tr>
-                                
-                            </b-thead>
-                            <b-tbody>
-                                <b-tr>
-                                    <b-th>{{ submissionData.pro_num }}</b-th>
-                                    <b-th >{{submissionData.zone}}</b-th>
-                                    <b-th> {{ submissionData.plad_num }}</b-th>
-                                    <b-th>{{ getLast5(submissionData.building_number) }}</b-th>
+        <b-row    class="invoice-preview">
+                        <b-col md="4">
+                            <div >
+                                <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
+                            </div>
+                        </b-col>
+                        <b-col cols="2" ></b-col>
+                        <b-col md="6">
+                            <b-table-simple small bordered class="text-center">
+                                <b-thead head-variant="light">
+                                    <b-tr>
+                                        <b-th class="green-item"> رقم المشروع</b-th>
+                                        <b-th class="green-item">رقم المنطقة</b-th>
+                                        <b-th class="green-item">رقم اللوحة</b-th>
+                                        <b-th class="green-item">رقم العقار</b-th>
+                                    </b-tr>
+                                    
+                                </b-thead>
+                                <b-tbody>
+                                    <b-tr>
+                                        <b-th  >{{ submissionData.pro_num }}</b-th>
+                                        <b-th >{{submissionData.zone}}</b-th>
+                                        <b-th> {{ submissionData.plad_num }}</b-th>
+                                        <b-th>{{getLast5(submissionData.building_number)}}</b-th>
 
-                                </b-tr>
+                                    </b-tr>
+                                    <b-tr>
+                                        رقم العقار ( {{ submissionData.building_number }}                           )
+                                    </b-tr>
+                                </b-tbody>
 
-                            </b-tbody>
-
-                        </b-table-simple>
-                <div style="width: 100%;  padding-right: 10px; ">رقم العقار (    {{ submissionData.building_number }}                        )</div>
-            </div>
-        </div>
+                            </b-table-simple>
+                            <!-- <b-table
+                                    bordered
+                                    style="text-align: right;"
+                                    hover
+                                    :items="submissionData"
+                                    :fields="[
+                                        { key: 'pro_num', label: 'رقم المشروع ' },
+                                        { key: 'area_num' , label: ' رقم المنطقة'   },
+                                        { key: 'num' , label: '  رقم اللوحة'   },
+                                        { key: 'building_number' , label: '  رقم العقار'   },
+                                    ]"
+                            >
+                                <tbody>
+                                    <tr>
+                                        <td>{{ submissionData.building_number }}</td>
+                                    </tr>
+                                </tbody>
+                            </b-table> -->
+                            <!-- <div style="width: 100%; text-align: right; padding-right: 10px; border: 0.1rem;" >  رقم العقار ( {{ submissionData.building_number }}                           )</div> -->
+                        </b-col>
+                    </b-row>
         
         <div>
             <h3 style="color:  rgb(11, 55, 2); margin-right: 20px; "> محضر تقدير </h3>
@@ -53,11 +73,13 @@
 
             </div>
         </div>
-        <br>
+        
 
         <b-row>
                     <b-col>
-                        <b-table-simple
+                <h3 style="color:  rgb(11, 55, 2); text-align: right;"> أولاً: بيانات ووصف العقار</h3>
+
+                        <b-table-simple small
                                 bordered
                         > 
                             <b-tbody>
@@ -81,7 +103,8 @@
                                     <b-th class="green-header" variant="secondary">رقم الصك</b-th>
                                     <b-th class="content-item">{{ submissionData.contract_number}}</b-th>
                                     <b-th class="green-header" variant="secondary">تاريخه</b-th>
-                                    <b-th class="content-item">{{ toLocalDatetime(submissionData.contract_date)}}</b-th>
+                                    <b-th class="content-item">{{ new Date(submissionData.contract_date).toLocaleString('ar-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric'})}}
+</b-th>
                                     <b-th class="green-header" variant="secondary">مصدره </b-th>
                                     <b-th class="content-item" colspan="3">{{submissionData.contract_source}}</b-th>
                                 </b-tr>
@@ -106,45 +129,56 @@
                         </b-table-simple>
                     </b-col>
                 </b-row>
-        <br><br>
+        <br>
         
-        <br><br>
         <b-row>
             <b-col>
                 <h3 style="color:  rgb(11, 55, 2); text-align: right;">  ثانياً: التقديرات </h3>
                 
-                <b-table-simple bordered>
+                <b-table-simple small bordered>
                     <b-tbody>
                         <b-tr>
-                            <b-th class="green-header" >الوصف</b-th>
-                            <b-th class="green-header" >الوحدة</b-th>
+                            <b-th class="green-header" style="width: 26.5%;" >الوصف</b-th>
+                            <b-th class="green-header" style="width: 18.5%;" >الوحدة</b-th>
                             <b-th class="green-header" >الكمية</b-th>
                             <b-th class="green-header" >سعر الوحدة</b-th>
                             <b-th class="green-header" >القيمة</b-th>
-                            <b-th class="green-header" >الملاحظات</b-th>
+                            <b-th class="green-header text-center" >الملاحظات</b-th>
                         </b-tr>
-                        <b-tr  v-for="(item,index) in submissionData.includes_data" :key="index">
+                        <b-tr  v-for="(item,index) in submissionData.includes_data" v-if="index <=8" :key="index">
                             <b-th class="content-item"> {{ item.content }} </b-th>
                             <b-th class="content-item">{{ item.unit }}</b-th>
                             <b-th class="content-item">{{ item.qty }}</b-th>
                             <b-th class="content-item">{{ item.price }}</b-th>
                             <b-th class="content-item">{{ item.qty * item.price }}</b-th>
-                            <b-th class="content-item">{{ item.notes }}</b-th>
+                            <b-th class="content-item text-center">{{ getValidData(item.notes)  }}</b-th>
                         </b-tr>
                         
                         
                     </b-tbody>
                 </b-table-simple>
-                <div style="padding-top: 8px;">
-                    <span style="padding:10px; padding-left: 147px; color: #ffffff; background-color: #05481e; "> إجمالي التعويض </span>
-                    <span style="padding:10px; padding-left: 137px; ">{{ totalComp() }}</span>
-                    <span style="padding:10px; padding-left: 95px; "> كتابة</span>
-                </div>
-                <div style="padding-top: 8px;">
-                    <span style="padding:10px; padding-left: 95px; color: #ffffff;  background-color: #05481e; "> إجمالي التعويض بدون ارض</span>
-                    <span style="padding:10px; padding-left: 137px; "></span>
-                    <span style="padding:10px; padding-left: 95px; "> كتابة</span>
-                </div>
+                
+                <b-table-simple small
+                                bordered
+                        > 
+                            <b-tbody>
+                                <b-tr>
+                                    <b-th style="width: 26.5%;" class="green-header" > إجمالي التعويض</b-th>
+                                    <b-th style="width: 18.5%;"  > {{ totalComp() }}</b-th>
+                                    <b-th  >كتابة:</b-th>
+                                    <b-th ></b-th>
+
+                                </b-tr>
+                                <b-tr>
+                                    <b-th class="green-header" > إجمالي التعويض بدون أرض</b-th>
+                                    <b-th  ></b-th>
+                                    <b-th  >كتابة:</b-th>
+                                    <b-th ></b-th>
+
+                                </b-tr>
+                            </b-tbody>
+                </b-table-simple>
+                
             </b-col>
             
         </b-row>
@@ -161,13 +195,48 @@
                 </b-table-simple>
             </b-col>
         </b-row> -->
-        <br><br>
+        <br>
+        <h3 style="color: #05481e; " class="text-center" >أعضاء اللجنة </h3>
+        
         <b-row>
             <b-col>
-                <b-table-simple bordered >
-                    <b-tbody style="text-align: right;">
-                        <b-tr >
-                            <b-th  class=" center-green text-center">اعضاء لجنة حصر العقارات</b-th>
+                <b-table-simple small bordered>
+                    <b-tbody>
+                        <b-tr>
+                            <b-th class="green_right_item" > مندوب الغرفة التجارية</b-th>
+                            <b-th class="green_right_item"> مندوب وزارة العدل</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th class="green_right_item" > مندوب الهيئة العامة لعقارات الدولة</b-th>
+                            <b-th class="green_right_item"> مندوب وزارة الداخلية</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th class="green_right_item" > مندوب وزارة الشؤون البلدية والقروية والإسكان</b-th>
+                            <b-th class="green_right_item"> مندوب الجهة المستفيدة</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                        </b-tr>
+                        <b-tr>
+                            <b-th style="color: aliceblue;" >.</b-th>
+                            <b-th style="color: aliceblue;" >.</b-th>
                         </b-tr>
                     </b-tbody>
                 </b-table-simple>
@@ -175,37 +244,10 @@
         </b-row>
         
         <b-row>
-            <b-col>
-                <b-table-simple bordered>
-                    <b-tbody>
-                        <b-tr>
-                            <b-th class="content-item" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                            <b-th class="content-item">الإمارة</b-th>
-                            <b-th class="content-item">وزارة البيئة والمياه والزراعة</b-th>
-                            <b-th class="content-item">الجهة المستفيدة</b-th>
-                        </b-tr>
-                        <b-tr>
-                            <b-th class="content-item">الاسم</b-th>
-                            <b-th class="content-item">الاسم</b-th>
-                            <b-th class="content-item">الاسم</b-th>
-                            <b-th class="content-item">الاسم</b-th>
-                        </b-tr>
-                        <b-tr>
-                            <b-th class="content-item">التاريخ</b-th>
-                            <b-th class="content-item">التاريخ</b-th>
-                            <b-th class="content-item">التاريخ</b-th>
-                            <b-th class="content-item">التاريخ</b-th>
-                        </b-tr>
-                        <b-tr>
-                            <b-th class="content-item">التوقيع</b-th>
-                            <b-th class="content-item">التوقيع</b-th>
-                            <b-th class="content-item">التوقيع</b-th>
-                            <b-th class="content-item">التوقيع</b-th>
-                        </b-tr>
-                    </b-tbody>
-                </b-table-simple>
-            </b-col>
-        </b-row>
+                        <b-col cols="4" class="mr-2" style="font-size: 10px;"  >رمز الوثيقة:[TP_OPS_ATM_01]</b-col>
+                        <b-col cols="5" ></b-col>
+                        <b-col cols="2" style="font-size: 10px;" >الاصدار:01</b-col>
+                    </b-row>
     </div>
 
 </template>
@@ -251,6 +293,15 @@ export default {
         // generateReport () {
         //     this.$refs.html2Pdf.generatePdf()
         // },
+        getValidData(data){
+            if (data == null) {
+                return "-"
+            }if (data == 'null') {
+                return "-"
+                
+            }
+            return data;
+        },
         getLast5( subNum ){
             return  subNum.slice(-5);
         },
@@ -263,7 +314,10 @@ export default {
                 data.forEach(element => {
                     total = total + (element.qty * element.price);
                 });
-                return total;
+                
+                return Number(total).toLocaleString() ;
+
+                // return total;
             }
     }
 }
@@ -275,6 +329,12 @@ export default {
 
 <style lang="scss" scoped >
 
+.green_right_item{
+    background-color: #05481e !important;
+    color: #ffffff !important;
+    text-align: left !important;
+    width: 50%;
+}
 .green-header{
     background-color: #05481e !important;
     color: #ffffff !important;
@@ -324,6 +384,12 @@ export default {
 .invoice-preview-wrapper_container{
 
 } 
+.green_right_item{
+    background-color: #05481e !important;
+    color: #ffffff !important;
+    text-align: left !important;
+    width: 50%;
+}
 .green-header{
     background-color: #05481e !important;
     color: #ffffff !important;

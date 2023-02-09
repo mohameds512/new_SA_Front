@@ -156,7 +156,7 @@ html[dir="rtl"]
    *{
      font-family: Sakkal Majalla !important;
      font-weight: bold;
-     font-size: 20px;
+     font-size: 18px;
    }
 
 

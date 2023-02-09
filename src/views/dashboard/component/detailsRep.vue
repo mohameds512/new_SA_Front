@@ -1380,7 +1380,7 @@ $min-name-width: 120px;
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
     color-adjust: exact !important; /*Firefox*/
-    
+    @page { size: landscape; }
   }
   .our_wrapper_for_container_details {
     .btn_print{
