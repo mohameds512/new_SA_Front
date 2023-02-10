@@ -30,25 +30,39 @@
                                                 <validation-observer ref="addProjectRules">
                                                     <b-form v-if="this.hide == true">
 
-                                                        <b-button @click="model_notes = true"  v-if="hasPermission('feedback_submissions')" style="margin-left: 20px;"> أضافة ملاحظة
+                                                        <b-button @click="model_notes = true"
+                                                                  v-if="hasPermission('feedback_submissions')"
+                                                                  style="margin-left: 20px;"> أضافة ملاحظة
                                                         </b-button>
                                                         <b-button @click="change_status(2)" variant="info"
-                                                                  v-if="this.form.submission[0].status != 2 && hasPermission('approve_submissions') && (this.form.submission[0].signature_eng && this.form.submission[0].signature_owner &&  this.form.submission[0].signature_poss )">
+                                                                  v-if="this.form.submission[0].status != 2 && hasPermission('approve_submissions') && (form.submission[0].signature_eng && (form.submission[0].signature_owner || form.submission[0].signature_vice) &&  form.submission[0].signature_poss )">
                                                             أعتماد
                                                             الطلب
                                                         </b-button>
 
-                                                        <b-button v-if="hasPermission('signOne_submissions')" @click="openSignature(1)" variant="primary"
+                                                        <b-button v-if="hasPermission('signOne_submissions')"
+                                                                  @click="openSignature(1)" variant="primary"
                                                                   class="mx-1">
                                                             توقيع المساح
                                                         </b-button>
 
-                                                        <b-button v-if="hasPermission('signTwo_submissions')" @click="openSignature(2)" variant="warning"
-                                                                  class="mx-1">
+
+                                                        <b-button
+                                                                v-if="hasPermission('signTwo_submissions') && !this.form.submission[0].signature_poss"
+                                                                @click="openSignature(4)" variant="danger"
+                                                                class="mx-1">
+                                                            توقيع الوكيل
+                                                        </b-button>
+
+                                                        <b-button
+                                                                v-if="hasPermission('signTwo_submissions') && !this.form.submission[0].signature_vice"
+                                                                @click="openSignature(2)" variant="warning"
+                                                                class="mx-1">
                                                             توقيع المالك
                                                         </b-button>
 
-                                                        <b-button v-if="hasPermission('signFinal_submissions')" @click="openSignature(3)" variant="success">
+                                                        <b-button v-if="hasPermission('signFinal_submissions')"
+                                                                  @click="openSignature(3)" variant="success">
                                                             توقيع رئيس اللجنة
                                                         </b-button>
 
@@ -264,7 +278,82 @@
                                             </div>
                                         </b-card-text>
                                     </b-tab>
+                                    <b-tab title="بيانات مقدم الطلب ">
+                                        <b-card-text>
+                                            <div class="add_project_details_wrapper">
+                                                <validation-observer ref="addProjectRules">
+                                                    <b-form v-if="this.hide == true">
+                                                        <b-row class="bg-white pt-2 pb-2">
 
+                                                            <b-col class="d-flex justify-content-center" md="8">
+                                                            </b-col>
+                                                        </b-row>
+
+                                                        <b-row v-for="(owner , i) in form.applicants" :key="i">
+                                                            <b-col md="4">
+                                                                <b-form-group class="text-left" label="اسم مقدم الطلب">
+                                                                    <validation-provider #default="{ errors }"
+                                                                                         name="اسم مقدم الطلب"
+                                                                                         rules="required">
+                                                                        <b-form-input v-model="owner.name"
+                                                                                      :state="errors.length > 0 ? false : null"
+                                                                                      placeholder="اسم مقدم الطلب"
+                                                                                      disabled/>
+                                                                        <small class="text-danger" v-if="errors[0]">هذا
+                                                                            الحقل
+                                                                            مطلوب</small>
+                                                                    </validation-provider>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                            <b-col md="4">
+                                                                <b-form-group class="text-left" label="رقم الجوال ">
+                                                                    <validation-provider #default="{ errors }"
+                                                                                         name=" رقم الجوال"
+                                                                                         rules="required">
+                                                                        <b-form-input v-model="owner.phone"
+                                                                                      :state="errors.length > 0 ? false : null"
+                                                                                      placeholder=" رقم الجوال"
+                                                                                      disabled/>
+                                                                        <small class="text-danger" v-if="errors[0]">هذا
+                                                                            الحقل
+                                                                            مطلوب</small>
+                                                                    </validation-provider>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                            <b-col md="4">
+                                                                <b-form-group class="text-left" label=" نوع الهوية ">
+                                                                    <validation-provider #default="{ errors }"
+                                                                                         name=" نوع الهوية"
+                                                                                         rules="required">
+                                                                        <b-form-input v-model="owner.id_type"
+                                                                                      :state="errors.length > 0 ? false : null"
+                                                                                      placeholder=" نوع الهوية "
+                                                                                      disabled/>
+                                                                        <!-- <v-select
+                                                                            placeholder="نوع الهوية"
+                                                                            :options="Array.from(personality , (el) => el)"
+                                                                            :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
+                                                                            v-model="submission.zone"
+                                                                            :reduce="(val) => val"
+                                                                            disabled
+                                                                        > -->
+                                                                        </v-select>
+                                                                        <small class="text-danger" v-if="errors[0]">هذا
+                                                                            الحقل
+                                                                            مطلوب</small>
+                                                                    </validation-provider>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                            <b-col md="2">
+
+                                                            </b-col>
+                                                        </b-row>
+
+                                                    </b-form>
+                                                </validation-observer>
+                                            </div>
+                                        </b-card-text>
+                                    </b-tab>
                                     <b-tab title="بيانات الصك ">
                                         <b-card-text>
                                             <div class="add_project_details_wrapper">
@@ -853,7 +942,8 @@
                                                                 <br/>
                                                                 <br/>
                                                                 <a :href="item.image" target="_blank">
-                                                                    <feather-icon icon="EyeIcon" class="text-primary mx-1 font-medium-4"></feather-icon>
+                                                                    <feather-icon icon="EyeIcon"
+                                                                                  class="text-primary mx-1 font-medium-4"></feather-icon>
                                                                 </a>
                                                             </b-col>
                                                             <b-modal hide-header-close v-model="model_floor"
@@ -1085,7 +1175,8 @@
                                             </div>
                                         </b-card-text>
                                     </b-tab>
-                                </b-tab><b-tab title="التوقيعات">
+                                    </b-tab>
+                                    <b-tab title="التوقيعات">
                                         <b-card-text>
                                             <div class="add_project_details_wrapper">
                                                 <validation-observer ref="addProjectRules">
@@ -1099,22 +1190,32 @@
                                                         <b-row>
                                                             <b-col md="12" class="justify-content-center">
                                                                 <div class="d-flex justify-content-between text-center">
-                                    <div>
-                                        <h4>توقيع المساح</h4>
-                                        <img v-if="form.submission[0].signature_eng"
-                                             :src="form.submission[0].signature_eng" width="200" height="70">
-                                    </div>
-                                    <div>
-                                        <h4>توقيع المالك</h4>
-                                        <img v-if="form.submission[0].signature_owner"
-                                             :src="form.submission[0].signature_owner" width="200" height="70">
-                                    </div>
-                                    <div>
-                                        <h4>توقيع رئيس اللجنة</h4>
-                                        <img v-if="form.submission[0].signature_poss"
-                                             :src="form.submission[0].signature_poss" width="200" height="70">
-                                    </div>
-                                </div>
+                                                                    <div>
+                                                                        <h4>توقيع المساح</h4>
+                                                                        <img v-if="form.submission[0].signature_eng"
+                                                                             :src="form.submission[0].signature_eng"
+                                                                             width="200" height="70">
+                                                                    </div>
+                                                                    <div v-if="form.submission[0].signature_vice">
+                                                                        <h4>توقيع الوكيل</h4>
+                                                                        <img v-if="form.submission[0].signature_vice"
+                                                                             :src="form.submission[0].signature_vice"
+                                                                             width="200" height="70">
+                                                                    </div>
+
+                                                                    <div v-else>
+                                                                        <h4>توقيع المالك</h4>
+                                                                        <img v-if="form.submission[0].signature_owner"
+                                                                             :src="form.submission[0].signature_owner"
+                                                                             width="200" height="70">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4>توقيع رئيس اللجنة</h4>
+                                                                        <img v-if="form.submission[0].signature_poss"
+                                                                             :src="form.submission[0].signature_poss"
+                                                                             width="200" height="70">
+                                                                    </div>
+                                                                </div>
                                                             </b-col>
                                                             <b-col md="12">
                                                                 <!-- <div>
@@ -1207,37 +1308,37 @@
                                     </b-tab>
                                     <b-tab title="التقارير">
                                         <b-card-text>
-                                            <div class="add_project_details_warpper" >
+                                            <div class="add_project_details_warpper">
                                                 <b-tabs pills card>
-                                                    <b-tab title=" المخطط التفصيلي " >
+                                                    <b-tab title=" المخطط التفصيلي ">
                                                         <b-card-text>
                                                             <details-rep
-                                                                :submissionData="form.submission[0]"
-                                                                :ownersData="form.owners[0]"
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners[0]"
                                                             ></details-rep>
                                                         </b-card-text>
                                                     </b-tab>
                                                     <b-tab title=" حصر العقار ">
                                                         <b-card-text>
                                                             <collect-includes
-                                                                :submissionData="form.submission[0]"
-                                                                :ownersData="form.owners[0]"
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners[0]"
                                                             ></collect-includes>
                                                         </b-card-text>
                                                     </b-tab>
-                                                    <b-tab title=" ملحق المشتملات " >
+                                                    <b-tab title=" ملحق المشتملات ">
                                                         <b-card-text>
                                                             <inclusions-supplement
-                                                                :submissionData="form.submission[0]"
-                                                                :ownersData="form.owners[0]"
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners[0]"
                                                             ></inclusions-supplement>
                                                         </b-card-text>
                                                     </b-tab>
-                                                    <b-tab title=" محضر تقدير " >
+                                                    <b-tab title=" محضر تقدير ">
                                                         <b-card-text>
                                                             <appreciation-miunte
-                                                                :submissionData="form.submission[0]"
-                                                                :ownersData="form.owners[0]"
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners[0]"
                                                             ></appreciation-miunte>
                                                             <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
                                                         </b-card-text>
@@ -1249,8 +1350,8 @@
                                     <b-tab v-if="form.submission[0].operation_type == 'دمج'" title="نموذج الدمج">
                                         <marge_report :submission="form.submission[0]"></marge_report>
                                     </b-tab>
-                                    <b-tab  v-if="form.submission[0].operation_type == 'فرز'" title="نموذج الفرز">
-                                      <isolate_report :submission="form.submission[0]"></isolate_report>
+                                    <b-tab v-if="form.submission[0].operation_type == 'فرز'" title="نموذج الفرز">
+                                        <isolate_report :submission="form.submission[0]"></isolate_report>
                                     </b-tab>
                                     <!--                                    <b-tab title="الملاحظات">-->
                                     <!--                                        <b-card-text>-->
@@ -1262,7 +1363,6 @@
                                     <!--                                        </b-card-text>-->
                                     <!--                                    </b-tab>-->
                                 </b-tabs>
-
 
 
                             </b-card>
@@ -1970,8 +2070,9 @@
             padding-top: 25px;
         }
     }
+
     @media print {
-        .hide_time_line{
+        .hide_time_line {
             display: none;
         }
     }

@@ -16,7 +16,7 @@
                                         <validation-provider #default="{ errors }" name="نوع المعاملة"
                                                             rules="required">
                                             <v-select
-                                                    :disabled="show_model_inputs > 8"
+                                                    :disabled="show_model_inputs > 9"
                                                     placeholder="نوع المعاملة"
                                                     :options="Array.from(all_operation_type , (el) => el)"
                                                     :dir="$store.state.appConfig.layout.isRTL ? 'rtl': 'ltr' "
@@ -281,8 +281,121 @@
                                         </validation-observer>
                                     </div>
                                 </b-overlay>
-                                <!-- بيانات الصك  -->
+
+                                <!-- بيانات مقدم الطلب  -->
                                 <b-overlay v-if="(show_model_inputs == 3)" variant="white" spinner-variant="primary"
+                                           blur="0" opacity=".75"
+                                           rounded="sm">
+                                    <div class="add_project_details_wrapper">
+                                        <validation-observer ref="addProjectRules">
+                                            <b-form v-if="this.hide == true">
+                                                <b-row class="bg-white pt-2 pb-2">
+                                                    <b-col md="12" class="back_ground">
+                                                        <p class="text-center"> بيانات مقدم الطلب </p>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-form-group class="text-right" v-if="ownersFormLenght() == 0">
+                                                    <b-button @click="addOwner"> اضف</b-button>
+                                                </b-form-group>
+                                                <b-row v-for="(applicant , i) in form.applicants" :key="i">
+                                                    <b-col md="3">
+                                                        <b-form-group class="text-right" label="اسم مقدم الطلب">
+                                                            <validation-provider #default="{ errors }" name="اسم مقدم الطلب"
+                                                                                 rules="required">
+                                                                <b-form-input v-model="applicant.name"
+                                                                              :state="errors.length > 0 ? false : null"
+                                                                              placeholder="اسم المالك"/>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="2">
+                                                        <b-form-group class="text-right" label="رقم الجوال ">
+                                                            <validation-provider #default="{ errors }"
+                                                                                 min="10" max="10"
+                                                                                 name=" رقم الجوال"
+                                                                                 rules="required">
+                                                                <b-form-input v-model="applicant.phone"
+                                                                              min="10" max="10"
+                                                                              :state="errors.length > 0 ? false : null"
+                                                                              placeholder=" رقم الجوال" type="number"/>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="3">
+                                                        <b-form-group  label="رقم الهوية " dir="rtl">
+                                                            <validation-provider #default="{ errors }"
+                                                                                 min="10" max="10"
+                                                                                 name=" رقم الهوية"
+                                                                                 rules="required">
+                                                                <b-form-input v-model="applicant.national_id"
+                                                                              min="10" max="10"
+
+                                                                              :state="errors.length > 0 ? false : null"
+                                                                              placeholder=" رقم الهوية" type="number"/>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="2">
+                                                        <b-form-group   dir="rtl" label=" نوع الهوية ">
+                                                            <validation-provider #default="{ errors }"
+                                                                                 name=" نوع الهوية"
+                                                                                 rules="required">
+                                                                <v-select
+                                                                        placeholder="نوع الهوية"
+                                                                        :options="Array.from(personality , (el) => el)"
+                                                                        dir="rtl"
+                                                                        v-model="applicant.id_type"
+                                                                        :reduce="(val) => val"
+                                                                >
+                                                                </v-select>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <b-col md="2">
+                                                        <b-row>
+                                                            <b-col cols="4">
+                                                                <b-form-group class="text-right" label=".  ">
+                                                                    <b-button @click="addApplicant"> اضف</b-button>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                            <b-col cols="4">
+                                                                <b-form-group class="text-right" label=" . ">
+                                                                    <b-button @click="form.applicants.pop()">حذف</b-button>
+                                                                </b-form-group>
+                                                            </b-col>
+                                                        </b-row>
+                                                    </b-col>
+                                                </b-row>
+                                                <b-row>
+                                                    <b-col cols="2 text-right pt-2">
+                                                        <b-button variant="primary" @click="show_model(2)">
+                                                            السابق
+                                                        </b-button>
+                                                    </b-col>
+
+                                                    <b-col cols="8 text-right pt-2">
+                                                    </b-col>
+                                                    <b-col cols="2 text-right pt-2">
+                                                        <b-button variant="info" @click="show_model(4)">
+                                                            التالي
+                                                        </b-button>
+                                                    </b-col>
+                                                </b-row>
+                                            </b-form>
+                                        </validation-observer>
+                                    </div>
+                                </b-overlay>
+
+                                <!-- بيانات الصك  -->
+                                <b-overlay v-if="(show_model_inputs == 4)" variant="white" spinner-variant="primary"
                                            blur="0" opacity=".75"
                                            rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -361,7 +474,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(2)">
+                                                        <b-button variant="primary" @click="show_model(3)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -369,7 +482,7 @@
                                                     <b-col cols="8 text-right pt-2">
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="info" @click="show_model(4)">
+                                                        <b-button variant="info" @click="show_model(5)">
                                                             التالي
                                                         </b-button>
                                                     </b-col>
@@ -379,7 +492,7 @@
                                     </div>
                                 </b-overlay>
                                 <!-- حدود العقار  بالصك-->
-                                <b-overlay v-if="(show_model_inputs == 4)" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 5)" variant="white" spinner-variant="primary"
                                            blur="0" opacity=".75"
                                            rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -505,7 +618,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(3)">
+                                                        <b-button variant="primary" @click="show_model(4)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -516,7 +629,7 @@
                                                         <!-- <b-button variant="info" @click="show_model(5)" >
                                                             التالي
                                                         </b-button> -->
-                                                        <b-button variant="info" @click="checkSubmit(5)">
+                                                        <b-button variant="info" @click="checkSubmit(6)">
                                                             تسجيل المرحلة الاولي
                                                         </b-button>
                                                     </b-col>
@@ -526,7 +639,7 @@
                                     </div>
                                 </b-overlay>
                                 <!-- بيانات العقار  -->
-                                <b-overlay v-if="(show_model_inputs == 5)" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 6)" variant="white" spinner-variant="primary"
                                            blur="0" opacity=".75"
                                            rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -656,7 +769,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary"  @click="show_model(4)">
+                                                        <b-button variant="primary"  @click="show_model(5)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -664,7 +777,7 @@
                                                     <b-col cols="8 text-right pt-2">
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="info" @click="show_model(6)">
+                                                        <b-button variant="info" @click="show_model(7)">
                                                             التالي
                                                         </b-button>
                                                     </b-col>
@@ -674,7 +787,7 @@
                                     </div>
                                 </b-overlay>
                                 <!-- حدود العقار -->
-                                <b-overlay v-if="(show_model_inputs == 6)" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 7)" variant="white" spinner-variant="primary"
                                            blur="0" opacity=".75"
                                            rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -808,7 +921,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(5)">
+                                                        <b-button variant="primary" @click="show_model(6)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -817,7 +930,7 @@
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
 
-                                                        <b-button variant="info" @click="show_model(7)">
+                                                        <b-button variant="info" @click="show_model(8)">
                                                             التالي
                                                         </b-button>
                                                     </b-col>
@@ -827,7 +940,7 @@
                                     </div>
                                 </b-overlay>
                                 <!--  الاحداثيات  -->
-                                <b-overlay v-if="(show_model_inputs == 7)" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 8)" variant="white" spinner-variant="primary"
                                            blur="0" opacity=".75"
                                            rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -898,7 +1011,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(6)">
+                                                        <b-button variant="primary" @click="show_model(7)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -906,7 +1019,7 @@
                                                     <b-col cols="8 text-right pt-2">
                                                     </b-col>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="info" @click="show_model(8)">
+                                                        <b-button variant="info" @click="show_model(9)">
                                                             التالي
                                                         </b-button>
                                                     </b-col>
@@ -916,7 +1029,7 @@
                                     </div>
                                 </b-overlay>
                                 <!-- المساحات بموجب الحصر الميداني   -->
-                                <b-overlay v-if="(show_model_inputs == 8)" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 9)" variant="white" spinner-variant="primary"
                                            blur="0" opacity=".75"
                                            rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -962,7 +1075,7 @@
                                                 </b-row>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(7)">
+                                                        <b-button variant="primary" @click="show_model(8)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -973,7 +1086,7 @@
                                                         <!-- <b-button variant="info" @click="show_model(8)" >
                                                             التالي
                                                         </b-button> -->
-                                                        <b-button variant="info" @click="checkSubmit(9)">
+                                                        <b-button variant="info" @click="checkSubmit(10)">
                                                             انهاء المرحلة الثانية
                                                         </b-button>
                                                     </b-col>
@@ -983,7 +1096,7 @@
                                     </div>
                                 </b-overlay>
                                 <!--  المشتمالات -->
-                                <b-overlay v-if="(show_model_inputs == 9 )" variant="white" spinner-variant="primary"
+                                <b-overlay v-if="(show_model_inputs == 10 )" variant="white" spinner-variant="primary"
                                         blur="0" opacity=".75"
                                         rounded="sm">
                                     <div class="add_project_details_wrapper">
@@ -1297,7 +1410,7 @@
                                                 </div>
                                                 <b-row>
                                                     <b-col cols="2 text-right pt-2">
-                                                        <b-button variant="primary" @click="show_model(8)">
+                                                        <b-button variant="primary" @click="show_model(9)">
                                                             السابق
                                                         </b-button>
                                                     </b-col>
@@ -1478,6 +1591,12 @@
                         national_id: null,
                         id_type: null,
                     }],
+                    applicants: [{
+                        name: null,
+                        phone: null,
+                        national_id: null,
+                        id_type: null,
+                    }],
                     attachs: [{
                         file: null,
                         note: null,
@@ -1641,8 +1760,10 @@
 
                     console.log(this.$store.getters['pgc_forms/showSub']);
                     this.form.owners = this.$store.getters['pgc_forms/showSub'].owners
+                    this.form.applicants = this.$store.getters['pgc_forms/showSub'].applicants
                     let data = this.$store.getters['pgc_forms/showSub'];
                     delete data.owners;
+                    delete data.applicants;
                     this.form.submission = data;
                     this.form.submission.restrict_border = data.restrict_border ? data.restrict_border : {};
                     this.form.submission.contract_border_details = data.contract_border_details ? data.contract_border_details : {};
@@ -1731,6 +1852,10 @@
             addOwner() {
                 this.form.owners.push({name: null, phone: null, id_type: null});
             },
+            addApplicant() {
+                this.form.applicants.push({name: null, phone: null, id_type: null});
+            },
+
             addCoor() {
                 if (!this.coorsFormLenght()) {
 
@@ -1823,7 +1948,7 @@
                         timer: 1500,
                     })
 
-                    if ($state == 5 || $state == 9) {
+                    if ($state == 6 || $state == 9) {
                         this.show_model($state)
                     } else {
 
