@@ -294,8 +294,8 @@
                                                         <p class="text-center"> بيانات مقدم الطلب </p>
                                                     </b-col>
                                                 </b-row>
-                                                <b-form-group class="text-right" v-if="ownersFormLenght() == 0">
-                                                    <b-button @click="addOwner"> اضف</b-button>
+                                                <b-form-group class="text-right" v-if="applictionsFormLenght() == 0">
+                                                    <b-button @click="addApplicant"> اضف</b-button>
                                                 </b-form-group>
                                                 <b-row v-for="(applicant , i) in form.applicants" :key="i">
                                                     <b-col md="3">
@@ -422,7 +422,59 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="3">
+                                                    <b-col md="6">
+                                                        <b-row>
+                                                            <b-col cols="4" >
+                                                                <b-form-group class="text-right" label="السنة">
+                                                                <validation-provider #default="{ errors }" name=" السنة"
+                                                                        rules="required">
+                                                                    <v-select
+                                                                        placeholder="السنة"
+                                                                        :options="Array.from(retHijriYears()  , (el) => el)"
+                                                                        v-model = "hYearV"
+                                                                        :reduce="(val) => val"
+                                                                    ></v-select>
+                                                                    <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                        مطلوب</small>
+                                                                </validation-provider>
+                                                            </b-form-group>
+                                                            </b-col>
+                                                            <b-col cols="4" >
+                                                                <b-form-group class="text-right" label="الشهر">
+                                                                <validation-provider #default="{ errors }" name=" الشهر"
+                                                                        rules="required">
+                                                                    <v-select
+                                                                        placeholder="الشهر"
+                                                                        :options="Array.from(HMonth , (el) => el)"
+                                                                        v-model = "hMonthV"
+                                                                        :reduce="(val) => val"
+                                                                        @change="retHijriDays"
+                                                                    ></v-select>
+                                                                    <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                        مطلوب</small>
+                                                                </validation-provider>
+                                                            </b-form-group>
+                                                            </b-col>
+                                                            <b-col cols="4" >
+                                                                <b-form-group class="text-right" label="اليوم">
+                                                                <validation-provider #default="{ errors }" name=" اليوم"
+                                                                        rules="required">
+                                                                    <v-select v-if="hMonthV != null"
+                                                                        placeholder="اليوم"
+                                                                        :options="Array.from(retHijriDays() , (el) => el)"
+                                                                        v-model = "hDayV"
+                                                                        :reduce="(val) => val"
+                                                                        @change="getHijriDate"
+                                                                    ></v-select>
+                                                                    <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                        مطلوب</small>
+                                                                </validation-provider>
+                                                                <!-- {{ getHijriDate()  }}   -->
+                                                            </b-form-group>
+                                                            </b-col>
+                                                        </b-row>
+                                                    </b-col>
+                                                    <!-- <b-col md="3">
                                                         <b-form-group class="text-right" label="تاريخه">
                                                             <validation-provider #default="{ errors }" name="رقم الصك"
                                                                                  rules="required">
@@ -436,14 +488,14 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
-                                                    </b-col>
-                                                    <b-col md="3">
+                                                    </b-col> -->
+                                                    <!-- <b-col md="3">
                                                         <b-form-group class="text-right mt-1" label="  تاريخه الهجرى" >
                                                             <p class="font-weight-bolder">
                                                                 {{ new Date(form.submission.contract_date).toLocaleString('ar-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric'})}}
                                                             </p>
                                                         </b-form-group>
-                                                    </b-col>
+                                                    </b-col> -->
                                                     <b-col md="6">
                                                         <b-form-group class="text-right" label="مصدره ">
                                                             <validation-provider #default="{ errors }" name="مصدره "
@@ -1571,6 +1623,9 @@
         },
         data() {
             return {
+                hYearV: null,
+                hMonthV: null,
+                hDayV: null,
                 model_inc_edit: false,
                 includesForm: {
                     build_id: null,
@@ -1677,6 +1732,20 @@
                 zones: [
                     '01','02','03'
                 ],
+                HMonth:[
+                    'محرم',
+                    'صفر',
+                    'ربيع الاول',
+                    'ربيع آخر',
+                    'جمادى الاول',
+                    'جمادى آخر',
+                    'رجب',
+                    'شعبان',
+                    'رمضان',
+                    'شوال',
+                    'ذو القعدة',
+                    'ذو الحجة',
+                ],
                 plad_num: [
                     '01','02','03','04','05','06','07','08'
                 ],
@@ -1778,6 +1847,35 @@
             },
         },
         methods: {
+            getHijriDate(){
+                let ddate = this.hDayV +" " + this.hMonthV + " " + this.hYearV + " هـ"
+                // if (this.hDayV != null && this.hMonth != null && this.hYearV != null) {
+                //     this.form.submission.contract_date = ddate;
+                // }
+                this.form.submission.contract_date = ddate;
+
+                return this.form.submission.contract_date;
+            },
+            retHijriDays(){
+                let length=30;
+                if (this.hMonthV != null) {
+                    if (this.hMonthV == 'محرم' || this.hMonthV == 'ربيع أول' || this.hMonthV == 'جمادي الأول' ||this.hMonthV == 'رجب' || this.hMonthV == 'شوال' ||this.hMonthV == 'ذو الحجة') {
+                        length = 29;
+                    }
+                }
+                var hhDays = [];
+                for (let index = 1; index <= length; index++) {
+                    hhDays.push(index)
+                }
+                return hhDays;
+            },
+            retHijriYears(){
+                var hhyears =  [];
+                for (let index = 1444; index > 1250; index--) {
+                    hhyears.push(index);
+                }  
+                return hhyears;
+            },
             passUnite() {
                 if (this.includesForm.build_id && this.includesForm.build_desc_id) {
                     let build_desc = this.$store.getters['dashboard/getLookups'].includes_type.filter((el) => el.id == this.includesForm.build_id)[0].build_desc;
@@ -1872,6 +1970,10 @@
             ownersFormLenght() {
                 var x = this.form.owners;
                 return x.length;
+            },
+            applictionsFormLenght() {
+                // var x = this.applicants;
+                // return x.length;
             },
             coorsFormLenght() {
                 var x = this.form.submission.coordinates;

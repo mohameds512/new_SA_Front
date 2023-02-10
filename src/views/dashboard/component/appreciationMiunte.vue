@@ -103,8 +103,8 @@
                                     <b-th class="green-header" variant="secondary">رقم الصك</b-th>
                                     <b-th class="content-item">{{ submissionData.contract_number}}</b-th>
                                     <b-th class="green-header" variant="secondary">تاريخه</b-th>
-                                    <b-th class="content-item">{{ new Date(submissionData.contract_date).toLocaleString('ar-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric'})}}
-</b-th>
+                                    <b-th class="content-item">{{ submissionData.contract_date}}</b-th>
+                                    <!-- <b-th class="content-item">{{ new Date(submissionData.contract_date).toLocaleString('ar-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric'})}}</b-th> -->
                                     <b-th class="green-header" variant="secondary">مصدره </b-th>
                                     <b-th class="content-item" colspan="3">{{submissionData.contract_source}}</b-th>
                                 </b-tr>
