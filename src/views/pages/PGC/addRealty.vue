@@ -204,13 +204,15 @@
                                                             <validation-provider #default="{ errors }"
                                                                                 min="10" max="10"
                                                                                  name=" رقم الجوال"
-                                                                                 rules="required">
+                                                                                 
+                                                                                 rules="min:10">
                                                                 <b-form-input v-model="owner.phone"
                                                                 min="10" max="10"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الجوال" type="number"/>
-                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                    مطلوب</small>
+                                                                <small class="text-danger" v-if="errors[0]"> 
+                                                                    يجب ان يكون 10 ارقام
+                                                                    </small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
@@ -219,13 +221,14 @@
                                                             <validation-provider #default="{ errors }"
                                                             min="10" max="10"
                                                                                  name=" رقم الهوية"
-                                                                                 rules="required">
+                                                                                 rules="min:10">
                                                                 <b-form-input v-model="owner.national_id"
                                                                 min="10" max="10"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الهوية" type="number"/>
-                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                    مطلوب</small>
+                                                                <small class="text-danger" v-if="errors[0]">
+                                                                    يجب ان يكون 10 ارقام
+                                                                </small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
@@ -464,14 +467,15 @@
                                                                         :options="Array.from(retHijriDays() , (el) => el)"
                                                                         v-model = "hDayV"
                                                                         :reduce="(val) => val"
-                                                                        @change="getHijriDate"
+                                                                        change="getHijriDate()"
                                                                     ></v-select>
                                                                     <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                         مطلوب</small>
                                                                 </validation-provider>
-                                                                <!-- {{ getHijriDate()  }}   -->
+                                                                <!-- {{ getHijriDate() }} -->
                                                             </b-form-group>
                                                             </b-col>
+                                                            
                                                         </b-row>
                                                     </b-col>
                                                     <!-- <b-col md="3">
@@ -496,7 +500,7 @@
                                                             </p>
                                                         </b-form-group>
                                                     </b-col> -->
-                                                    <b-col md="6">
+                                                    <b-col md="4">
                                                         <b-form-group class="text-right" label="مصدره ">
                                                             <validation-provider #default="{ errors }" name="مصدره "
                                                                                  rules="required">
@@ -508,7 +512,7 @@
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
-                                                    <b-col md="6">
+                                                    <b-col md="4">
                                                         <b-form-group class="text-right" label="المساحة حسب الصك ">
                                                             <validation-provider #default="{ errors }"
                                                                                  name="المساحة حسب الصك "
@@ -521,6 +525,22 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
+                                                    </b-col>
+                                                    <b-col cols="4" >
+                                                        <b-form-group class="text-right" label="حالة الصك">
+                                                        <validation-provider #default="{ errors }" name=" حالة الصك"
+                                                                rules="required">
+                                                            <v-select 
+                                                                placeholder="حالة الصك"
+                                                                :options="Array.from(contractStatusArray , (el) => el)"
+                                                                v-model = "form.submission.contract_status"
+                                                                :reduce="(val) => val"
+                                                            ></v-select>
+                                                            <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                مطلوب</small>
+                                                        </validation-provider>
+                                                        
+                                                    </b-form-group>
                                                     </b-col>
 
                                                 </b-row>
@@ -1697,6 +1717,7 @@
                         center: null,
                         contract_type: null,
                         contract_area: null,
+                        contract_status: null,
                         build_area: null,
                         unbuild_area: null,
                         total_area: null,
@@ -1720,6 +1741,7 @@
                 },
                 show_model_inputs: 1,
                 hide: true,
+                contractStatusArray: ['الكتروني', 'مجهول','يدوي'],
                 floors: [
                     ' تحت الارضي', ' الارضي', ' الاول', ' الثاني', ' الثالث', ' الرابع', ' الخامس', 'أخري',
                 ],
@@ -1732,20 +1754,21 @@
                 zones: [
                     '01','02','03'
                 ],
-                HMonth:[
-                    'محرم',
-                    'صفر',
-                    'ربيع الاول',
-                    'ربيع آخر',
-                    'جمادى الاول',
-                    'جمادى آخر',
-                    'رجب',
-                    'شعبان',
-                    'رمضان',
-                    'شوال',
-                    'ذو القعدة',
-                    'ذو الحجة',
-                ],
+                HMonth:[1,2,3,4,5,6,7,8,9,10,11,12],
+                // HMonth:[
+                //     'محرم',
+                //     'صفر',
+                //     'ربيع الاول',
+                //     'ربيع آخر',
+                //     'جمادى الاول',
+                //     'جمادى آخر',
+                //     'رجب',
+                //     'شعبان',
+                //     'رمضان',
+                //     'شوال',
+                //     'ذو القعدة',
+                //     'ذو الحجة',
+                // ],
                 plad_num: [
                     '01','02','03','04','05','06','07','08'
                 ],
@@ -1848,7 +1871,7 @@
         },
         methods: {
             getHijriDate(){
-                let ddate = this.hDayV +" " + this.hMonthV + " " + this.hYearV + " هـ"
+                let ddate = this.hDayV +"/ " + this.hMonthV + " /" + this.hYearV + " هـ"
                 // if (this.hDayV != null && this.hMonth != null && this.hYearV != null) {
                 //     this.form.submission.contract_date = ddate;
                 // }
@@ -1972,8 +1995,8 @@
                 return x.length;
             },
             applictionsFormLenght() {
-                // var x = this.applicants;
-                // return x.length;
+                var x = this.form.applicants;
+                return x.length;
             },
             coorsFormLenght() {
                 var x = this.form.submission.coordinates;
@@ -2039,6 +2062,7 @@
                     })
             },
             checkSubmit($state) {
+                this.getHijriDate();
                 this.$store.dispatch('pgc_forms/save_subs', {
                     id: this.$route.params.id,
                     query: this.form,
@@ -2050,7 +2074,7 @@
                         timer: 1500,
                     })
 
-                    if ($state == 6 || $state == 9) {
+                    if ($state == 6 || $state == 10) {
                         this.show_model($state)
                     } else {
 

@@ -382,23 +382,19 @@
                                                             <b-col md="6">
                                                                 <b-form-group class="text-left" label="تاريخه">
                                                                     <validation-provider #default="{ errors }"
-                                                                                         name="رقم الصك"
-                                                                                         rules="required">
+
+                                                                                        rules="required">
                                                                         <b-form-input
                                                                                 v-model="form.submission[0].contract_date"
                                                                                 :state="errors.length > 0 ? false : null"
                                                                                 placeholder="  تاريخه" disabled/>
-                                                                        <!-- <b-form-datepicker
-                                                                            v-model="submission.submission_history"
-                                                                            :state="errors.length > 0 ? false : null"
-                                                                            label-no-date-selected="تاريخه " disabled /> -->
                                                                         <small class="text-danger" v-if="errors[0]">هذا
                                                                             الحقل
                                                                             مطلوب</small>
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-                                                            <b-col md="6">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-left" label="مصدره ">
                                                                     <validation-provider #default="{ errors }"
                                                                                          name="مصدره "
@@ -414,16 +410,16 @@
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-                                                            <b-col md="6">
+                                                            <b-col md="4">
                                                                 <b-form-group class="text-left"
-                                                                              label="المساحة حسب السك ">
+                                                                        label="المساحة حسب الصك ">
                                                                     <validation-provider #default="{ errors }"
-                                                                                         name="المساحة حسب السك "
+                                                                                         name="المساحة حسب الصك "
                                                                                          rules="required">
                                                                         <b-form-input
                                                                                 v-model="form.submission[0].contract_area"
                                                                                 :state="errors.length > 0 ? false : null"
-                                                                                placeholder="المساحة حسب السك "
+                                                                                placeholder="المساحة حسب الصك "
                                                                                 disabled/>
                                                                         <small class="text-danger" v-if="errors[0]">هذا
                                                                             الحقل
@@ -431,7 +427,23 @@
                                                                     </validation-provider>
                                                                 </b-form-group>
                                                             </b-col>
-
+                                                            <b-col md="4">
+                                                                <b-form-group class="text-left"
+                                                                              label="حالة الصك">
+                                                                    <validation-provider #default="{ errors }"
+                                                                                         name="حالة الصك"
+                                                                                         rules="required">
+                                                                        <b-form-input
+                                                                                v-model="form.submission[0].contract_status"
+                                                                                :state="errors.length > 0 ? false : null"
+                                                                                placeholder="حالة الصك"
+                                                                                disabled/>
+                                                                        <small class="text-danger" v-if="errors[0]">هذا
+                                                                            الحقل
+                                                                            مطلوب</small>
+                                                                    </validation-provider>
+                                                                </b-form-group>
+                                                            </b-col>
                                                         </b-row>
 
                                                     </b-form>

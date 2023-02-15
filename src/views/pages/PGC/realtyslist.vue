@@ -9,7 +9,7 @@
             <!--                <b-button variant="primary"> اضافة عقار </b-button>-->
             <!--            </router-link>-->
 
-            <router-link :to="`/building_desc`" style="margin-right: 15px;">
+            <router-link :to="`/building_desc`" style="margin-right: 15px;" v-if="hasPermission('add_includes')">
                 <b-button variant="primary"> انواع المشتمالات و الوصف</b-button>
             </router-link>
         </div>
@@ -78,7 +78,7 @@
         </div>
         <!-- {{ $store.getters['dashboard/allSubmission'] }} -->
         <!-- {{  $store.getters['dashboard/getSubs'].submissions  }}   -->
-
+        
         <b-table
                 class="text-center"
                 striped

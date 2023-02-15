@@ -9,7 +9,7 @@
         </b-row>
         <b-row>
             <b-col md="12" class="justify-content-start d-flex">
-                <b-button  variant="primary" @click="editDashMap()"
+                <b-button  variant="primary" @click="editDashMap()" v-if="hasPermission('add_dashMap')"
                             class="mb-2">
                     تحديث الخريطة   
                 </b-button>

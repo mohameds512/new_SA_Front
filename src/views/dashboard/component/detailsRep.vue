@@ -3,6 +3,7 @@
     <!-- id="all_main_pdf_details_wrapper" -->
     <div class="btn_print">
       <br>
+      {{ returnFloorsArea('تحت الارضي') }}
       <b-button
                 variant="success"
                 class="invoice-actions"
@@ -12,6 +13,8 @@
             طباعة
         </b-button>
         <br>
+        <!-- {{ submissionData.includes }} -->
+        
     </div>
         
         
@@ -99,20 +102,20 @@
           </div>
           <div class="three one">
             <span class="name bg_main_color">اسم المشروع</span>
-            <span v-if="ownersData">{{
-              handlerOfNullProperty(ownersData.project_name)
+            <span v-if="submissionData">{{
+              handlerOfNullProperty(submissionData.pro_name)
             }}</span>
           </div>
           <div class="four one">
             <span class="name bg_main_color">استعمال العقار</span>
-            <span v-if="ownersData">{{
-              handlerOfNullProperty(ownersData.building_used)
+            <span v-if="submissionData">{{
+              handlerOfNullProperty(submissionData.submission_using)
             }}</span>
           </div>
           <div class="five one">
             <span class="name bg_main_color">تصنيف العقار</span>
-            <span v-if="ownersData">{{
-              handlerOfNullProperty(ownersData.building_type)
+            <span v-if="submissionData">{{
+              handlerOfNullProperty(submissionData.building_type)
             }}</span>
           </div>
         </div>
@@ -170,34 +173,34 @@
                   <div class="title bg_main_color">
                     <span>بناء</span>
                   </div>
-                  <div class="wrapper_data">
+                  <div class="wrapper_data text-center">
                     <div class="one">
                       <span class="names bg_main_color">تحت الارضي</span>
-                      <span></span>
+                      <span  > {{ returnFloorsArea('تحت الارضي') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">الارضي</span>
-                      <span></span>
+                      <span>   {{ returnFloorsArea(' الارضي') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">اول</span>
-                      <span></span>
+                      <span>  {{ returnFloorsArea(' الاول') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">ثاني</span>
-                      <span></span>
+                      <span>  {{ returnFloorsArea(' الثاني') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">ثالث</span>
-                      <span></span>
+                      <span>  {{ returnFloorsArea(' الثالث') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">رابع</span>
-                      <span></span>
+                      <span>  {{ returnFloorsArea(' الرابع') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">خامس</span>
-                      <span></span>
+                      <span>  {{ returnFloorsArea(' الخامس') }} </span>
                     </div>
                     <div class="one two">
                       <span class="names bg_main_color">المجموع</span>
@@ -785,12 +788,12 @@
                 </div>
                 <div class="all_inputs with_border_bottom">
                   <div class="inputs_one with_border_left">
-                    <span class="input_number">___</span>
+                    <span class="input_number">009</span>
                     <!-- <span class="input_number with_border_left">24</span>
                     <span class="input_number">25</span> -->
                   </div>
                   <div class="inputs_one a_b with_border_left">
-                    <span class="input_number just_two_inputs">___</span>
+                    <span class="input_number just_two_inputs">{{ submissionData.pro_num }}</span>
                   </div>
                   <div class="inputs_one">
                     <span class="input_number just_two_inputs">{{
@@ -885,6 +888,23 @@ export default {
   },
 
   methods: {
+    returnFloorsArea(theFloor){
+      let x = [];
+      this.submissionData.includes.forEach(element => {
+        if (element.build_id == 1) {
+          x.push(element)
+        }
+      });
+      let floorItem = x[0].floors;
+      let floorArea = 0;
+      floorItem.forEach(element => {
+        if (element.floor == theFloor ) {
+          floorArea = element.area
+        }
+      });
+      
+      return floorArea;
+    },
     printInvoice() {
       window.print();
     },
