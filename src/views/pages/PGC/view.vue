@@ -1334,7 +1334,7 @@
                                                         <b-card-text>
                                                             <collect-includes
                                                                     :submissionData="form.submission[0]"
-                                                                    :ownersData="form.owners[0]"
+                                                                    :ownersData="form.owners"
                                                             ></collect-includes>
                                                         </b-card-text>
                                                     </b-tab>
@@ -1346,12 +1346,47 @@
                                                             ></inclusions-supplement>
                                                         </b-card-text>
                                                     </b-tab>
+                                                    <b-tab title="  ملحق المشتملات 2" v-if="form.submission[0].includes_data.length > 51"   >
+                                                        <b-card-text>
+                                                            <inclusions-supplement2
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners[0]"
+                                                            ></inclusions-supplement2>
+                                                        </b-card-text>
+                                                    </b-tab>
                                                     <b-tab title=" محضر تقدير ">
                                                         <b-card-text>
                                                             <appreciation-miunte
                                                                     :submissionData="form.submission[0]"
-                                                                    :ownersData="form.owners[0]"
+                                                                    :ownersData="form.owners"
                                                             ></appreciation-miunte>
+                                                            <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                    <b-tab title="ملحق محضر تقدير " v-if="form.submission[0].includes_data.length > 12">
+                                                        <b-card-text>
+                                                            <appreciation-miunte2
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners"
+                                                            ></appreciation-miunte2>
+                                                            <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                    <b-tab title="ملحق محضر تقدير 2" v-if="form.submission[0].includes_data.length > 38">
+                                                        <b-card-text>
+                                                            <appreciation-miunte3
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners"
+                                                            ></appreciation-miunte3>
+                                                            <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
+                                                        </b-card-text>
+                                                    </b-tab>
+                                                    <b-tab title="ملحق محضر تقدير 3" v-if="form.submission[0].includes_data.length > 61">
+                                                        <b-card-text>
+                                                            <appreciation-miunte4
+                                                                    :submissionData="form.submission[0]"
+                                                                    :ownersData="form.owners"
+                                                            ></appreciation-miunte4>
                                                             <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
                                                         </b-card-text>
                                                     </b-tab>
@@ -1465,8 +1500,12 @@
     // import detailsRep from "@/views/dashboard/component/detailsRep.vue";
     import collectIncludes from "@/views/dashboard/component/collectIncludes.vue";
     import appreciationMiunte from "@/views/dashboard/component/appreciationMiunte.vue";
+    import appreciationMiunte2 from "@/views/dashboard/component/appreciationMiunte2.vue";
+    import appreciationMiunte3 from "@/views/dashboard/component/appreciationMiunte3.vue";
+    import appreciationMiunte4 from "@/views/dashboard/component/appreciationMiunte4.vue";
 
     import inclusionsSupplement from "@/views/dashboard/component/inclusionsSupplement.vue";
+    import inclusionsSupplement2 from "@/views/dashboard/component/inclusionsSupplement2.vue";
 
     import {formatDate} from '@/@core/utils/filter'
     import Marge_report from "@/views/pages/PGC/marge_report";
@@ -1555,7 +1594,11 @@
             Isolate_report,
             Marge_report,
             inclusionsSupplement,
+            inclusionsSupplement2,
             appreciationMiunte,
+            appreciationMiunte2,
+            appreciationMiunte3,
+            appreciationMiunte4,
             collectIncludes,
             Report,
             detailsRep,

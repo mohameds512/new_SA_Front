@@ -67,16 +67,16 @@
                     </b-row>
         
         <div>
-            <h3 style="color:  rgb(11, 55, 2); margin-right: 20px; "> محضر تقدير </h3>
-            <div style="padding-right: 15px;">
+            <h3 style="color:  rgb(11, 55, 2); margin-right: 20px; ">ملحق محضر تقدير </h3>
+            <!-- <div style="padding-right: 15px;">
                 تاريخ نهاية إجراءات قرار لجنة التقدير     /      /          14هـ
 بناءً على الأمر السامي الكريم رقم (……………) الصادر بتاريخ  ..../…./………هــ القاضي بالموافقة على الآلية المقترحة لنزع الملكيات وإعادة توطين السكان بمشروع .............................، وعلى الأمر السامي الكريم رقم (..............) في ...../....../.............هـ القاضي بالموافقة على ...............................، تم شخوص اللجنة المشكلة بموجب المادة السابعة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المصادق عليه بالمرسوم الملكي رقم (م/15) بتاريخ (11/03/1424هـ) على العقار الموضح بياناته أدناه، واتضح أن المعلومات المبينة صحيحة وأن الأسعار التي حددت أخذت بعين الاعتبار موقع العقار بالنسبة للمنطقة والعقارات المجاورة وكذلك بحسب وصف العقار  في محضر الحصر المعتد من قبل لجنة الحصر المشكلة حسب نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المشار إليه ولائحته التنفيذية، كما أن اللجنة اتبعت في تقديراتها طريقة (...........) وفقاً للمعايير والضوابط التي تتبعها الهيئة السعودية للمقيمين المعتمدين وفقاً للتالي:
 
-            </div>
+            </div> -->
         </div>
         
 
-        <b-row>
+        <!-- <b-row>
             
                     <b-col>
                 <h3 style="color:  rgb(11, 55, 2); text-align: right;"> أولاً: بيانات ووصف العقار</h3>
@@ -108,7 +108,6 @@
                                     <b-th class="content-item">{{ submissionData.contract_number}}</b-th>
                                     <b-th class="green-header" variant="secondary">تاريخه</b-th>
                                     <b-th class="content-item">{{ submissionData.contract_date}}</b-th>
-                                    <!-- <b-th class="content-item">{{ new Date(submissionData.contract_date).toLocaleString('ar-u-ca-islamic', { year: 'numeric', month: 'long', day: 'numeric'})}}</b-th> -->
                                     <b-th class="green-header" variant="secondary">مصدره </b-th>
                                     <b-th class="content-item" colspan="3">{{submissionData.contract_source}}</b-th>
                                 </b-tr>
@@ -132,12 +131,12 @@
 
                         </b-table-simple>
                     </b-col>
-                </b-row>
-        <br>
+        </b-row> -->
+        
         
         <b-row>
             <b-col>
-                <h3 style="color:  rgb(11, 55, 2); text-align: right;">  ثانياً: التقديرات </h3>
+                <h3 style="color:  rgb(11, 55, 2); text-align: right;">   التقديرات </h3>
                 
                 <b-table-simple small bordered>
                     <b-tbody>
@@ -149,8 +148,8 @@
                             <b-th class="green-header" >القيمة</b-th>
                             <b-th class="green-header text-center" >الملاحظات</b-th>
                         </b-tr>
-                        <b-tr  v-for="(item,index) in submissionData.includes_data" v-if="index <=12" :key="index">
-                            <b-th class="content-item"> {{ item.content }} </b-th>
+                        <b-tr  v-for="(item,index) in submissionData.includes_data" v-if="index > 37 && index < 62" :key="index">
+                            <b-th class="content-item"> {{ index }} </b-th>
                             <b-th class="content-item">{{ item.unit }}</b-th>
                             <b-th class="content-item">{{ item.qty }}</b-th>
                             <b-th class="content-item">{{ item.price }}</b-th>
@@ -322,10 +321,11 @@ export default {
         totalComp(){
                 let data = this.submissionData.includes_data;
                 let total = 0 ;
-                data.forEach((element , index) => {
-                    if (index < 13) {
+                data.forEach((element,index) => {
+                    if(index > 37 && index < 62){
                         total = total + (element.qty * element.price);
                     }
+                    
                 });
                 
                 return Number(total).toLocaleString() ;

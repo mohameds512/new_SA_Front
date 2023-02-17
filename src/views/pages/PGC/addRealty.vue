@@ -97,9 +97,9 @@
                                                                                     rules="required">
                                                                 <v-select
                                                                         placeholder="رقم اللوحة "
-                                                                        :options="Array.from(plad_num , (el) => el)"
+                                                                        :options="Array.from(plad_num.filter((element)=>element.area_num == form.submission.zone) , (el) => el.plad)"
                                                                         v-model="form.submission.plad_num"
-                                                                        :reduce="(val) => val"
+                                                                        :reduce="(val) => val.plad"
                                                                 >
                                                                 </v-select>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
@@ -168,6 +168,18 @@
                                                 </b-form-group>
                                                 <b-row>
                                                     <b-col md="4">
+                                                        <b-form-group class="text-right" label="  نوع الملكية ">
+                                                            <validation-provider #default="{ errors }" name="  نوع الملكية "
+                                                                                 rules="required">
+                                                                <b-form-input v-model="form.submission.contract_type"
+                                                                              :state="errors.length > 0 ? false : null"
+                                                                              placeholder="  نوع الملكية "/>
+                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
+                                                                    مطلوب</small>
+                                                            </validation-provider>
+                                                        </b-form-group>
+                                                    </b-col>
+                                                    <!-- <b-col md="4">
                                                         <b-form-group class="text-right" label=" نوع الملكية ">
                                                             <validation-provider #default="{ errors }"
                                                                                  name=" نوع الملكية"
@@ -184,7 +196,7 @@
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
-                                                    </b-col>
+                                                    </b-col> -->
                                                 </b-row>
                                                 <b-row v-for="(owner , i) in form.owners" :key="i">
                                                     <b-col md="3">
@@ -464,7 +476,7 @@
                                                                         rules="required">
                                                                     <v-select v-if="hMonthV != null"
                                                                         placeholder="اليوم"
-                                                                        :options="Array.from(retHijriDays() , (el) => el)"
+                                                                        :options="Array.from(HDay , (el) => el)"
                                                                         v-model = "hDayV"
                                                                         :reduce="(val) => val"
                                                                         change="getHijriDate()"
@@ -1193,8 +1205,8 @@
 
                                                         <b-form-group class="text-right" label=" نوع المشتمل ">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name=" نوع المشتمل"
-                                                                                 rules="required">
+                                                                            name=" نوع المشتمل"
+                                                                            rules="required">
                                                                 <v-select
                                                                         placeholder="نوع المشتمل"
                                                                         :options="$store.getters['dashboard/getLookups'].includes_type "
@@ -1376,13 +1388,39 @@
                                                                <feather-icon icon="EyeIcon" class="text-primary mx-1"></feather-icon>
                                                             </a>
                                                             <feather-icon @click="edit_inc_form(data.item)"
-                                                                          icon="EditIcon" class="text-success">
-
+                                                                icon="EditIcon" class="text-success">
+                                                            </feather-icon>
+                                                            <feather-icon @click="delete_inc_form(data.item)"
+                                                                icon="DeleteIcon" class="text-danger mx-1">
                                                             </feather-icon>
                                                         </template>
                                                     </b-table>
                                                 </div>
                                                 <div>
+                                                    <b-modal hide-header-close v-model="model_inc_delete"
+                                                        hide-footer dir="rtl" title=" حذف مشتمل " >
+                                                        <div class="demo-vertical-spacing">
+                                                            <b-row>
+                                                                <h3 class="text-danger" > هل أنت متأكد من عملية الحذف </h3>
+                                                            </b-row>
+                                                            <div class="mt-2">
+                                                            <b-col cols="12">
+                                                                <div class="d-flex justify-content-end">
+                                                                    <b-button @click="deleteIncludes()" variant="danger"
+                                                                              style="margin-right: 10px;">حذف
+                                                                    </b-button>
+                                                                    <b-button @click="model_inc_delete = false" class="mr-2"
+                                                                              variant="outline-primary">الغاء
+                                                                    </b-button>
+                                                                </div>
+                                                            </b-col>
+                                                        </div>
+                                                        </div>
+                                                            
+
+                                                    </b-modal>
+
+
                                                     <b-modal hide-header-close v-model="model_inc_edit"
                                                              hide-footer title=" تحديث مشتمل " size="lg">
                                                         <div class="demo-vertical-spacing">
@@ -1647,6 +1685,8 @@
                 hMonthV: null,
                 hDayV: null,
                 model_inc_edit: false,
+                model_inc_delete: false,
+                inc_id_for_delete:null,
                 includesForm: {
                     build_id: null,
                     build_desc_id: null,
@@ -1743,18 +1783,19 @@
                 hide: true,
                 contractStatusArray: ['الكتروني', 'مجهول','يدوي'],
                 floors: [
-                    ' تحت الارضي', ' الارضي', ' الاول', ' الثاني', ' الثالث', ' الرابع', ' الخامس', 'أخري',
+                    ' تحت الارضي', ' الارضي', ' الاول', ' الثاني', ' الثالث', ' الرابع', ' الخامس', 'السادس','السابع','الثامن','التاسع','العاشر','الحادي عشر','الثاني عشر','الثالث عشر','الرابع عشر','الخامس عشر','السادس عشر','السابع عشر','الثامن عشر','التاسع عشر','العشرين'
                 ],
                 all_operation_type: [
                     'فرز', 'دمج', 'عادية', 'اخري'
                 ],
                 personality: [
-                    'تابعية', 'هوية','حفيظة نفوس'
+                    'تابعية', 'هوية وطنية','حفيظة نفوس'
                 ],
                 zones: [
                     '01','02','03'
                 ],
-                HMonth:[1,2,3,4,5,6,7,8,9,10,11,12],
+                HMonth:['01','02','03','04','05','06','07','08','09','10','11','12'],
+                HDay:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'],
                 // HMonth:[
                 //     'محرم',
                 //     'صفر',
@@ -1770,7 +1811,14 @@
                 //     'ذو الحجة',
                 // ],
                 plad_num: [
-                    '01','02','03','04','05','06','07','08'
+                    {'area_num': '01','plad':'01'},
+                    {'area_num': '01','plad':'02'},
+                    {'area_num': '02','plad':'03'},
+                    {'area_num': '02','plad':'04'},
+                    {'area_num': '02','plad':'05'},
+                    {'area_num': '03','plad':'06'},
+                    {'area_num': '03','plad':'07'},
+                    {'area_num': '03','plad':'08'},
                 ],
                 submissionTypes: [
                     'سكني-تجاري',
@@ -1917,12 +1965,38 @@
                         this.getAllIncs = res.includes;
                     })
             },
+            delete_inc_form(item){
+                this.inc_id_for_delete = item.id;
+                
+                this.model_inc_delete = true;
+            },
             edit_inc_form(item) {
                 this.editInc_id = item.id,
                     this.editInc.build_id = item.build_id,
                     this.editInc.build_desc_id = item.build_desc_id,
                     this.editInc.qty = item.qty,
                 this.model_inc_edit = true;
+            },
+            deleteIncludes(){
+                this.$store
+                .dispatch('pgc_forms/delete_includes',{
+                    query:this.inc_id_for_delete
+                })
+                .then((response)=>{
+                    this.inc_id_for_delete=null,
+                    this.model_inc_delete = false,
+                    this.initGetIncs(),
+                    
+                    this.$swal({
+                        icon: 'success',
+                        title: 'تم حذف المشتمل ',
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
             },
             editIncludes() {
                 const dataInclude = new FormData();
