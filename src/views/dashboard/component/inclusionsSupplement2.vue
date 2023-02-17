@@ -69,7 +69,7 @@
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0 && index > 6 && index < 51" >
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0 && index > 50 && index < 85" >
                                         <b-td class="gray_item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].qty }}</b-th>
@@ -90,7 +90,7 @@
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0 && index > 6 && index < 51" >
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0 && index > 50 && index < 85" >
                                         <b-td class="gray_item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].qty }}</b-th>

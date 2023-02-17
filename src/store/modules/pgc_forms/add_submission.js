@@ -89,6 +89,7 @@ const locationModule = {
                     })
             })
         },
+
         updateDashMap({commit}, payload) {
             return new Promise((resolve, reject) => {
                 pgc_forms.updateDashMap(payload)
@@ -175,6 +176,18 @@ const locationModule = {
                         // commit('SET_ID', response.project.id);
                         console.log(response)
                         // console.log(response.project.id)
+                        resolve();
+
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
+        delete_includes({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.delete_includes(payload)
+                    .then(response => {
                         resolve();
 
                     })

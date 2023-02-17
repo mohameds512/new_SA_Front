@@ -100,9 +100,11 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">اسم المالك</b-th>
-                                        <b-th class="content-item"  colspan="3">{{ ownersData.name }}</b-th>
+                                        <b-th class="content-item"  colspan="3">
+                                            <span v-for=" (name ,index) in get_owners_names()" :key="index" > {{ name }} <span v-if="get_owners_names().length > index+1" >,</span>  </span>
+                                        </b-th>
                                         <b-th class="green-header" variant="secondary">رقم الهوية</b-th>
-                                        <b-th class="content-item" colspan="3">{{ ownersData.national_id }}</b-th>
+                                        <b-th class="content-item" colspan="3">{{ ownersData[0].national_id }}</b-th>
 
                                     </b-tr>
                                     <b-tr>
@@ -351,6 +353,13 @@
             ownersData:[],
         },
         methods: {
+            get_owners_names(){
+            let Onames = [];
+            this.ownersData.forEach(element => {
+                Onames.push(element.name);
+            });
+            return Onames;
+        },
             // generateReport () {
             //     this.$refs.html2Pdf.generatePdf()
             // },

@@ -32,7 +32,13 @@ class PGC extends Resource {
             headers: {'Content-Type': 'multipart/form-data'},
         })
     }
-
+    delete_includes(payload) {
+        return request({
+            url: `/store/delete_inc`,
+            method: "post",
+            data: payload.query,
+        })
+    }
     submitMab(payload) {
         return request({
             url: `/store/map/${payload.id}`,
