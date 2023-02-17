@@ -78,7 +78,7 @@
         </div>
         <!-- {{ $store.getters['dashboard/allSubmission'] }} -->
         <!-- {{  $store.getters['dashboard/getSubs'].submissions  }}   -->
-        
+
         <b-table
                 class="text-center"
                 striped

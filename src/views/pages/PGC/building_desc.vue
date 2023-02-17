@@ -8,6 +8,10 @@
                         <div class="container">
                             <!-- {{ $store.getters['dashboard/allBuildType'] }} -->
                             <!-- {{ buildTypes }} -->
+                            <div class="my-1">
+                                <b-button @click="edit_type_form(null)" variant="primary" class="mx-1">اضافة مشتمل </b-button>
+                            </div>
+
                             <b-table
                                 class="text-center"
                                 striped
@@ -29,12 +33,12 @@
                             </b-table>
                         </div>
                         <div>
-                            
-                            <b-modal hide-header-close v-model="model_type_form" hide-footer title=" تحديث "  >
-                                <div class="demo-vertical-spacing">
-                                    
-                                    <b-col md="6">
-                                        <b-form-group class="text-right" label= " النوع   ">
+
+                            <b-modal hide-header-close v-model="model_type_form" hide-footer title=" تحديث "  dir="rtl">
+                                <div class="demo-vertical-spacing" dir="rtl">
+
+                                    <b-col md="12">
+                                        <b-form-group class="text-left" label= " النوع   ">
                                             <validation-provider #default="{ errors }" name=" النوع "
                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.type_name"
@@ -45,8 +49,8 @@
                                             </validation-provider>
                                         </b-form-group>
                                     </b-col>
-                                    <b-col md="6">
-                                        <b-form-group class="text-right" label= " الوصف   ">
+                                    <b-col md="12">
+                                        <b-form-group class="text-left" label= " الوصف   ">
                                             <validation-provider #default="{ errors }" name=" الوصف "
                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.desc_name"
@@ -57,8 +61,8 @@
                                             </validation-provider>
                                         </b-form-group>
                                     </b-col>
-                                    <b-col md="6">
-                                        <b-form-group class="text-right" label= " الوحدة   ">
+                                    <b-col md="12">
+                                        <b-form-group  class="text-left" label= " الوحدة   ">
                                             <validation-provider #default="{ errors }" name=" الوحدة "
                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.desc_unit"
@@ -69,8 +73,8 @@
                                             </validation-provider>
                                         </b-form-group>
                                     </b-col>
-                                    <b-col md="6">
-                                        <b-form-group class="text-right" label= " السعر ">
+                                    <b-col md="12">
+                                        <b-form-group  class="text-left" label= " السعر ">
                                             <validation-provider #default="{ errors }" name=" السعر "
                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.desc_price"
@@ -85,14 +89,14 @@
                                 <div class="mt-2">
                                     <b-col cols="12">
                                         <div class="d-flex justify-content-end">
-                                            <b-button @click="edit_type()" variant="primary" style="margin-right: 10px;">تأكيد</b-button>
-                                            <b-button @click="model_inc_edit = false"  variant="outline-primary">الغاء</b-button>
+                                            <b-button @click="edit_type()" variant="primary" class="mx-1">تأكيد</b-button>
+                                            <b-button @click="model_type_form = false"  variant="outline-primary">الغاء</b-button>
                                         </div>
                                     </b-col>
                                 </div>
 
                             </b-modal>
-                        
+
                         </div>
                     </b-row>
                 </div>
@@ -145,15 +149,15 @@ import router from '@/router'
         },
         data() {
             return {
-                
+
                 hide: true,
-                
+
                 // submissionDesc: [
                 //     'تشطيب داخلي',
                 //     'تشطيب خارجي',
                 //     'تشطيب داخلي و خارجي',
                 // ],
-                
+
                 monthes: [
                     { title: 'يناير' },
                     { title: 'فبراير' },
@@ -211,16 +215,16 @@ import router from '@/router'
             // this.includes_type  = $store.getters['dashboard/getLookups'].includes_type
             this.$store.dispatch('dashboard/getLookups')
                 .then((res) => {
-                    
+
                     // this.build_type = res.includes_type;
-                    
+
                 })
-                this.initBuild() 
+                this.initBuild()
             // this.$store.dispatch(`dashboard/get_incs/${69}`)
             // .then((res) => {
             //     console.log(res);
             //     // this.build_type = res.includes_type;
-                
+
             // })
 
         },
@@ -229,7 +233,7 @@ import router from '@/router'
                 return this.$store.getters['dashboard/getAllTypes']
             }
         },
-        methods: { 
+        methods: {
             edit_type_form(data){
                 this.model_type_form = true;
                 this.editBuildTypes.desc_id = data.desc_id,
@@ -289,7 +293,7 @@ import router from '@/router'
             // },
             includesFormLength(){
                 var x = this.includesForm;
-                return x.length; 
+                return x.length;
             },
             addOwner(){
                 this.form.owners.push({name:null,phone:null,id_type:null});
@@ -302,11 +306,11 @@ import router from '@/router'
             },
             ownersFormLenght(){
                 var x = this.form.owners;
-                return x.length; 
+                return x.length;
             },
             coorsFormLenght(){
                 var x = this.form.submission.coordinates;
-                return x.length; 
+                return x.length;
             },
             addAttachs(){
                 this.form.attachs.push({file:null,note:null});
@@ -332,7 +336,7 @@ import router from '@/router'
                         this.includesForm.build_desc_id = null,
                         this.includesForm.qty = null,
                         this.includesForm.image = null,
-                        
+
                         this.$swal({
                             icon: 'success',
                             title: 'تم حفظ المشتمل ',
@@ -362,9 +366,9 @@ import router from '@/router'
                         // console.log(response)
                         // router.push({name:'Realtys'})
                         if ($state) {
-                            this.show_model_inputs = $state ;    
+                            this.show_model_inputs = $state ;
                         }
-                        
+
                         this.$swal({
                             icon: 'success',
                             title: 'تم الحفظ',
