@@ -276,9 +276,10 @@
                             </b-col>
                         </b-row>
                         <b-row v-else>
-                            <b-col md="12">
-                                <b-form-group label="رقم العقار" label-for="name-input">
+                            <b-col md="6">
+                                <b-form-group   label="رقم العقار" label-for="name-input">
                                     <v-select
+                                            :disabled="form.submission_number"
                                             dir="rtl"
                                             placeholder="رقم العقار"
                                             :options="$store.getters['dashboard/getSubs'].submissions"
@@ -287,6 +288,13 @@
                                             label="building_number"
                                     >
                                     </v-select>
+                                </b-form-group>
+                            </b-col>
+                            <b-col md="6">
+                                <b-form-group class="font-weight-bolder" label="اضافة عقار الجديد" >
+                                    <b-form-input v-model="form.submission_number"
+                                                  :disabled="form.submission_id"
+                                                  placeholder="رقم العقار الجديد"/>
                                 </b-form-group>
                             </b-col>
                         </b-row>

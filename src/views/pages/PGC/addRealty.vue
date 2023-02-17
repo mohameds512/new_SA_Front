@@ -216,13 +216,13 @@
                                                             <validation-provider #default="{ errors }"
                                                                                 min="10" max="10"
                                                                                  name=" رقم الجوال"
-                                                                                 
+
                                                                                  rules="min:10">
                                                                 <b-form-input v-model="owner.phone"
                                                                 min="10" max="10"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الجوال" type="number"/>
-                                                                <small class="text-danger" v-if="errors[0]"> 
+                                                                <small class="text-danger" v-if="errors[0]">
                                                                     يجب ان يكون 10 ارقام
                                                                     </small>
                                                             </validation-provider>
@@ -330,29 +330,33 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  min="10" max="10"
                                                                                  name=" رقم الجوال"
-                                                                                 rules="required">
+
+                                                                                 rules="min:10">
                                                                 <b-form-input v-model="applicant.phone"
                                                                               min="10" max="10"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الجوال" type="number"/>
-                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                    مطلوب</small>
+                                                                <small class="text-danger" v-if="errors[0]">
+                                                                    يجب ان يكون 10 ارقام
+                                                                </small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="3">
                                                         <b-form-group  label="رقم الهوية " dir="rtl">
                                                             <validation-provider #default="{ errors }"
-                                                                                 min="10" max="10"
                                                                                  name=" رقم الهوية"
-                                                                                 rules="required">
+                                                                                 min="10" max="10"
+
+                                                                                 rules="min:10">
                                                                 <b-form-input v-model="applicant.national_id"
                                                                               min="10" max="10"
 
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الهوية" type="number"/>
-                                                                <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                                                    مطلوب</small>
+                                                                <small class="text-danger" v-if="errors[0]">
+                                                                    يجب ان يكون 10 ارقام
+                                                                </small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
@@ -487,7 +491,7 @@
                                                                 <!-- {{ getHijriDate() }} -->
                                                             </b-form-group>
                                                             </b-col>
-                                                            
+
                                                         </b-row>
                                                     </b-col>
                                                     <!-- <b-col md="3">
@@ -542,7 +546,7 @@
                                                         <b-form-group class="text-right" label="حالة الصك">
                                                         <validation-provider #default="{ errors }" name=" حالة الصك"
                                                                 rules="required">
-                                                            <v-select 
+                                                            <v-select
                                                                 placeholder="حالة الصك"
                                                                 :options="Array.from(contractStatusArray , (el) => el)"
                                                                 v-model = "form.submission.contract_status"
@@ -551,7 +555,7 @@
                                                             <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                 مطلوب</small>
                                                         </validation-provider>
-                                                        
+
                                                     </b-form-group>
                                                     </b-col>
 
@@ -592,14 +596,14 @@
                                                     <b-col class="d-flex justify-content-center" md="8">
                                                     </b-col>
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الشمال">
+                                                        <b-form-group class="text-right" label="الحد الشمال">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الشمال"
+                                                                                 name="الحد الشمال"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.north_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الشمال" type="text"/>
+                                                                        placeholder="الحد الشمال" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -612,21 +616,21 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.north_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الشمال" type="number"/>
+                                                                        placeholder="الحد الشمال" type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الجنوب">
+                                                        <b-form-group class="text-right" label="الحد الجنوب">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الجنوب"
+                                                                                 name="الحد الجنوب"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.south_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الجنوب" type="text"/>
+                                                                        placeholder="الحد الجنوب" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -646,14 +650,14 @@
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الشرق">
+                                                        <b-form-group class="text-right" label="الحد الشرق">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الشرق"
+                                                                                 name="الحد الشرق"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.east_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الشرق" type="text"/>
+                                                                        placeholder="الحد الشرق" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -673,14 +677,14 @@
                                                         </b-form-group>
                                                     </b-col>
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الغرب">
+                                                        <b-form-group class="text-right" label="الحد الغرب">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الغرب"
+                                                                                 name="الحد الغرب"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.west_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الغرب" type="text"/>
+                                                                        placeholder="الحد الغرب" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -889,14 +893,14 @@
                                                     </b-col>
 
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الشمال">
+                                                        <b-form-group class="text-right" label="الحد الشمال">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الشمال"
+                                                                                 name="الحد الشمال"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.north_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الشمال" type="text"/>
+                                                                        placeholder="الحد الشمال" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -909,7 +913,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.north_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الشمال" type="number"/>
+                                                                        placeholder="الحد الشمال" type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -918,14 +922,14 @@
 
 
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الجنوب">
+                                                        <b-form-group class="text-right" label="الحد الجنوب">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الجنوب"
+                                                                                 name="الحد الجنوب"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.south_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الجنوب" type="text"/>
+                                                                        placeholder="الحد الجنوب" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -946,14 +950,14 @@
                                                     </b-col>
 
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الشرق">
+                                                        <b-form-group class="text-right" label="الحد الشرق">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الشرق"
+                                                                                 name="الحد الشرق"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.east_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الشرق" type="text"/>
+                                                                        placeholder="الحد الشرق" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -974,14 +978,14 @@
                                                     </b-col>
 
                                                     <b-col md="6">
-                                                        <b-form-group class="text-right" label="أتجاه الغرب">
+                                                        <b-form-group class="text-right" label="الحد الغرب">
                                                             <validation-provider #default="{ errors }"
-                                                                                 name="أتجاه الغرب"
+                                                                                 name="الحد الغرب"
                                                                                  rules="required">
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.west_dir"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="أتجاه الغرب" type="text"/>
+                                                                        placeholder="الحد الغرب" type="text"/>
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1416,7 +1420,7 @@
                                                             </b-col>
                                                         </div>
                                                         </div>
-                                                            
+
 
                                                     </b-modal>
 
@@ -1944,7 +1948,7 @@
                 var hhyears =  [];
                 for (let index = 1444; index > 1250; index--) {
                     hhyears.push(index);
-                }  
+                }
                 return hhyears;
             },
             passUnite() {
@@ -1967,7 +1971,7 @@
             },
             delete_inc_form(item){
                 this.inc_id_for_delete = item.id;
-                
+
                 this.model_inc_delete = true;
             },
             edit_inc_form(item) {
@@ -1986,7 +1990,7 @@
                     this.inc_id_for_delete=null,
                     this.model_inc_delete = false,
                     this.initGetIncs(),
-                    
+
                     this.$swal({
                         icon: 'success',
                         title: 'تم حذف المشتمل ',

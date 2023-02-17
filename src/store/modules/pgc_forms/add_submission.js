@@ -262,7 +262,7 @@ const locationModule = {
                 // console.log('payload')
                 // console.log(payload)
                 pgc_forms
-                    .editTypes(payload.query)
+                    .editTypes(payload)
                     .then(response => {
                         console.log(response)
                         // console.log(response.project.id)

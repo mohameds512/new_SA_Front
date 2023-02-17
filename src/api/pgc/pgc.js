@@ -47,7 +47,7 @@ class PGC extends Resource {
             headers: {'Content-Type': 'multipart/form-data'},
         })
     }
-    
+
     updateDashMap(payload) {
         return request({
             url: `/store/updateDashMap`,
@@ -86,9 +86,9 @@ class PGC extends Resource {
     editTypes(payload) {
         console.log(payload)
         return request({
-            url: `/store/edit_desc`,
-            method: "post",
-            data: payload
+            url: `/dashboard/edit_desc${payload.id? `/${payload.id}` : ''}`,
+            method: "put",
+            data: payload.query
         })
     }
 

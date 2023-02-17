@@ -4,20 +4,22 @@
         <b-row>
             <b-col>
                 <div align="right">
+
                     <b-row class="bg-white pt-2 pb-2">
                         <div class="container">
                             <!-- {{ $store.getters['dashboard/allBuildType'] }} -->
                             <!-- {{ buildTypes }} -->
                             <div class="my-1">
-                                <b-button @click="edit_type_form(null)" variant="primary" class="mx-1">اضافة مشتمل </b-button>
+                                <b-button @click="edit_type_form(null)" variant="primary" class="mx-1">اضافة مشتمل
+                                </b-button>
                             </div>
 
                             <b-table
-                                class="text-center"
-                                striped
-                                hover
-                                :items="buildTypes"
-                                :fields="[
+                                    class="text-center"
+                                    striped
+                                    hover
+                                    :items="buildTypes"
+                                    :fields="[
                                             { key: 'type_name', label: 'نوع المشتمل ' },
                                             { key: 'desc_name', label: 'الوصف' },
                                             { key: 'desc_unit', label: '  الوحدة ' },
@@ -34,52 +36,61 @@
                         </div>
                         <div>
 
-                            <b-modal hide-header-close v-model="model_type_form" hide-footer title=" تحديث "  dir="rtl">
+                            <b-modal hide-header-close v-model="model_type_form" hide-footer title=" تحديث " dir="rtl">
                                 <div class="demo-vertical-spacing" dir="rtl">
 
                                     <b-col md="12">
-                                        <b-form-group class="text-left" label= " النوع   ">
-                                            <validation-provider #default="{ errors }" name=" النوع "
-                                                rules="required">
-                                                <b-form-input v-model="editBuildTypes.type_name"
-                                                    :state="errors.length > 0 ? false : null"
-                                                    placeholder=" النوع " disabled  />
+                                        <b-form-group class="text-left" label=" النوع   ">
+                                            <validation-provider #default="{ errors }" name=" النوع " rules="required">
+                                                <v-select
+                                                        placeholder=" النوع "
+                                                        :options="lookups.includes_type"
+                                                        dir="rtl"
+                                                        v-model="editBuildTypes.type"
+                                                        label="name"
+                                                        :reduce="(val) => val.id"
+                                                        :disabled="id ? true : false"
+                                                >
+                                                </v-select>
+                                                <!--                                                <b-form-input v-model="editBuildTypes.type_name"-->
+                                                <!--                                                    :state="errors.length > 0 ? false : null"-->
+                                                <!--                                                    placeholder=" النوع " disabled  />-->
                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                     مطلوب</small>
                                             </validation-provider>
                                         </b-form-group>
                                     </b-col>
                                     <b-col md="12">
-                                        <b-form-group class="text-left" label= " الوصف   ">
+                                        <b-form-group class="text-left" label=" الوصف   ">
                                             <validation-provider #default="{ errors }" name=" الوصف "
-                                                rules="required">
+                                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.desc_name"
-                                                    :state="errors.length > 0 ? false : null"
-                                                    placeholder=" الوصف " disabled />
+                                                              :state="errors.length > 0 ? false : null"
+                                                              placeholder=" الوصف " :disabled="id ? true : false"/>
                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                     مطلوب</small>
                                             </validation-provider>
                                         </b-form-group>
                                     </b-col>
                                     <b-col md="12">
-                                        <b-form-group  class="text-left" label= " الوحدة   ">
+                                        <b-form-group class="text-left" label=" الوحدة   ">
                                             <validation-provider #default="{ errors }" name=" الوحدة "
-                                                rules="required">
+                                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.desc_unit"
-                                                    :state="errors.length > 0 ? false : null"
-                                                    placeholder=" الوحدة "  />
+                                                              :state="errors.length > 0 ? false : null"
+                                                              placeholder=" الوحدة "/>
                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                     مطلوب</small>
                                             </validation-provider>
                                         </b-form-group>
                                     </b-col>
                                     <b-col md="12">
-                                        <b-form-group  class="text-left" label= " السعر ">
+                                        <b-form-group class="text-left" label=" السعر ">
                                             <validation-provider #default="{ errors }" name=" السعر "
-                                                rules="required">
+                                                                 rules="required">
                                                 <b-form-input v-model="editBuildTypes.desc_price"
-                                                    :state="errors.length > 0 ? false : null"
-                                                    placeholder=" السعر "  />
+                                                              :state="errors.length > 0 ? false : null"
+                                                              placeholder=" السعر "/>
                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                     مطلوب</small>
                                             </validation-provider>
@@ -89,8 +100,10 @@
                                 <div class="mt-2">
                                     <b-col cols="12">
                                         <div class="d-flex justify-content-end">
-                                            <b-button @click="edit_type()" variant="primary" class="mx-1">تأكيد</b-button>
-                                            <b-button @click="model_type_form = false"  variant="outline-primary">الغاء</b-button>
+                                            <b-button @click="edit_type()" variant="primary" class="mx-1">تأكيد
+                                            </b-button>
+                                            <b-button @click="model_type_form = false" variant="outline-primary">الغاء
+                                            </b-button>
                                         </div>
                                     </b-col>
                                 </div>
@@ -108,8 +121,8 @@
 
 <script>
     // import { mapGetters } from 'vuex'
-    import { ValidationProvider, ValidationObserver } from 'vee-validate'
-    import { required, min_value } from '@validations'
+    import {ValidationProvider, ValidationObserver} from 'vee-validate'
+    import {required, min_value} from '@validations'
     import vSelect from 'vue-select'
     import DataTable from '@/views/components/table/DataTable'
     import {
@@ -138,8 +151,8 @@
     import Exports from "@/views/dashboard/component/exports";
     import ManPower from "@/views/dashboard/component/manPower";
     import WorkProgress from "@/views/dashboard/component/workProgress";
-import lookups from '@/api/system/lookups'
-import router from '@/router'
+    import lookups from '@/api/system/lookups'
+    import router from '@/router'
 
     export default {
         name: 'Add Project',
@@ -159,28 +172,29 @@ import router from '@/router'
                 // ],
 
                 monthes: [
-                    { title: 'يناير' },
-                    { title: 'فبراير' },
-                    { title: 'مارس' },
-                    { title: 'ابريل' },
-                    { title: 'مايو' },
-                    { title: 'يونيو' },
-                    { title: 'يوليو' },
-                    { title: 'أغسطس' },
-                    { title: 'سبتمبر' },
-                    { title: 'اكتوبر' },
-                    { title: 'نوفمبر' },
-                    { title: 'ديسمبر' },
+                    {title: 'يناير'},
+                    {title: 'فبراير'},
+                    {title: 'مارس'},
+                    {title: 'ابريل'},
+                    {title: 'مايو'},
+                    {title: 'يونيو'},
+                    {title: 'يوليو'},
+                    {title: 'أغسطس'},
+                    {title: 'سبتمبر'},
+                    {title: 'اكتوبر'},
+                    {title: 'نوفمبر'},
+                    {title: 'ديسمبر'},
                 ],
-                allBuild:[],
-                editBuildTypes:{
+                allBuild: [],
+                editBuildTypes: {
                     desc_id: null,
-                    type_name:null,
-                    desc_name:null,
-                    desc_unit:null,
-                    desc_price:null,
+                    type_name: null,
+                    desc_name: null,
+                    desc_unit: null,
+                    desc_price: null,
                 },
-                model_type_form:false,
+                id: null,
+                model_type_form: false,
             }
         },
         components: {
@@ -219,7 +233,7 @@ import router from '@/router'
                     // this.build_type = res.includes_type;
 
                 })
-                this.initBuild()
+            this.initBuild()
             // this.$store.dispatch(`dashboard/get_incs/${69}`)
             // .then((res) => {
             //     console.log(res);
@@ -228,24 +242,32 @@ import router from '@/router'
             // })
 
         },
-        computed:{
-            buildTypes(){
+        computed: {
+            buildTypes() {
                 return this.$store.getters['dashboard/getAllTypes']
+            },
+            lookups() {
+                return this.$store.getters['dashboard/getLookups']
             }
         },
         methods: {
-            edit_type_form(data){
+            edit_type_form(data) {
                 this.model_type_form = true;
-                this.editBuildTypes.desc_id = data.desc_id,
-                this.editBuildTypes.type_name = data.type_name,
-                this.editBuildTypes.desc_name = data.desc_name,
-                this.editBuildTypes.desc_price = data.desc_price,
-                this.editBuildTypes.desc_unit = data.type_unit
+                this.id = null;
+                if (data) {
+                    this.id = data.desc_id;
+                    this.editBuildTypes.type = data.type_id;
+                    this.editBuildTypes.desc_name = data.desc_name;
+                    this.editBuildTypes.desc_price = data.desc_price;
+                    this.editBuildTypes.desc_unit = data.desc_unit;
+                }
             },
-            edit_type(){
+            edit_type() {
+                console.log('hhh'+ this.id)
                 this.$store
-                    .dispatch('pgc_forms/edit_desc',{
-                        query: this.editBuildTypes
+                    .dispatch('pgc_forms/edit_desc', {
+                        query: this.editBuildTypes,
+                        id: this.id
                     })
                     .then((resp) => {
                         this.model_type_form = false;
@@ -259,67 +281,67 @@ import router from '@/router'
                         console.log(response);
                     })
             },
-            initBuild(){
+            initBuild() {
                 this.$store.dispatch('dashboard/allBuildType')
-                .then((res)=>{
-                    console.log(res.build_desc)
-                    this.allBuild = res.build_desc
-                    // console.log(res)
-                })
-            } ,
-            edit_inc(){
+                    .then((res) => {
+                        console.log(res.build_desc)
+                        this.allBuild = res.build_desc
+                        // console.log(res)
+                    })
+            },
+            edit_inc() {
 
             },
-            edit_inc_form(item){
+            edit_inc_form(item) {
                 this.includesForm.build_id = 1,
-                // this.includesForm.build_id = item.build_id,
-                this.includesForm.build_desc_id = 1,
-                // this.includesForm.build_desc_id = item.build_desc_id,
-                this.includesForm.qty = 1,
-                // this.includesForm.qty = item.qty,
-                this.model_inc_edit = true;
+                    // this.includesForm.build_id = item.build_id,
+                    this.includesForm.build_desc_id = 1,
+                    // this.includesForm.build_desc_id = item.build_desc_id,
+                    this.includesForm.qty = 1,
+                    // this.includesForm.qty = item.qty,
+                    this.model_inc_edit = true;
 
                 console.log(item);
             },
-            changeImg(e){
+            changeImg(e) {
                 console.log(e.target.files[0]);
                 this.includesForm.image = e.target.files[0];
             },
-            show_model(num){
+            show_model(num) {
                 this.show_model_inputs = num;
             },
             // addIncludes(){
             //     this.includesForm.push({build_id:null,build_desc_id:null,qty:null});
             // },
-            includesFormLength(){
+            includesFormLength() {
                 var x = this.includesForm;
                 return x.length;
             },
-            addOwner(){
-                this.form.owners.push({name:null,phone:null,id_type:null});
+            addOwner() {
+                this.form.owners.push({name: null, phone: null, id_type: null});
             },
-            addCoor(){
-                this.form.submission.coordinates.push({coor_north:null,coor_east:null});
+            addCoor() {
+                this.form.submission.coordinates.push({coor_north: null, coor_east: null});
             },
-            addroof(){
-                this.form.submission.building_details.push({roof:null,area:null});
+            addroof() {
+                this.form.submission.building_details.push({roof: null, area: null});
             },
-            ownersFormLenght(){
+            ownersFormLenght() {
                 var x = this.form.owners;
                 return x.length;
             },
-            coorsFormLenght(){
+            coorsFormLenght() {
                 var x = this.form.submission.coordinates;
                 return x.length;
             },
-            addAttachs(){
-                this.form.attachs.push({file:null,note:null});
+            addAttachs() {
+                this.form.attachs.push({file: null, note: null});
             },
-            attachLength(){
+            attachLength() {
                 var x = this.form.attachs;
                 return x.length;
             },
-            addIncludes(){
+            addIncludes() {
                 this.includesForm.submission_id = 67;
                 // this.includesForm.submission_id = this.form.submission.id;
                 console.log(this.includesForm)
@@ -333,19 +355,19 @@ import router from '@/router'
                         // console.log(response)
                         // router.push({name:'Realtys'})
                         this.includesForm.build_id = null,
-                        this.includesForm.build_desc_id = null,
-                        this.includesForm.qty = null,
-                        this.includesForm.image = null,
+                            this.includesForm.build_desc_id = null,
+                            this.includesForm.qty = null,
+                            this.includesForm.image = null,
 
-                        this.$swal({
-                            icon: 'success',
-                            title: 'تم حفظ المشتمل ',
-                            showConfirmButton: false,
-                            timer: 1000,
-                        })
+                            this.$swal({
+                                icon: 'success',
+                                title: 'تم حفظ المشتمل ',
+                                showConfirmButton: false,
+                                timer: 1000,
+                            })
 
                         // this.submission = response.submission;
-                            console.log(response);
+                        console.log(response);
 
                     })
                     .catch((error) => {
@@ -366,7 +388,7 @@ import router from '@/router'
                         // console.log(response)
                         // router.push({name:'Realtys'})
                         if ($state) {
-                            this.show_model_inputs = $state ;
+                            this.show_model_inputs = $state;
                         }
 
                         this.$swal({
@@ -376,7 +398,7 @@ import router from '@/router'
                             timer: 1500,
                         })
                         // this.submission = response.submission;
-                            console.log(response);
+                        console.log(response);
                         // this.form.submission.id = response.id
                         // this.form.submission.building_number = response.building_number
                     })
@@ -675,7 +697,8 @@ import router from '@/router'
                 }
             }
         }
-        .back_ground{
+
+        .back_ground {
             color: antiquewhite !important;
             padding-top: 8px;
             font-size: 20px;
@@ -683,6 +706,7 @@ import router from '@/router'
             background-color: #535ae7;
             margin-bottom: 10px;
         }
+
         .choose_images {
             .choosing_photos_ {
                 display: flex;
