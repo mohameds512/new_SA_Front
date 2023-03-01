@@ -1363,7 +1363,7 @@
                                                             <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
                                                         </b-card-text>
                                                     </b-tab>
-                                                    <b-tab title="ملحق محضر تقدير " v-if="form.submission[0].includes_data.length > 12">
+                                                    <b-tab title="ملحق محضر تقدير " v-if="form.submission[0].includes_data.length > 13">
                                                         <b-card-text>
                                                             <appreciation-miunte2
                                                                     :submissionData="form.submission[0]"
@@ -1381,7 +1381,7 @@
                                                             <!-- <h3 class="text-center"> جار العمل عليه </h3> -->
                                                         </b-card-text>
                                                     </b-tab>
-                                                    <b-tab title="ملحق محضر تقدير 3" v-if="form.submission[0].includes_data.length > 61">
+                                                    <b-tab title="ملحق محضر تقدير 3" v-if="form.submission[0].includes_data.length > 63">
                                                         <b-card-text>
                                                             <appreciation-miunte4
                                                                     :submissionData="form.submission[0]"
@@ -1395,10 +1395,18 @@
                                         </b-card-text>
                                     </b-tab>
                                     <b-tab v-if="form.submission[0].operation_type == 'دمج'" title="نموذج الدمج">
-                                        <marge_report :submission="form.submission[0]"></marge_report>
+                                        <marge_report 
+                                            :submission="form.submission[0]"
+                                            :owners="form.owners"
+                                            >
+                                        </marge_report>
                                     </b-tab>
                                     <b-tab v-if="form.submission[0].operation_type == 'فرز'" title="نموذج الفرز">
-                                        <isolate_report :submission="form.submission[0]"></isolate_report>
+                                        <isolate_report 
+                                            :submission="form.submission[0]"
+                                            :owners="form.owners"
+                                        >
+                                    </isolate_report>
                                     </b-tab>
                                     <!--                                    <b-tab title="الملاحظات">-->
                                     <!--                                        <b-card-text>-->

@@ -56,7 +56,7 @@
             </b-col>
             <b-col md="12">
                 <b-card class="text-center" v-if="dashboardMap.img">
-                    <img 
+                    <img  style="width: 100%; height: 500px;"
                             :src="dashboardMap.img" alt="map">
                 </b-card>
             </b-col>
@@ -64,7 +64,7 @@
         
         <b-row>
 
-            <b-col cols="6">
+            <!-- <b-col cols="6">
                 <b-card>
                     <div class="d-flex">
                         <feather-icon size="21" class="mr-2" icon="UsersIcon"/>
@@ -74,7 +74,7 @@
                                         height="400"
                                         :data="[23,34,45,56,12,3,45]"/>
                 </b-card>
-            </b-col>
+            </b-col> -->
 
 
             <b-col cols="6">
@@ -84,6 +84,15 @@
                         <h4>عدد العقارات لكل منطقة</h4>
                     </div>
                     <chartjs-component-bar-chart :options="options" :height="400" :data="programs" v-if="programs"/>
+                </b-card>
+            </b-col>
+            <b-col cols="6">
+                <b-card>
+                    <div class="d-flex">
+                        <feather-icon size="21" class="mr-2" icon="TrendingUpIcon"/>
+                        <h4>عدد العقارات لكل لوحة</h4>
+                    </div>
+                    <chartjs-component-bar-chart :options="options" :height="400" :data="programs_blade" v-if="programs_blade"/>
                 </b-card>
             </b-col>
 
@@ -350,13 +359,41 @@
                 //  }
             },
             programs() {
+                let dataLabels= ['01','02','03'];
+                let all_submissions = this.$store.getters['pgc_forms/dashboard'].submissions;
+                // console.log('all_submissions');
+                // console.log(all_submissions);
+                const dataValues = [];
+                dataLabels.forEach(area_element => {
+                    let x = all_submissions.filter((el)=>el.zone == area_element )
+                    dataValues.push(x.length);
+                });
+                console.log(dataValues)
                 return {
-                    labels: [' sub zone 1 ', 'sub zone 2  ', 'sub zone 3 ', 'sub zone 4 ', 'sub zone 5 '
-                                , 'sub zone 6 ', 'sub zone 7 ', 'sub zone 8 '
-                            ],
+                    labels:dataLabels,
                     datasets: [
                         {
-                            data: [10, 20, 40, 20, 15,20,35,31],
+                            data:dataValues,
+                            backgroundColor: chartColors.second_color,
+                            borderColor: 'transparent',
+                        },
+                    ],
+                };
+            },
+            programs_blade() {
+                let dataLabels= ['01','02','03','04','05','06','07','08'];
+                let all_submissions = this.$store.getters['pgc_forms/dashboard'].submissions;
+                const dataValues = [];
+                dataLabels.forEach(area_element => {
+                    let x = all_submissions.filter((el)=>el.plad_num == area_element )
+                    dataValues.push(x.length);
+                });
+                console.log(dataValues)
+                return {
+                    labels:dataLabels,
+                    datasets: [
+                        {
+                            data:dataValues,
                             backgroundColor: chartColors.second_color,
                             borderColor: 'transparent',
                         },

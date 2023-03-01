@@ -646,16 +646,16 @@
                 <!-- Start Directions  -->
                 <div
                   class="title_parts with_border_bottom"
-                  v-for="(item, i) in submissionData.includes_data"
+                  v-for="(item, i) in submissionData.includes_data" v-if=" i < 8"
                   :key="i"
                 >
-                  <span class="one with_border_left with_center_text">{{
+                  <span class="one with_border_left with_center_text includes_types">{{
                     item.type
                   }}</span>
                   <span class="one two with_border_left with_center_text">{{
                     item.qty
                   }}</span>
-                  <span class="one three with_center_text">م2</span>
+                  <span class="one three with_center_text">{{item.unit}}</span>
                 </div>
 
                 <!-- End Directions  -->
@@ -895,15 +895,21 @@ export default {
           x.push(element)
         }
       });
-      let floorItem = x[0].floors;
-      let floorArea = 0;
-      floorItem.forEach(element => {
-        if (element.floor == theFloor ) {
-          floorArea = element.area
-        }
-      });
+      if(x.length >0){
+        let floorItem = x[0].floors;
+        let floorArea = 0;
+        floorItem.forEach(element => {
+          if (element.floor == theFloor ) {
+            floorArea = element.area
+          }
+        });
+        return floorArea;
+
+      }else{
+        return '-';
+      }
       
-      return floorArea;
+      
     },
     printInvoice() {
       window.print();
@@ -1403,18 +1409,22 @@ $min-name-width: 120px;
     @page { size: landscape; }
   }
   .our_wrapper_for_container_details {
+    transform: rotate(90deg);
+    .includes_types{
+      font-size: x-small;
+    }
     .btn_print{
       display: none;
     }
     overflow:hidden !important;
-    height: 100%;
+    height: 70%;
     width: 100%;
     position: fixed;
     inset: 0;
     padding-top: 50px;
     margin: 0;
-    z-index: 999999999999999999999999999999;
-    zoom: 80%;
+    // z-index: 999999999999999999999999999999;
+    zoom: 79%;
   }
 }
 </style>

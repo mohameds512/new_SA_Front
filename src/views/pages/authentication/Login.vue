@@ -3,7 +3,7 @@
     <b-row class="auth-inner m-0">
       <!-- Brand logo-->
       <b-link class="brand-logo">
-        <img src="../../../assets/images/logo/logo_one.png" class="vero-logo" />
+        <img src="../../../assets/images/logo/BG.jpeg" class="vero-logo" />
         <!-- <vuexy-logo /> -->
         <div
           class="brand-text text-primary ml-1 nav navbar-nav flex-row d-flex align-items-center"
@@ -233,7 +233,7 @@ export default {
         password: "",
       },
       sideImg: require("@/assets/images/pages/bg2.jpg"),
-      mainImage: require("@/assets/images/logo/BG.jpeg"),
+      mainImage: require("@/assets/images/logo/logo_one.png"),
       // validation rules
       required,
       email,
@@ -245,7 +245,7 @@ export default {
     },
     imgUrl() {
       if (store.state.appConfig.layout.skin === "dark") {
-        this.sideImg = require("@/assets/images/pages/bg2.jpg");
+        this.sideImg = require("@/assets/images/pages/bg.jpg");
         return this.sideImg;
       }
       return this.sideImg;

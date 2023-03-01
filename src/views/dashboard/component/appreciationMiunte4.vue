@@ -149,7 +149,7 @@
                             <b-th class="green-header text-center" >الملاحظات</b-th>
                         </b-tr>
                         <b-tr  v-for="(item,index) in submissionData.includes_data" v-if="index > 61" :key="index">
-                            <b-th class="content-item"> {{ index }} </b-th>
+                            <b-th class="content-item"> {{ item.content }} </b-th>
                             <b-th class="content-item">{{ item.unit }}</b-th>
                             <b-th class="content-item">{{ item.qty }}</b-th>
                             <b-th class="content-item">{{ item.price }}</b-th>
@@ -322,9 +322,9 @@ export default {
                 let data = this.submissionData.includes_data;
                 let total = 0 ;
                 data.forEach((element,index) => {
-                    if (index > 61) {
+                    
                         total = total + (element.qty * element.price);
-                    }
+                    
                     
                 });
                 

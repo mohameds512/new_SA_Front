@@ -165,7 +165,7 @@
                 <b-table-simple small
                                 bordered
                         > 
-                            <b-tbody>
+                            <b-tbody v-if="submissionData.includes_data.length <= 13" >
                                 <b-tr>
                                     <b-th style="width: 26.5%;" class="green-header" > إجمالي التعويض</b-th>
                                     <b-th style="width: 18.5%;"  > {{ totalComp() }}</b-th>
@@ -323,9 +323,9 @@ export default {
                 let data = this.submissionData.includes_data;
                 let total = 0 ;
                 data.forEach((element , index) => {
-                    if (index < 13) {
+                    // if (index < 13) {
                         total = total + (element.qty * element.price);
-                    }
+                    // }
                 });
                 
                 return Number(total).toLocaleString() ;
@@ -448,7 +448,8 @@ export default {
     
     .card-header-pills{
         display: none;
-    }@media print {
+    }
+    @media print {
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
     color-adjust: exact !important; /*Firefox*/

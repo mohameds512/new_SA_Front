@@ -19,7 +19,7 @@
                 <b-col md="4">
                     <b-form-group class="text-right" label=" بحث بنوع المعاملة ">
                         <validation-provider #default="{ errors }" name="نوع المعاملة"
-                                             rules="required">
+                                    rules="required">
                             <v-select
                                     placeholder="نوع المعاملة"
                                     :options="Array.from(all_operation_type , (el) => el)"
@@ -27,8 +27,6 @@
                                     :reduce="(val) => val"
                             >
                             </v-select>
-                            <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                مطلوب</small>
                         </validation-provider>
                     </b-form-group>
                 </b-col>
@@ -93,9 +91,9 @@
                         { key: 'status', label: 'الحالة' },
                         { key: 'operation_type', label: 'نوع المعاملة' },
                         { key: 'zone', label: '  المنطقة ' },
-                        { key: 'created_by', label: '  المساح ' },
-                        { key: 'created_at', label: '  التاريخ ' },
-                           { key: 'action', label: '  تعديل ' },
+                        { key: 'name_local', label: '  المساح ' },
+                        { key: 'updated_at', label: '  التاريخ ' },
+                        { key: 'action', label: '  تعديل ' },
                     ]"
         >
             <template #cell(building_number)="data">
@@ -107,8 +105,8 @@
             <template #cell(status)="data">
                 {{getStatus(data.item.status) }}
             </template>
-            <template #cell(created_at)="data">
-                {{toLocalDatetime(data.item.created_at) }}
+            <template #cell(updated_at)="data">
+                {{toLocalDatetime(data.item.updated_at) }}
             </template>
             <template #cell(action)="data">
                 <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">
