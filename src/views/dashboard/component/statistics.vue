@@ -64,17 +64,20 @@
         
         <b-row>
 
-            <!-- <b-col cols="6">
+            <b-col cols="6">
                 <b-card>
                     <div class="d-flex">
-                        <feather-icon size="21" class="mr-2" icon="UsersIcon"/>
-                        <h4>عدد مساحين لكل منطقة</h4>
+                        <feather-icon size="21" class="mr-2" icon="HomeIcon"/>
+                        <h4> نسبة الانجاز لكل منطقة</h4>
                     </div>
-                    <pie-chart-category :label="['منطقة 1','منطقة 2','منطقة 3','منطقة 4','منطقة 5','منطقة 6','منطقة 7']"
+                    <!-- <pie-chart-category 
+                                        height="400"    
+                                        :data="programs"/> -->
+                    <pie-chart-category :label="['01','02','03']"
                                         height="400"
-                                        :data="[23,34,45,56,12,3,45]"/>
+                                        :data="programsCircle"/>
                 </b-card>
-            </b-col> -->
+            </b-col>
 
 
             <b-col cols="6">
@@ -84,6 +87,20 @@
                         <h4>عدد العقارات لكل منطقة</h4>
                     </div>
                     <chartjs-component-bar-chart :options="options" :height="400" :data="programs" v-if="programs"/>
+                </b-card>
+            </b-col>
+            <b-col cols="6">
+                <b-card>
+                    <div class="d-flex">
+                        <feather-icon size="21" class="mr-2" icon="HomeIcon"/>
+                        <h4> نسبة الانجاز لكل لوحة</h4>
+                    </div>
+                    <!-- <pie-chart-category 
+                                        height="400"    
+                                        :data="programs"/> -->
+                    <pie-chart-category :label="['01','02','03','04','05','06','07','08']"
+                                        height="400"
+                                        :data="programsCircle_blade"/>
                 </b-card>
             </b-col>
             <b-col cols="6">
@@ -380,6 +397,19 @@
                     ],
                 };
             },
+            programsCircle() {
+                let dataLabels= ['01','02','03'];
+                let all_submissions = this.$store.getters['pgc_forms/dashboard'].submissions;
+                // console.log('all_submissions');
+                // console.log(all_submissions);
+                const dataValues = [];
+                dataLabels.forEach(area_element => {
+                    let x = all_submissions.filter((el)=>el.zone == area_element )
+                    dataValues.push(x.length);
+                });
+                console.log(dataValues)
+                return dataValues;
+            },
             programs_blade() {
                 let dataLabels= ['01','02','03','04','05','06','07','08'];
                 let all_submissions = this.$store.getters['pgc_forms/dashboard'].submissions;
@@ -399,6 +429,17 @@
                         },
                     ],
                 };
+            },
+            programsCircle_blade() {
+                let dataLabels= ['01','02','03','04','05','06','07','08'];
+                let all_submissions = this.$store.getters['pgc_forms/dashboard'].submissions;
+                const dataValues = [];
+                dataLabels.forEach(area_element => {
+                    let x = all_submissions.filter((el)=>el.plad_num == area_element )
+                    dataValues.push(x.length);
+                });
+                console.log(dataValues)
+                return dataValues;
             },
             courses() {
                 return {

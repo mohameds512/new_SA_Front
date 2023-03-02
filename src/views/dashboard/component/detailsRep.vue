@@ -222,12 +222,12 @@
                 </div>
                 <div class="a_two with_border_bottom">
                   <div class="line_one with_center_text">
-                    <span></span>
+                    <span>{{submissionData.removed_from_building + submissionData.removed_from_unbuilding}}</span>
                   </div>
                 </div>
                 <div class="a_two more_one with_border_bottom">
                   <div class="line_one with_center_text">
-                    <span></span>
+                    <span>{{ submissionData.notes }}</span>
                   </div>
                 </div>
               </div>
@@ -514,10 +514,8 @@
                 >تاريخ الصك
               </span>
               <span
-                ><span>{{
-                  handlerOfNullProperty(
-                    toLocalDatetime(submissionData.contract_date)
-                  )
+                ><span>{{submissionData.contract_date
+                  
                 }}</span></span
               >
             </div>
@@ -676,7 +674,7 @@
                   <span class="one with_border_left with_center_text"
                     >إجمالي التعويض</span
                   >
-                  <span class="one three with_center_text"></span>
+                  <span class="one three with_center_text">{{ totalComp() }}</span>
                 </div>
                 <div class="content_parts with_border_bottom">
                   <span class="one with_border_left with_center_text"
@@ -850,7 +848,7 @@
 
             <div
               class="contains_wrapper"
-              v-for="(item, i) in submissionData.coordinates"
+              v-for="(item, i) in submissionData.coordinates" v-if="i < 7"
               :key="i"
             >
               <div class="tittles_wrap with_border_bottom">
@@ -869,7 +867,9 @@
                 </div>
               </div>
             </div>
+            
           </div>
+          
         </section>
         <!-- End Section Part Two ---  [ Part Two ] -->
       </section>
@@ -888,6 +888,20 @@ export default {
   },
 
   methods: {
+    totalComp(){
+      let data = this.submissionData.includes_data;
+      let total = 0 ;
+      data.forEach((element,index) => {
+          
+              total = total + (element.qty * element.price);
+          
+          
+      });
+      
+      return Number(total).toLocaleString() ;
+
+      // return total;
+    },
     returnFloorsArea(theFloor){
       let x = [];
       this.submissionData.includes.forEach(element => {
