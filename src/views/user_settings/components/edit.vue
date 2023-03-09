@@ -123,7 +123,7 @@
             <!-- social link -->
             <tab-content :title="$t('Global.contact')" icon="feather icon-link">
               <b-row>
-                <b-col md="6">
+                <b-col md="4">
                   <b-form-group :label="$t('email')" label-for="vi-email">
                     <validation-provider
                       #default="{ errors }"
@@ -144,7 +144,7 @@
                     </validation-provider>
                   </b-form-group>
                 </b-col>
-                <b-col md="6">
+                <b-col md="4">
                   <b-form-group
                     :label="$t('Global.mobile')"
                     label-for="vi-mobile"
@@ -159,6 +159,29 @@
                         id="vi-mobile"
                         v-model="form.mobile"
                         :placeholder="$t('Global.mobile')"
+                      />
+                      <ValidationErrors
+                        default-message
+                        :frontend-errors="errors"
+                      />
+                    </validation-provider>
+                  </b-form-group>
+                </b-col>
+                <b-col md="4">
+                  <b-form-group
+                    label="password"
+                    label-for="vi-password"
+                  >
+                    <validation-provider
+                      #default="{ errors }"
+                      rules="required"
+                      name="department_id"
+                    >
+                      <b-form-input
+                        :state="errors.length > 0 ? false : null"
+                        id="vi-password"
+                        v-model="form.mobile"
+                        :placeholder="password"
                       />
                       <ValidationErrors
                         default-message

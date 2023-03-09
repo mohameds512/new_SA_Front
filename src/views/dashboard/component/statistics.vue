@@ -114,7 +114,7 @@
             </b-col>
 
 
-            <b-col cols="6">
+            <!-- <b-col cols="6">
                 <b-card>
                     <div class="d-flex">
                         <feather-icon size="21" class="mr-2" icon="CommandIcon"/>
@@ -122,9 +122,9 @@
                     </div>
                     <chartjs-component-bar-chart :options="options" :height="400" :data="courses" v-if="courses"/>
                 </b-card>
-            </b-col>
+            </b-col> -->
 
-            <b-col cols="6">
+            <!-- <b-col cols="6">
                 <b-card>
                     <div class="d-flex">
                         <feather-icon size="21" class="mr-2" icon="UsersIcon"/>
@@ -134,7 +134,7 @@
                                         height="400"
                                         :data="[23,34,45,56,12,3,45]"/>
                 </b-card>
-            </b-col>
+            </b-col> -->
 
         </b-row>
         <!-- <b-row>
@@ -146,16 +146,15 @@
             </b-col>
         </b-row> -->
         <b-row>
-            <b-col cols="12">
+            <!-- <b-col cols="12">
                 <b-card>
                     <div class="d-flex">
-                        <feather-icon size="21" class="mr-2" icon="CommandIcon"/>
-                        <!--            <feather-icon size="21"  icon="DollarSignIcon"/>-->
+                        <feather-icon size="21" class="mr-2" icon="CommandIcon"/>   
                         <h4>نسب الانجاز التراكمية خلال الشهور </h4>
                     </div>
                     <chartjs-component-bar-chart :options="options" :height="400" :data="mixedChart"/>
                 </b-card>
-            </b-col>
+            </b-col> -->
             <!--            <b-col cols="12">-->
             <!--                <b-card>-->
             <!--                    <div class="d-flex">-->

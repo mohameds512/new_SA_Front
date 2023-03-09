@@ -87,12 +87,12 @@
       </b-modal>
     </template>
     <template #action>
-      <b-button target="_blank" :to="{ name: 'user-add' }" v-b-tooltip.hover="$t('Global.add')" variant="primary" class="btn-icon mr-1">
+      <b-button  :to="{ name: 'user-add' }" v-b-tooltip.hover="$t('Global.add')" variant="primary" class="btn-icon mr-1">
         <feather-icon icon="PlusIcon" />
       </b-button>
-      <b-button v-b-tooltip.hover="$t('Global.export_excel')" class="btn-icon" variant="primary" @click="filter.export = 1">
+      <!-- <b-button v-b-tooltip.hover="$t('Global.export_excel')" class="btn-icon" variant="primary" @click="filter.export = 1">
         <feather-icon icon="FileTextIcon" />
-      </b-button>
+      </b-button> -->
     </template>
   </DataTable>
 </template>

@@ -37,7 +37,7 @@
             بمنطقة ( {{ handlerOfNullProperty(submissionData.zone) }} )
           </div>
           <div class="two one with_center_text">
-            <span>نوع وثيقة التملك:</span>
+            <span>نوع وثيقة التملك: </span> <span> {{handlerOfNullProperty(submissionData.contract_type)}}</span>
           </div>
 
           <div class="three one">
@@ -59,7 +59,7 @@
                 >(
                 {{
                   handlerOfNullProperty(
-                    toLocalDatetime(submissionData.contract_date)
+                    submissionData.contract_date
                   )
                 }}
                 )</span
@@ -1431,14 +1431,17 @@ $min-name-width: 120px;
       display: none;
     }
     overflow:hidden !important;
-    height: 70%;
-    width: 100%;
-    position: fixed;
+    height: 60% !important;
+    width: 180% !important;
+    position: relative;
     inset: 0;
-    padding-top: 50px;
-    margin: 0;
-    // z-index: 999999999999999999999999999999;
-    zoom: 79%;
+    padding-top: 25%;
+    margin-right: -46.5%;
+    // margin: 0;
+    z-index: 999999999999999999999999999999;
+    zoom: 109%;
+    // zoom:(5,1.4)
+    // transform: scale(2);
   }
 }
 </style>

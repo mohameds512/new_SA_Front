@@ -537,7 +537,7 @@
                                                                 <b-form-input v-model="form.submission.contract_area"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="المساحة حسب الصك "
-                                                                              type="number"/>
+                                                                              />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -849,7 +849,7 @@
                                                                 <b-form-input v-model="form.submission.submission_area"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="مساحة العقار م2"
-                                                                              type="number"/>
+                                                                              />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1141,7 +1141,7 @@
                                                                 <b-form-input v-model="form.submission.build_area"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="المساحة المبنية"
-                                                                              type="number"/>
+                                                                              />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1155,7 +1155,7 @@
                                                                 <b-form-input v-model="form.submission.unbuild_area"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="المساحات غير المبنية"
-                                                                              type="number"/>
+                                                                              />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1303,7 +1303,7 @@
                                                         </b-row>
                                                     </b-col>
                                                 </b-row>
-                                                <div v-if="includesForm.build_id == 1">
+                                                <div v-if="includesForm.build_id == 32">
                                                     <b-row v-for="(item , index) in sub_floors"
                                                             :key="index">
                                                         <b-col md="4">
@@ -1332,7 +1332,7 @@
                                                                     <b-form-input
                                                                             v-model="sub_floors[index].area"
                                                                             :state="errors.length > 0 ? false : null"
-                                                                            placeholder="المساحة " type="number"/>
+                                                                            placeholder="المساحة " />
                                                                     <small class="text-danger" v-if="errors[0]">هذا
                                                                         الحقل
                                                                         مطلوب</small>

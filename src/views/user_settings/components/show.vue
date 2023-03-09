@@ -30,13 +30,13 @@
                   <span class="card-text d-block">{{ item.email }}</span>
                 </div>
                 <div class="d-flex flex-wrap">
-                  <b-button v-if="type == 1" v-b-tooltip.hover class="mb-2" :title="$t('Global.edit')" style="width: 100px" target="_blank" :to="{ name: 'staff-edit', params: { id: item.id } }" variant="primary">
+                  <b-button v-if="type == 1" v-b-tooltip.hover class="mb-2" :title="$t('Global.edit')" style="width: 100px"  :to="{ name: 'staff-edit', params: { id: item.id } }" variant="primary">
                     {{ $t('Global.edit') }}
                   </b-button>
-                  <b-button v-else-if="type == 2 && hasPermission('edit_users')" v-b-tooltip.hover class="mb-2" target="_blank" :title="$t('Global.edit')" style="width: 100px" :to="{ name: 'employee-edit', params: { id: item.id } }" variant="primary">
+                  <b-button v-else-if="type == 2 && hasPermission('edit_users')" v-b-tooltip.hover class="mb-2"  :title="$t('Global.edit')" style="width: 100px" :to="{ name: 'employee-edit', params: { id: item.id } }" variant="primary">
                     {{ $t('Global.edit') }}
                   </b-button>
-                  <b-button v-else-if="hasPermission('edit_users')" v-b-tooltip.hover class="mb-2" target="_blank" :title="$t('Global.edit')" style="width: 100px" :to="{ name: 'user-edit', params: { id: item.id } }" variant="primary">
+                  <b-button v-else-if="hasPermission('edit_users')" v-b-tooltip.hover class="mb-2"  :title="$t('Global.edit')" style="width: 100px" :to="{ name: 'user-edit', params: { id: item.id } }" variant="primary">
                     {{ $t('Global.edit') }}
                   </b-button>
                   <!--                                    <b-button variant="light" class="ml-1" :to="{ name: 'role-view', params: { id: id } }">-->
