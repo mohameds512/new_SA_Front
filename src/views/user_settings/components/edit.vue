@@ -180,7 +180,7 @@
                       <b-form-input
                         :state="errors.length > 0 ? false : null"
                         id="vi-password"
-                        v-model="form.mobile"
+                        v-model="form.password"
                         :placeholder="password"
                       />
                       <ValidationErrors

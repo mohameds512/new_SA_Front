@@ -20,7 +20,7 @@
         <div class="text-center" > 
             <span style="padding: 10px;   background-color: #e7e7e7;" > نموذج دمج عقار </span>
         </div>
-        <div style="padding: 20px;">
+        <div style="padding: 20px;" v-if="owners && owners[0]">
             <p>بعد الوقف الميداني في لجنة الحصر مع المواطن</p>
             <b-row>
                 <b-col cols="8">

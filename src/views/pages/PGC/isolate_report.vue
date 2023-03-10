@@ -30,7 +30,7 @@
                 <input type="checkbox" >
             </span><span class="mr-1"  >حصر ميداني</span>
         </div>
-        <div>
+        <div v-if="owners && owners[0]">
             <p>بعد مراجعة </p>
             <b-row>
                 <b-col cols="8">

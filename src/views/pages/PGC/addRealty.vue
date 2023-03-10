@@ -173,7 +173,7 @@
                                                     <b-col md="4">
                                                         <b-form-group class="text-right" label="  نوع الملكية ">
                                                             <validation-provider #default="{ errors }" name="  نوع الملكية "
-                                                                                 rules="required">
+                                                                    rules="required">
                                                                 <b-form-input v-model="form.submission.contract_type"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder="  نوع الملكية "/>
@@ -268,12 +268,12 @@
                                                     <b-col md="2">
                                                         <b-row>
                                                             <b-col cols="4">
-                                                                <b-form-group class="text-right" label=".  ">
+                                                                <b-form-group class="text-right mt-2" label="  ">
                                                                     <b-button @click="addOwner"> اضف</b-button>
                                                                 </b-form-group>
                                                             </b-col>
                                                             <b-col cols="4">
-                                                                <b-form-group class="text-right" label=" . ">
+                                                                <b-form-group class="text-right mt-2" label="  ">
                                                                     <b-button @click="form.owners.pop()">حذف</b-button>
                                                                 </b-form-group>
                                                             </b-col>
@@ -384,12 +384,12 @@
                                                     <b-col md="2">
                                                         <b-row>
                                                             <b-col cols="4">
-                                                                <b-form-group class="text-right" label=".  ">
+                                                                <b-form-group class="text-right mt-2" label="  ">
                                                                     <b-button @click="addApplicant"> اضف</b-button>
                                                                 </b-form-group>
                                                             </b-col>
                                                             <b-col cols="4">
-                                                                <b-form-group class="text-right" label=" . ">
+                                                                <b-form-group class="text-right mt-2" label="  ">
                                                                     <b-button @click="form.applicants.pop()">حذف</b-button>
                                                                 </b-form-group>
                                                             </b-col>
@@ -1086,12 +1086,12 @@
                                                     <b-col md="2">
                                                         <b-row>
                                                             <b-col cols="4">
-                                                                <b-form-group class="text-right" label=".  ">
+                                                                <b-form-group class="text-right mt-2" label="  ">
                                                                     <b-button @click="addCoor" > اضف</b-button>
                                                                 </b-form-group>
                                                             </b-col>
                                                             <b-col cols="4">
-                                                                <b-form-group class="text-right" label=" . ">
+                                                                <b-form-group class="text-right mt-2" label="  ">
                                                                     <b-button class="mr-2"
                                                                             @click="form.submission.coordinates.pop()">
                                                                         حذف
@@ -1346,13 +1346,13 @@
                                                             <b-row >
                                                                 <b-col cols="4">
 
-                                                                    <b-form-group class="text-right" label=".  ">
+                                                                    <b-form-group class="text-right mt-2" label=" ">
                                                                         <b-button @click="addfloor" :disabled="floorFormLenght() > 8 ? true : false"
                                                                         > اضف</b-button>
                                                                     </b-form-group>
                                                                 </b-col>
                                                                 <b-col cols="4">
-                                                                    <b-form-group class="text-right" label=" . ">
+                                                                    <b-form-group class="text-right mt-2" label="  ">
                                                                         <b-button
                                                                                 @click="sub_floors.pop()">
                                                                             حذف
@@ -1363,7 +1363,7 @@
                                                         </b-col>
                                                     </b-row>
                                                     <div v-if="floorFormLenght() == 0">
-                                                        <b-form-group class="text-right" label=".  ">
+                                                        <b-form-group class="text-right mt-2" label=" ">
                                                             <b-button @click="addfloor" :disabled="floorFormLenght() > 8 ? true : false"
                                                             > اضف</b-button>
                                                         </b-form-group>
@@ -1912,10 +1912,28 @@
                     delete data.owners;
                     delete data.applicants;
                     this.form.submission = data;
-                    this.form.submission.restrict_border = data.restrict_border ? data.restrict_border : {};
-                    this.form.submission.contract_border_details = data.contract_border_details ? data.contract_border_details : {};
+                    this.form.submission.restrict_border = data.restrict_border ? data.restrict_border : {
+                        north_dir: null,
+                        south_dir: null,
+                        east_dir: null,
+                        west_dir: null,
+                        north_length: null,
+                        south_length: null,
+                        east_length: null,
+                        west_length: null,
+                    };
+                    this.form.submission.contract_border_details = data.contract_border_details ? data.contract_border_details : {
+                        north_dir: null,
+                        south_dir: null,
+                        east_dir: null,
+                        west_dir: null,
+                        north_length: null,
+                        south_length: null,
+                        east_length: null,
+                        west_length: null,
+                    };
                     this.form.submission.coordinates = data.coordinates ? data.coordinates : [{coor_north:null,coor_east:null}];
-                    this.form.submission.building_details = data.building_details ? data.contract_border_details : {};
+                    // this.form.submission.building_details = data.building_details ? data.contract_border_details : {};
                 });
                 
                 this.returnContDate();

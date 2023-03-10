@@ -48,7 +48,7 @@
 
 
                                                         <b-button
-                                                                v-if="hasPermission('signTwo_submissions') && !this.form.submission[0].signature_poss"
+                                                                v-if="hasPermission('signTwo_submissions') && !this.form.submission[0].signature_owner"
                                                                 @click="openSignature(4)" variant="danger"
                                                                 class="mx-1">
                                                             توقيع الوكيل
@@ -606,8 +606,8 @@
                                                             <b-col md="6">
                                                                 <b-form-group class="text-left" label="رقم العقار">
                                                                     <validation-provider #default="{ errors }"
-                                                                                         name="رقم العقار"
-                                                                                         rules="required">
+                                                                        name="رقم العقار"
+                                                                        rules="required">
                                                                         <b-form-input
                                                                                 v-model="form.submission[0].building_number"
                                                                                 :state="errors.length > 0 ? false : null"
