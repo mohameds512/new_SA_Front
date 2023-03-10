@@ -875,6 +875,11 @@
       </section>
       <!-- End Section Part Two  -->
     </div>
+    <div>
+        <span  class="mr-2" style="font-size: 10px;"  >رمز الوثيقة:  [TP-OPS-ATM-14] </span>
+        <span class="text-right" style="font-size: 10px;" >الإصدار:1.0</span>
+    </div>
+
   </div>
 </template>
 
@@ -888,6 +893,7 @@ export default {
   },
 
   methods: {
+    
     totalComp(){
       let data = this.submissionData.includes_data;
       let total = 0 ;
@@ -1415,7 +1421,32 @@ $min-name-width: 120px;
 
   // End Section Part Two
 }
-
+// @page { size:  landscape; }
+// @media print {
+//   // @page { size: landscape; }
+//   * {
+//     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+//     color-adjust: exact !important; /*Firefox*/
+    
+//   }
+//   .our_wrapper_for_container_details {
+//     .includes_types{
+//       font-size: x-small;
+//     }
+//     .btn_print{
+//       display: none;
+//     }
+//     overflow:hidden !important;
+    
+//     position: relative;
+//     inset: 0;
+//     margin-top: -32%;
+//     margin-right: -35%;
+//      zoom: 64%;
+    
+//      transform: scale(1.2 , 0.8) ;
+    
+//   }
 @media print {
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */

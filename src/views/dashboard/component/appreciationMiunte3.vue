@@ -39,7 +39,7 @@
 
                                     </b-tr>
                                     <b-tr>
-                                        رقم العقار ( {{ submissionData.building_number }}                           )
+                                        رقم العقار ( {{ submissionData.pro_num + submissionData.zone+submissionData.plad_num + getLast5(submissionData.building_number) }}                           )
                                     </b-tr>
                                 </b-tbody>
 

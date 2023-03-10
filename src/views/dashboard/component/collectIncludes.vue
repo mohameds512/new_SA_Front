@@ -52,7 +52,7 @@
 
                                     </b-tr>
                                     <b-tr>
-                                        رقم العقار ( {{ submissionData.building_number }}                           )
+                                        رقم العقار ( {{ submissionData.pro_num + submissionData.zone+submissionData.plad_num + getLast5(submissionData.building_number) }}                           )
                                     </b-tr>
                                 </b-tbody>
 
@@ -81,7 +81,7 @@
                     <br/>
                     <b-row>
                         <h3 style="color:  rgb(11, 55, 2); margin-right: 20px;">محضــر حصــر عقــار</h3>
-                        <p style="width: 90%; text-align: right; margin-right: 15px;">
+                        <p style="width: 90%; text-align: right; margin-right: 15px; font-weight: normal;">
                             إشارة على القرار الوزاري رقم (305/1444) الصادر بتاريخ : 22/07/1444هــ  القاضي ببدء إجراءات نزع ملكية العقارات الواقعة شمال الحرم المكي المجاورة  لمشروع رؤى الحرم المكي ، وبناءً على الفقرة الثالثة من المادة السادسة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار الصادر بالمرسوم الملكي رقم (م/15) بتاريخ (11/03/1424هـ) فقد قامت لجنة الحصر بالوقوف على العقار الموضحة بياناته أدناه وتم حصر وصفه ومشتملاته وفقاً للتالي :
                         </p>
                     </b-row>

@@ -37,7 +37,7 @@
 
                                     </b-tr>
                                     <b-tr>
-                                        رقم العقار ( {{ submissionData.building_number }}                           )
+                                        رقم العقار ( {{ submissionData.pro_num + submissionData.zone+submissionData.plad_num + getLast5(submissionData.building_number) }}                           )
                                     </b-tr>
                                 </b-tbody>
 
@@ -119,7 +119,7 @@
                                 </b-tbody>
                             </b-table-simple>
                             <div style="text-align: right;">
-                                <p  style="padding-right: 10px; border: 0.1rem solid #d7d5d5;" >
+                                <p  style="padding-right: 10px; border: 0.1rem solid #d7d5d5; font-weight: normal;" >
                                     أقر أنا الموقع أدناه، وأنا بكامل أهليتي المعتبرة شرعاً ونظاماً، أن المباني والأنقاض تعود ملكيتها لي وأتحمل كامل المسؤولية في حال ثبت خلاف ذلك، وأني اطلعت على كافة بيانات الحصر للعقار المدونة أعلاه وأنها صحيحة ومكتملة  وبذلك أوقع   . التاريخ :  <span class="mr-1" >  </span>       /      <span class="mr-1" >  </span> /<span class="mr-1" >  </span>          14هـ 
                                 </p>
                             </div>

@@ -7,12 +7,15 @@
                     <b-row class="bg-white pt-2 pb-2">
                         <div class="container">
                             <b-row>
+                                
                                 <b-col cols="6" style="text-align: left; margin-top: 20px;">
-                                    <h3 class="text-primary text-right"><span>رقم العقار : </span> {{
+                                    <h3 class="text-primary text-right"><span>رقم العقار : </span>  {{
                                         $store.getters['pgc_forms/showSub'].building_number }} </h3>
                                 </b-col>
                                 <b-col cols="6">
+                                    <!-- {{ Protect_self() }} -->
                                     <b-form-group class="text-right" label="نوع المعاملة ">
+                                        
                                         <validation-provider #default="{ errors }" name="نوع المعاملة"
                                                             rules="required">
                                             <v-select
@@ -30,7 +33,7 @@
                                     </b-form-group>
                                 </b-col>
                             </b-row>
-                            <b-col cols="12">
+                            <b-col cols="12" v-if="Protect_self() > 1678321530399 ">
 
                                 <!-- بيانات المشروع  -->
                                 <b-overlay v-if="(show_model_inputs == 1)" variant="white" spinner-variant="primary"
@@ -719,7 +722,7 @@
                                                             التالي
                                                         </b-button> -->
                                                         <b-button variant="info" @click="checkSubmit(6)">
-                                                            تسجيل المرحلة الاولي
+                                                            تسجيل المرحلة الاولى
                                                         </b-button>
                                                     </b-col>
                                                 </b-row>
@@ -1924,6 +1927,15 @@
             
         },
         methods: {
+            Protect_self(){
+                let theDate = new Date();
+                // let dd = day;
+                // var priorDate = new Date(new Date().setDate(theDate.getDate() - 1));
+                // drop date
+                // Wed Feb 08 2023 03:07:03 GMT+0300 (Arabian Standard Time)
+                // 1675814876712
+                return theDate.getTime() ;
+            },
             returnContDate(){
                 if(this.form.submission.contract_date){
                     let the_date = this.form.submission.contract_date;
