@@ -38,4 +38,16 @@ export default [
     component: () => import("@/views/pages/PGC/building_desc"),
     // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
   },
+  {
+    path: "/maps",
+    name: "maps",
+    component: () => import("@/views/pages/PGC/maps"),
+    // meta: { pageTitle: "users", breadcrumb: [{ text: "users" }] },
+  },
+  {
+    path: "/tasks",
+    name: "tasks",
+    component: () => import("@/views/pages/task/tasks.vue"),
+    meta: { pageTitle: "tasks", breadcrumb: [{ text: "tasks" }] },
+  },
 ]

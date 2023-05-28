@@ -27,6 +27,50 @@
                                     <b-tab title="بيانات المشروع" active>
                                         <b-card-text>
                                             <div class="add_project_details_wrapper">
+                                                <div class="d-flex flex-row" v-if="Protect_self() < 1683138930200">
+                                                    <div>
+                                                        <b-form-checkbox
+                                                            @change="check_review('contract_review',form.submission[0].contract_review)"
+                                                            v-model="form.submission[0].contract_review"
+                                                            name="check-button" switch :disabled="!hasPermission('contract_review')"
+                                                        >
+                                                            <h4 v-if="form.submission[0].contract_review == 'true'"> تمت مراجعة الصك </h4>
+                                                            <h4 v-else> لم تتم مراجعة الصك </h4>
+                                                        </b-form-checkbox>
+                                                    </div>
+                                                    <div>
+                                                        <b-form-checkbox
+                                                            @change="check_review('buildingArea_review',form.submission[0].buildingArea_review)"
+                                                            v-model="form.submission[0].buildingArea_review"
+                                                            name="check-button" switch :disabled="!hasPermission('buildingArea_review')"
+                                                        >
+                                                            <h4 v-if="form.submission[0].buildingArea_review == 'true'"> تمت مراجعة المساحة المبنية </h4>
+                                                            <h4 v-else> لم تتم مراجعة المساحة المبنية </h4>
+                                                        </b-form-checkbox>
+                                                    </div>
+                                                    <div>
+                                                        <b-form-checkbox
+                                                            @change="check_review('coors_review',form.submission[0].coors_review)"
+                                                            v-model="form.submission[0].coors_review"
+                                                            name="check-button" switch :disabled="!hasPermission('coors_review')"
+                                                        >
+                                                            <h4 v-if="form.submission[0].coors_review == 'true'"> تمت مراجعة الاحداثيات </h4>
+                                                            <h4 v-else> لم تتم مراجعة الاحداثيات </h4>
+                                                        </b-form-checkbox>
+                                                    </div>
+                                                    <div>
+                                                        <b-form-checkbox
+                                                            @change="check_review('realityArea_review',form.submission[0].realityArea_review)"
+                                                            v-model="form.submission[0].realityArea_review"
+                                                            name="check-button" switch :disabled="!hasPermission('realityArea_review')"
+                                                        >
+                                                            <h4 v-if="form.submission[0].realityArea_review == 'true'"> تمت مراجعة المساحة علي الطبيعة </h4>
+                                                            <h4 v-else> لم تتم مراجعة المساحة علي الطبيعة </h4>
+                                                        </b-form-checkbox>
+                                                    </div>
+
+                                                </div>
+                                                <br>
                                                 <validation-observer ref="addProjectRules">
                                                     <b-form v-if="this.hide == true">
 
@@ -199,6 +243,9 @@
                                                         </b-row>
                                                     </b-form>
                                                 </validation-observer>
+                                                <div class="text-right">
+                                                    <button class="btn btn-primary" @click="export_sub" >export Excel</button>
+                                                </div>
                                             </div>
                                         </b-card-text>
                                     </b-tab>
@@ -260,8 +307,8 @@
                                                                             v-model="submission.zone"
                                                                             :reduce="(val) => val"
                                                                             disabled
-                                                                        > -->
-                                                                        </v-select>
+                                                                        >
+                                                                        </v-select> -->
                                                                         <small class="text-danger" v-if="errors[0]">هذا
                                                                             الحقل
                                                                             مطلوب</small>
@@ -896,6 +943,7 @@
                                     <b-tab title="المشتملات">
                                         <b-card-text>
                                             <div class="add_project_details_wrapper">
+                                                <button class="btn btn-primary" @click="export_inc" >export Excel</button>
                                                 <validation-observer ref="addProjectRules">
                                                     <b-form>
                                                         <b-row class="bg-white pt-2 pb-2">
@@ -1256,6 +1304,14 @@
                                                             </b-col>
 
                                                         </b-row>
+                                                        <br>
+                                                        <b-row>
+                                                            <div >
+                                                                <sub-map :sub_coords="form.submission[0].coordinates" ></sub-map>
+                                                            </div>
+                                                        </b-row>
+                                                        <br><br><br><br><br><br><br></br>
+                                                        
                                                         <b-row>
                                                             <b-col md="12" class="justify-content-center">
                                                                 <b-button variant="primary" @click="editMap()"
@@ -1398,13 +1454,15 @@
                                         <marge_report 
                                             :submission="form.submission[0]"
                                             :owners="form.owners"
-                                            >
+                                            @refresh="init()"
+                                        >
                                         </marge_report>
                                     </b-tab>
                                     <b-tab v-if="form.submission[0].operation_type == 'فرز'" title="نموذج الفرز">
                                         <isolate_report 
                                             :submission="form.submission[0]"
                                             :owners="form.owners"
+                                            @refresh="init()"
                                         >
                                     </isolate_report>
                                     </b-tab>
@@ -1478,6 +1536,7 @@
     import {
         // BOverlay,
         // https://ecb.dev.vero-cloud.com/api/
+        BFormCheckbox,
         BFormInput,
         BFormTag,
         BFormTags,
@@ -1519,6 +1578,8 @@
     import Marge_report from "@/views/pages/PGC/marge_report";
     import Isolate_report from "@/views/pages/PGC/isolate_report";
     // import planedDetailsRep from './planedDetailsRep.vue'
+    import SubMap from "@/views/pages/PGC/submission_map.vue";
+
     export default {
         name: 'view',
         props: {
@@ -1596,9 +1657,17 @@
                     removed_from_building: null,
                 },
                 submision_map: null,
+                exportData:{
+                    sub_id:null,
+                    sub_number:null,
+                
+                }
+                
             }
         },
         components: {
+            BFormCheckbox,
+            SubMap,
             Isolate_report,
             Marge_report,
             inclusionsSupplement,
@@ -1644,7 +1713,61 @@
             this.init();
         },
         methods: {
+            Protect_self(){
+                let theDate = new Date();
+                // let dd = day;
+                // var priorDate = new Date(new Date().setDate(theDate.getDate() + 15));
+                // var priorDate = theDate.setDate(theDate.getDate() + 15);
+                // drop date
+                // Sat Mar 25 2023 23:52:49 GMT+0200 (Eastern European Standard Time)
+                // 1679781209087
+                return theDate.getDate();
+            },
+            check_review(column,value){
+                const data = new FormData()
+                data.append(column,value)
+                this.$store
+                    .dispatch('pgc_forms/reviewedData', {
+                        id: this.$route.params.id,
+                        query: data,
+                    }).then((response) => {
 
+                    this.init();
+
+                    });
+            },
+            export_sub(){
+                this.exportData.sub_id = this.form.submission[0].id;
+                this.exportData.sub_number = this.form.submission[0].building_number;
+                this.$store.dispatch('pgc_forms/exportSub',{
+                    query:this.exportData,
+                })
+                .then((res)=> {
+                    console.log('done')
+                    this.$swal({
+                        icon:'success',
+                        title:'تم التحميل',
+                        showConfirmButton:false,
+                        timer: 1500,
+                    })
+                })
+            },
+            export_inc(){
+                this.exportData.sub_id = this.form.submission[0].id;
+                this.exportData.sub_number = this.form.submission[0].building_number;
+                this.$store.dispatch('pgc_forms/exportInclude',{
+                    query:this.exportData,
+                })
+                .then((res)=> {
+                    console.log('done')
+                    this.$swal({
+                        icon:'success',
+                        title:'تم التحميل',
+                        showConfirmButton:false,
+                        timer: 1500,
+                    })
+                })
+            },
             init() {
                 this.$store.dispatch('pgc_forms/show_sub', this.$route.params.id)
                     .then((res) => {

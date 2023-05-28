@@ -167,16 +167,16 @@
                             <b-tbody v-if="submissionData.includes_data.length <= 38">
                                 <b-tr>
                                     <b-th style="width: 26.5%;" class="green-header" > إجمالي التعويض</b-th>
-                                    <b-th style="width: 18.5%;"  > {{ totalComp() }}</b-th>
-                                    <b-th  >كتابة:</b-th>
-                                    <b-th ></b-th>
+                                    <b-th style="width: 18.5%;"  > {{ totalComp("with") }}</b-th>
+                                    <b-th  style=" font-weight: normal;" >كتابة: {{ retrnWrite(totalComp("with")) }} </b-th>
+                                    
 
                                 </b-tr>
                                 <b-tr>
                                     <b-th class="green-header" > إجمالي التعويض بدون أرض</b-th>
-                                    <b-th  ></b-th>
-                                    <b-th  >كتابة:</b-th>
-                                    <b-th ></b-th>
+                                    <b-th  > {{ totalComp("withOut")  }}</b-th>
+                                    <b-th  style=" font-weight: normal;" >كتابة: {{ retrnWrite(totalComp("withOut")) }} </b-th>
+                                    
 
                                 </b-tr>
                             </b-tbody>
@@ -206,8 +206,8 @@
                 <b-table-simple small bordered>
                     <b-tbody>
                         <b-tr>
-                            <b-th class="green_right_item" > مندوب الغرفة التجارية</b-th>
-                            <b-th class="green_right_item"> مندوب وزارة العدل</b-th>
+                            <b-th class="green_right_item" >  الغرفة التجارية</b-th>
+                            <b-th class="green_right_item">  وزارة العدل</b-th>
                         </b-tr>
                         <b-tr>
                             <b-th style="color: aliceblue;" >.</b-th>
@@ -218,8 +218,8 @@
                             <b-th style="color: aliceblue;" >.</b-th>
                         </b-tr>
                         <b-tr>
-                            <b-th class="green_right_item" > مندوب الهيئة العامة لعقارات الدولة</b-th>
-                            <b-th class="green_right_item"> مندوب وزارة الداخلية</b-th>
+                            <b-th class="green_right_item" >  الهيئة العامة لعقارات الدولة</b-th>
+                            <b-th class="green_right_item">  وزارة الداخلية</b-th>
                         </b-tr>
                         <b-tr>
                             <b-th style="color: aliceblue;" >.</b-th>
@@ -230,8 +230,8 @@
                             <b-th style="color: aliceblue;" >.</b-th>
                         </b-tr>
                         <b-tr>
-                            <b-th class="green_right_item" > مندوب وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                            <b-th class="green_right_item"> مندوب الجهة المستفيدة</b-th>
+                            <b-th class="green_right_item" >  وزارة الشؤون البلدية والقروية والإسكان</b-th>
+                            <b-th class="green_right_item">  الجهة المستفيدة</b-th>
                         </b-tr>
                         <b-tr>
                             <b-th style="color: aliceblue;" >.</b-th>
@@ -293,6 +293,11 @@ export default {
         ownersData:[],
     },
     methods: {
+        retrnWrite(value){
+            var Tafgeet = require('tafgeetjs');
+            var stringText = new Tafgeet(value, 'SAR').parse();
+            return stringText;
+        }, 
         get_owners_names(){
             let Onames = [];
             this.ownersData.forEach(element => {
@@ -316,19 +321,46 @@ export default {
             return  subNum.slice(-5);
         },
         printInvoice() {
+            var css = '@page { size: portrait; }',
+            head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet){
+            style.styleSheet.cssText = css;
+            } else {
+            style.appendChild(document.createTextNode(css));
+            }
+
+            head.appendChild(style);
             window.print()
         },
-        totalComp(){
+        totalComp( type ){
                 let data = this.submissionData.includes_data;
                 let total = 0 ;
                 data.forEach((element,index) => {
-                    // if (index > 12 && index < 38) {
+                    // if(index > 37 && index < 62){
                         total = total + (element.qty * element.price);
                     // }
                     
                 });
+                if (type == "with") {
+                    return Number(total).toLocaleString() ;
+                }
+                if (type == "withOut") {
+                    let area_total = 0;
+                    data.forEach((element,index) => {
+                    if(element.type_id == 41){
+                        area_total = area_total + (element.qty * element.price);
+                    }
+                    
+                    });
+                    let diff = total - area_total;
+                    return Number(diff).toLocaleString() ;
+                }
                 
-                return Number(total).toLocaleString() ;
 
                 // return total;
             }
@@ -353,6 +385,7 @@ export default {
     color: #ffffff !important;
     text-align: left !important;
 }
+@page { size: portrait; }
 @media print {
 
     // Global Styles

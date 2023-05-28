@@ -181,7 +181,7 @@
                         :state="errors.length > 0 ? false : null"
                         id="vi-password"
                         v-model="form.password"
-                        :placeholder="password"
+                        placeholder="password"
                       />
                       <ValidationErrors
                         default-message

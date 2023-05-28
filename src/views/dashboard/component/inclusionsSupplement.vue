@@ -11,13 +11,13 @@
                     </b-button>
                     <br><br>
                     <b-row    class="invoice-preview">
-                        <b-col md="4">
+                        <b-col cols="4">
                             <div >
                                 <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
                             </div>
                         </b-col>
                         <b-col cols="2" ></b-col>
-                        <b-col md="6" class="text-center">
+                        <b-col cpls="6" class="text-center">
                             <b-table-simple small bordered>
                                 <b-thead head-variant="light">
                                     <b-tr>
@@ -69,10 +69,10 @@
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0 && index > 6 && index < 51" >
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 != 0 && index > 6 && index < 51 && submissionData.includes_data[index].type_id != 41" >
                                         <b-td class="gray_item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
-                                        <b-th class="content-item" >{{ submissionData.includes_data[index].qty }}</b-th>
+                                        <b-th class="content-item" >{{ submissionData.includes_data[index].qty }} <span class="opacity_unit">{{ submissionData.includes_data[index].unit }}</span> </b-th>
                                     </b-tr>
                                 </b-tbody>
 
@@ -90,10 +90,10 @@
                                     </b-tr>
                                 </b-thead>
                                 <b-tbody>
-                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0 && index > 6 && index < 51" >
+                                    <b-tr v-for="(item ,index) in submissionData.includes_data" :key="index" v-if="index%2 == 0 && index > 6 && index < 51 && submissionData.includes_data[index].type_id != 41" >
                                         <b-td class="gray_item" >{{ index+1 }}</b-td>
                                         <b-th class="content-item" >{{ submissionData.includes_data[index].content }}</b-th>
-                                        <b-th class="content-item" >{{ submissionData.includes_data[index].qty }}</b-th>
+                                        <b-th class="content-item" >{{ submissionData.includes_data[index].qty }} <span class="opacity_unit">{{ submissionData.includes_data[index].unit }}</span> </b-th>
                                     </b-tr>
                                 </b-tbody>
 
@@ -138,26 +138,30 @@
                             </b-table-simple>
                         </b-col>
                     </b-row>
-                    
-                    <b-row>
+                    <div style="background-color: #05481e; color: #ffffff;">
+                        <p class="text-center" style="width: 100%;padding: 4px;">اعضاء لجنة حصر العقارات</p>
+                    </div>
+                    <!-- <b-row>
+                        
+                        
                         <b-col>
                             <b-table-simple small bordered >
-                                <b-tbody style="text-align: right;">
+                                <b-tbody >
                                     <b-tr >
                                         <b-th  class=" center-green text-center">اعضاء لجنة حصر العقارات</b-th>
                                     </b-tr>
                                 </b-tbody>
                             </b-table-simple>
                         </b-col>
-                    </b-row>
+                    </b-row> -->
                     
-                    <b-row>
+                    <b-row style="margin-top: -12px;">
                         <b-col>
                             <b-table-simple small bordered>
                                 <b-tbody>
                                     <b-tr>
                                         <b-th style="width: 25%;" class="content-item" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                                        <b-th style="width: 25%;" class="content-item">الإمارة</b-th>
+                                        <b-th style="width: 25%;" class="content-item">إمارة منطقة مكة المكرمة</b-th>
                                         <b-th style="width: 25%;" class="content-item">وزارة البيئة والمياه والزراعة</b-th>
                                         <b-th style="width: 25%;" class="content-item">الجهة المستفيدة</b-th>
                                     </b-tr>
@@ -243,9 +247,23 @@ export default {
         getLast5( subNum ){
                 return  subNum.slice(-5);
             },
-        printInvoice() {
+            printInvoice() {
+            var css = '@page { size: portrait; }',
+            head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet){
+            style.styleSheet.cssText = css;
+            } else {
+            style.appendChild(document.createTextNode(css));
+            }
+
+            head.appendChild(style);
             window.print()
-        }
+        },
     }
 }
 </script>
@@ -257,6 +275,10 @@ export default {
 
 
 <style lang="scss" scoped >
+.opacity_unit{
+    opacity: 0.2;
+    font-size: 15px;
+}
 .gray_item{
     color: #1b0404;
     background-color: #dedddd !important;
@@ -281,12 +303,18 @@ export default {
         background-color: #ffffff;  
         color: #1b0404;
     }
+    @page { size: portrait; }
     @media print {
 
         // Global Styles
         body {
             background-color: transparent !important;
             margin-top: -30px;
+        }
+        .center-green{
+            color: #ffffff !important;
+            background-color: #05481e !important;
+            text-align: center ;
         }
         nav.header-navbar {
             display: none;

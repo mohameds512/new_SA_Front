@@ -1,4 +1,5 @@
 import pgcSubmission from '../../../api/pgc/pgc';
+import fileDownload from 'js-file-download';
 
 const pgc_forms = new pgcSubmission();
 
@@ -10,9 +11,16 @@ const locationModule = {
         showSub: null,
         incs: null,
         dashboard: null,
+        taskSub:[],
+        taskSurv:[],
     },
     getters: {
-
+        taskSurv(state){
+            return state.taskSurv
+        },
+        taskSub(state){
+            return state.taskSub
+        },
         showSub(state) {
             return state.showSub
         },
@@ -25,7 +33,12 @@ const locationModule = {
 
     },
     mutations: {
-
+        SET_TASK_SUB(state,taskSub){
+            state.taskSub = taskSub
+        },
+        SET_TASK_SURV(state,taskSurv){
+            state.taskSurv = taskSurv
+        },
         SET_SHOW_SUB(state, sub) {
             state.showSub = sub
         },
@@ -37,6 +50,37 @@ const locationModule = {
         // },
     },
     actions: {
+
+        exportInclude({ commit },payload) {
+            
+            return new Promise((resolve, reject) => {
+              pgc_forms
+                .exportInclude(payload.query)
+                .then(response => {
+                //    fileDownload(response,'ddddd.xlsx');
+                   fileDownload(response,payload.query.sub_number+'.xlsx');
+                  resolve(response)
+                })
+                .catch(error => {
+                  reject(error)
+                })
+            })
+        },
+        exportSub({ commit },payload) {
+            
+            return new Promise((resolve, reject) => {
+              pgc_forms
+                .exportSub(payload.query)
+                .then(response => {
+                //    fileDownload(response,'ddddd.xlsx');
+                   fileDownload(response,payload.query.sub_number+'.xlsx');
+                  resolve(response)
+                })
+                .catch(error => {
+                  reject(error)
+                })
+            })
+        },
         show_sub({commit}, id) {
             return new Promise((resolve, reject) => {
                 pgc_forms
@@ -49,6 +93,30 @@ const locationModule = {
                     .catch(error => {
                         reject(error)
                     })
+            })
+        },
+
+        taskLookUps({commit}) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.taskLookUps()
+                    .then(response => {
+                        console.log(response.data);
+                        commit('SET_TASK_SURV', response.data.survey_users)
+                        commit('SET_TASK_SUB', response.data.submission_id)
+                        resolve(response)
+                    }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+        listTasks({commit}) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.listTasks()
+                    .then(response => {
+                        resolve(response)
+                    }).catch(error => {
+                    reject(error)
+                })
             })
         },
 
@@ -83,6 +151,28 @@ const locationModule = {
                     .then(response => {
                         resolve();
 
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
+        updateBeforeAfter({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.updateBeforeAfter(payload)
+                    .then(response => {
+                        resolve();
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
+        reviewedData({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.reviewedData(payload)
+                    .then(response => {
+                        resolve();
                     })
                     .catch(error => {
                         reject(error)
@@ -196,6 +286,18 @@ const locationModule = {
                     })
             })
         },
+        delete_subs({commit}, payload) {
+            return new Promise((resolve, reject) => {
+                pgc_forms.delete_subs(payload)
+                    .then(response => {
+                        resolve();
+
+                    })
+                    .catch(error => {
+                        reject(error)
+                    })
+            })
+        },
         add_notes({commit}, payload) {
 
             return new Promise((resolve, reject) => {
@@ -272,6 +374,33 @@ const locationModule = {
                     .catch(error => {
                         reject(error)
                     })
+            })
+        },
+
+        submitTask({ commit },payload) {
+            
+            return new Promise((resolve, reject) => {
+              pgc_forms
+                .save_task(payload.id,payload.query)
+                .then(response => {
+                  resolve(response)
+                })
+                .catch(error => {
+                  reject(error)
+                })
+            })
+        },
+        deleteTask({ commit },payload) {
+            
+            return new Promise((resolve, reject) => {
+              pgc_forms
+                .deleteTask(payload.id)
+                .then(response => {
+                  resolve(response)
+                })
+                .catch(error => {
+                  reject(error)
+                })
             })
         },
     }

@@ -23,6 +23,26 @@ class PGC extends Resource {
     //     method: 'post'
     //   });
     // }
+
+    exportInclude(payload) {
+        console.log(payload)
+        return request({
+            url: `exportInclude`,
+            method: "post",
+            data: payload,
+            responseType:"blob"
+        })
+    }
+    
+    exportSub(payload) {
+        console.log(payload)
+        return request({
+            url: `exportSub`,
+            method: "post",
+            data: payload,
+            responseType:"blob"
+        })
+    }
     save_includes(payload) {
         console.log(payload)
         return request({
@@ -32,6 +52,7 @@ class PGC extends Resource {
             headers: {'Content-Type': 'multipart/form-data'},
         })
     }
+    
     delete_includes(payload) {
         return request({
             url: `/store/delete_inc`,
@@ -39,9 +60,32 @@ class PGC extends Resource {
             data: payload.query,
         })
     }
+    delete_subs(payload) {
+        return request({
+            url: `/store/deleteSubmission`,
+            method: "post",
+            data: payload.query,
+        })
+    }
     submitMab(payload) {
         return request({
             url: `/store/map/${payload.id}`,
+            method: "post",
+            data: payload.query,
+            headers: {'Content-Type': 'multipart/form-data'},
+        })
+    }
+    updateBeforeAfter(payload) {
+        return request({
+            url: `/store/updateBeforeAfter/${payload.id}`,
+            method: "post",
+            data: payload.query,
+            headers: {'Content-Type': 'multipart/form-data'},
+        })
+    }
+    reviewedData(payload) {
+        return request({
+            url: `/store/reviewedData/${payload.id}`,
             method: "post",
             data: payload.query,
             headers: {'Content-Type': 'multipart/form-data'},
@@ -113,6 +157,19 @@ class PGC extends Resource {
 
     }
 
+    taskLookUps() {
+        return request({
+            url: `/taskLookUps`,
+            method: "post"
+        })
+    }
+    listTasks() {
+        return request({
+            url: `/listTasks`,
+            method: "post"
+        })
+    }
+
     show_submission(id) {
         return request({
             url: `/store/show/${id}`,
@@ -134,7 +191,6 @@ class PGC extends Resource {
     }
 
     change_status(payload) {
-
 
         return request({
             url: `/store/change/status/${payload.id}`,
@@ -163,6 +219,29 @@ class PGC extends Resource {
             url: `/store/submitFloor`,
             method: "post",
             data: payload
+        })
+    }
+    save_task(id, payload) {
+        if (id == null) {
+            return request({
+                url: `/saveTask`,
+                method: "post",
+                data: payload
+            });
+        } else {
+
+            return request({
+                url: `/saveTask/${id}`,
+                method: "post",
+                data: payload
+            });
+        }
+    }
+    deleteTask(id) {
+        return request({
+            url: `/deleteTask/${id}`,
+            method: "post",
+            // data: payload.query,
         })
     }
 

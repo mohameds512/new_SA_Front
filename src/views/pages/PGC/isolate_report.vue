@@ -1,5 +1,90 @@
 <template>
+    
     <div class="invoice-preview-wrapper " >
+        <div class="invoice-actions">
+            <b-button variant="primary" @click="editBefore()"
+                        class="mb-2">
+                تحديث الخريطة قبل الفرز
+            </b-button>
+            <b-button variant="primary" @click="editAfter()"
+                        class="mb-2 mr-5">
+                تحديث الخريطة بعد الفرز
+            </b-button>
+            <b-modal hide-header-close v-model="modal_img_before"
+                    hide-footer title="أضفة خريطة" id="img">
+            <div class="demo-vertical-spacing">
+
+                <b-form-group class="text-left">
+                    <!-- <input type="hidden" v-model="before_image"> -->
+                    <validation-provider
+                            #default="{ errors }"
+                            name="خريطة "
+                            rules="required">
+                        <input type="file" name="image"
+                                @change="changeImgB"
+                                ref="img_before"
+                                accept="image/apng, image/jpeg, image/png, image/webp"
+                        />
+                        <small class="text-danger"
+                                v-if="errors[0]">هذا الحقل
+                            مطلوب</small>
+                    </validation-provider>
+                </b-form-group>
+            </div>
+            <div class="mt-2">
+                <b-col cols="12">
+                    <div class="d-flex justify-content-end">
+                        <b-button @click="updateImg()"
+                                    variant="primary"
+                                    style="margin-right: 10px;">
+                            تأكيد
+                        </b-button>
+                        <b-button @click="modal_img_before = false"
+                                    variant="outline-primary">
+                            الغاء
+                        </b-button>
+                    </div>
+                </b-col>
+            </div>
+            </b-modal>
+            <b-modal hide-header-close v-model="modal_img_after"
+                    hide-footer title="أضفة خريطة" id="img">
+            <div class="demo-vertical-spacing">
+
+                <b-form-group class="text-left">
+                    <!-- <input type="hidden" v-model="before_image"> -->
+                    <validation-provider
+                            #default="{ errors }"
+                            name="خريطة "
+                            rules="required">
+                        <input type="file" name="image"
+                                @change="changeImgA"
+                                ref="img_after"
+                                accept="image/apng, image/jpeg, image/png, image/webp"
+                        />
+                        <small class="text-danger"
+                                v-if="errors[0]">هذا الحقل
+                            مطلوب</small>
+                    </validation-provider>
+                </b-form-group>
+            </div>
+            <div class="mt-2">
+                <b-col cols="12">
+                    <div class="d-flex justify-content-end">
+                        <b-button @click="updateImg()"
+                                    variant="primary"
+                                    style="margin-right: 10px;">
+                            تأكيد
+                        </b-button>
+                        <b-button @click="modal_img_after = false"
+                                    variant="outline-primary">
+                            الغاء
+                        </b-button>
+                    </div>
+                </b-col>
+            </div>
+            </b-modal>
+        </div>
         <br><br>
         <b-button
                 variant="success"
@@ -57,7 +142,7 @@
                 </b-col>
             </b-row>
             <div style="padding:20px ;">
-                أوضح بأنه يملك جزء من العقار و ليس كامل الشكل المرسوم ادناه علي قواعد البانات المكانية و تم فرز العقار و تعديل مشتملاته و تم  اعطائها أرقام جديدة و عددها ({{ submission.isolate_submissions.length }}) عقار وهي كالتالي
+                أوضح بأنه يملك جزء من العقار و ليس كامل الشكل المرسوم ادناه علي قواعد البانات المكانية و تم فرز العقار و تعديل مشتملاته و تم  اعطائها أرقام جديدة و عددها ({{ getIsolateLength() }}) عقار وهي كالتالي
             </div>
         </div>
         <b-table-simple bordered  class="text-center">
@@ -132,12 +217,16 @@
         BTfoot,
         BTbody,
         BTd,
-        BThead
+        BThead,
+        BFormGroup,
     } from "bootstrap-vue";
 
+    import {ValidationProvider, ValidationObserver} from 'vee-validate'
     export default {
         name: "isolate_report",
         components: {
+            BFormGroup,
+            ValidationProvider,
             BRow,
             BCol,
             BTab,
@@ -148,14 +237,55 @@
             BTableSimple,
             BTr, BTh, BTfoot, BTbody, BTd, BThead
         },
+        data() {
+            return {
+                modal_img_before:false,
+                modal_img_after:false,
+                before_image:null,
+                after_image:null,
+            }
+            
+        },
         props: {
             submission: null,
             owners:null,
         },
+        
         methods:{
             printInvoice() {
                 window.print()
-            }
+            },
+            changeImgB() {
+                this.before_image = this.$refs.img_before.files[0];
+            },
+            changeImgA() {
+                this.after_image = this.$refs.img_after.files[0];
+            },
+            editBefore(){
+                this.modal_img_before = true;
+            },
+            editAfter(){
+                this.modal_img_after = true;
+            },
+            updateImg() {
+                const image = new FormData()
+                image.append('before_image', this.before_image)
+                image.append('after_image', this.after_image)
+                this.$store
+                    .dispatch('pgc_forms/updateBeforeAfter', {
+                        id: this.$route.params.id,
+                        query: image,
+                    }).then((response) => {
+                        this.$emit('refresh');
+                        this.before_image = null;
+                        this.after_image = null;
+                        this.modal_img_before = false;
+                        this.modal_img_after = false;
+                    // this.init();
+
+                });
+                // this.store.d
+            },
         }
         
     }

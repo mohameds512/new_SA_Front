@@ -5,7 +5,7 @@
         <!-- <p style="margin-left:15px">Raduis :{{radius}} Kilometer &nbsp;<span style="color:black;font-weight:bold"> Result:{{index.length}}</span></p> -->
 
         <div v-if="!getLocation"
-             style="z-index: 999; margin-left: 40px; margin-bottom: -40px; position: relative; text-align: center">
+            style="z-index: 999; margin-left: 40px; margin-bottom: -40px; position: relative; text-align: center">
             <b-button style="border-radius: 50px" @click="setCategory((x = null))" variant="light">
                 <feather-icon icon="" size="12"/> &nbsp;Show All
             </b-button>&nbsp;
@@ -40,8 +40,8 @@
 
         <!-- test -->
         <div class="theMainDiv my-0 mt-1 white text-black no_spacing p-0 mb-2 w-100" @mouseout="closeInfo"
-             @mouseover="setWindowInfoStatus" elevation="16" max-width="600" width="500" max-height="100"
-             style="padding: 0px">
+              @mouseover="setWindowInfoStatus" elevation="16" max-width="600" width="500" max-height="100"
+              style="padding: 0px">
 <!--            <div class="img_slider bg-white rounded-top">-->
 <!--                <b-img class="mr-0-5" :src="require('@/assets/images/avatars/1.png')" fluid alt="Fluid image"></b-img>-->
 <!--                <b-img class="mx-0-5" :src="require('@/assets/images/avatars/1.png')" fluid alt="Fluid image"></b-img>-->
@@ -85,6 +85,7 @@
 
   delete Icon.Default.prototype._getIconUrl
   Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.PNG'),
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),

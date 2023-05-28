@@ -3,7 +3,7 @@
     <!-- id="all_main_pdf_details_wrapper" -->
     <div class="btn_print">
       <br>
-      {{ returnFloorsArea('تحت الارضي') }}
+      
       <b-button
                 variant="success"
                 class="invoice-actions"
@@ -22,7 +22,7 @@
       <!-- Start Section Part One  -->
       <section class="section_part_one">
         <div class="num_one">
-          <img
+          <img style="max-height: 130px"
             class="d-block w-100"
             src="@/assets/images/Picture1.png"
             alt="logo"
@@ -263,17 +263,21 @@
                 <!-- Start Directions  -->
                 <div class="title_parts with_border_bottom">
                   <span
-                    class="one with_border_left with_center_text bg_main_color"
+                    class="one with_border_left with_center_text bg_main_color " 
                     >شمالاً</span
                   >
                   <span
-                    class="one two with_border_left with_center_text"
+                    class="one two with_border_left with_center_text" style="font-weight: small !important;"
                     v-if="submissionData.contract_border_details"
-                    >{{
+                    >
+                      الى الجبل لايعرف عرضها لاتصالها بالأرض البيضاء
+
+                    <!-- {{
                       handlerOfNullProperty(
                         submissionData.contract_border_details.north_dir
                       )
-                    }}</span
+                    }} -->
+                    </span
                   >
                   <span
                     class="one three with_center_text"
@@ -543,21 +547,21 @@
               </div>
               <div class="gg_names_wrapper with_border_bottom">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >الإسم</span
                 >
                 <span></span>
               </div>
               <div class="gg_names_wrapper with_border_bottom">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >التوقيع</span
                 >
                 <span></span>
               </div>
               <div class="gg_names_wrapper">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >التاريخ</span
                 >
                 <span></span>
@@ -572,21 +576,21 @@
               </div>
               <div class="gg_names_wrapper with_border_bottom">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >إسم المساح
                 </span>
                 <span></span>
               </div>
               <div class="gg_names_wrapper with_border_bottom">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >التوقيع</span
                 >
                 <span></span>
               </div>
               <div class="gg_names_wrapper">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >التاريخ</span
                 >
                 <span></span>
@@ -594,30 +598,30 @@
             </div>
             <div class="part_g_a part_g_bc">
               <div class="title spa_title bg_main_colors with_border_bottom">
-                <span class="one">يعتمد</span>
-                <span class="two">صاحب الصلاحية ..</span>
-                <span class="three">الختم</span>
+                <span class="one_1">يعتمد</span>
+                <span class="two_2">صاحب الصلاحية ..</span>
+                <span class="three_3">الختم</span>
               </div>
               <div class="gg_names_wrapper with_border_bottom">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >الإسم</span
                 >
                 <span></span>
               </div>
               <div class="gg_names_wrapper with_border_bottom">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >التوقيع</span
                 >
                 <span></span>
               </div>
               <div class="gg_names_wrapper">
                 <span
-                  class="name bg_main_color with_center_text with_border_left"
+                  class="name_1 bg_main_color with_center_text with_border_left"
                   >التاريخ</span
                 >
-                <span></span>
+                <span><span class="mr-1"> /  </span><span class="mr-1"> / </span> <span class="mr-1">     14هـ</span></span>
               </div>
             </div>
           </div>
@@ -828,45 +832,92 @@
                 />
               </div>
             </div>
-            <div class="contains_wrapper">
-              <div class="tittles_wrap with_border_bottom">
-                <div
-                  class="title_one num with_center_text with_border_left bg_main_color"
-                >
-                  <span>الرقم</span>
+            <div class="main_container_wraper_ss">
+              <div class="main_container_wraper_ss1">
+                <div class="contains_wrapper">
+                  <div class="tittles_wrap with_border_bottom">
+                    <div
+                      class="title_one num with_center_text with_border_left bg_main_color"
+                    >
+                      <span>الرقم</span>
+                    </div>
+                    <div
+                      class="title_one num_two with_center_text with_border_left bg_main_color"
+                    >
+                      <span>شماليات</span>
+                    </div>
+                    <div class="title_one num_two with_center_text bg_main_color">
+                      <span>شرقيات</span>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="title_one num_two with_center_text with_border_left bg_main_color"
-                >
-                  <span>شماليات</span>
-                </div>
-                <div class="title_one num_two with_center_text bg_main_color">
-                  <span>شرقيات</span>
-                </div>
-              </div>
-            </div>
 
-            <div
-              class="contains_wrapper"
-              v-for="(item, i) in submissionData.coordinates" v-if="i < 7"
-              :key="i"
-            >
-              <div class="tittles_wrap with_border_bottom">
                 <div
-                  class="title_one num with_center_text with_border_left bg_main_color"
+                  class="contains_wrapper"
+                  v-for="(item, i) in submissionData.coordinates" v-if="i < 14 && i%2 == 0"
+                  :key="i"
                 >
-                  <span>{{ i + 1 }}</span>
-                </div>
-                <div
-                  class="title_one num_two with_center_text with_border_left"
-                >
-                  <span>{{ item.coor_north }}</span>
-                </div>
-                <div class="title_one num_two with_center_text">
-                  <span>{{ item.coor_east }}</span>
+                  <div class="tittles_wrap with_border_bottom">
+                    <div
+                      class="title_one num with_center_text with_border_left bg_main_color"
+                    >
+                      <span>{{ i + 1 }}</span>
+                    </div>
+                    <div
+                      class="title_one num_two with_center_text with_border_left"
+                    >
+                      <span>{{ item.coor_north }}</span>
+                    </div>
+                    <div class="title_one num_two with_center_text">
+                      <span>{{ item.coor_east }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="main_container_wraper_ss1">
+                <div class="contains_wrapper">
+                  <div class="tittles_wrap with_border_bottom">
+                    <div
+                      class="title_one num with_center_text with_border_left bg_main_color"
+                    >
+                      <span>الرقم</span>
+                    </div>
+                    <div
+                      class="title_one num_two with_center_text with_border_left bg_main_color"
+                    >
+                      <span>شماليات</span>
+                    </div>
+                    <div class="title_one num_two with_center_text bg_main_color">
+                      <span>شرقيات</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="contains_wrapper"
+                  v-for="(item, i) in submissionData.coordinates" v-if="i < 14 && i%2 != 0"
+                  :key="i"
+                >
+                  <div class="tittles_wrap with_border_bottom">
+                    <div
+                      class="title_one num with_center_text with_border_left bg_main_color"
+                    >
+                      <span>{{ i + 1 }}</span>
+                    </div>
+                    <div
+                      class="title_one num_two with_center_text with_border_left"
+                    >
+                      <span>{{ item.coor_north }}</span>
+                    </div>
+                    <div class="title_one num_two with_center_text">
+                      <span>{{ item.coor_east }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
             </div>
+            
             
           </div>
           
@@ -893,6 +944,7 @@ export default {
   },
 
   methods: {
+    
     
     totalComp(){
       let data = this.submissionData.includes_data;
@@ -932,8 +984,22 @@ export default {
       
     },
     printInvoice() {
-      window.print();
-    },
+            var css = '@page { size: landscape; }',
+            head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet){
+            style.styleSheet.cssText = css;
+            } else {
+            style.appendChild(document.createTextNode(css));
+            }
+
+            head.appendChild(style);
+            window.print()
+        },
     handlerOfNullProperty(anyProperty) {
       if (anyProperty != null) {
         return anyProperty;
@@ -957,6 +1023,13 @@ $border-color: #ccc;
 $column-height: 26px;
 $min-part-height: 130px;
 $min-name-width: 120px;
+$min-name-width_1:90px;
+.main_container_wraper_ss{
+  display: flex;
+  .main_container_wraper_ss1{
+    width: 50%;
+  }
+}
 .bg_main_color {
   background-color: #dcecf2;
 }
@@ -965,6 +1038,7 @@ $min-name-width: 120px;
 }
 .with_border_left {
   border-left: 1px solid $border-color;
+  font-size: 14px;
 }
 .with_border_bottom {
   border-bottom: 1px solid $border-color;
@@ -973,7 +1047,9 @@ $min-name-width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
+
 .our_wrapper_for_container_details{
   overflow-x: scroll;
 
@@ -1048,6 +1124,7 @@ $min-name-width: 120px;
           justify-content: center;
           align-items: center;
         }
+        
       }
       .two {
         border-top: 1px solid $border-color;
@@ -1258,10 +1335,19 @@ $min-name-width: 120px;
                 width: 15%;
               }
               .two {
-                width: 75%;
+                width: 60%;
               }
               .three {
-                width: 10%;
+                width: 25%;
+              }
+              .one_1 {
+                width: 15%;
+              }
+              .two_2 {
+                width: 40%;
+              }
+              .three_3 {
+                width: 25%;
               }
             }
           }
@@ -1275,6 +1361,9 @@ $min-name-width: 120px;
           gap: 8px;
           .name {
             width: $min-name-width;
+          }
+          .name_1 {
+            width: $min-name-width_1;
           }
         }
       }
@@ -1422,39 +1511,14 @@ $min-name-width: 120px;
   // End Section Part Two
 }
 // @page { size:  landscape; }
-// @media print {
-//   // @page { size: landscape; }
-//   * {
-//     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
-//     color-adjust: exact !important; /*Firefox*/
-    
-//   }
-//   .our_wrapper_for_container_details {
-//     .includes_types{
-//       font-size: x-small;
-//     }
-//     .btn_print{
-//       display: none;
-//     }
-//     overflow:hidden !important;
-    
-//     position: relative;
-//     inset: 0;
-//     margin-top: -32%;
-//     margin-right: -35%;
-//      zoom: 64%;
-    
-//      transform: scale(1.2 , 0.8) ;
-    
-//   }
 @media print {
+  // @page { size: landscape; }
   * {
     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
     color-adjust: exact !important; /*Firefox*/
-    @page { size: landscape; }
+    
   }
   .our_wrapper_for_container_details {
-    transform: rotate(90deg);
     .includes_types{
       font-size: x-small;
     }
@@ -1462,17 +1526,43 @@ $min-name-width: 120px;
       display: none;
     }
     overflow:hidden !important;
-    height: 60% !important;
-    width: 180% !important;
+    
     position: relative;
     inset: 0;
-    padding-top: 25%;
-    margin-right: -46.5%;
-    // margin: 0;
-    z-index: 999999999999999999999999999999;
-    zoom: 109%;
-    // zoom:(5,1.4)
-    // transform: scale(2);
+    margin-top: -32%;
+    margin-right: -35%;
+     zoom: 64%;
+    
+     transform: scale(1.2 , 0.8) ;
+    
   }
 }
+// @media print {
+//   * {
+//     -webkit-print-color-adjust: exact !important; /* Chrome, Safari, Edge */
+//     color-adjust: exact !important; /*Firefox*/
+//     @page { size: landscape; }
+//   }
+//   .our_wrapper_for_container_details {
+//     transform: rotate(90deg);
+//     .includes_types{
+//       font-size: x-small;
+//     }
+//     .btn_print{
+//       display: none;
+//     }
+//     overflow:hidden !important;
+//     height: 60% !important;
+//     width: 180% !important;
+//     position: relative;
+//     inset: 0;
+//     padding-top: 25%;
+//     margin-right: -46.5%;
+//     // margin: 0;
+//     z-index: 999999999999999999999999999999;
+//     zoom: 109%;
+//     // zoom:(5,1.4)
+//     // transform: scale(2);
+//   }
+// }
 </style>

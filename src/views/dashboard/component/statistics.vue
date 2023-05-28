@@ -47,7 +47,7 @@
                                     <b-button @click="modal_map = false"
                                                 variant="outline-primary">
                                         الغاء
-                                    </b-button>
+                                    </b-button> 
                                 </div>
                             </b-col>
                         </div>
@@ -55,8 +55,12 @@
                 </div>
             </b-col>
             <b-col md="12">
+                <b-card class="text-center"  v-if="coordinates">
+                    <!-- <dash-map :coords="coordinates"></dash-map> -->
+                    <!-- <maps ></maps> -->
+                </b-card>
                 <b-card class="text-center" v-if="dashboardMap.img">
-                    <img  style="width: 100%; height: 500px;"
+                    <img  style="width: 100%; "
                             :src="dashboardMap.img" alt="map">
                 </b-card>
             </b-col>
@@ -191,9 +195,10 @@
     import ChartjsComponentBarChart from '@/views/components/charts-components/ChartjsComponentBarChart.vue';
     import ChartjsComponentLineChart from '@/views/components/charts-components/ChartjsComponentLineChart.vue';
     import Statistics from '@/views/components/info/statistics';
-
+    import dashMap from '@/views/pages/PGC/maps.vue'
 
     import {$themeColors} from '@themeConfig';
+import { push } from 'postcss-rtl/lib/affected-props';
     // colors
     const chartColors = {
         mainColor: '#054978',
@@ -217,6 +222,7 @@
 
     export default {
         components: {
+            dashMap,
             ValidationProvider,
             ValidationObserver,
             BFormGroup,
@@ -240,6 +246,7 @@
         },
         data() {
             return {
+                coordinates:[],
                 dash_map:null,
                 modal_map:false,
                 data: null,
@@ -378,13 +385,16 @@
                 let dataLabels= ['01','02','03'];
                 let all_submissions = this.$store.getters['pgc_forms/dashboard'].submissions;
                 // console.log('all_submissions');
-                // console.log(all_submissions);
+                all_submissions.forEach((element,index) => {
+                    this.coordinates.push(element.coordinates)
+                });
+                // console.log(this.coordinates);
                 const dataValues = [];
                 dataLabels.forEach(area_element => {
                     let x = all_submissions.filter((el)=>el.zone == area_element )
                     dataValues.push(x.length);
                 });
-                console.log(dataValues)
+                // console.log(dataValues)
                 return {
                     labels:dataLabels,
                     datasets: [
@@ -406,7 +416,7 @@
                     let x = all_submissions.filter((el)=>el.zone == area_element )
                     dataValues.push(x.length);
                 });
-                console.log(dataValues)
+                // console.log(dataValues)
                 return dataValues;
             },
             programs_blade() {
@@ -417,7 +427,7 @@
                     let x = all_submissions.filter((el)=>el.plad_num == area_element )
                     dataValues.push(x.length);
                 });
-                console.log(dataValues)
+                // console.log(dataValues)
                 return {
                     labels:dataLabels,
                     datasets: [
@@ -437,7 +447,7 @@
                     let x = all_submissions.filter((el)=>el.plad_num == area_element )
                     dataValues.push(x.length);
                 });
-                console.log(dataValues)
+                // console.log(dataValues)
                 return dataValues;
             },
             courses() {
@@ -466,7 +476,7 @@
         methods: {
             changeDashMap(){
                 this.dash_map = this.$refs.dashMap.files[0];
-                console.log(this.dash_map);
+                // console.log(this.dash_map);
             },
             editDashMap(){
                 this.modal_map = true;

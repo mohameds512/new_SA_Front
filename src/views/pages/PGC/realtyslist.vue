@@ -15,6 +15,28 @@
         </div>
         <br>
         <div>
+            <b-modal hide-header-close v-model="model_sub_delete"
+                hide-footer dir="rtl" title=" حذف عقار " >
+                <div class="demo-vertical-spacing">
+                    <b-row>
+                        <h3 class="text-danger" > هل أنت متأكد من عملية الحذف </h3>
+                    </b-row>
+                    <div class="mt-2">
+                    <b-col cols="12">
+                        <div class="d-flex justify-content-end">
+                            <b-button @click="deleteSub()" variant="danger"
+                                        style="margin-right: 10px;">حذف
+                            </b-button>
+                            <b-button @click="model_sub_delete = false" class="mr-2"
+                                        variant="outline-primary">الغاء
+                            </b-button>
+                        </div>
+                    </b-col>
+                </div>
+                </div>
+
+
+            </b-modal>
             <b-row>
                 <b-col md="4">
                     <b-form-group class="text-right" label=" بحث بنوع المعاملة ">
@@ -30,19 +52,30 @@
                         </validation-provider>
                     </b-form-group>
                 </b-col>
-                <!-- <b-col md="4">
+                <b-col md="4">
                     <b-form-group class="text-right" label="  بحث برقم العقار  ">
                         <validation-provider #default="{ errors }"
                                             name="رقم العقار  "
-                                            rules="required">
+                                            >
                             <b-form-input v-model="search_buildingNumber"
                                         :state="errors.length > 0 ? false : null"
                                         placeholder="رقم العقار  " />
-                            <small class="text-danger" v-if="errors[0]">هذا الحقل
-                                مطلوب</small>
+                            
                         </validation-provider>
                     </b-form-group>
-                </b-col> -->
+                </b-col>
+                <b-col md="4">
+                    <b-form-group class="text-right" label=" اسم المساح   ">
+                        <validation-provider #default="{ errors }"
+                                            name="اسم المساح "
+                                            >
+                            <b-form-input v-model="search_createdBy"
+                                        :state="errors.length > 0 ? false : null"
+                                        placeholder=" اسم المساح  " />
+                            
+                        </validation-provider>
+                    </b-form-group>
+                </b-col>
                 <!-- <b-col md="4">
                     <b-form-group class="text-right" label="  بحث برقم العقار  ">
                         <validation-provider #default="{ errors }"
@@ -76,15 +109,15 @@
         </div>
         <!-- {{ $store.getters['dashboard/allSubmission'] }} -->
         <!-- {{  $store.getters['dashboard/getSubs'].submissions  }}   -->
-
+        
         <b-table
                 class="text-center"
                 striped
                 hover
                 :items="$store.getters['dashboard/getSubs'].submissions.filter((el)=>
                     (el.operation_type == search_operation_type || search_operation_type == null) &&
-                    (el.building_number == search_buildingNumber || search_buildingNumber == null) &&
-                    (el.created_by == search_createdBy || search_createdBy == null)
+                    (getLast5(el.building_number) == search_buildingNumber || search_buildingNumber == '') &&
+                    (el.name_local == search_createdBy || search_createdBy == '')
                     )"
                 :fields="[
                         { key: 'building_number', label: 'رقم العقار ' },
@@ -112,6 +145,9 @@
                 <router-link v-if="hasPermission('edit_submissions')" :to="`/addRealty/${data.item.id}`">
                     <feather-icon icon="EditIcon"></feather-icon>
                 </router-link>
+                <feather-icon @click="delete_sub_form(data.item.id)" v-if="hasPermission('delete_submissions')"
+                    icon="DeleteIcon" class="text-danger mx-1">
+                </feather-icon>
             </template>
         </b-table>
         <!--        <b-table-->
@@ -363,9 +399,11 @@
 
         data() {
             return {
+                model_sub_delete:false,
+                delete_sub_id:null,
                 search_operation_type: null,
-                search_buildingNumber: null,
-                search_createdBy: null,
+                search_buildingNumber: '',
+                search_createdBy: '',
                 sub_created_by: null,
                 all_operation_type: [
                     'فرز', 'دمج', 'عادية', 'اخري'
@@ -391,6 +429,52 @@
 
         },
         methods: {
+            getLast5( subNum ){
+                if(this.search_buildingNumber != ''){
+                    return  subNum.slice(-5);
+                }else{
+                    return subNum;
+                }
+                
+            },
+            delete_sub_form(sub_id){
+                this.delete_sub_id = sub_id;
+                this.model_sub_delete = true;
+            },
+            deleteSub(){
+                this.$store
+                .dispatch('pgc_forms/delete_subs',{
+                    query:this.delete_sub_id
+                })
+                .then((response)=>{
+                    this.delete_sub_id=null,
+                    this.model_sub_delete = false,
+
+                    this.$store.dispatch('dashboard/allSubmission')
+                    .then((res) => {
+                        this.realty_list = res.submissions
+                        // this.build_type = res.includes_type;
+                        console.log('res')
+                        // console.log(this.realty_list)
+                    })
+
+                    this.$swal({
+                        icon: 'success',
+                        title: 'تم حذف العقار ',
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.$swal({
+                        icon: 'error',
+                        title: 'حدث خطأ أثناء التنفيذ',
+                        showConfirmButton: false,
+                        timer: 1000,
+                    })
+                })
+            },
             searchSub() {
 
                 if (this.search_Sub) {
@@ -441,6 +525,12 @@
                     })
                     .catch((error) => {
                         console.log(error);
+                        this.$swal({
+                            icon: 'error',
+                            title: 'رقم العقار موجود بالفعل',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        })
                     })
             },
         }

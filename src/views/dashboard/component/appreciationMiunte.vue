@@ -73,7 +73,7 @@
                     تاريخ نهاية إجراءات قرار لجنة التقدير     <span class="mr-1"></span>/<span class="mr-1"></span>      /<span class="mr-1"></span>          14هـ
                 </p> 
                 <p style="font-weight: normal !important; ">
-                    بناءً على الأمر الملكي  الكريم رقم (907) الصادر بتاريخ 06/01/1439هــ القاضي بالموافقة على نزع ملكية العقارات الواقعة  بمنطقة شمال الحرم المكي وبناءً على القرار الوزاري رقم (305/1444) الصادر بتاريخ : 22/07/1444هــ  القاضي ببدء إجراءات نزع ملكية العقارات الواقعة شمال الحرم المكي المجاورة  لمشروع رؤى الحرم المكي ، تم شخوص اللجنة المشكلة بموجب المادة السابعة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المصادق عليه بالمرسوم الملكي رقم (م/15) بتاريخ (11/03/1424هـ) على العقار الموضح بياناته أدناه، واتضح أن المعلومات المبينة صحيحة وأن الأسعار التي حددت أخذت بعين الاعتبار موقع العقار بالنسبة للمنطقة والعقارات المجاورة وكذلك بحسب وصف العقار  في محضر الحصر المعد من قبل لجنة الحصر المشكلة حسب نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المشار إليه ولائحته التنفيذية، كما أن اللجنة اتبعت في تقديراتها أدناه طريقة (...........) وفقاً للمعايير والضوابط التي تتبعها الهيئة السعودية للمقيمين المعتمدين وفقاً للتالي:
+                    بناءً على الأمر الملكي  الكريم رقم (907) الصادر بتاريخ <span style="font-weight: normal;" >06/  </span> <span style="font-weight: normal;"> 01/</span> <span style="font-weight: normal;">1439هــ </span> القاضي بالموافقة على نزع ملكية العقارات الواقعة  بمنطقة شمال الحرم المكي وبناءً على القرار الوزاري رقم ( <span style="font-weight: normal;">1444/</span><span style="font-weight: normal;">305</span> ) الصادر بتاريخ : <span style="font-weight: normal;"> 22/</span> <span style="font-weight: normal;">07/</span> <span style="font-weight: normal;">1444هــ </span> القاضي ببدء إجراءات نزع ملكية العقارات الواقعة شمال الحرم المكي المجاورة  لمشروع رؤى الحرم المكي ، تم شخوص اللجنة المشكلة بموجب المادة السابعة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المصادق عليه بالمرسوم الملكي رقم (م/15) بتاريخ ( <span style="font-weight: normal;"> 11/</span> <span style="font-weight: normal;">03/</span> <span style="font-weight: normal;">1424هـ</span> ) على العقار الموضح بياناته أدناه، واتضح أن المعلومات المبينة صحيحة وأن الأسعار التي حددت أخذت بعين الاعتبار موقع العقار بالنسبة للمنطقة والعقارات المجاورة وكذلك بحسب وصف العقار  في محضر الحصر المعد من قبل لجنة الحصر المشكلة حسب نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار المشار إليه ولائحته التنفيذية، كما أن اللجنة اتبعت في تقديراتها أدناه طريقة (...........) وفقاً للمعايير والضوابط التي تتبعها الهيئة السعودية للمقيمين المعتمدين وفقاً للتالي:
                 </p>                
 
 
@@ -104,7 +104,7 @@
                                     <b-th class="content-item">{{ submissionData.slice_number }}</b-th>
                                     <b-th class="green-header" variant="secondary">رقم المخطط</b-th>
                                     <b-th class="content-item">{{ submissionData.planned_num}}</b-th>
-                                    <b-th class="green-header" variant="secondary">الموقع</b-th>
+                                    <b-th class="green-header" variant="secondary">موقع العقار</b-th>
                                     <b-th class="content-item" colspan="3">56</b-th>
 
                                 </b-tr>
@@ -120,13 +120,13 @@
                                 <b-tr>
                                     <b-th class="green-header" variant="secondary">نوع العقار</b-th>
                                     <b-th class="content-item" > {{submissionData.building_type}}</b-th>
-                                    <b-th class="green-header" variant="secondary">المساحة حسب الصك ( <span>م&sup2</span>)</b-th>
-                                    <b-th class="content-item">{{ submissionData.contract_area }}</b-th>
-                                    <b-th class="green-header" variant="secondary">الاستخدام </b-th>
+                                    <b-th class="green-header" variant="secondary">استخدام العقار</b-th></b-th>
+                                    <b-th class="content-item">{{ submissionData.submission_using }}</b-th>
+                                    <b-th class="green-header" variant="secondary">الشوارع </b-th>
                                     <b-th class="content-item" colspan="3">{{submissionData.submission_using}}</b-th>
                                 </b-tr>
                                 <b-tr>
-                                    <b-th class="green-header" variant="secondary">نوع الملكية</b-th>
+                                    <b-th class="green-header" variant="secondary"> حالة البناء</b-th>
                                     <b-td class="content-item" >{{ submissionData.contract_type }}</b-td>
                                     <b-th class="green-header" variant="secondary">وصف العقار</b-th>
                                     <b-th class="content-item" colspan="5">{{submissionData.building_type }}</b-th>
@@ -170,19 +170,19 @@
                 <b-table-simple small
                                 bordered
                         > 
-                            <b-tbody v-if="submissionData.includes_data.length <= 13" >
+                            <b-tbody v-if="submissionData.includes_data.length <= 13">
                                 <b-tr>
                                     <b-th style="width: 26.5%;" class="green-header" > إجمالي التعويض</b-th>
-                                    <b-th style="width: 18.5%;"  > {{ totalComp() }}</b-th>
-                                    <b-th  >كتابة:</b-th>
-                                    <b-th ></b-th>
+                                    <b-th style="width: 18.5%;"  > {{ totalComp("with") }}</b-th>
+                                    <b-th  style=" font-weight: normal;" >كتابة: {{ retrnWrite(totalComp("with")) }} </b-th>
+                                    
 
                                 </b-tr>
                                 <b-tr>
                                     <b-th class="green-header" > إجمالي التعويض بدون أرض</b-th>
-                                    <b-th  ></b-th>
-                                    <b-th  >كتابة:</b-th>
-                                    <b-th ></b-th>
+                                    <b-th  > {{ totalComp("withOut")  }}</b-th>
+                                    <b-th  style=" font-weight: normal;" >كتابة: {{ retrnWrite(totalComp("withOut")) }} </b-th>
+                                    
 
                                 </b-tr>
                             </b-tbody>
@@ -212,8 +212,8 @@
                 <b-table-simple small bordered>
                     <b-tbody>
                         <b-tr>
-                            <b-th class="green_right_item" > مندوب الغرفة التجارية</b-th>
-                            <b-th class="green_right_item"> مندوب وزارة العدل</b-th>
+                            <b-th class="green_right_item" >  الغرفة التجارية</b-th>
+                            <b-th class="green_right_item">  وزارة العدل</b-th>
                         </b-tr>
                         <b-tr>
                             <b-th style="color: aliceblue;" >.</b-th>
@@ -224,8 +224,8 @@
                             <b-th style="color: aliceblue;" >.</b-th>
                         </b-tr>
                         <b-tr>
-                            <b-th class="green_right_item" > مندوب الهيئة العامة لعقارات الدولة</b-th>
-                            <b-th class="green_right_item"> مندوب وزارة الداخلية</b-th>
+                            <b-th class="green_right_item" >  الهيئة العامة لعقارات الدولة</b-th>
+                            <b-th class="green_right_item">  وزارة الداخلية</b-th>
                         </b-tr>
                         <b-tr>
                             <b-th style="color: aliceblue;" >.</b-th>
@@ -236,8 +236,8 @@
                             <b-th style="color: aliceblue;" >.</b-th>
                         </b-tr>
                         <b-tr>
-                            <b-th class="green_right_item" > مندوب وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                            <b-th class="green_right_item"> مندوب الجهة المستفيدة</b-th>
+                            <b-th class="green_right_item" >  وزارة الشؤون البلدية والقروية والإسكان</b-th>
+                            <b-th class="green_right_item">  الجهة المستفيدة</b-th>
                         </b-tr>
                         <b-tr>
                             <b-th style="color: aliceblue;" >.</b-th>
@@ -299,6 +299,11 @@ export default {
         ownersData:[],
     },
     methods: {
+        retrnWrite(value){
+            var Tafgeet = require('tafgeetjs');
+            var stringText = new Tafgeet(value, 'SAR').parse();
+            return stringText;
+        }, 
         get_owners_names(){
             let Onames = [];
             this.ownersData.forEach(element => {
@@ -322,18 +327,46 @@ export default {
             return  subNum.slice(-5);
         },
         printInvoice() {
+            var css = '@page { size: portrait; }',
+            head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet){
+            style.styleSheet.cssText = css;
+            } else {
+            style.appendChild(document.createTextNode(css));
+            }
+
+            head.appendChild(style);
             window.print()
         },
-        totalComp(){
+        totalComp( type ){
                 let data = this.submissionData.includes_data;
                 let total = 0 ;
-                data.forEach((element , index) => {
-                    // if (index < 13) {
+                data.forEach((element,index) => {
+                    // if(index > 37 && index < 62){
                         total = total + (element.qty * element.price);
                     // }
+                    
                 });
+                if (type == "with") {
+                    return Number(total).toLocaleString() ;
+                }
+                if (type == "withOut") {
+                    let area_total = 0;
+                    data.forEach((element,index) => {
+                    if(element.type_id == 41){
+                        area_total = area_total + (element.qty * element.price);
+                    }
+                    
+                    });
+                    let diff = total - area_total;
+                    return Number(diff).toLocaleString() ;
+                }
                 
-                return Number(total).toLocaleString() ;
 
                 // return total;
             }
@@ -358,6 +391,7 @@ export default {
     color: #ffffff !important;
     text-align: left !important;
 }
+@page { size: portrait; }
 @media print {
 
     // Global Styles

@@ -26,13 +26,13 @@
                     </b-button>
                     <br><br>
                     <b-row    class="invoice-preview">
-                        <b-col md="4">
+                        <b-col cols="4">
                             <div >
                                 <img style="max-width: 200px; max-height: 150px;" src="@/assets/images/Picture1.png" alt="" />
                             </div>
                         </b-col>
                         <b-col cols="2" ></b-col>
-                        <b-col md="6">
+                        <b-col cols="6">
                             <b-table-simple bordered class="text-center">
                                 <b-thead head-variant="light">
                                     <b-tr>
@@ -51,8 +51,8 @@
                                         <b-th>{{getLast5(submissionData.building_number)}}</b-th>
 
                                     </b-tr>
-                                    <b-tr>
-                                        رقم العقار ( {{ submissionData.pro_num + submissionData.zone+submissionData.plad_num + getLast5(submissionData.building_number) }}                           )
+                                    <b-tr >
+                                        {{ submissionData.pro_num + submissionData.zone+submissionData.plad_num + getLast5(submissionData.building_number) }}                           
                                     </b-tr>
                                 </b-tbody>
 
@@ -82,7 +82,7 @@
                     <b-row>
                         <h3 style="color:  rgb(11, 55, 2); margin-right: 20px;">محضــر حصــر عقــار</h3>
                         <p style="width: 90%; text-align: right; margin-right: 15px; font-weight: normal;">
-                            إشارة على القرار الوزاري رقم (305/1444) الصادر بتاريخ : 22/07/1444هــ  القاضي ببدء إجراءات نزع ملكية العقارات الواقعة شمال الحرم المكي المجاورة  لمشروع رؤى الحرم المكي ، وبناءً على الفقرة الثالثة من المادة السادسة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار الصادر بالمرسوم الملكي رقم (م/15) بتاريخ (11/03/1424هـ) فقد قامت لجنة الحصر بالوقوف على العقار الموضحة بياناته أدناه وتم حصر وصفه ومشتملاته وفقاً للتالي :
+                            إشارة على القرار الوزاري رقم (1444/305) الصادر بتاريخ : <span style="font-weight: normal;">1444/</span><span style="font-weight: normal;">07/</span><span style="font-weight: normal;">22</span> <span style="font-weight: normal;">هــ</span> القاضي ببدء إجراءات نزع ملكية العقارات الواقعة شمال الحرم المكي المجاورة  لمشروع رؤى الحرم المكي ، وبناءً على الفقرة الثالثة من المادة السادسة من نظام نزع ملكية العقارات للمنفعة العامة ووضع اليد المؤقت على العقار الصادر بالمرسوم الملكي رقم (م/15) بتاريخ (<span style="font-weight: normal;">1424/</span><span style="font-weight: normal;">03/</span><span style="font-weight: normal;">11</span> <span style="font-weight: normal;">هــ</span>) فقد قامت لجنة الحصر بالوقوف على العقار الموضحة بياناته أدناه وتم حصر وصفه ومشتملاته وفقاً للتالي :
                         </p>
                     </b-row>
                     <br>
@@ -114,9 +114,8 @@
                                         <b-th class="content-item">{{ submissionData.slice_number }}</b-th>
                                         <b-th class="green-header" variant="secondary">رقم المخطط</b-th>
                                         <b-th class="content-item">{{ submissionData.planned_num}}</b-th>
-                                        <b-th class="green-header" variant="secondary">الموقع</b-th>
+                                        <b-th class="green-header" variant="secondary">موقع العقار</b-th>
                                         <b-th class="content-item" colspan="3">56</b-th>
-
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">رقم الصك</b-th>
@@ -130,16 +129,17 @@
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">نوع العقار</b-th>
                                         <b-th class="content-item" > {{submissionData.building_type}}</b-th>
-                                        <b-th class="green-header" variant="secondary">المساحة حسب الصك ( <span>م&sup2</span>)</b-th>
-                                        <b-th class="content-item">{{ submissionData.contract_area }}</b-th>
-                                        <b-th class="green-header" variant="secondary">الاستخدام </b-th>
+                                        <!-- <b-th class="green-header" variant="secondary">المساحة حسب الصك ( <span>م&sup2</span>)</b-th> -->
+                                        <b-th class="green-header" variant="secondary">استخدام العقار </b-th>
+                                        <b-th class="content-item">{{ submissionData.submission_using }}</b-th>
+                                        <b-th class="green-header" variant="secondary"> حالة السكن </b-th>
                                         <b-th class="content-item" colspan="3">{{submissionData.submission_using}}</b-th>
                                     </b-tr>
                                     <b-tr>
                                         <b-th class="green-header" variant="secondary">نوع الملكية</b-th>
                                         <b-td class="content-item" >{{ submissionData.contract_type }}</b-td>
                                         <b-th class="green-header" variant="secondary">وصف العقار</b-th>
-                                        <b-th class="content-item" colspan="5">{{submissionData.building_type }}</b-th>
+                                        <b-th class="content-item" colspan="5">{{submissionData.submission_desc }}</b-th>
 
                                     </b-tr>
 
@@ -157,10 +157,11 @@
                             > 
                             <b-tbody>
                                     <b-tr>
-                                        <b-th class="green-header" style="width: 25%;" variant="secondary">  المساحة حسب الصك ( <span>م&sup2</span>)</b-th>
+                                        <b-th class="green-header" style="width: 22%;" variant="secondary">  المساحة حسب الصك </b-th>
                                         <b-th class="content-item" style="width: 25%;"  colspan="3">{{ submissionData.contract_area }}</b-th>
-                                        <b-th class="green-header" style="width: 25%;" variant="secondary">المساحة حسب الطبيعة ( <span>م&sup2</span>)</b-th>
+                                        <b-th class="green-header" style="width: 23%;" variant="secondary">المساحة حسب الطبيعة </b-th>
                                         <b-th class="content-item" style="width: 25%;" colspan="3">{{ submissionData.submission_area}}</b-th>
+                                        <b-th class="content-item" style="width: 5%;" colspan="3"><span>م&sup2</span></b-th>
 
                                     </b-tr>
                                 </b-tbody>
@@ -177,13 +178,13 @@
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="green-header" style="width: 5%;" variant="secondary"> م</b-th>
-                                        <b-th class="green-header" > الوصف</b-th>
+                                        <b-th class="green-header" > النوع</b-th>
                                         <b-th class="green-header" > الوحدة</b-th>
                                         <b-th class="green-header" style="width: 11%;" > العدد/المساحة</b-th>
                                         <b-th class="green-header text-center" >الملاحظات</b-th>
                                         
                                     </b-tr>
-                                    <b-tr  v-for="(item,index) in submissionData.includes_data" v-if="index <= 6" :key="index">
+                                    <b-tr  v-for="(item,index) in submissionData.includes_data" v-if="index <= 6 && item.type_id != 41" :key="index">
                                         <b-th class="content-item">{{ index + 1}}</b-th>
                                         <b-th class="content-item"> {{ item.content }} </b-th>
                                         <b-th class="content-item">{{ item.unit }}</b-th>
@@ -225,9 +226,9 @@
                             <b-table-simple small bordered >
                                 <b-tbody>
                                     <b-tr>
-                                        <b-th style="width: 33%;">الاسم: {{ ownersData.name }} </b-th>
+                                        <b-th style="width: 33%;">الاسم: {{ ownersData[0].name }} </b-th>
                                         <b-th style="width: 33%;">التوقيع:</b-th>
-                                        <b-th style="width: 33%;">رقم الجوال: {{ ownersData.phone }} </b-th>
+                                        <b-th style="width: 33%;">رقم الجوال: <span>{{ ownersData[0].phone }}</span>  </b-th>
                                     </b-tr>
                                 </b-tbody>
                             </b-table-simple>
@@ -236,13 +237,13 @@
                     <br>
                     <b-row>
                         <b-col>
-                            <h3 style="color:  rgb(11, 55, 2); text-align: right;"> أعضاء لجنة حصر العقارات</h3>
+                            <h3 style="color:  rgb(11, 55, 2); text-align: right;" class=""> أعضاء لجنة حصر العقارات</h3>
                             
                             <b-table-simple small bordered>
                                 <b-tbody>
                                     <b-tr>
                                         <b-th class="green-header" style="width: 25%;" >وزارة الشؤون البلدية والقروية والإسكان</b-th>
-                                        <b-th class="green-header" style="width: 25%;">الإمارة</b-th>
+                                        <b-th class="green-header" style="width: 25%;" > إمارة منطقة مكة المكرمة</b-th>
                                         <b-th class="green-header" style="width: 25%;">وزارة البيئة والمياه والزراعة</b-th>
                                         <b-th class="green-header" style="width: 25%;">الجهة المستفيدة</b-th>
                                     </b-tr>
@@ -378,8 +379,22 @@
                 return  subNum.slice(-5);
             },
             printInvoice() {
-                window.print()
+                var css = '@page { size: portrait; }',
+            head = document.head || document.getElementsByTagName('head')[0],
+            style = document.createElement('style');
+
+            style.type = 'text/css';
+            style.media = 'print';
+
+            if (style.styleSheet){
+            style.styleSheet.cssText = css;
+            } else {
+            style.appendChild(document.createTextNode(css));
             }
+
+            head.appendChild(style);
+            window.print()
+            },
         }
     }
 </script>
@@ -403,6 +418,7 @@
         background-color: #ffffff;  
         color: #1b0404;
     }
+    @page { size: portrait; }
     @media print {
 
         // Global Styles

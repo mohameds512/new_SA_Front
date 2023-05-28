@@ -13,7 +13,7 @@
                                         $store.getters['pgc_forms/showSub'].building_number }} </h3>
                                 </b-col>
                                 <b-col cols="6">
-                                    <!-- {{ Protect_self() }} -->
+                                    {{ Protect_self() }}
                                     <b-form-group class="text-right" label="نوع المعاملة ">
                                         
                                         <validation-provider #default="{ errors }" name="نوع المعاملة"
@@ -33,7 +33,7 @@
                                     </b-form-group>
                                 </b-col>
                             </b-row>
-                            <b-col cols="12" v-if="Protect_self() > 1678321530399 ">
+                            <b-col cols="12">  
 
                                 <!-- بيانات المشروع  -->
                                 <b-overlay v-if="(show_model_inputs == 1)" variant="white" spinner-variant="primary"
@@ -45,7 +45,8 @@
                                                 <b-row></b-row>
                                                 <b-row class="bg-white pt-2 pb-2">
                                                     <b-col md="12" class="back_ground">
-                                                        <p class="text-center"> بيانات المشروع </p>
+                                                        <p class="text-center"> بيانات المشروع  </p>
+                                                        
                                                     </b-col>
                                                     <b-col md="1"></b-col>
 
@@ -336,7 +337,7 @@
 
                                                                                  rules="min:10">
                                                                 <b-form-input v-model="applicant.phone"
-                                                                              min="10" max="10"
+                                                                              min="10" 
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" رقم الجوال" type="number"/>
                                                                 <small class="text-danger" v-if="errors[0]">
@@ -604,7 +605,8 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الشمالي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input 
+                                                                maxlength="46"
                                                                         v-model="form.submission.contract_border_details.north_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الشمالي" type="text"/>
@@ -620,7 +622,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.north_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="الحد الشمال" type="number"/>
+                                                                        placeholder="الحد الشمال" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -631,7 +633,8 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الجنوبي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input 
+                                                                        maxlength="46"
                                                                         v-model="form.submission.contract_border_details.south_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الجنوبي" type="text"/>
@@ -647,7 +650,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.south_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="طول الجنوب" type="number"/>
+                                                                        placeholder="طول الجنوب" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -658,7 +661,7 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الشرقي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input maxlength="46"
                                                                         v-model="form.submission.contract_border_details.east_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الشرقي" type="text"/>
@@ -674,7 +677,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.east_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="طول الشرق" type="number"/>
+                                                                        placeholder="طول الشرق" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -685,7 +688,7 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الغربي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input maxlength="46"
                                                                         v-model="form.submission.contract_border_details.west_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الغربي" type="text"/>
@@ -701,7 +704,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.contract_border_details.west_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="طول الغرب" type="number"/>
+                                                                        placeholder="طول الغرب" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -901,7 +904,7 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الشمالي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input maxlength="46"
                                                                         v-model="form.submission.restrict_border.north_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الشمالي" type="text"/>
@@ -917,7 +920,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.north_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="الحد الشمال" type="number"/>
+                                                                        placeholder="الحد الشمال" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -930,7 +933,7 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الجنوبي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input maxlength="46"
                                                                         v-model="form.submission.restrict_border.south_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الجنوبي" type="text"/>
@@ -943,10 +946,10 @@
                                                         <b-form-group class="text-right" label="طول الجنوب ">
                                                             <validation-provider #default="{ errors }" name="طول الجنوب"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input 
                                                                         v-model="form.submission.restrict_border.south_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="طول الجنوب" type="number"/>
+                                                                        placeholder="طول الجنوب" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -958,7 +961,7 @@
                                                             <validation-provider #default="{ errors }"
                                                                                  name="الحد الشرقي"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input maxlength="46"
                                                                         v-model="form.submission.restrict_border.east_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الشرقي" type="text"/>
@@ -971,10 +974,10 @@
                                                         <b-form-group class="text-right" label="طول الشرق ">
                                                             <validation-provider #default="{ errors }" name="طول الشرق"
                                                                                  rules="required">
-                                                                <b-form-input
+                                                                <b-form-input 
                                                                         v-model="form.submission.restrict_border.east_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="طول الشرق" type="number"/>
+                                                                        placeholder="طول الشرق" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -986,7 +989,7 @@
                                                             <validation-provider #default="{ errors }"
                                                                                 name="الحد الغربي"
                                                                                 rules="required">
-                                                                <b-form-input
+                                                                <b-form-input maxlength="46"
                                                                         v-model="form.submission.restrict_border.west_dir"
                                                                         :state="errors.length > 0 ? false : null"
                                                                         placeholder="الحد الغربي" type="text"/>
@@ -1002,7 +1005,7 @@
                                                                 <b-form-input
                                                                         v-model="form.submission.restrict_border.west_length"
                                                                         :state="errors.length > 0 ? false : null"
-                                                                        placeholder="طول الغرب" type="number"/>
+                                                                        placeholder="طول الغرب" />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1062,7 +1065,7 @@
                                                                 <b-form-input v-model="coor.coor_north"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" احداثيات الشمال"
-                                                                              type="number"/>
+                                                                              />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1077,7 +1080,7 @@
                                                                 <b-form-input v-model="coor.coor_east"
                                                                               :state="errors.length > 0 ? false : null"
                                                                               placeholder=" احداثيات الشرق"
-                                                                              type="number"/>
+                                                                              />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1259,7 +1262,7 @@
                                                                                  rules="required">
                                                                 <b-form-input v-model="includesForm.qty"
                                                                               :state="errors.length > 0 ? false : null"
-                                                                              placeholder=" " type="number"/>
+                                                                              placeholder=" " />
                                                                 <small class="text-danger" v-if="errors[0]">هذا الحقل
                                                                     مطلوب</small>
                                                             </validation-provider>
@@ -1456,7 +1459,7 @@
                                                                             <b-form-input v-model="editInc.qty"
                                                                                           :state="errors.length > 0 ? false : null"
                                                                                           placeholder=" "
-                                                                                          type="number"/>
+                                                                                          />
                                                                             <small class="text-danger" v-if="errors[0]">هذا
                                                                                 الحقل
                                                                                 مطلوب</small>
@@ -1945,14 +1948,21 @@
             
         },
         methods: {
+            getBorderLength(){
+                let x ="الى الجبل لايعرف عرضها لاتصالها بالأرض البيضاء";
+                return x.length
+            
+            },
             Protect_self(){
                 let theDate = new Date();
                 // let dd = day;
-                // var priorDate = new Date(new Date().setDate(theDate.getDate() - 1));
+                // var priorDate = new Date(new Date().setDate(theDate.getDate() + 15));
+                var priorDate = theDate.setDate(theDate.getDate() + 25  );
                 // drop date
-                // Wed Feb 08 2023 03:07:03 GMT+0300 (Arabian Standard Time)
-                // 1675814876712
-                return theDate.getTime() ;
+                // Sat Mar 25 2023 23:52:49 GMT+0200 (Eastern European Standard Time)
+                // 1679781209087
+                // return theDate.getDate();
+                return priorDate;
             },
             returnContDate(){
                 if(this.form.submission.contract_date){

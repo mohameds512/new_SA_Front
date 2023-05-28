@@ -1,7 +1,7 @@
 export default [{
     header: 'management',
     permission: 'public'
-},
+    },
     {
         title: ' التقرير',
         icon: 'CommandIcon',
@@ -14,6 +14,18 @@ export default [{
         icon: 'HomeIcon',
         permission: 'public',
         route: 'Realtys',
+
+    },
+    
+    {
+        header: 'المهام',
+        permission: 'access_tasks'
+    },
+    {
+        title: 'tasks',
+        icon: 'FileTextIcon',
+        permission: 'access_tasks',
+        route: 'tasks',
 
     },
     {
