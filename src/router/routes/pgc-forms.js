@@ -48,6 +48,6 @@ export default [
     path: "/tasks",
     name: "tasks",
     component: () => import("@/views/pages/task/tasks.vue"),
-    meta: { pageTitle: "tasks", breadcrumb: [{ text: "tasks" }] },
+    meta: { pageTitle: "tasks", breadcrumb: [{ text: "المهام" }] },
   },
 ]

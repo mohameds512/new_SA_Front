@@ -1,17 +1,17 @@
 <template>
     <b-card class="text-right">
-        <b-button class="mb-2" @click="insertTask"> add task</b-button>
+        <b-button class="mb-2" variant="success" @click="insertTask"> أضافة مهمة </b-button>
         
         <b-modal hide-header-close v-model="task_modal" no-close-on-backdrop hide-footer
                     title="أضافة مهمة">
                     
             <b-row>
-                <b-col md="6">
-                    <b-form-group  label="Surveyor">
-                        <validation-provider #default="{ errors }" name="Surveyor"
+                <b-col md="6 text-right">
+                    <b-form-group   label="المساح">
+                        <validation-provider #default="{ errors }" name="المساح"
                                                 rules="required">
                             <v-select
-                                    placeholder="Surveyor"
+                                    placeholder="المساح"
                                     :options="taskSurv"
                                     :get-option-label="(option)=>option.name_local"
                                     v-model="task.sur_id"
@@ -31,21 +31,22 @@
                         </validation-provider>
                     </b-form-group>
                 </b-col>
-                <b-col md="6">
+                
+                <b-col md="6" class=" text-right">
                     <!-- <h2>{{ task.building_number }}</h2> -->
-                    <b-form-group  v-if="task.building_number" label="submission">  
-                        <validation-provider #default="{ errors }" name="submission"
+                    <b-form-group dir="rtl" v-if="task_id" label="رقم العقار">  
+                        <validation-provider #default="{ errors }" name="رقم العقار"
                                                 rules="required">
-                            <b-form-input v-model="task.building_number" disabled></b-form-input>
+                            <b-form-input v-model="building_number" disabled></b-form-input>
                             <small class="text-danger" v-if="errors[0]">هذا الحقل
                                 مطلوب</small>
                         </validation-provider>
                     </b-form-group>
-                    <b-form-group v-else label="submission">  
-                        <validation-provider #default="{ errors }" name="submission"
+                    <b-form-group v-else label="رقم العقار">  
+                        <validation-provider #default="{ errors }" name="رقم العقار"
                                                 rules="required">
                             <v-select
-                                    placeholder="submission"
+                                    placeholder="رقم العقار"
                                     :options="taskSub"
                                     :get-option-label="(option)=>option.building_number"
                                     v-model="task.sub_id"
@@ -71,13 +72,14 @@
                     <b-form-group class="text-right" label="تاريخ الحصر">
                         <validation-provider #default="{ errors }" name="extra_date"
                                                 rules="required">
+                                                <!-- :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric'}" -->
                             <b-form-datepicker
                                     locale="ar-u-ca-islamic"
-                                    :date-format-options="{ year: 'numeric', month: 'long', day: 'numeric'}"
+                                    
                                     v-model="task.extra_date"
                                     :min="new Date().toISOString().substr(0, 10)"
                                     :state="errors.length > 0 ? false : null"
-                                    label-no-date-selected="تاريخه "/>
+                                    label-no-date-selected="الحد الاقصي لحصر العقار"/>
                             <small class="text-danger" v-if="errors[0]">هذا الحقل
                                 مطلوب</small>
                         </validation-provider>
@@ -100,10 +102,11 @@
 
         </b-modal>
 
-        <b-table class="text-center " striped hover :items="tasksData" 
+        <b-table class="text-center " striped hover :items="tasksData" dir="rtl" 
             :fields="[
                 {key:'building_number',label:'رقم العقار'},
                 {key:'extra_date',label:'أقصي تاريخ'},
+                {key:'end_date',label:'الوقت المتبقي'},
                 {key:'operation_date',label:' تاريخ التنفيذ'},
                 {key:'name_local',label:'المساح'},
                 {key:'status',label:'الحالة'},
@@ -308,7 +311,7 @@ export default ({
                 this.$store
                     .dispatch('pgc_forms/listTasks')
                     .then((response) => {
-                        this.tasksData = response.tasks
+                        this.tasksData = response.data
 
                     });
             }

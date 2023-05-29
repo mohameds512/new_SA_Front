@@ -22,7 +22,7 @@ export default [{
         permission: 'access_tasks'
     },
     {
-        title: 'tasks',
+        title: 'المهام',
         icon: 'FileTextIcon',
         permission: 'access_tasks',
         route: 'tasks',
