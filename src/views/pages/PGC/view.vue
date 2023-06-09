@@ -4,10 +4,17 @@
         <b-row>
 
             <b-col>
-                <div dir="rtl">
-                    <b-row class="bg-white pt-2 pb-2">
-                        <b-col cols="3">
-                            <div class="hide_time_line">
+                <div dir="rtl" class=" bg-white  pt-2 pb-2">
+                    <div style="width:80% ;padding-right:15%;">
+                        <b-progress :max="100" height="2rem" width="70%">
+                            <b-progress-bar :value="33">
+                                <span> المرحلة الاولي <strong></strong></span>
+                            </b-progress-bar>
+                        </b-progress>
+                    </div>
+                    <b-row >
+                        <b-col cols="2">
+                            <!-- <div class="hide_time_line">
 
                                 <app-timeline>
                                     <app-timeline-item
@@ -19,9 +26,206 @@
                                             variant="success"
                                     />
                                 </app-timeline>
+                            </div> -->
+                            <div class="sideBar p-2 m-1">
+                                <div class="sidBarBtn mb-1" :class="{ active_btn : selected_btn == 1 }"
+                                    @click="handlerSelected(1)" >
+                                    بيانات عامة
+                                </div>
+                                <div class="sidBarBtn mb-1" :class="{ active_btn : selected_btn == 2 }"
+                                    @click="handlerSelected(2)">
+                                    بيانات العقد
+                                </div>
+                                <div class="sidBarBtn mb-1" :class="{ active_btn : selected_btn == 3 }"
+                                    @click="handlerSelected(3)">
+                                    بيانات العقار
+                                </div>
+                                <div class="sidBarBtn mb-1" :class="{ active_btn : selected_btn == 4 }"
+                                    @click="handlerSelected(4)">
+                                    مشتمالات العقار
+                                </div>
+                                <div class="sidBarBtn mb-1" :class="{ active_btn : selected_btn == 5 }"
+                                    @click="handlerSelected(5)">
+                                    احداثيات العقار
+                                </div>
+                                
+                                
                             </div>
                         </b-col>
-                        <b-col cols="9">
+                        <b-col cols="10">
+                            
+                            <div v-if="selected_btn == 1" class="m-5">
+                                <table class="table">
+                                    <tbody class="text-left">
+                                        <div class="p-2 text-gray" > بيانات المشروع </div>
+                                        <tr class=" border">
+                                            <td class="contain_title" style="width:16.6%">اسم المشروع</td>
+                                            <td  style="width:16.6%">{{form.submission[0].pro_name}}</td>
+                                            <td  style="width:16.6%" class="contain_title">رقم المشروع</td>
+                                            <td  style="width:16.6%">{{ form.submission[0].pro_num }}</td>
+                                            <td  style="width:16.6%" class="contain_title">رقم المنطقة</td>
+                                            <td  style="width:16.6%">{{ form.submission[0].zone }}</td>
+                                        </tr>
+                                        <div class="p-2 text-gray" > بيانات الملاك </div>
+                                        <tr class=" border" v-for="(owner , i) in form.owners" :key="i">
+                                            <td class="contain_title" style="width:16.6%">اسم المالك</td>
+                                            <td  style="width:16.6%">{{owner.name}}</td>
+                                            <td  style="width:16.6%" class="contain_title">رقم الجوال </td>
+                                            <td  style="width:16.6%">{{ owner.phone }}</td>
+                                            <td  style="width:16.6%" class="contain_title">رقم الهوية</td>
+                                            <td  style="width:16.6%">{{ owner.national_id }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div v-if="selected_btn == 2" class="m-5">
+                                <div class="text-center text-default" > بيانات العقد </div>
+                                <table class="table">
+                                    <tbody class="text-left">
+                                        
+                                        <tr class=" border">
+                                            <td class="contain_title" > رقم العقد</td>
+                                            <td  >{{form.submission[0].contract_number}}</td>
+                                            <td class="contain_title" > تاريخ العقد</td>
+                                            <td  >{{form.submission[0].contract_date}}</td>
+                                            
+                                        </tr> <br>
+                                        <tr class=" border">
+                                            <td class="contain_title" > صياغة العقد</td>
+                                            <td  >{{form.submission[0].contract_status}}</td>
+                                            <td class="contain_title" > المساحة بالعقد</td>
+                                            <td  >{{form.submission[0].contract_area}}</td>
+                                        </tr> <br>
+                                        
+                                        
+                                    </tbody>
+                                </table> <br>
+                                <div class="text-center">
+                                    <div>الحدود</div> 
+                                    <table class="table">
+                                        <tbody class="text-left">
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الشمالي </td>
+                                                <td> {{form.submission[0].contract_border_details.north_dir}} </td>
+                                                <td class="contain_title">  طول الشمال </td>
+                                                <td> {{form.submission[0].contract_border_details.north_length}} </td>
+                                            </tr>
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الجنوبي </td>
+                                                <td> {{form.submission[0].contract_border_details.south_dir}} </td>
+                                                <td class="contain_title">  طول الجنوب </td>
+                                                <td> {{form.submission[0].contract_border_details.south_length}} </td>
+                                            </tr>
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الشرقي </td>
+                                                <td> {{form.submission[0].contract_border_details.east_dir}} </td>
+                                                <td class="contain_title">  طول الشرق </td>
+                                                <td> {{form.submission[0].contract_border_details.east_length}} </td>
+                                            </tr>
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الغربي </td>
+                                                <td> {{form.submission[0].contract_border_details.west_dir}} </td>
+                                                <td class="contain_title">  طول الغرب </td>
+                                                <td> {{form.submission[0].contract_border_details.west_length}} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div v-if="selected_btn == 3" class="m-5">
+                                <div class="text-center text-default" > بيانات العقار </div>
+                                <table class="table">
+                                    <tbody class="text-left">
+                                        
+                                        <tr class=" border">
+                                            <td class="contain_title" > رقم العقار</td>
+                                            <td  >{{form.submission[0].building_number}}</td>
+                                            <td class="contain_title" >  مساحة العقار </td>
+                                            <td  >{{form.submission[0].submission_area}}</td>
+                                            
+                                        </tr> <br>
+                                        <tr class=" border">
+                                            <td class="contain_title" >  نوع الملكية</td>
+                                            <td  >{{form.submission[0].contract_type}}</td>
+                                            <td class="contain_title" > استخدام العقار</td>
+                                            <td  >{{form.submission[0].submission_using}}</td>
+                                        </tr> <br>
+                                        
+                                        
+                                    </tbody>
+                                </table> <br>
+                                <div class="text-center">
+                                    <div>حدود العقار</div> 
+                                    <table class="table">
+                                        <tbody class="text-left">
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الشمالي </td>
+                                                <td> {{form.submission[0].restrict_border.north_dir}} </td>
+                                                <td class="contain_title">  طول الشمال </td>
+                                                <td> {{form.submission[0].restrict_border.north_length}} </td>
+                                            </tr>
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الجنوبي </td>
+                                                <td> {{form.submission[0].restrict_border.south_dir}} </td>
+                                                <td class="contain_title">  طول الجنوب </td>
+                                                <td> {{form.submission[0].restrict_border.south_length}} </td>
+                                            </tr>
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الشرقي </td>
+                                                <td> {{form.submission[0].restrict_border.east_dir}} </td>
+                                                <td class="contain_title">  طول الشرق </td>
+                                                <td> {{form.submission[0].restrict_border.east_length}} </td>
+                                            </tr>
+                                            <tr class="border" >
+                                                <td class="contain_title" > الحد الغربي </td>
+                                                <td> {{form.submission[0].restrict_border.west_dir}} </td>
+                                                <td class="contain_title">  طول الغرب </td>
+                                                <td> {{form.submission[0].restrict_border.west_length}} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div v-if="selected_btn == 4" class="m-5">
+                                <div class="text-center text-default" >  مشتمالات </div>
+                                <hr>
+                                <div>
+                                    <b-row>
+                                        <b-col cols="4"  v-for="(item ,index) in form.submission[0].includes_data"
+                                                :key="index">
+                                            
+                                        
+                                                <b-card 
+                                                    :title="item.content" 
+                                                    
+                                                    img-height="250"
+                                                    img-width="200"
+                                                    :img-src="item.image" img-alt="Card image"
+                                                    class=" border" img-top
+                                                >
+                                                    <b-card-text class="text-left">
+                                                        <p>{{item.type}}</p>
+                                                        <p>
+                                                            <span> السعر  : </span>
+                                                            <span> {{ item.price }}/{{ item.unit }} * {{ item.qty }}  </span> 
+                                                            <span> = {{ item.price * item.qty}}  </span>
+                                                        </p>
+                                                        <p>
+                                                            <span> = {{ item.price * item.qty}}  </span>
+                                                            
+                                                        </p>
+                                                        
+                                                    </b-card-text>
+                                                </b-card>
+                                            </b-col>
+                                        
+                                    </b->
+                                    </b-row>
+                                    
+                                
+                                </div>
+                                
+                            </div>
                             <b-card no-body v-if=" form.submission && form.submission[0]">
                                 <b-tabs pills card dir="rtl" class="text-left">
                                     <b-tab title="بيانات المشروع" active>
@@ -1550,10 +1754,15 @@
         BButton,
         BCardText,
         BCard,
+        BCardGroup,
         BModal,
         BFormDatepicker,
         BFormFile,
         BTable,
+        BProgress,
+        BProgressBar,
+        BListGroup,
+        BListGroupItem,
 
     } from 'bootstrap-vue'
     import EquipmentProductivity from "@/views/dashboard/component/equipmentProductivity";
@@ -1588,6 +1797,7 @@
         },
         data() {
             return {
+                selected_btn: 1,
                 option: {
                     penColor: "rgb(0, 0, 0)",
                     backgroundColor: "rgb(255,255,255)"
@@ -1666,6 +1876,10 @@
             }
         },
         components: {
+            BListGroup,
+            BListGroupItem,
+            BProgressBar,
+            BProgress,
             BFormCheckbox,
             SubMap,
             Isolate_report,
@@ -1691,6 +1905,7 @@
             // BOverlay,
             BCardText,
             BCard,
+            BCardGroup,
             BModal,
             BFormInput,
             BFormGroup,
@@ -1713,6 +1928,9 @@
             this.init();
         },
         methods: {
+            handlerSelected(sel){
+                this.selected_btn = sel
+            },
             Protect_self(){
                 let theDate = new Date();
                 // let dd = day;
@@ -2191,7 +2409,31 @@
                 }
             }
         }
-
+        .sideBar{
+            background-color: rgb(235, 238, 241) ;
+            height: 100%;
+        }
+        .sidBarBtn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+            color: #777;
+            transition: 0.3s;
+            
+            &.active_btn{
+                background-color: rgb(5, 73, 120);
+                color:#fff;
+            }
+            &:hover{
+                background-color: rgb(5, 73, 120);
+                color:#fff;
+            }
+        }
+        .contain_title{
+            background-color: #e3e3e3f4;
+        }
         .plus_icon {
             border: 1px solid #ccc;
             border-radius: 50%;
@@ -2262,4 +2504,9 @@
             display: none;
         }
     }
+    [dir] .card .card-title {
+        margin-bottom: 1.53rem;
+        text-align: -webkit-right;
+    }
+    
 </style>

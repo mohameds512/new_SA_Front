@@ -42,7 +42,7 @@
               <h2 class="m-0 brand-text ">
                 <!--                {{ appName }}-->
 
-                PGC
+                ESF
               </h2>
 
 
@@ -154,7 +154,7 @@
               <h2 class="m-0 brand-text ">
                 <!--                {{ appName }}-->
 
-                PGC
+                ESF
               </h2>
 
 

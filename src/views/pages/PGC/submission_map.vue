@@ -1,23 +1,13 @@
 <template>
   <div style="height: 80vh">
     {{ getSubDD() }}
-    <!-- {{ convertUtmToDecimalDegrees(584987.157,2370328.052,37) }} -->
-      <LMap :zoom="zoom"  style="width: 100%;">
-        <LTileLayer :url="url"></LTileLayer>
-        <!-- <LMarker :lat-lng="[21.433321833866195,  39.82011367462905]" :icon="myIcon"></LMarker> -->
-        <!-- <LMarker :lat-lng="[31.0420, 31.3601]" :icon="myIcon"></LMarker> -->
-        <LPolygon :lat-lngs="[ [ 21.43460812154106, 39.818834251291086 ], [ 21.434574733800847, 39.81888151139584 ], [ 21.43455965272907, 39.818896798837635 ], [ 21.43443181882447, 39.81907509248142 ], [ 21.434400776471602, 39.81904919385381 ], [ 21.43430743355508, 39.81897129419493 ], [ 21.4344691659786, 39.81875580774353 ] ]" :options="{ color: 'red', fillColor: '#f03', fillOpacity: 0.5 }"></LPolygon>
-      </LMap>
+          
     </div>
   </template>
   
   <script>
   import proj4 from 'proj4';
   
-  import { LMap, LTileLayer, LMarker ,LPolygon,LIcon  } from "vue2-leaflet";
-//   import {L} from "leaflet"
-  import 'leaflet/dist/leaflet.css';
-import { push } from 'postcss-rtl/lib/affected-props';
   export default {
     name: "Map",
     components: {

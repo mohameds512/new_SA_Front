@@ -26,7 +26,7 @@
               <!-- <h2 class="m-0 brand-text "> -->
                 <!--                {{ appName }}-->
 
-                <!-- PGC
+                <!-- ESF
               </h2> -->
 
 
@@ -40,7 +40,7 @@
               <!-- email -->
               <b-form-group  label-for="login-email">
                 <div class="d-flex justify-content-between">
-                  <label for="login-password" style="color: #1c8400 !important; font-size: larger;">Email</label>
+                  <label for="login-password" style="color: rgb(5, 73, 120) !important; font-size: larger;">Email</label>
                   <!-- <b-link :to="{ name: 'auth-forgot-password' }">
                                       <small>Forgot Password?</small>
                                     </b-link> -->
@@ -65,7 +65,7 @@
               <!-- forgot password -->
               <b-form-group >
                 <div class="d-flex justify-content-between">
-                  <label for="login-password" style="color: #1c8400 !important; font-size: larger;">Password</label>
+                  <label for="login-password" style="color: rgb(5, 73, 120) !important; font-size: larger;">Password</label>
                   <!-- <b-link :to="{ name: 'auth-forgot-password' }">
                                       <small>Forgot Password?</small>
                                     </b-link> -->

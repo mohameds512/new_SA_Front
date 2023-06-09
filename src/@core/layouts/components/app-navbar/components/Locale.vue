@@ -25,7 +25,7 @@ export default {
     },
   },
   mounted() {
-    const lang=this.$cookie.get('language') || 'ar';
+    const lang=this.$cookie.get('language') || 'en';
     console.log('load lang ',lang);
     if(lang){
       this.$i18n.locale = lang;
