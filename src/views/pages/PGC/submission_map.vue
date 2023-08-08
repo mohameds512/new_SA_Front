@@ -12,7 +12,7 @@
     name: "Map",
     components: {
         // L,
-        LPolygon ,
+        // LPolygon ,
         LMap,
         LTileLayer,
         LMarker,
